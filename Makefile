@@ -17,6 +17,13 @@ help:
 serve:
 	@python3 -m http.server 8080 -d build/html
 
+clean:
+	@rm -rf build/doctrees
+	@rm -rf docs
+	@mkdir docs
+	@touch docs/.nojekyll
+	@echo 'chyla.org' > docs/CNAME
+
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
