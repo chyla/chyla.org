@@ -1,0 +1,235 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Dowiązanie w systemie plików a AV i Linux | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="dowiazanie-w-systemie-plikow-a-av-i-linux">
+<h1>Dowiązanie w systemie plików a AV i Linux<a class="headerlink" href="#dowiazanie-w-systemie-plikow-a-av-i-linux" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<section id="wstep">
+<h2>Wstęp<a class="headerlink" href="#wstep" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Bardzo ogólnie mówiąc, dowiązanie jest dodatkową nazwą (w systemie plików) na plik lub katalog. Z punktu widzenia użytkownika, różnice pomiędzy dowiązaniem a zwykłym plikiem są niemal niezauważalne — wszelkie operacje są wykonywane na oryginalnym pliku/katalogu.</p>
+<p>Możemy wyróżnić trzy rodzaje dowiązań:</p>
+<ul class="simple">
+<li><p>miękkie,</p></li>
+<li><p>twarde,</p></li>
+<li><p>directory junction.</p></li>
+</ul>
+<p>Pierwsze dwa to klasyczne dowiązania znane ze środowiska uniksowego. Trzecie natomiast, dostępne jest tylko w systemach Windows (od 2000).</p>
+<p>Dowiązanie miękkie (inaczej dowiązanie symboliczne, link symboliczny) jest plikiem przechowującym alternatywną ścieżkę do pliku docelowego. Plikiem docelowym może być plik/katalog (także nieistniejący) lub plik/katalog znajdujący się w innym systemie plików.</p>
+<p>Dowiązanie twarde jest bezpośrednim wskazaniem na i-węzeł znajdujący się wyłącznie w obrębie tego samego systemu plików.</p>
+<p>Wskazane różnice pomiędzy dowiązaniem miękkim a twardym zostały przez Iana Shieldsa opisane następująco:</p>
+<blockquote>
+<div><p>A hard link is a directory entry that points to an inode, while a soft link or symbolic link is a directory entry that points to an inode that provides the name of another directory entry. The exact mechanism for storing the second name may depend on both the file system and the length of the name. [<a class="reference external" href="https://www.ibm.com/developerworks/library/l-lpic1-v3-104-6/index.html">Ian Shields, Create and change hard and symbolic links</a>]</p>
+</div></blockquote>
+<p>Directory junction jest dowiązaniem zaimplementowanym za pomocą „reparse points”. Może wskazywać wyłącznie na katalogi w obrębie danego systemu operacyjnego (podobnie jak dowiązanie miękkie). Harry Johnston przedstawił różnice między directory junction a dowiązaniem miękkim następująco:</p>
+<blockquote>
+<div><p>The main difference is that, if you are looking at a remote server, <strong>junctions are processed at the server</strong> and <strong>directory symbolic links are processed at the client</strong>. [<a class="reference external" href="https://superuser.com/a/343079">Harry Johnston</a>]</p>
+</div></blockquote>
+</section>
+<section id="podatnosc-avgater">
+<h2>Podatność #AVGater<a class="headerlink" href="#podatnosc-avgater" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>#AVGater bazuje na koncepcji dowiązań, by podwyższyć uprawnienia użytkownika aż do uprawnień administratora. Jak podaje Florian Bogner (odkrywca luki), podatnych na atak jest co najmniej sześć programów antywirusowych działających pod kontrolą systemu Windows — Kaspersky, Trend Micro, Emsisoft, Malwarebytes, Zone Alarm, Ikarus.</p>
+<figure class="align-default" id="id1">
+<img alt="../../_images/dowiazanie-w-systemie-plikow-a-av-i-linux-avgater-logo-small.png" src="../../_images/dowiazanie-w-systemie-plikow-a-av-i-linux-avgater-logo-small.png" />
+<figcaption>
+<p><span class="caption-text">Logo podatności. Źródło: [6]</span><a class="headerlink" href="#id1" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+<p>Błąd znajduje się w mechanizmie przywracania plików z kwarantanny — oprogramowanie nie weryfikuje, czy miejsce docelowe jest dowiązaniem. Przebieg ataku jest następujący:</p>
+<ol class="arabic simple">
+<li><p>Oprogramowanie antywirusowe umieszcza, wybrany przez atakującego, plik w kwarantannie.</p></li>
+<li><p>Atakujący usuwa katalog, w którym znajdował się plik, a w jego miejsce tworzy dowiązanie (konkretnie directory junction) do innej lokalizacji (np. C:\Windows, C:\Windows\System32). Oprogramowanie antywirusowe przywraca plik do katalogu źródłowego, który teraz jest dowiązaniem.</p></li>
+<li><p>Inne oprogramowanie ładuje wybrany przez atakującego plik (może to być biblioteka dynamiczna, która zostanie załadowana automatycznie podczas uruchamiania programu).</p></li>
+</ol>
+<figure class="align-default" id="id2">
+<img alt="../../_images/dowiazanie-w-systemie-plikow-a-av-i-linux-avgater-summary.png" src="../../_images/dowiazanie-w-systemie-plikow-a-av-i-linux-avgater-summary.png" />
+<figcaption>
+<p><span class="caption-text">Schemat przedstawiający przebieg ataku. Źródło: [6]</span><a class="headerlink" href="#id2" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+<p>Do momentu poprawienia luki w oprogramowaniu antywirusowym, zalecane jest zablokowanie użytkownikom funkcji przywracania plików z kwarantanny.</p>
+</section>
+<section id="z-podrecznika-administratora">
+<h2>Z podręcznika administratora<a class="headerlink" href="#z-podrecznika-administratora" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Pomysł na atak wykorzystujący dowiązania nie jest nowy. W podręcznikach dla administratorów omawiane są przykładowe scenariusze wraz z metodami obrony.</p>
+<p>W 2003 roku Bri Hatch przedstawił następującą historię [8]:</p>
+<blockquote>
+<div><p>Atakującemu udało się dostać do zabezpieczonego systemu, uzyskał prawa zwykłego użytkownika i mógł wykonywać polecenia konsoli. System był jednak stale aktualizowany i atakujący nie mógł podwyższyć swoich uprawnień stosując znane luki w oprogramowaniu.</p>
+<p>Po kilku miesiącach, w pewnym programie uruchamianym z uprawnieniami administratora, wykryto błąd pozwalający na wykonanie dowolnego polecenia. Oczywiście administrator zaktualizował wadliwe oprogramowanie, jednak po kilku dniach okazało się, że mimo aktualizacji luka została wykorzystana. Administrator usunął w całości wadliwe oprogramowanie, po czym ponownie je zainstalował, a mimo to atakujący w dalszym ciągu wykorzystywał wykrytą lukę.</p>
+</div></blockquote>
+<p>Jak to możliwe, co przeoczył administrator? W grudniu 2003 roku Bri Hatch udostępnił rozwiązanie tej zagadki [9].</p>
+<p>Kluczem do sukcesu atakującego okazała się wiedza na temat dowiązania twardego. Dowiązanie tego typu zachowuje wszelkie atrybuty (np. bit suid) - są one przechowywane z i-węzłem. Co więcej, usunięcie oryginalnego pliku (de facto dowiązania twardego) nie oznacza, że dany plik został usunięty - jest to jedynie usunięcie pierwotnej nazwy, pierwotnego dowiązania.</p>
+<p>Atakujący utworzył dowiązanie twarde do podatnej aplikacji w katalogu <cite>/tmp</cite>, co spowodowało, że pomimo aktualizacji w jego rękach ciągle znajdowała się niezaktualizowana wersja oprogramowania. Zachęcam do zapoznania się z całym opisem tej historii oraz jej rozwiązaniem.</p>
+<p>Jedną z metod ochrony przed tego typu atakiem jest umieszczenie katalogów, do których prawa zapisu ma użytkownik, na osobnych systemach plików. Zabieg ten uniemożliwia tworzenie dowiązań twardych. Innym rozwiązaniem jest zastosowanie odpowiedniej modyfikacji jądra (np. OpenWall) blokującej tworzenie dowiązań twardych do plików, których użytkownik nie jest właścicielem [7].</p>
+</section>
+<section id="znane-podatnosci-w-systemie-linux">
+<h2>Znane podatności w systemie Linux<a class="headerlink" href="#znane-podatnosci-w-systemie-linux" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Przypadków wykorzystania błędów związanych z dowiązaniami jest więcej. Przeszukując bazę CVE (Common Vulnerabilities and Exposures), pod kątem błędów powiązanych z samymi dowiązaniami twardymi [10], otrzymujemy 41 wyników (na dzień 15.11.2017). Błędy te dotyczą różnego oprogramowania, jednak dwa z nich wydają się szczególnie ciekawe.</p>
+<figure class="align-default" id="id3">
+<img alt="../../_images/dowiazanie-w-systemie-plikow-a-av-i-linux-cve-search.png" src="../../_images/dowiazanie-w-systemie-plikow-a-av-i-linux-cve-search.png" />
+<figcaption>
+<p><span class="caption-text">Fragment wyników wyszukiwania „hard link” w bazie Common Vulnerabilities and Exposures. [10]</span><a class="headerlink" href="#id3" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+<p>Wybrane podatności dotyczą menadżerów pakietów rpm oraz dpkg, co sprawia, że wpływa to na bezpieczeństwo dystrybucji na nich opartych (np. Ubuntu, Debian, Fedora). Co ciekawsze, są one związane z historią przedstawioną powyżej. Oczywiście odpowiednie poprawki zostały wdrożone i problem już nie występuje.</p>
+<p>Podatność związana z menadżerem pakietów <strong>dpkg</strong> z <strong>2004</strong> roku:</p>
+<blockquote>
+<div><p>dpkg 1.9.21 does not properly reset the metadata of a file during replacement of the file in a package upgrade, which might allow local users to gain privileges by creating a hard link to a vulnerable (1) setuid file, (2) setgid file, or (3) device, a related issue to CVE-2010-2059. <a class="reference external" href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-2768">[źródło: CVE]</a></p>
+</div></blockquote>
+<p>Podatność związana z menadżerem pakietów <strong>rpm</strong> z <strong>2010</strong> roku:</p>
+<blockquote>
+<div><p>lib/fsm.c in RPM 4.8.0 and earlier does not properly reset the metadata of an executable file during replacement of the file in an RPM package upgrade or deletion of the file in an RPM package removal, which might allow local users to gain privileges or bypass intended access restrictions by creating a hard link to a vulnerable file that has (1) POSIX file capabilities or (2) SELinux context information, a related issue to CVE-2010-2059. <a class="reference external" href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2198">[źródło: CVE]</a></p>
+</div></blockquote>
+<p>Błędy związane z dowiązaniami są znane, a mimo to ciągle popełniane. Warto o nich pamiętać i co jakiś czas sprawdzać aplikacje pod kątem ich występowania.</p>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.ibm.com/developerworks/library/l-lpic1-v3-104-6/index.html">Ian Shields, Create and change hard and symbolic links</a></p></li>
+<li><p><a class="reference external" href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa365006%28v=vs.85%29.aspx?f=255&amp;MSPPError=-2147217396">Hard Links and Junctions</a></p></li>
+<li><p><a class="reference external" href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa365503(v=vs.85).aspx">Reparse Points</a></p></li>
+<li><p><a class="reference external" href="https://superuser.com/questions/343074/directory-junction-vs-directory-symbolic-link">“directory junction” vs “directory symbolic link”?</a></p></li>
+<li><p><a class="reference external" href="https://sekurak.pl/linki-symboliczne-w-windows-umozliwily-otrzymanie-lokalnego-admina-na-popularnych-antywirusach/">Linki symboliczne w Windows umożliwiły otrzymanie lokalnego admina na popularnych antywirusach</a></p></li>
+<li><p><a class="reference external" href="https://bogner.sh/2017/11/avgater-getting-local-admin-by-abusing-the-anti-virus-quarantine/">#AVGater: Getting Local Admin by Abusing the Anti-Virus Quarantine » #bogner.sh</a></p></li>
+<li><p><a class="reference external" href="https://books.google.pl/books?id=PyqjvNNltqYC&amp;pg=PA68&amp;lpg=PA68&amp;dq=linux+hard+link+attack&amp;source=bl&amp;ots=XFiFcyTC6L&amp;sig=4TCRTdQuQxQak5TNtocrXA2ekQc&amp;hl=pl&amp;sa=X&amp;ved=0ahUKEwim6q7Nn7rXAhWLLcAKHQgZDesQ6AEIcjAJ#v=onepage&amp;q&amp;f=false">Turnbull, J. (2006), Hardening Linux, s. 68</a></p></li>
+<li><p><a class="reference external" href="https://www.hackinglinuxexposed.com/articles/20031111.html">Contest - The mysteriously persistently exploitable program</a></p></li>
+<li><p><a class="reference external" href="http://lists.jammed.com/ISN/2003/12/0056.html">[ISN] The mysteriously persistently exploitable program explained.</a></p></li>
+<li><p><a class="reference external" href="http://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=hard+link">hard link - CVE - Search Results</a></p></li>
+<li><p><a class="reference external" href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-2768">dpkg does not properly reset the metadata (CVE-2004-2768)</a></p></li>
+<li><p><a class="reference external" href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-2198">rpm does not properly reset the metadata (CVE-2010-2198)</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

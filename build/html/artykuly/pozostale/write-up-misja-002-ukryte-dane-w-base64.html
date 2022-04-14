@@ -1,0 +1,349 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>(Write-Up) Misja 002 - Ukryte dane w Base64 | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="write-up-misja-002-ukryte-dane-w-base64">
+<h1>(Write-Up) Misja 002 - Ukryte dane w Base64<a class="headerlink" href="#write-up-misja-002-ukryte-dane-w-base64" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<p>Write-up z misji Gynvaela Coldwinda zaprezentowanej na jednym z live streamów. Wiemy, że dane ukryto w ciągu znaków zakodowanym za pomocą Base64, odnajdźmy je!</p>
+<p>Treść misji została zaprezentowana na końcu streamu <a class="reference external" href="https://www.youtube.com/watch?v=FN-5CowRdXM">Pluginy, DLLki - z czym to się je</a>. Dla przypomnienia umieszczam ją poniżej:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>MISJA 002                                                  DIFFICULTY: [3/10]
+
+Przechwyciliśmy fragment komunikacji pomiędzy dwoma podejrzanymi. Sądzimy, że
+to hasło administratora do jednego z systemów, na których mogą znajdować się
+kluczowe dla sprawy dane.
+
+              +---                                   ---+
+              | QW== QT== QT== QQ== QU== Qd== QU== Qd== |
+                QX== QV== QW== Qe== QT== QR== QU== QT==
+                QT== QU== QX== QU== QT== QR== QT== QQ==
+              | QW== Qe==               »goo.gl/4Iuxdi« |
+              +---                                   ---+
+
+Niestety, pomimo, iż wiemy, że użyte zostało kodowanie Base64, nie jesteśmy w
+stanie zdekodować ukrytej wiadomości. Nasi technicy uparcie twierdzą, że po
+zdekodowaniu wychodzi „AAAAAAAAAAAAAAAAAAAAAAAAAA”, ale sądzimy, że nie mają
+racji.
+
+Zwracamy się więc do Ciebie z prośbą o pomoc - zrzuć okiem na powyższą
+wiadomość i sprawdź czy nie ma czasem drugiego dna.
+</pre></div>
+</div>
+<p>Zastanawiające są znaki dopełnienia (=) w środku zakodowanej wiadomości, powinny być umieszczone na samym końcu. Spróbujmy jednak zdekodować podany ciąg. W linuksie dostępne jest polecenie <cite>base64</cite>, które wywołane z opcją <cite>-d</cite> pozwala wykonać dekodowanie:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat &gt; enc
+QW== QT== QT== QQ== QU== Qd== QU== Qd==
+QX== QV== QW== Qe== QT== QR== QU== QT==
+QT== QU== QX== QU== QT== QR== QT== QQ==
+QW== Qe==
+
+$ base64 -d enc
+Abase64: błędne dane wejściowe
+
+$ base64 -d enc 2&gt; /dev/null
+A
+</pre></div>
+</div>
+<p>Nie udało się, jednak według informacji podanej w treści misji powinniśmy otrzymać litery <cite>A</cite>. Pójdźmy tropem związanym ze znakami dopełnienia i potraktujmy każdą z grup jako osobny ciąg do zdekodowania:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ for group in $(cat enc) ; do base64 -d &lt;&lt;&lt; $group ; done
+AAAAAAAAAAAAAAAAAAAAAAAAAA
+</pre></div>
+</div>
+<p>Teraz otrzymaliśmy ciąg podany w treści zadania. Chyba jesteśmy o krok dalej. Myślę, że możemy każdą grupę traktować jako osobny ciąg do zdekodowania.</p>
+<p>Zobaczmy też, jak wygląda wynik dekodowania jednej grupy po przekazaniu do programu <cite>hexdump</cite>. Może na terminalu otrzymaliśmy znaki niedrukowalne:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ base64 -d &lt;&lt;&lt; QW== | hexdump
+0000000 0041
+0000001
+</pre></div>
+</div>
+<p>Nie ma tam nic ciekawego, tylko znak <code class="docutils literal notranslate"><span class="pre">A</span></code>. Zdekodujmy więc sami pierwszą grupę. Jest to operacja odwrotna do kodowania, którego na <a class="reference external" href="https://pl.wikipedia.org/wiki/Base64">Wikipedii</a> znalazłem dość jasny opis:</p>
+<blockquote>
+<div><p>Kodowanie to przypisuje 64 wybranym znakom (patrz tabelka niżej) wartości od 0 do 63. Ciąg bajtów poddawany kodowaniu dzielony jest na grupy po 3 bajty. Ponieważ bajt ma 8 bitów, grupa 3 bajtów składa się z 24 bitów. Każdą taką grupę dzieli się następnie na 4 jednostki 6-bitowe. Istnieją więc dokładnie 64 możliwe wartości każdej takiej jednostki. Wszystkim tym jednostkom są przypisywane znaki na podstawie arbitralnie ustalonego przypisania (patrz tabela poniżej).</p>
+<p>Jeśli rozmiar wejściowego ciągu bajtów nie jest wielokrotnością liczby 3, to stosowane jest dopełnianie (na końcu wynikowego ciągu dodawana jest taka ilość symboli dopełnienia (pad), aby ten miał długość podzielną przez 3).</p>
+</div></blockquote>
+<p>Dekodowanie będzie polegało na zamianie liter na wartości w formie binarnej, połączeniu całości w grupy i wyodrębnieniu każdego z bajtów.</p>
+<p>Zaczynamy od grupy <code class="docutils literal notranslate"><span class="pre">QW==</span></code>. Litera <code class="docutils literal notranslate"><span class="pre">Q</span></code> ma wartość 16, a litera <code class="docutils literal notranslate"><span class="pre">W</span></code> - 22, <code class="docutils literal notranslate"><span class="pre">=</span></code> to dopełnienie. Zapiszmy to binarnie:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">010000</span>  <span class="mi">010110</span>
+</pre></div>
+</div>
+<p>Podane wartości w formie binarnej zajmują 5 miejsc, a do wykorzystania mamy 6, dlatego zostały uzupełnione z przodu jednym zerem.</p>
+<p>Teraz przegrupujmy otrzymane bity, by móc odczytać pierwszy bajt:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">01000001</span> <span class="mi">0110</span>
+</pre></div>
+</div>
+<p>Z tablicy <a class="reference external" href="https://pl.wikipedia.org/wiki/ASCII">ASCII</a> możemy odczytać, że pierwszy bajt jest reprezentowany jako litera <code class="docutils literal notranslate"><span class="pre">A</span></code>. Jest to znak, który udało nam się wcześniej zdekodować za pomocą programu <code class="docutils literal notranslate"><span class="pre">base64</span></code>. Widzimy jednak teraz, że znajdują się tutaj dodatkowe dane (<code class="docutils literal notranslate"><span class="pre">0110</span></code>), które nie zostały wyświetlone. Nie tworzą one całego bajtu i zostały pominięte.</p>
+<p>Pomyślmy przez chwilę co z dopełnieniem. Wikipedia niewiele mówi na ten temat, dlatego trzeba rzucić okiem na <a class="reference external" href="https://tools.ietf.org/html/rfc4648#section-3.5">specyfikację</a> (szukamy po słowie padding):</p>
+<blockquote>
+<div><p>The padding step in base 64 and base 32 encoding can, if improperly
+implemented, lead to non-significant alterations of the encoded data.
+For example, if the input is only one octet for a base 64 encoding,
+then all six bits of the first symbol are used, but only the first
+two bits of the next symbol are used.  These pad bits MUST be set to
+zero by conforming encoders, which is described in the descriptions
+on padding below.  If this property do not hold, there is no
+canonical representation of base-encoded data, and multiple base-
+encoded strings can be decoded to the same binary data.  If this
+property (and others discussed in this document) holds, a canonical
+encoding is guaranteed.</p>
+<p>In some environments, the alteration is critical and therefore
+decoders MAY chose to reject an encoding if the pad bits have not
+been set to zero.</p>
+</div></blockquote>
+<p>Wygląda na to, że opisany jest przypadek, który nas interesuje. Odczytajmy zatem wszystkie dodatkowe dane. Wystarczy, że na wejście podamy litery znajdujące się po literze <code class="docutils literal notranslate"><span class="pre">Q</span></code> w każdej z grup. Z nich będziemy mogli odkryć ukryte dane zamieniając je na liczby 6-bitowe i wybierając dolne 4 bity.</p>
+<p>Kolejne litery, które zawierają ukryte dane:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat enc | tr &#39; &#39; &#39;\n&#39; | sed -r &#39;s/.(.).*/\1/&#39; | tr -d &#39;\n&#39;
+WTTQUdUdXVWeTRUTTUXUTRTQWe
+</pre></div>
+</div>
+<p>Zobaczmy program:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;array&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unordered_map&gt;</span><span class="cp"></span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">array</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="mi">26</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="sc">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;Q&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;U&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;U&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;X&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;V&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;e&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="sc">&#39;R&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;U&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;U&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;X&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;U&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;R&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;Q&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;e&#39;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b64_map</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;d&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">29</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;e&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;R&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;Q&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">19</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;U&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;V&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;X&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">print_bits</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">part</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Bits for &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">part</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;: &quot;</span><span class="w"></span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="kt">bool</span><span class="p">(</span><span class="n">bits</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x08</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"></span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="kt">bool</span><span class="p">(</span><span class="n">bits</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x04</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"></span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="kt">bool</span><span class="p">(</span><span class="n">bits</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x02</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="w"></span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="kt">bool</span><span class="p">(</span><span class="n">bits</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x01</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">data</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="n">print_bits</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">b64_map</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">c</span><span class="p">));</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>I jego wynik prezentujący wszystkie ukryte dane w kolejności ich występowania:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Bits</span> <span class="k">for</span> <span class="n">W</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">T</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">T</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">Q</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">U</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">d</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">U</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">d</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">X</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">V</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">W</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">e</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">T</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">R</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">U</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">T</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">T</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">U</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">X</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">U</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">T</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">R</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">T</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">Q</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">W</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span>
+<span class="n">Bits</span> <span class="k">for</span> <span class="n">e</span><span class="p">:</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Niewiele to pomogło. Zadanie jest jednak ocenione jako dość proste, spróbujmy więc pogrupować bity po 8 i każdą z grup (czyli bajt) zamienić na znak ASCII.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;array&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unordered_map&gt;</span><span class="cp"></span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">array</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="mi">26</span><span class="o">&gt;</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="sc">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;Q&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;U&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;U&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;d&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;X&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;V&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;e&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="sc">&#39;R&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;U&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;U&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;X&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;U&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;R&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;Q&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;e&#39;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b64_map</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;d&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">29</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;e&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;R&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;Q&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;T&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">19</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;U&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;V&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;W&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="sc">&#39;X&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">print_ascii</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">b1</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">b2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kt">char</span><span class="w"> </span><span class="n">higher_bits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="kt">char</span><span class="w"> </span><span class="n">lower_bits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b2</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0x0F</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="kt">char</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">higher_bits</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">lower_bits</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">result</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">              </span><span class="n">print_ascii</span><span class="p">(</span><span class="n">b64_map</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="w"> </span><span class="n">b64_map</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]));</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Wynik działania programu:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c0MMun1C4t10n</span>
+</pre></div>
+</div>
+<p>Rozwiązanie znalezione ☺</p>
+<div class="admonition note">
+<p class="admonition-title">Informacja</p>
+<p><a class="reference external" href="http://gynvael.coldwind.pl">Gynvael Coldwind</a> udostępnił film <a class="reference external" href="https://youtu.be/xR0hAJPp1vs?t=460">Gynvael’s Livestream #39: RPC, czyli zdalne API</a>, na którym przedstawia swoje oraz omawia nadesłane rozwiązania.</p>
+</div>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

@@ -1,0 +1,238 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>xrange() nie jest generatorem | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="xrange-nie-jest-generatorem">
+<h1>xrange() nie jest generatorem<a class="headerlink" href="#xrange-nie-jest-generatorem" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<section id="spis-tresci">
+<h2>Spis treści<a class="headerlink" href="#spis-tresci" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Wstęp</p></li>
+<li><p>Koncepcja generatora</p></li>
+<li><p>xrange a generator</p></li>
+<li><p>Wnioski</p></li>
+</ol>
+</section>
+<section id="wstep">
+<h2>Wstęp<a class="headerlink" href="#wstep" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>W Pythonie 2 dostępne są funkcje <code class="docutils literal notranslate"><span class="pre">range()</span></code> oraz <code class="docutils literal notranslate"><span class="pre">xrange()</span></code>. Wartością zwracaną przez <code class="docutils literal notranslate"><span class="pre">range()</span></code> jest lista kolejnych liczb całkowitych, <code class="docutils literal notranslate"><span class="pre">xrange()</span></code> zwraca obiekt pozwalający na wytworzenie kolejnych liczb tylko wtedy, gdy jest to potrzebne. W Pythonie 3 funkcja <code class="docutils literal notranslate"><span class="pre">range()</span></code> została usunięta, zastąpiła ją <code class="docutils literal notranslate"><span class="pre">xrange()</span></code> pod nową nazwą <code class="docutils literal notranslate"><span class="pre">range()</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python2
+Python 2.7.13 (default, Nov 24 2017, 17:33:09)
+[GCC 6.3.0 20170516] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; range(1,5)
+[1, 2, 3, 4]
+&gt;&gt;&gt; xrange(1,5)
+xrange(1, 5)
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3
+Python 3.5.3 (default, Jan 19 2017, 14:11:04)
+[GCC 6.3.0 20170118] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; range(1,5) # dawniej xrange()
+range(1, 5)
+</pre></div>
+</div>
+<p>W dalszej części mowa jest o funkcji <cite>range()</cite> w kontekście Pythona 3.</p>
+</section>
+<section id="koncepcja-generatora">
+<h2>Koncepcja generatora<a class="headerlink" href="#koncepcja-generatora" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Dość szczegółowo generatory <a class="reference external" href="/artykuly/python/python-dekoratory.html">opisałem już na swoim blogu [2]</a>. We wspomnianym wpisie podałem następujący opis generatora:</p>
+<blockquote>
+<div><p>Generator jest pewnego rodzaju funkcją. Funkcja ta może zostać wstrzymana oraz wznowiona od miejsca, w którym została wstrzymana. Na podstawie zapamiętanego stanu możliwe jest zwracanie różnych wartości podczas kolejnych wstrzymań funkcji. [..] Taką funkcję nazywamy funkcją generującą (ang. generator function). Jej wywołanie spowoduje utworzenie generatora - obiektu generującego (ang. generator object, generator-iterator).</p>
+<p>Generatory cechuje leniwa ewaluacja (ang. lazy evaluation), czyli tworzenie kolejnych elementów dopiero przy odwołaniu się do generatora. Technika ta pozwala zredukować liczbę wykonywanych obliczeń, zmniejszyć wykorzystanie pamięci oraz tworzyć nieskończoną ilość elementów.</p>
+</div></blockquote>
+<p>Generator jako obiekt posiada także określony interfejs, w jego skład wchodzą funkcje <code class="docutils literal notranslate"><span class="pre">send()</span></code>, <code class="docutils literal notranslate"><span class="pre">throw()</span></code> oraz <code class="docutils literal notranslate"><span class="pre">close()</span></code>, a także <code class="docutils literal notranslate"><span class="pre">__next__()</span></code> w przypadku Pythona 3 i <code class="docutils literal notranslate"><span class="pre">next()</span></code> w Pythonie 2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3
+Python 3.5.3 (default, Jan 19 2017, 14:11:04)
+[GCC 6.3.0 20170118] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; g = (x for x in range(5))
+&gt;&gt;&gt; type(g)
+&lt;class &#39;generator&#39;&gt;
+&gt;&gt;&gt; dir(g)
+[&#39;__class__&#39;, &#39;__del__&#39;, &#39;__delattr__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__getattribute__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__iter__&#39;, &#39;__le__&#39;, &#39;__lt__&#39;, &#39;__name__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__next__&#39;, &#39;__qualname__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;close&#39;, &#39;gi_code&#39;, &#39;gi_frame&#39;, &#39;gi_running&#39;, &#39;gi_yieldfrom&#39;, &#39;send&#39;, &#39;throw&#39;]
+</pre></div>
+</div>
+</section>
+<section id="xrange-a-generator">
+<h2>xrange a generator<a class="headerlink" href="#xrange-a-generator" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">range()</span></code> jest podobny w działaniu do generatora – tworzy kolejne elementy na żądanie. Funkcja <code class="docutils literal notranslate"><span class="pre">range()</span></code> nie tworzy jednak obiektu generującego, tworzona jest natomiast instancja klasy <code class="docutils literal notranslate"><span class="pre">range</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Python 3.5.3 (default, Jan 19 2017, 14:11:04)
+[GCC 6.3.0 20170118] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; x = range(1, 5)
+&gt;&gt;&gt; type(x)
+&lt;class &#39;range&#39;&gt;
+</pre></div>
+</div>
+<p>W Pythonie 2 nie jest to instancja klasy <code class="docutils literal notranslate"><span class="pre">range</span></code>, a obiekt typu <code class="docutils literal notranslate"><span class="pre">xrange</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python2
+Python 2.7.13 (default, Nov 24 2017, 17:33:09)
+[GCC 6.3.0 20170516] on linux2
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; x = xrange(1, 5)
+&gt;&gt;&gt; type(x)
+&lt;type &#39;xrange&#39;&gt;
+</pre></div>
+</div>
+<p>Klasa <code class="docutils literal notranslate"><span class="pre">range</span></code> nie implementuje także interfejsu generatora:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3
+Python 3.5.3 (default, Jan 19 2017, 14:11:04)
+[GCC 6.3.0 20170118] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; x = range(1, 5)
+&gt;&gt;&gt; dir(x)
+[&#39;__class__&#39;, &#39;__contains__&#39;, &#39;__delattr__&#39;, &#39;__dir__&#39;, &#39;__doc__&#39;, &#39;__eq__&#39;, &#39;__format__&#39;, &#39;__ge__&#39;, &#39;__getattribute__&#39;, &#39;__getitem__&#39;, &#39;__gt__&#39;, &#39;__hash__&#39;, &#39;__init__&#39;, &#39;__iter__&#39;, &#39;__le__&#39;, &#39;__len__&#39;, &#39;__lt__&#39;, &#39;__ne__&#39;, &#39;__new__&#39;, &#39;__reduce__&#39;, &#39;__reduce_ex__&#39;, &#39;__repr__&#39;, &#39;__reversed__&#39;, &#39;__setattr__&#39;, &#39;__sizeof__&#39;, &#39;__str__&#39;, &#39;__subclasshook__&#39;, &#39;count&#39;, &#39;index&#39;, &#39;start&#39;, &#39;step&#39;, &#39;stop&#39;]
+</pre></div>
+</div>
+<p>Jak zaprezentowano na powyższym wydruku, obiekt klasy range nie zawiera żadnej z metod <code class="docutils literal notranslate"><span class="pre">send()</span></code>, <code class="docutils literal notranslate"><span class="pre">throw()</span></code>, <code class="docutils literal notranslate"><span class="pre">close()</span></code> czy <code class="docutils literal notranslate"><span class="pre">__next__()</span></code>. Wykorzystywany jest natomiast protokół iteratorów — wskazuje na to obecność funkcji <code class="docutils literal notranslate"><span class="pre">__iter__()</span></code>. <code class="docutils literal notranslate"><span class="pre">range</span></code> jest obiektem iterowalnym.</p>
+</section>
+<section id="wnioski">
+<h2>Wnioski<a class="headerlink" href="#wnioski" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">range()</span></code> nie jest generatorem, swoje działanie opiera na protokole iteratorów. Wyszukanie frazy ‘<a class="reference external" href="https://www.google.pl/search?q=xrange+generator">xrange generator</a>’[3] w wyszukiwarce Google zwraca całkiem sporo wyników, w których to autorzy poszczególnych tekstów określają <code class="docutils literal notranslate"><span class="pre">xrange()</span></code> jako generator, co — jak już wykazałem — nie jest poprawne.</p>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0260/">PEP 260 – Simplify xrange()</a></p></li>
+<li><p><a class="reference external" href="/artykuly/python/python-dekoratory.html">Python - Generatory</a></p></li>
+<li><p><a class="reference external" href="https://www.google.pl/search?q=xrange+generator">Google: xrange generator</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

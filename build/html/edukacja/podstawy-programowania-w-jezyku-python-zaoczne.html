@@ -1,0 +1,471 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Programowanie w języku Python - studia zaoczne | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/chyla.css" />
+    <link rel="shortcut icon" href="../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../artykuly/index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="programowanie-w-jezyku-python-studia-zaoczne">
+<h1>Programowanie w języku Python - studia zaoczne<a class="headerlink" href="#programowanie-w-jezyku-python-studia-zaoczne" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<div class="contents local topic" id="tematy">
+<p class="topic-title">Tematy</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#zasady-zaliczenia" id="id1">Zasady zaliczenia</a></p></li>
+<li><p><a class="reference internal" href="#literatura" id="id2">Literatura</a></p></li>
+<li><p><a class="reference internal" href="#srodowisko-pracy" id="id3">Środowisko pracy</a></p></li>
+<li><p><a class="reference internal" href="#wprowadzenie-do-jezyka" id="id4">Wprowadzenie do języka</a></p></li>
+<li><p><a class="reference internal" href="#podstawowe-elementy-jezyka" id="id5">Podstawowe elementy języka</a></p></li>
+<li><p><a class="reference internal" href="#funkcje" id="id6">Funkcje</a></p></li>
+<li><p><a class="reference internal" href="#rekurencja" id="id7">Rekurencja</a></p></li>
+<li><p><a class="reference internal" href="#podzial-projektu-na-pliki-moduly-i-pakiety-moduly-standardowe" id="id8">Podział projektu na pliki - Moduły i pakiety, moduły standardowe</a></p></li>
+<li><p><a class="reference internal" href="#formatowanie-napisow" id="id9">Formatowanie napisów</a></p></li>
+<li><p><a class="reference internal" href="#wirtualne-srodowisko" id="id10">Wirtualne środowisko</a></p></li>
+<li><p><a class="reference internal" href="#operacje-wejscia-wyjscia-pliki" id="id11">Operacje wejścia/wyjścia - Pliki</a></p></li>
+<li><p><a class="reference internal" href="#operacje-wejscia-wyjscia-pickle" id="id12">Operacje wejścia/wyjścia - Pickle</a></p></li>
+<li><p><a class="reference internal" href="#wprowadzenie-do-obslugi-wyjatkow" id="id13">Wprowadzenie do obsługi wyjątków</a></p></li>
+<li><p><a class="reference internal" href="#przykladowe-programy-do-wykladow" id="id14">Przykładowe programy do wykładów</a></p></li>
+</ul>
+</div>
+<section id="zasady-zaliczenia">
+<h2>Zasady zaliczenia<a class="headerlink" href="#zasady-zaliczenia" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<section id="zasady-zaliczenia-przedmiotu">
+<h3>Zasady zaliczenia przedmiotu<a class="headerlink" href="#zasady-zaliczenia-przedmiotu" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p><strong>Do zaliczenia przedmiotu konieczne jest otrzymanie oceny co najmniej 3 z wykładu i co najmniej 3 z ćwiczeń.</strong> Uzyskanie oceny 2nb z ćwiczeń lub wykładu skutkuje uzyskaniem oceny 2nb z przedmiotu. Uzyskanie oceny 2 z ćwiczeń lub wykładu skutkuje uzyskaniem oceny 2 z przedmiotu.</p>
+<p><strong>Ocena z przedmiotu jest średnią oceny z ćwiczeń i wykładu.</strong></p>
+</section>
+<section id="zasady-zaliczenia-cwiczen">
+<h3>Zasady zaliczenia ćwiczeń<a class="headerlink" href="#zasady-zaliczenia-cwiczen" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Zasady zaliczenia ćwiczeń są ustalane przez odpowiedniego prowadzącego i będą podane na pierwszych zajęciach.</p>
+</section>
+<section id="zasady-zaliczenia-wykladu">
+<h3>Zasady zaliczenia wykładu<a class="headerlink" href="#zasady-zaliczenia-wykladu" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Zaliczenie wykładu, odbywa się w formie <strong>egzaminu testowego na ostatnim wykładzie</strong> (czas trwania około 90 minut). W każdym z 30 pytań będą zamieszczone trzy odpowiedzi, z których tylko jedna jest prawidłowa. Za odpowiedź prawidłową otrzymuje się 1 punkt, za błędną 0 punktów.</p>
+<p><strong>Termin egzaminu poprawkowego zostanie ogłoszony na ostatnim wykładzie.</strong></p>
+<p>Obowiązująca skala ocen:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 39%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ocena</p></th>
+<th class="head"><p>liczba punktów</p></th>
+<th class="head"><p>procent sumarycznie uzyskanych punktów</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>od 28pkt do 30pkt</p></td>
+<td><p>od 91% do 100%</p></td>
+</tr>
+<tr class="row-odd"><td><p>4.5</p></td>
+<td><p>od 25pkt do 27pkt</p></td>
+<td><p>od 81% do 90%</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>od 22pkt do 24pkt</p></td>
+<td><p>od 71% do 80%</p></td>
+</tr>
+<tr class="row-odd"><td><p>3.5</p></td>
+<td><p>od 19pkt do 21pkt</p></td>
+<td><p>od 61% do 70%</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>od 16pkt do 18pkt</p></td>
+<td><p>od 51% do 60%</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>poniżej 16pkt</p></td>
+<td><p>poniżej 51%</p></td>
+</tr>
+<tr class="row-even"><td><p>2nb</p></td>
+<td colspan="2"><p>za brak podejścia do egzaminu</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Polecam oficjalny tutorial:</p>
+<ul class="simple">
+<li><p>[EN] <a class="reference external" href="https://docs.python.org/3/tutorial/">https://docs.python.org/3/tutorial/</a></p></li>
+<li><p>[PL] <a class="reference external" href="https://docs.python.org/pl/3/tutorial/">https://docs.python.org/pl/3/tutorial/</a></p></li>
+</ul>
+<p>Książki:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/python-instrukcje-dla-programisty-wydanie-ii-eric-matthes,blkpy2.htm">Python. Instrukcje dla programisty, Eric Matthes, Helion</a></p></li>
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/python-wprowadzenie-wydanie-v-mark-lutz,pytho5.htm">Python. Wprowadzenie. Mark Lutz, Helion</a></p></li>
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/python-dla-testera-piotr-wroblewski,pyttes.htm#format/d">Python dla testera. Piotr Wróblewski. Helion</a></p></li>
+<li><p><a class="reference external" href="https://ksiazki.promise.pl/produkt/zaawansowany-python-jasne-zwiezle-i-efektywne-programowanie/">Zaawansowany Python, Luciano Ramalho, APN Promise</a></p></li>
+</ul>
+<p>Książki o poprawnym pisaniu kodu:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/czysty-kod-podrecznik-dobrego-programisty-robert-c-martin,czykov.htm">Czysty kod. Podręcznik dobrego programisty, Robert C. Martin, Helion</a></p></li>
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/wzorce-projektowe-elementy-oprogramowania-obiektowego-wielokrotnego-uzytku-erich-gamma-richard-helm-ralph-johnson-john-vli,wzoevv.htm">Wzorce projektowe. Elementy oprogramowania obiektowego wielokrotnego użytku, Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides, Helion</a></p></li>
+</ul>
+<p>Książki z zadaniami:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/python-zadania-z-programowania-przykladowe-funkcyjne-rozwiazania-miroslaw-j-kubiak,pyzapr.htm?5494556315243#format/d">Python. Zadania z programowania. Przykładowe funkcyjne rozwiązania. Mirosław J. Kubiak. Helion</a></p></li>
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/python-zadania-z-programowania-przykladowe-imperatywne-rozwiazania-miroslaw-j-kubiak,pyzaim.htm#format/d">Python. Zadania z programowania. Przykładowe imperatywne rozwiązania. Mirosław J. Kubiak. Helion</a></p></li>
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/python-cwiczenia-praktyczne-andrzej-kierzkowski-marek-gawryszewski,cwpyth.htm#format/d">Python. Ćwiczenia praktyczne. Andrzej Kierzkowski, Marek Gawryszewski. Helion</a> (nie zawiera rozwiązań)</p></li>
+</ul>
+</section>
+<section id="srodowisko-pracy">
+<h2>Środowisko pracy<a class="headerlink" href="#srodowisko-pracy" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Wymagany <strong>oficjalny interpreter Pythona</strong> w wersji co najmniej 3.7 (najlepiej najnowszy).</p>
+<p>Link do pobrania oficjalnego interpretera: <a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p>
+<div class="admonition note">
+<p class="admonition-title">Informacja</p>
+<p>Niektóre systemy operacyjne (np. Ubuntu 18.04) nie posiadają wymaganej wersji interpretera języka Python. Część omawianych elementów języka może nie działać.</p>
+</div>
+<p>Wybór środowiska programistycznego należy do Ciebie, chociaż polecam <strong>PyCharm</strong>.</p>
+<p>Link do pobrania środowiska PyCharm (wersja PyCharm Community Edition jest darmowa): <a class="reference external" href="https://www.jetbrains.com/pycharm/download/">https://www.jetbrains.com/pycharm/download/</a></p>
+<p>Można uzyskać licencję edukacyjną (ważna przez rok) dla PyCharm/InteliJ IDEA/CLion/PhpStorm, więcej informacji tutaj: <a class="reference external" href="https://www.jetbrains.com/community/education/">https://www.jetbrains.com/community/education/</a></p>
+<p>Licencję edukacyjną na produkty (nie tylko związane z Pythonem) innych firm można także otrzymać przez GitHub Student Developer Pack, więcej informacji tutaj: <a class="reference external" href="https://education.github.com/pack">https://education.github.com/pack</a></p>
+<p>Myślę, że warto również wypróbować <strong>Microsoft Visual Studio Code</strong>. Jest darmowy, posiada wsparcie dla wielu języków (np. C, C++, C#, Java, Robot Framework), wydawany na <a class="reference external" href="https://code.visualstudio.com/License/">własnej licencji</a>.</p>
+<p>Link do pobrania środowiska Microsoft Visual Studio Code: <a class="reference external" href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></p>
+<p>Dostępne są także <strong>środowiska programistyczne on-line</strong>, z tych polecam:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://replit.com/">https://replit.com/</a></p></li>
+<li><p><a class="reference external" href="https://www.online-python.com/">https://www.online-python.com/</a></p></li>
+</ul>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/using/index.html">Python Setup and Usage [EN]</a></p></li>
+<li><p><a class="reference external" href="https://www.ics.uci.edu/~pattis/common/handouts/pythoneclipsejava/python.html">Python Download and Installation Instructions [Windows] [EN]</a></p></li>
+<li><p><a class="reference external" href="https://flaviocopes.com/python-installation-macos/">Installing Python 3 on macOS [EN]</a></p></li>
+<li><p><a class="reference external" href="https://www.jetbrains.com/help/pycharm/installation-guide.html">Install PyCharm  [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/pl/3.9/using/index.html">Instalacja i używanie Pythona [PL]</a></p></li>
+<li><p><a class="reference external" href="https://tutorial.djangogirls.org/pl/python_installation/#instalowanie-pythona">Instalowanie Pythona [PL]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=owU1yyZhoH8">Instalacja Pycharm oraz Python - poradnik krok po kroku [PL]</a></p></li>
+</ol>
+</section>
+<section id="wprowadzenie-do-jezyka">
+<h2>Wprowadzenie do języka<a class="headerlink" href="#wprowadzenie-do-jezyka" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Slajdy:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="/artykuly/python/python-tutorial/wprowadzenie-do-jezyka-pierwszy-program.html">Wprowadzenie do języka Python - Pierwszy program</a></p></li>
+</ol>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/license.html#history-of-the-software">History of the software [EN]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=kjK8zoeF7I0">Kurs Python 🐍: 3. Pierwszy program (autor:  Krzysztof Jura) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=qtTQmjAGa7c">Kurs Python 🐍: 4. Tryb interaktywny (autor:  Krzysztof Jura) [PL]</a></p></li>
+</ol>
+</section>
+<section id="podstawowe-elementy-jezyka">
+<h2>Podstawowe elementy języka<a class="headerlink" href="#podstawowe-elementy-jezyka" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Slajdy:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="/artykuly/python/python-tutorial/podstawowe-elementy-jezyka-podstawowe-typy-danych-kolekcje-instrukcje-sterujace.html">Podstawowe elementy języka - podstawowe typy danych, kolekcje, instrukcje sterujące</a></p></li>
+</ol>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html">If statement [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/introduction.html#strings">String operations [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html#for-statements">for Statements [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html#the-range-function">The range() Function [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/introduction.html#lists">Lists [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html">Data Structures [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#sets">Sets [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">Dictionaries [EN]</a></p></li>
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP 8 – Style Guide for Python Code [EN]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=pHZlmBN1YaE">Kurs Python 3 [#5] Instrukcje warunkowe (autor:  Piotr Baja) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=LDE3nkST3vQ">Kurs Python 3 [#7] Pętla while (autor:  Piotr Baja) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=QYnArPazjew">Kurs Python 3 [#8] Pętla for (autor:  Piotr Baja) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=y9eS0kuuxoI">Python – podstawy: listy, krotki, słowniki, zbiory, pętle, funkcje, generatory, pliki, konteksty (autor: Maciej Komosiński) [PL]</a></p></li>
+</ol>
+</section>
+<section id="funkcje">
+<h2>Funkcje<a class="headerlink" href="#funkcje" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Slajdy:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="/artykuly/python/python-tutorial/funkcje.html">Funkcje - Definicja i wywołanie funkcji, przekazywanie argumentów, zwracanie wartości</a></p></li>
+</ol>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html">Functions [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions">Defining functions [EN]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=ybRVhUtdHs8">Kurs Python 3 [#13] Funkcje (autor:  Piotr Baja) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=gWS0d18LBu8">Czym są funkcje? [Python] odc. 10 z serii podstaw Pythona (autor: Adam Djellouli) [PL]</a></p></li>
+</ol>
+</section>
+<section id="rekurencja">
+<h2>Rekurencja<a class="headerlink" href="#rekurencja" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Slajdy:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="/artykuly/python/python-tutorial/rekurencja.html">Rekurencja - Żeby zrozumieć rekurencję, najpierw musisz zrozumieć rekurencję</a></p></li>
+</ol>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://python.oeiizk.waw.pl/ematerialy/python_grafika2017/2_10_rekurencja.html">Rekurencja [PL]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=9zfv_luNQjo">Czym jest rekurencja? [Python] odc. 26 z serii podstaw Pythona (autor: Adam Djellouli) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=gY8CUgxv2zU">Rekurencja w Pythonie - wprowadzenie (Python kurs dla początkujących #27) (autor: Szymon Wolny) [PL]</a></p></li>
+</ol>
+</section>
+<section id="podzial-projektu-na-pliki-moduly-i-pakiety-moduly-standardowe">
+<h2>Podział projektu na pliki - Moduły i pakiety, moduły standardowe<a class="headerlink" href="#podzial-projektu-na-pliki-moduly-i-pakiety-moduly-standardowe" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Slajdy:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="/artykuly/python/python-tutorial/podzial-projektu-na-pliki-moduly-i-pakiety-moduly-standardowe.html">Podział projektu na pliki - Moduły i pakiety, moduły standardowe</a></p></li>
+</ol>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/modules.html">Modules (+ Standard Modules, Packages) [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/reference/import.html">The import system [EN]</a></p></li>
+<li><p><a class="reference external" href="https://brain.fuw.edu.pl/edu/index.php/PPy3/Modu%C5%82y">Moduły [PL]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=EFIX33Mjzpg">Kurs Python 3 [#14] Własne moduły, import, from, as (autor:  Piotr Baja) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=hVKyIvJc6xU">Lekcja 11. KURS PYTHON 3. Moduły. Pakiety. (autor: WebCrew Tomasz Jaśniewski) [PL]</a></p></li>
+</ol>
+</section>
+<section id="formatowanie-napisow">
+<h2>Formatowanie napisów<a class="headerlink" href="#formatowanie-napisow" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Slajdy:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="/artykuly/python/python-tutorial/formatowanie-napisow.html">Formatowanie napisów - %-formatting, str.format(), f-strings</a></p></li>
+</ol>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://pyformat.info/">PyFormat - Using % and .format() for great good! [EN]</a></p></li>
+<li><p><a class="reference external" href="https://mkaz.blog/code/python-string-format-cookbook/">Python String Format Cookbook [EN]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=zvevvLSNQ20">Kurs Python 3 [#9] enumerate, format, break (autor:  Piotr Baja) [PL]</a></p></li>
+</ol>
+</section>
+<section id="wirtualne-srodowisko">
+<h2>Wirtualne środowisko<a class="headerlink" href="#wirtualne-srodowisko" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Slajdy:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="/artykuly/python/python-tutorial/wirtualne-srodowisko-pypi-venv.html">Wirtualne środowisko - PyPI, venv</a></p></li>
+</ol>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/venv.html">venv — Creation of virtual environments [EN]</a></p></li>
+<li><p><a class="reference external" href="https://www.jetbrains.com/help/pycharm/creating-virtual-environment.html">PyCharm - Configure a virtual environment﻿ [EN]</a></p></li>
+<li><p><a class="reference external" href="https://analityk.edu.pl/python-virtualenv-wirtualne-srodowisko-virtual-environment/">Python – wirtualne środowisko pracy [PL]</a></p></li>
+<li><p><a class="reference external" href="/artykuly/python/python3-venv.html">Python 3 &amp; venv [PL]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=eWOlJkhtSqU">02 - Kurs Python - Virtualenv + PIP [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=V2PzPpPCxik">PyWaw #69 - Środowiska wirtualne i zarządzanie zależnościami w Pythonie (autor:  Piotr Grzesik) [PL]</a></p></li>
+</ol>
+</section>
+<section id="operacje-wejscia-wyjscia-pliki">
+<h2>Operacje wejścia/wyjścia - Pliki<a class="headerlink" href="#operacje-wejscia-wyjscia-pliki" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Slajdy:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="/artykuly/python/python-tutorial/operacje-wejscia-wyjscia-pliki.html">Operacje wejścia/wyjścia - Pliki</a></p></li>
+</ol>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files">Input and Output - Reading and Writing Files [EN]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=HsF8rxID48M">Operacje na plikach tekstowych [Python] odc. 30 z serii podstaw Pythona (autor: Adam Djellouli) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=QzGLTeUxe0U">Python #6 - Zapis i odczyt danych z plików tekstowych + Obsługa Plików CSV (*.CSV) (autor: Mały Ale Wariat) [PL]</a></p></li>
+</ol>
+</section>
+<section id="operacje-wejscia-wyjscia-pickle">
+<h2>Operacje wejścia/wyjścia - Pickle<a class="headerlink" href="#operacje-wejscia-wyjscia-pickle" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Slajdy:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="/artykuly/python/python-tutorial/operacje-wejscia-wyjscia-pickle.html">Operacje wejścia/wyjścia - Pickle</a></p></li>
+</ol>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/pickle.html">pickle — Python object serialization [EN]</a></p></li>
+<li><p><a class="reference external" href="https://www.benfrederickson.com/dont-pickle-your-data/">Don’t Pickle Your Data [EN]</a></p></li>
+</ol>
+</section>
+<section id="wprowadzenie-do-obslugi-wyjatkow">
+<h2>Wprowadzenie do obsługi wyjątków<a class="headerlink" href="#wprowadzenie-do-obslugi-wyjatkow" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/errors.html">Errors and Exceptions [EN]</a></p></li>
+<li><p><a class="reference external" href="https://web.archive.org/web/20210929122114/http://home.agh.edu.pl/~kmiernik/PWJP/python6.pdf">Wyjątki (autor: Katarzyna Miernik, AGH) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://katarzynabuzniak.pl/python/testowanie-w-pythonie/">Testowanie w Pythonie (o wyjątkach) [PL]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=Aek_2oxBGhU">Kurs Python 3 [#17] Wyjątki (Exceptions) (autor:  Piotr Baja) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=H-S7_MtKvEs">12. Kurs Python 3 - obsługa wyjątków (try, except) (autor: Kanał o Wszystkim) [PL]</a></p></li>
+</ol>
+</section>
+<section id="przykladowe-programy-do-wykladow">
+<h2>Przykładowe programy do wykładów<a class="headerlink" href="#przykladowe-programy-do-wykladow" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p><strong>Wykład 1, 2</strong> - Zasady zaliczenia; Literatura; Środowisko pracy; Wprowadzenie do języka; Podstawowe elementy języka</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="/_static/files/edukacja/materialy/programowanie-w-jezyku-python/zaoczne/Programowanie-Python-Wyklad-1i2-Ksiazka-telefoniczna-Slownik-Petla-while.zip">Książka telefoniczna (słownik; pętla while)</a></p></li>
+</ol>
+<p><strong>Wykład 3, 4</strong> - Funkcje; Rekurencja; Podział projektu na pliki - Moduły i pakiety, moduły standardowe</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="/_static/files/edukacja/materialy/programowanie-w-jezyku-python/zaoczne/Programowanie-Python-Wyklad-3i4-Ksiazka-telefoniczna-Funkcje.zip">Książka telefoniczna (funkcje)</a></p></li>
+<li><p><a class="reference external" href="/_static/files/edukacja/materialy/programowanie-w-jezyku-python/zaoczne/Programowanie-Python-Wyklad-3i4-Fibonacci-Funkcja-rekurencyjna-iteracyjna-asercje-testy-TDD.zip">Fibonacci (funkcja rekurencyjna, iteracyjna; asercje; testy; TDD)</a></p></li>
+</ol>
+<p><strong>Wykład 5, 6</strong> - Formatowanie napisów; Wirtualne środowisko; Operacje wejścia/wyjścia - Pliki; Operacje wejścia/wyjścia - Pickle</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="/_static/files/edukacja/materialy/programowanie-w-jezyku-python/zaoczne/Programowanie-Python-Wyklad-5i6-Fibonacci-Czytanie-i-zapisywanie-pliku.zip">Fibonacci (czytanie i zapisywanie pliku)</a></p></li>
+<li><p><a class="reference external" href="/_static/files/edukacja/materialy/programowanie-w-jezyku-python/zaoczne/Programowanie-Python-Wyklad-5i6-Fibonacci-Pickle.zip">Fibonacci (pickle)</a></p></li>
+</ol>
+<p><strong>Wykład 7</strong> - Wprowadzenie do obsługi wyjątków</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="/_static/files/edukacja/materialy/programowanie-w-jezyku-python/zaoczne/Programowanie-Python-Wyklad-7-NBP-Wyjatki.zip">NBP (wyjątki)</a></p></li>
+</ol>
+<p><strong>Wykład 8</strong> - Egzamin</p>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

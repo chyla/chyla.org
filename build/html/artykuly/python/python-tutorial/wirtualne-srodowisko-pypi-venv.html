@@ -1,0 +1,240 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Wirtualne środowisko - PyPI, venv | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../../index.html">
+                <img src="../../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="wirtualne-srodowisko-pypi-venv">
+<h1>Wirtualne środowisko - PyPI, venv<a class="headerlink" href="#wirtualne-srodowisko-pypi-venv" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Informacja</p>
+<p>Może Ciebie również zaintersować artykuł: <a class="reference external" href="/artykuly/python/python3-venv.html">Python 3 &amp; venv</a></p>
+</div>
+
+<div id="pdfobject-0" class="pdfobject-container"></div>
+<script>PDFObject.embed("/_static/files/artykuly/python/python-tutorial/Wirtualne-srodowisko-PyPI-venv.pdf", "#pdfobject-0");</script>
+<section id="pypi">
+<h2>PyPI<a class="headerlink" href="#pypi" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p><strong>The Python Package Index</strong> (PyPI) to repozytorium pakietów (bibliotek i programów) dla języka Python dostępne pod adresem <a class="reference external" href="https://pypi.org/">https://pypi.org/</a>.</p>
+<p>Przykładowe narzędzia dostępne w repozytorium:</p>
+<ul class="simple">
+<li><p>pycodestyle - <a class="reference external" href="https://pypi.org/project/pycodestyle/">https://pypi.org/project/pycodestyle/</a>,</p></li>
+<li><p>pytest - <a class="reference external" href="https://pypi.org/project/pytest/">https://pypi.org/project/pytest/</a>,</p></li>
+<li><p>django - <a class="reference external" href="https://pypi.org/project/Django/">https://pypi.org/project/Django/</a>,</p></li>
+<li><p>flask - <a class="reference external" href="https://pypi.org/project/Flask/">https://pypi.org/project/Flask/</a>.</p></li>
+</ul>
+<p>Częste pytanie: <em>Jak dodać własną bibliotekę/program do repozytorium?</em> Instrukcja: <a class="reference external" href="https://packaging.python.org/tutorials/packaging-projects/">https://packaging.python.org/tutorials/packaging-projects/</a></p>
+<p>Zarządzanie pakietami (wyszukiwanie, instalacja, aktualizacja, dezinstalacja, wypisanie listy zainstalowanych pakietów) odbywa się za pomocą, uruchamianego z konsoli, programu <strong>pip</strong>.</p>
+<p><strong>Najważniejsze polecenie</strong> - wyświetla dostępne polecenia i ich opis:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pip
+</pre></div>
+</div>
+<p>Przykłady:</p>
+<p><strong>Wyszukiwanie pakietów powiązanych z biblioteką pytest</strong>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pip search pytest
+</pre></div>
+</div>
+<p><strong>Instalacja pakietu</strong>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pip install pytest
+</pre></div>
+</div>
+<p><strong>Instalacja konkretnej wersji pakietu</strong>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pip install pytest==4.3.0
+</pre></div>
+</div>
+<p><strong>Aktualizacja pakietu do najnowszej wersji</strong>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pip install --upgrade pytest
+</pre></div>
+</div>
+<p><strong>Dezinstalacja pakietu</strong>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pip uninstall pytest
+</pre></div>
+</div>
+<p><strong>Wypisanie listy zainstalowanych pakietów</strong>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pip list
+</pre></div>
+</div>
+<p>Więcej informacji na temat zarządzania pakietami: <a class="reference external" href="https://packaging.python.org/tutorials/installing-packages/">https://packaging.python.org/tutorials/installing-packages/</a></p>
+<section id="problemy">
+<h3>Problemy?<a class="headerlink" href="#problemy" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Przykładowy problem:</p>
+<blockquote>
+<div><p>Którą wersję biblioteki zainstalować, jeśli chcę korzystać z dwóch programów w tej samej chwili, a korzystają one z tych samych bibliotek, ale w różnych wersjach? Czy różne wersje tej samej biblioteki będą ze sobą współpracować?</p>
+<p><strong>Program A</strong> - Wymaga Django w wersji 2.1.</p>
+<p><strong>Program B</strong> - Wymaga Django w wersji 1.11 (LTS).</p>
+</div></blockquote>
+</section>
+</section>
+<section id="venv">
+<h2>venv<a class="headerlink" href="#venv" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Wirtualne środowisko pozwala zarządzać pakietami bez ingerencji w systemową instalację Pythona.</p>
+<p>Moduł venv odpowiedzialny za tworzenie wirtualnego środowiska dostarczany jest wraz z domyślną instalacją Pythona 3.7. W niektórych dystrybucjach Linuksa (np. Debian/Ubuntu) może być konieczne doinstalowanie dodatkowego pakietu zawierającego moduł venv.</p>
+<p><strong>Utworzenie wirtualnego środowiska</strong> jest możliwe za pomocą polecenia <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">venv</span></code>, argumentem do modułu jest nazwa środowiska (w poniższym przykładzie webenv):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>python -m venv webenv
+</pre></div>
+</div>
+<p>W przypadku powłoki BASH, <strong>do aktywacji środowiska służy polecenie source.</strong> Parametrem jest_ścieżka do skryptu, który odpowiednio zmienia zmienne środowiskowe (np. <code class="docutils literal notranslate"><span class="pre">PATH</span></code>, <code class="docutils literal notranslate"><span class="pre">PS1</span></code>):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>source webenv/bin/activate
+</pre></div>
+</div>
+<p>W przypadku powłoki systemu Windows <strong>aktywację środowiska przeprowadza się_poprzez_uruchomienie skryptu activate</strong>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>webenv\Scripts\activate
+</pre></div>
+</div>
+<p>Do <strong>dezaktywacji środowiska</strong> służy polecenie:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>deactivate
+</pre></div>
+</div>
+<p><strong>Po aktywacji możemy używać poleceń związanych z pythonem</strong>. Przyładowo, instalację Django w wersji 1.8.13 wykonujemy poleceniem:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pip install Django==1.8.13
+</pre></div>
+</div>
+<p>Innymi komendami, które warto znać, są:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pip freeze &gt; nazwa_pliku
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pip install -r nazwa_pliku
+</pre></div>
+</div>
+<p>Pierwsze polecenie polecenie tworzy plik, którego zawartością jest lista zainstalowanych w środowisku pakietów, wraz z ich wersjami. Ogólnie przyjęta nazwa pliku to <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>. Tworząc nowe, czyste środowisko możemy wczytać taką listę i zainstalować pakiety w niej zawarte (drugie polecenie).</p>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://packaging.python.org/tutorials/installing-packages/">Obsługa polecenia PIP i informacje o wirtualnych środowiskach</a></p></li>
+<li><p><a class="reference external" href="https://docs.python-guide.org/dev/virtualenvs/">Opis innych narzędzi do zarządania wirtualnym środowiskiem</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

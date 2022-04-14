@@ -1,0 +1,261 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Jak poprawnie wywołać funkcję C++ z języka C? | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="jak-poprawnie-wywolac-funkcje-c-z-jezyka-c">
+<h1>Jak poprawnie wywołać funkcję C++ z języka C?<a class="headerlink" href="#jak-poprawnie-wywolac-funkcje-c-z-jezyka-c" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<p>Pewnie większość z nas wie, że <cite>extern „C”</cite> (<a class="reference external" href="https://en.cppreference.com/w/cpp/language/language_linkage">language linkage</a>) wyłącza dekorowanie nazw funkcji (ang. <a class="reference external" href="https://en.wikipedia.org/wiki/Name_mangling">name mangling</a>) i ustawia <a class="reference external" href="https://en.cppreference.com/w/cpp/language/storage_duration">external linkage</a>. Kompilator C++ dodaje dodatkowe napisy do nazwy na potrzeby, chociażby, <a class="reference external" href="https://pl.wikipedia.org/wiki/Przeci%C4%85%C5%BCanie_funkcji">przeciążania funkcji</a>.</p>
+<blockquote>
+<div><p>A mangled name encodes a function or
+variable’s name, scope, type, and/or template arguments into a text
+identifier.  This identifier is used as the function’s or
+variable’s linkage name, to preserve compatibility between C++»s
+language features (<em>templates, scoping, and overloading</em>) and C
+linkers.</p>
+<p>(źródło: <a class="reference external" href="https://github.com/gcc-mirror/gcc/blob/master/gcc/cp/mangle.c">github.com/gcc-mirror/gcc</a>)</p>
+</div></blockquote>
+<p>Zobaczmy przykład:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">moja_funkcja</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">moja_funkcja</span><span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>A oto wygenerowane symbole (pominąłem nieistotne):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">00000000000006</span><span class="n">a9</span> <span class="n">T</span> <span class="n">main</span>
+<span class="mi">000000000000069</span><span class="n">d</span> <span class="n">T</span> <span class="n">_Z12moja_funkcjac</span>
+<span class="mi">0000000000000690</span> <span class="n">T</span> <span class="n">_Z12moja_funkcjaii</span>
+</pre></div>
+</div>
+<p>Pierwsza funkcja otrzymała nazwę <cite>_Z12moja_funkcjaii</cite>, natomiast druga <cite>_Z12moja_funkcjac</cite>. Sposób dekorowania nazw jest zależny od kompilatora.</p>
+<p>Kompilator języka C nie stosuje dekorowania nazw, nazwy używane w kodzie źródłowym są identyczne z nazwami wygenerowanych symboli. Zobaczmy to na kolejnym przykładzie:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">inna_funkcja</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Wygenerowane symbole (tutaj także pominąłem nieistotne):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0000000000000660</span> <span class="n">T</span> <span class="n">inna_funkcja</span>
+<span class="mi">000000000000066</span><span class="n">d</span> <span class="n">T</span> <span class="n">main</span>
+</pre></div>
+</div>
+<p>Dekorowanie nazw uniemożliwia linkowanie z kodem wynikowym wygenerowanym za pomocą kompilatora języka C. Jak linkować funkcję języka C++, której nazwa w tablicy symboli jest zależna od kompilatora? Rozwiązaniem jest użycie <cite>extern „C”</cite>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">moja_funkcja</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+
+<span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">moja_druga_funkcja</span><span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Nazwa jednej z przykładowych funkcji musiała ulec zmianie, gdyż nie mogą istnieć dwie takie same nazwy w tablicy symboli:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">00000000000006</span><span class="n">a9</span> <span class="n">T</span> <span class="n">main</span>
+<span class="mi">000000000000069</span><span class="n">d</span> <span class="n">T</span> <span class="n">moja_druga_funkcja</span>
+<span class="mi">0000000000000690</span> <span class="n">T</span> <span class="n">moja_funkcja</span>
+</pre></div>
+</div>
+<p>Bazując na tych informacjach możemy bez problemu napisać program w języku C wywołujący funkcję języka C++.</p>
+<p>Plik <cite>funkcja.cpp</cite>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">funkcja</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Plik <cite>main.c</cite>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">extern</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">funkcja</span><span class="p">();</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">funkcja</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<section id="a-gdyby-tak-funkcja-c-przyjmowala-adres-na-funkcje">
+<h2>A gdyby tak funkcja C przyjmowała adres na funkcję?<a class="headerlink" href="#a-gdyby-tak-funkcja-c-przyjmowala-adres-na-funkcje" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Spójrzmy na przykład.</p>
+<p>Plik <cite>funkcja.c</cite>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">funkcja</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ptr</span><span class="p">)()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">ptr</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Plik <cite>main.cpp</cite>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">funkcja</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ptr</span><span class="p">)()</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">przekazywana</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">funkcja</span><span class="p">(</span><span class="o">&amp;</span><span class="n">przekazywana</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Główny kod programu znajduje się w pliku <cite>main.cpp</cite> kompilowany kompilatorem dla języka C++. Funkcja main() wywołuje <cite>funkcja</cite> z pliku <cite>funkcja.c</cite> kompilowanym kompilatorem języka C. <cite>funkcja</cite> wywołuje funkcję przekazaną jako argument. W tym przykładzie nie ma problemów z linkowaniem.</p>
+<p>Problem w tym, że kod źródłowy z pliku <cite>funkcja.c</cite> jest kodem źródłowym języka C i zapis <cite>ptr()</cite> wywołuje funkcję przekazaną jako argument tak, jak zwykłą funkcję języka C. Przekazywana funkcja jest natomiast funkcją języka C++ i oczekuje, że będzie wywołana tak jak funkcja języka C++.</p>
+<p>Mówiąc precyzyjniej problem dotyczy zgodności <a class="reference external" href="https://en.wikipedia.org/wiki/Calling_convention">konwencji wywołań funkcji</a> C i C++. Dla języka C++ mogła (ale nie musiała) zostać przyjęta inna konwencja niż dla języka C.</p>
+<p>Problem rozwiąże dodanie <cite>extern „C”</cite> do definicji funkcji <cite>przekazywana()</cite>. Na tej podstawie kompilator C++ będzie wiedział jakiej konwencji wywołań użyć:</p>
+<blockquote>
+<div><p>Every function type, every function name with external linkage, and every variable name with external linkage, has a property called language linkage. Language linkage encapsulates the set of requirements necessary to link with a module written in another programming language: <strong>calling convention, name mangling algorithm, etc.</strong></p>
+<p>(źródło: <a class="reference external" href="https://en.cppreference.com/w/cpp/language/language_linkage">cppreference.com</a>)</p>
+</div></blockquote>
+<p>Poprawiony przykład z użyciem <cite>extern „C”</cite>:</p>
+<p>Plik <cite>funkcja.c</cite>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">funkcja</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ptr</span><span class="p">)()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">ptr</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Plik <cite>main.cpp</cite>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">funkcja</span><span class="p">(</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">ptr</span><span class="p">)()</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+
+<span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">przekazywana</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">funkcja</span><span class="p">(</span><span class="o">&amp;</span><span class="n">przekazywana</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Na tego typu problem natkniemy się wykorzystując funkcje języka C, możemy do nich zaliczyć funkcje systemowe (np. te związane z pthreads).</p>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://en.cppreference.com/w/cpp/language/language_linkage">Language linkage</a></p></li>
+<li><p><a class="reference external" href="https://isocpp.org/wiki/faq/mixing-c-and-cpp">How to mix C and C++</a></p></li>
+<li><p><a class="reference external" href="https://www.quora.com/What-is-function-name-mangling-in-programming-and-why-it-happens">What is function name mangling in programming and why it happens?</a></p></li>
+<li><p><a class="reference external" href="https://en.cppreference.com/w/cpp/language/storage_duration">Storage class specifiers</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Calling_convention">Calling convention</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

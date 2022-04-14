@@ -1,0 +1,279 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Core dump | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="core-dump">
+<h1>Core dump<a class="headerlink" href="#core-dump" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<p>Core dump to plik zawierający zapis stanu programu z chwili, w której wystąpiło żądanie jego utworzenia. Mogło ono zostać spowodowane awarią aplikacji lub działaniem użytkownika.</p>
+<section id="automatyczne-generowanie-pliku-core">
+<h2>Automatyczne generowanie pliku core<a class="headerlink" href="#automatyczne-generowanie-pliku-core" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Plik core (zrzut pamięci) zostanie automatycznie wygenerowany przez jądro systemu, gdy aplikacja ulegnie awarii <em>(crash)</em> i nie jest w stanie kontynuować swojej pracy. Może tak się stać na przykład, gdy nastąpi próba zapisu do niezaalokowanej pamięci lub wykonania błędnej instrukcji procesora…</p>
+<p>Muszą zostać spełnione odpowiednie warunki, aby było możliwe wykonanie zrzutu. Elementem, na który trzeba zwrócić uwagę, jest limit rozmiaru pliku core. Sprawdzić go możemy za pomocą polecenia <code class="docutils literal notranslate"><span class="pre">ulimit</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ulimit -a
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 29175
+max locked memory       (kbytes, -l) 64
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 1024
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 8192
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 29175
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+
+$ ulimit -c
+0
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ulimit</span> <span class="pre">-a</span></code> wypisze wszystkie ustawione limity, natomiast <code class="docutils literal notranslate"><span class="pre">ulimit</span> <span class="pre">-c</span></code> wypisze tylko limit maksymalnego rozmiaru pliku core.</p>
+<p>Na powyższym przykładzie widzimy, że maksymalny rozmiar pliku wynosi zero. W takim przypadku nie zostanie on utworzony. Możemy określić dokładny rozmiar lub przypisać wartość <em>unlimited</em>, co pozwoli na tworzenie dowolnie dużych plików zrzutu:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ulimit -c unlimited
+
+$ ulimit -c
+unlimited
+</pre></div>
+</div>
+<p>Powyższe ustawienie zadziała tylko dla aktualnej sesji (np. aktualnie otwartej sesji bash, aktualnie otwartego okna terminala), aby było ono stosowane dla każdej nowej sesji każdego użytkownika, musimy dodać do pliku <code class="docutils literal notranslate"><span class="pre">/etc/security/limits.conf</span></code> linię:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>               <span class="n">soft</span>    <span class="n">core</span>            <span class="n">unlimited</span>
+</pre></div>
+</div>
+<p>Jeżeli nie chcemy modyfikować pliku <code class="docutils literal notranslate"><span class="pre">limits.conf</span></code>, to istnieje możliwość utworzenia nowego pliku konfiguracyjnego w <code class="docutils literal notranslate"><span class="pre">/etc/security/limits.d/</span></code> z dokładnie tą samą linią jak powyżej.</p>
+<p>O pozostałych warunkach, które trzeba spełnić, by został wygenerowany plik core, przeczytasz w <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">5</span> <span class="pre">core</span></code>. Nie wspominam o nich, gdyż to właśnie limity są najczęściej zmieniane. W manualu znajdziesz również informacje o możliwych przyczynach, które spowodują jego wygenerowanie.</p>
+</section>
+<section id="samodzielne-wygenerowanie-pliku-core">
+<h2>Samodzielne wygenerowanie pliku core<a class="headerlink" href="#samodzielne-wygenerowanie-pliku-core" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Plik zrzutu możemy również wygenerować samodzielnie za pomocą polecenia <code class="docutils literal notranslate"><span class="pre">gcore</span></code>. Nie wymaga to przerywania pracy programu - proces ten będzie działał poprawnie również po wykonaniu zrzutu.</p>
+<p>Oto przebieg przykładowej sesji, w której wygenerowano plik core dla aktualnie uruchomionego shella Bash:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ps
+PID TTY          TIME CMD
+15665 pts/7    00:00:00 bash
+15689 pts/7    00:00:00 ps
+
+$ gcore -o moj_plik_zrzutu 15665
+0x00007f4ba32bd58a in __GI___waitpid (pid=-1, stat_loc=0x7ffed73b4280, options=10) at ../sysdeps/unix/sysv/linux/waitpid.c:29
+29        return SYSCALL_CANCEL (wait4, pid, stat_loc, options, NULL);
+Saved corefile moj_plik_zrzutu.15665
+
+$ ls -lh moj_plik_zrzutu.15665
+-rw-rw-r--. 1 adam adam 1,4M 04-11 14:44 moj_plik_zrzutu.15665
+</pre></div>
+</div>
+<p>Polecenie <code class="docutils literal notranslate"><span class="pre">gcore</span></code> działa niezależnie od ustawienia limitu rozmiaru pliku core. Opcja <code class="docutils literal notranslate"><span class="pre">-o</span></code> pozwala na zdefiniowanie własnej nazwy, do której dołączony zostaje numer PID. Drugim argumentem do programu jest numer procesu, dla którego tworzymy plik core.</p>
+<p>Wygenerowanie pliku core możemy również wymusić poprzez wysłanie sygnału do procesu, np. <em>abort</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ kill -ABRT 15665
+Aborted (zrzut pamięci)
+
+$ ls
+</pre></div>
+</div>
+<p>W takim przypadku zrzut został wykonany przez jądro systemu operacyjnego. Argument <code class="docutils literal notranslate"><span class="pre">-ABRT</span></code> identyfikuje sygnał, który chcemy wysłać. Liczba <em>15665</em> to oczywiście numer procesu.</p>
+</section>
+<section id="nazwa-pliku-core">
+<h2>Nazwa pliku core<a class="headerlink" href="#nazwa-pliku-core" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Nazwa pliku core powstaje według określonego formatu przechowywanego w parametrze jądra <code class="docutils literal notranslate"><span class="pre">kernel.core_pattern</span></code>. Za jego pomocą możemy zmienić nazwę generowanego pliku core oraz miejsce, w którym zostanie zapisany. Zobaczmy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sysctl kernel.core_pattern=/tmp/core-%h.%p
+
+$ sleep 90 &amp;
+[1] 22237
+
+$ ps
+PID TTY          TIME CMD
+21845 pts/7    00:00:00 bash
+22237 pts/7    00:00:00 sleep
+22240 pts/7    00:00:00 ps
+
+$ kill -ABRT 22237
+[1]+  Aborted                 (zrzut pamięci) sleep 90
+
+$ ls -al /tmp/core-Dahlia.22237
+-rw-------. 1 adam adam 393216 04-11 18:34 /tmp/core-Dahlia.22237
+</pre></div>
+</div>
+<p>Jądro umieściło plik core w katalogu <em>/tmp</em> pod nazwą <em>core-Dahlia.22237</em>. Specyfikatory <code class="docutils literal notranslate"><span class="pre">%h</span></code> oraz <code class="docutils literal notranslate"><span class="pre">%p</span></code> ze wzorca zostały zamienione przez nazwę hosta oraz PID procesu. Oto lista niektórych specyfikatorów (więcej znajdziesz w <code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">5</span> <span class="pre">core</span></code>):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">%e</span></code> - nazwa pliku wykonywalnego</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%g</span></code> - numer identyfikacyjny grupy, na prawach której był uruchomiony proces</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%h</span></code> - nazwa hosta</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%p</span></code> lub <code class="docutils literal notranslate"><span class="pre">%P</span></code> - numer procesu</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%s</span></code> - numer sygnału, który spowodował zrzut pamięci</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%t</span></code> - czas w jakim powstał plik zrzutu</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%u</span></code> - numer identyfikacyjny użytkownika, na prawach którego był uruchomiony proces</p></li>
+</ul>
+<p>Wzorzec może rozpoczynać się od znaku <cite>|</cite> (pipe). Oznacza to, że zostanie wywołany program, którego ścieżkę podano po znaku pipe, a na jego standardowe wejście zostanie przekazany zrzut pamięci. Podjęte działanie zależy wtedy od wywołanego programu, może to być zapis zrzutu pamięci do pliku core lub inne działanie (np. wysłanie zgłoszenia błędu do autora danego programu).</p>
+<p>Oto przykład, w którym na standardowe wejście programu <code class="docutils literal notranslate"><span class="pre">systemd-coredump</span></code> zostanie przekazany zrzut pamięci:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sysctl kernel.core_pattern
+kernel.core_pattern = |/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %e
+</pre></div>
+</div>
+</section>
+<section id="gnu-debugger-gdb">
+<h2>GNU Debugger (GDB)<a class="headerlink" href="#gnu-debugger-gdb" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Plik core wykorzystywany jest podczas analizy z użyciem programu <code class="docutils literal notranslate"><span class="pre">gdb</span></code>. W tym celu jako argument należy podać ścieżkę do pliku binarnego aplikacji oraz ścieżkę do pliku core:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb /bin/sleep sleep.core
+  // ... //
+Core was generated by `sleep&#39;.
+Program terminated with signal 6, Aborted.
+Reading symbols from /lib/libc.so.7...(no debugging symbols found)...done.
+Loaded symbols for /lib/libc.so.7
+Reading symbols from /libexec/ld-elf.so.1...(no debugging symbols found)...done.
+Loaded symbols for /libexec/ld-elf.so.1
+#0  0x00000008008fa95a in _nanosleep () from /lib/libc.so.7
+(gdb) where
+#0  0x00000008008fa95a in _nanosleep () from /lib/libc.so.7
+#1  0x00000000004009e6 in ?? ()
+#2  0x000000000040086f in ?? ()
+#3  0x0000000800621000 in ?? ()
+#4  0x0000000000000000 in ?? ()
+(gdb)
+</pre></div>
+</div>
+<p>Polecenie <code class="docutils literal notranslate"><span class="pre">where</span></code> pokazuje kolejne ramki stosu procesu.</p>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://linux.die.net/man/5/core">core(5)</a></p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/17965/how-to-generate-a-core-dump-in-linux-when-a-process-gets-a-segmentation-fault">How to generate a core dump in Linux when a process gets a segmentation fault?</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

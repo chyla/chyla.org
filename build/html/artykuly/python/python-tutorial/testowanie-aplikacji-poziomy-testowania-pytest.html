@@ -1,0 +1,347 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Testowanie aplikacji - Poziomy testowania, pytest | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../../index.html">
+                <img src="../../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="testowanie-aplikacji-poziomy-testowania-pytest">
+<h1>Testowanie aplikacji - Poziomy testowania, pytest<a class="headerlink" href="#testowanie-aplikacji-poziomy-testowania-pytest" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+
+<div id="pdfobject-0" class="pdfobject-container"></div>
+<script>PDFObject.embed("/_static/files/artykuly/python/python-tutorial/Testowanie-aplikacji-Poziomy-testowania-pytest.pdf", "#pdfobject-0");</script>
+<section id="poziomy-testowania">
+<h2>Poziomy testowania<a class="headerlink" href="#poziomy-testowania" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p><strong>Poziom testów</strong> czyli grupa czynności testowych, które są razem zorganizowane.</p>
+<p><em>Istotą rozróżniania poziomów testów jest to, że każdy poziom ma inne cele testowania, ma zwykle inną podstawę testów, a także inny obiekt testowania.</em></p>
+<p><em>Typowe poziomy testowania:</em></p>
+<ul class="simple">
+<li><p><strong>jednostkowe</strong> - <em>testowanie pojedynczych modułów,</em></p></li>
+<li><p><strong>integracyjne</strong> - <em>testowanie wykonywane w celu wykrycia defektów podczas interakcji między komponentami lub systemami,</em></p></li>
+<li><p><strong>systemowe</strong> - <em>testowanie zintegrowanego systemu w celu sprawdzenia jego zgodności z wyspecyfikowanymi wymaganiami,</em></p></li>
+<li><p><strong>akceptacyjne</strong> - <em>testowanie formalnie przeprowadzane w celu umożliwienia użytkownikowi, klientowi lub innemu ustalonemu podmiotowi ustalenia, czy zaakceptować system lub moduł.</em> <a class="footnote-reference brackets" href="#tijo" id="id1">1</a></p></li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="tijo"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>żródło/na podstawie: <a class="reference external" href="https://ksiegarnia.pwn.pl/Testowanie-i-jakosc-oprogramowania.-Modele-techniki-narzedzia.,732463348,p.html">Testowanie i jakość oprogramowania. Metody, narzędzia, techniki, Adam Roman, 2015</a> s. 72-80</p>
+</dd>
+</dl>
+</section>
+<section id="pytest">
+<h2>pytest<a class="headerlink" href="#pytest" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<blockquote>
+<div><p>The pytest framework makes it easy to write small tests. <a class="footnote-reference brackets" href="#pytestdocs" id="id2">2</a></p>
+</div></blockquote>
+<p>Pytest pozwala napisać proste testy z użyciem instrukcji <code class="docutils literal notranslate"><span class="pre">assert</span></code>, dodatkowo potrafi uruchomić testy napisane z użyciem modułu unittest.</p>
+<p>Do napisania testu z użyciem pytest wymagana jest instalacja pakietu <code class="docutils literal notranslate"><span class="pre">pytest</span></code>.</p>
+<p><strong>Kluczowe słownictwo:</strong></p>
+<ul class="simple">
+<li><p>test fixture - określa akcje potrzebne do przygotowania testu i jego zakończenia.</p></li>
+<li><p>test case - przypadek testowy, test.</p></li>
+<li><p>test suite - kolekcja test case i test suite, służy do grupowania testów, które należy wykonać razem.</p></li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="pytestdocs"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>źródło: <a class="reference external" href="https://docs.pytest.org/en/latest/">https://docs.pytest.org/en/latest/</a></p>
+</dd>
+</dl>
+<section id="struktura-projektu">
+<h3>Struktura projektu<a class="headerlink" href="#struktura-projektu" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Przykładowa struktura plików projektu.</p>
+<p>Pliki z testami umieszczamy w katalogu z implementacją lub w osobnym katalogu o nazwie tests.</p>
+<p>Struktura plików - testy w katalogu z implementacją:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.
+|-- kalkulator.py
+`-- utils
+    |-- strings.py
+    |-- test_strings.py
+    |-- user.py
+    `-- test_user.py
+</pre></div>
+</div>
+<p>Struktura plików - testy w osobnym katalogu:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.
+|-- kalkulator.py
+|-- utils
+|   |-- strings.py
+|   `-- user.py
+`-- tests
+    |-- __init__.py
+    `-- utils
+        |-- __init__.py
+        |-- test_strings.py
+        `-- test_user.py
+</pre></div>
+</div>
+<p><strong>Ważne jest, by nazwa pliku z testami zaczynała się od frazy</strong> <code class="docutils literal notranslate"><span class="pre">test_</span></code> <strong>, inaczej testy się nie uruchomią!</strong></p>
+</section>
+<section id="tworzenie-testow">
+<h3>Tworzenie testów<a class="headerlink" href="#tworzenie-testow" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p><strong>Tworzenie testów</strong> rozpoczynamy od utworzenia funkcji. Jedna funkcja odpowiada jednemu przypadkowi testowemu.</p>
+<p><strong>Nazwy poszczególnych testów powinny zaczynać się od frazy</strong> <code class="docutils literal notranslate"><span class="pre">test_</span></code> <strong>, inaczej testy się nie uruchomią!</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">tests/utils/test_strings.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils.strings</span> <span class="kn">import</span> <span class="n">czy_liczba</span>
+
+<span class="k">def</span> <span class="nf">test_poprawna_liczba_dodatnia</span><span class="p">():</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">czy_liczba</span><span class="p">(</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+<section id="warunki-testowe">
+<h3>Warunki testowe<a class="headerlink" href="#warunki-testowe" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p><strong>Warunki testowe</strong> sprawdzane są za pomocą instrukcji <code class="docutils literal notranslate"><span class="pre">assert</span></code>.</p>
+<p>Jeśli warunek instrukcji <code class="docutils literal notranslate"><span class="pre">assert</span></code> nie zostanie spełniony wykonywanie testu zostanie przerwane i pojawi się komunikat o błędzie.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tests/utils/test_strings.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils.strings</span> <span class="kn">import</span> <span class="n">czy_liczba</span>
+
+<span class="k">def</span> <span class="nf">test_poprawna_liczba_dodatnia</span><span class="p">():</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">czy_liczba</span><span class="p">(</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Wybrane warunki w instrukcji <code class="docutils literal notranslate"><span class="pre">assert</span></code>:</p>
+<ul class="simple">
+<li><p>a == b</p></li>
+<li><p>a != b</p></li>
+<li><p>x is True</p></li>
+<li><p>x is False</p></li>
+<li><p>x is None</p></li>
+<li><p>x is not None</p></li>
+<li><p>a in b</p></li>
+<li><p>a not in b</p></li>
+</ul>
+<p>W przypadku, gdy warunek instrukcji <code class="docutils literal notranslate"><span class="pre">assert</span></code> nie zostanie spełniony test zostaje przerwany i oznaczony jako FAIL.</p>
+<p>Funkcja <strong>pytest.raises()</strong>, sprawdza czy instrukcje umieszczone w specjalnym bloku <code class="docutils literal notranslate"><span class="pre">with</span></code> rzucą wyjątek, jako parametr przyjmuje klasę oczekiwanego wyjątku.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="k">def</span> <span class="nf">test_liczba_z_litera</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">NotDigit</span><span class="p">):</span>
+        <span class="n">check_digit</span><span class="p">(</span><span class="s2">&quot;3a&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="klasy-z-testami">
+<h3>Klasy z testami<a class="headerlink" href="#klasy-z-testami" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p><strong>Testy mogą zostać pogrupowane</strong> za pomocą klasy.</p>
+<p><strong>Nazwa klasy musi zaczynać się od słowa Test.</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">tests/utils/test_strings.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils.strings</span> <span class="kn">import</span> <span class="n">czy_liczba</span>
+
+<span class="k">class</span> <span class="nc">TestCzyLiczba</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_poprawna_liczba_dodatnia</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">czy_liczba</span><span class="p">(</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">test_poprawna_liczba_ujemna</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">czy_liczba</span><span class="p">(</span><span class="s2">&quot;-1&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</section>
+<section id="fixture">
+<h3>fixture<a class="headerlink" href="#fixture" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Testy mogą również wykorzystywać specjalne <strong>metody uruchamiane przed rozpoczęciem testu</strong>, który tego wymaga.</p>
+<p>Takie metody oznaczane są za pomocą <code class="docutils literal notranslate"><span class="pre">&#64;pytest.fixture</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span> <span class="nf">sut</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">Kalkulator</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">test_dodawanie</span><span class="p">(</span><span class="n">sut</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">sut</span><span class="o">.</span><span class="n">dodaj</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+
+<span class="k">def</span> <span class="nf">test_true</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="kc">True</span> <span class="ow">is</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Nazwa oznaczonej funkcji musi zgadzać się z nazwą parametru przyjmowanego przez funkcję testową, by ta została uruchomiona dla danego testu.</p>
+<p>Funkcja <code class="docutils literal notranslate"><span class="pre">sut()</span></code> zostanie uruchomiona dla <code class="docutils literal notranslate"><span class="pre">test_dodawanie()</span></code>, nie zostanie uruchomiona dla <code class="docutils literal notranslate"><span class="pre">test_true()</span></code>.</p>
+</section>
+<section id="uruchamianie-testow">
+<h3>Uruchamianie testów<a class="headerlink" href="#uruchamianie-testow" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Testy uruchamiamy za pomocą polecenia <code class="docutils literal notranslate"><span class="pre">pytest</span></code> wykonywanego z poziomu katalogu głównego projektu.</p>
+<p>Opcjonalnym argumentem do polecenia jest ścieżka do pliku z testem.</p>
+<p>Przykład uruchomienia programu pytest bez argumentów:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ pytest
+============= test session starts ==============
+platform linux -- Python 3.7.0, pytest-4.3.0, py-1.8.0, pluggy-0.9.0
+rootdir: /home/user/, inifile:
+collected 1 item
+
+tests/utils/test_strings.py .            [100%]
+
+=========== 1 passed in 0.01 seconds ===========
+</pre></div>
+</div>
+<p>Przykład uruchomienia programu pytest z podaniem ścieżki do pliku z testami.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ pytest tests/utils/test_strings.py
+============= test session starts ==============
+platform linux -- Python 3.7.0, pytest-4.3.0, py-1.8.0, pluggy-0.9.0
+rootdir: /home/user/, inifile:
+collected 1 item
+
+tests/utils/test_strings.py .            [100%]
+
+=========== 1 passed in 0.01 seconds ===========
+</pre></div>
+</div>
+<p>Przykładowy wydruk z wykonania testu, który się nie powiódł.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>=========== test session starts ===========
+[...]
+tests/utils/test_strings_pytest.py F [100%]
+
+================ FAILURES =================
+______ test_poprawna_liczba_dodatnia ______
+
+    def test_poprawna_liczba_dodatnia():
+        result = czy_liczba(&quot;5&quot;)
+&gt;       assert result is True
+E       assert False is True
+
+tests/utils/test_strings_pytest.py:8: AssertionError
+======== 1 failed in 0.02 seconds =========
+</pre></div>
+</div>
+</section>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Full pytest documentation, <a class="reference external" href="https://docs.pytest.org/en/latest/contents.html">https://docs.pytest.org/en/latest/contents.html</a></p></li>
+<li><p>Adam Roman, Testowanie i jakość oprogramowania. Metody, narzędzia, techniki, 2015, <a class="reference external" href="https://ksiegarnia.pwn.pl/Testowanie-i-jakosc-oprogramowania.-Modele-techniki-narzedzia.,732463348,p.html">https://ksiegarnia.pwn.pl/Testowanie-i-jakosc-oprogramowania.-Modele-techniki-narzedzia.,732463348,p.html</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

@@ -1,0 +1,374 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Testowanie aplikacji - Poziomy testowania, unittest | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../../index.html">
+                <img src="../../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="testowanie-aplikacji-poziomy-testowania-unittest">
+<h1>Testowanie aplikacji - Poziomy testowania, unittest<a class="headerlink" href="#testowanie-aplikacji-poziomy-testowania-unittest" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+
+<div id="pdfobject-0" class="pdfobject-container"></div>
+<script>PDFObject.embed("/_static/files/artykuly/python/python-tutorial/Testowanie-aplikacji-Poziomy-testowania-unittest.pdf", "#pdfobject-0");</script>
+<section id="poziomy-testowania">
+<h2>Poziomy testowania<a class="headerlink" href="#poziomy-testowania" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p><strong>Poziom testów</strong> czyli grupa czynności testowych, które są razem zorganizowane.</p>
+<p><em>Istotą rozróżniania poziomów testów jest to, że każdy poziom ma inne cele testowania, ma zwykle inną podstawę testów, a także inny obiekt testowania.</em></p>
+<p><em>Typowe poziomy testowania:</em></p>
+<ul class="simple">
+<li><p><strong>jednostkowe</strong> - <em>testowanie pojedynczych modułów,</em></p></li>
+<li><p><strong>integracyjne</strong> - <em>testowanie wykonywane w celu wykrycia defektów podczas interakcji między komponentami lub systemami,</em></p></li>
+<li><p><strong>systemowe</strong> - <em>testowanie zintegrowanego systemu w celu sprawdzenia jego zgodności z wyspecyfikowanymi wymaganiami,</em></p></li>
+<li><p><strong>akceptacyjne</strong> - <em>testowanie formalnie przeprowadzane w celu umożliwienia użytkownikowi, klientowi lub innemu ustalonemu podmiotowi ustalenia, czy zaakceptować system lub moduł.</em> <a class="footnote-reference brackets" href="#tijo" id="id1">1</a></p></li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="tijo"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>żródło/na podstawie: <a class="reference external" href="https://ksiegarnia.pwn.pl/Testowanie-i-jakosc-oprogramowania.-Modele-techniki-narzedzia.,732463348,p.html">Testowanie i jakość oprogramowania. Metody, narzędzia, techniki, Adam Roman, 2015</a> s. 72-80</p>
+</dd>
+</dl>
+</section>
+<section id="unittest">
+<h2>Unittest<a class="headerlink" href="#unittest" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<blockquote>
+<div><p>The unittest unit testing framework was originally inspired by JUnit and has a similar flavor as_major unit testing frameworks in other languages. <a class="footnote-reference brackets" href="#utdocs" id="id2">2</a></p>
+</div></blockquote>
+<p>unittest jest biblioteką dostarczaną razem z Pythonem, nie wymaga instalacji.</p>
+<p><strong>Kluczowe słownictwo:</strong></p>
+<ul class="simple">
+<li><p>test fixture - określa akcje potrzebne do przygotowania testu i jego zakończenia.</p></li>
+<li><p>test case - przypadek testowy, test.</p></li>
+<li><p>test suite - kolekcja test case i test suite, służy do grupowania testów, które należy wykonać razem.</p></li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="utdocs"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>źródło: <a class="reference external" href="https://docs.python.org/3/library/unittest.html">https://docs.python.org/3/library/unittest.html</a></p>
+</dd>
+</dl>
+<section id="struktura-projektu">
+<h3>Struktura projektu<a class="headerlink" href="#struktura-projektu" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Przykładowa struktura plików projektu.</p>
+<p>Pliki z testami umieszczamy w katalogu z implementacją lub w osobnym katalogu o nazwie tests.</p>
+<p>Struktura plików - testy w katalogu z implementacją:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.
+|-- kalkulator.py
+`-- utils
+    |-- strings.py
+    |-- test_strings.py
+    |-- user.py
+    `-- test_user.py
+</pre></div>
+</div>
+<p>Struktura plików - testy w osobnym katalogu:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.
+|-- kalkulator.py
+|-- utils
+|   |-- strings.py
+|   `-- user.py
+`-- tests
+    |-- __init__.py
+    `-- utils
+        |-- __init__.py
+        |-- test_strings.py
+        `-- test_user.py
+</pre></div>
+</div>
+<p><strong>Ważne jest, by nazwa pliku z testami zaczynała się od frazy</strong> <code class="docutils literal notranslate"><span class="pre">test_</span></code> <strong>, inaczej testy się nie uruchomią!</strong></p>
+</section>
+<section id="tworzenie-testow">
+<h3>Tworzenie testów<a class="headerlink" href="#tworzenie-testow" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p><strong>Tworzenie testów</strong> rozpoczynamy od utworzenia klasy, w której umieszczone będą poszczególne przypadki testowe.</p>
+<p><strong>Klasa ta musi dziedziczyć po unittest.TestCase.</strong></p>
+<p><strong>Nazwy poszczególnych testów powinny zaczynać się od frazy</strong> <code class="docutils literal notranslate"><span class="pre">test_</span></code> <strong>, inaczej testy się nie uruchomią!</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">tests/utils/test_strings.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="kn">from</span> <span class="nn">utils.strings</span> <span class="kn">import</span> <span class="n">czy_liczba</span>
+
+<span class="k">class</span> <span class="nc">CzyLiczba</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">test_poprawna_liczba_dodatnia</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">czy_liczba</span><span class="p">(</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="warunki-testowe">
+<h3>Warunki testowe<a class="headerlink" href="#warunki-testowe" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p><strong>Warunki testowe</strong> sprawdzane są za pomocą metod typu <code class="docutils literal notranslate"><span class="pre">assert*</span></code>.</p>
+<p>W przykładzie została użyta metoda <strong>assertTrue()</strong>, sprawdza ona czy podany argument ma wartość True, jeśli nie, wykonywany test zostanie przerwany i pojawi się komunikat o błędzie.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tests/utils/test_strings.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="kn">from</span> <span class="nn">utils.strings</span> <span class="kn">import</span> <span class="n">czy_liczba</span>
+
+<span class="k">class</span> <span class="nc">CzyLiczba</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">test_poprawna_liczba_dodatnia</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">czy_liczba</span><span class="p">(</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wybrane metody typu <code class="docutils literal notranslate"><span class="pre">assert*()</span></code>:</p>
+<ul class="simple">
+<li><p>assertEqual(a, b) –&gt; <em>a == b</em></p></li>
+<li><p>assertNotEqual(a, b) –&gt; <em>a != b</em></p></li>
+<li><p>assertTrue(x) –&gt; <em>bool(x) is True</em></p></li>
+<li><p>assertFalse(x) –&gt; <em>bool(x) is False</em></p></li>
+<li><p>assertIs(a, b) –&gt; <em>a is b</em></p></li>
+<li><p>assertIsNot(a, b) –&gt; <em>a is not b</em></p></li>
+<li><p>assertIsNone(x) –&gt; <em>x is None</em></p></li>
+<li><p>assertIsNotNone(x) –&gt; <em>x is not None</em></p></li>
+<li><p>assertIn(a, b) –&gt; <em>a in b</em></p></li>
+<li><p>assertNotIn(a, b) –&gt; <em>a not in b</em></p></li>
+<li><p>assertAlmostEqual(a, b) –&gt; <em>round(a-b, 7) == 0</em></p></li>
+<li><p>assertNotAlmostEqual(a, b) –&gt; <em>round(a-b, 7) != 0</em></p></li>
+<li><p>assertGreater(a, b) –&gt; <em>a &gt; b</em></p></li>
+<li><p>assertGreaterEqual(a, b) –&gt; <em>a &gt;= b</em></p></li>
+<li><p>assertLess(a, b) –&gt; <em>a &lt; b</em></p></li>
+<li><p>assertLessEqual(a, b) –&gt; <em>a &lt;= b</em></p></li>
+</ul>
+<p>W metodach typu <strong>assert*()</strong> za parametr <strong>a</strong> podajemy wartość uzyskaną w wyniku działania testu, parametr <strong>b</strong> powinien przyjmować wartość oczekiwaną. Ma to znaczenie podczas wyświetlania komunikatu o błędzie.</p>
+<p>W przypadku, gdy warunek metody typu assert*() nie zostanie spełniony test zostaje przerwany i oznaczony jako FAIL.</p>
+<p>Metoda <strong>assertRaises()</strong>, sprawdza czy instrukcje umieszczone w specjalnym bloku <strong>with</strong> rzucą wyjątek, jako parametr przyjmuje klasę oczekiwanego wyjątku.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="k">class</span> <span class="nc">CheckDigit</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">test_liczba_z_litera</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">NotDigit</span><span class="p">):</span>
+            <span class="n">check_digit</span><span class="p">(</span><span class="s2">&quot;3a&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="setup-teardown">
+<h3>setUp, tearDown<a class="headerlink" href="#setup-teardown" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Testy mogą również wykorzystywać specjalne metody <code class="docutils literal notranslate"><span class="pre">setUp()</span></code> oraz <code class="docutils literal notranslate"><span class="pre">tearDown()</span></code> do przygotowania i zakończenia testu.</p>
+<p>Metody te zostaną wywołane przed rozpoczęciem i po zakończeniu każdego z testów.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">unittest</span>
+
+<span class="k">class</span> <span class="nc">TestKalkulator</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kalkulator</span> <span class="o">=</span> <span class="n">Kalkulator</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">test_dodaj</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kalkulator</span><span class="o">.</span><span class="n">dodaj</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kalkulator</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+<section id="uruchamianie-testow">
+<h3>Uruchamianie testów<a class="headerlink" href="#uruchamianie-testow" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Testy uruchamiamy za pomocą polecenia <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">unittest</span></code> wykonywanego z poziomu katalogu głównego projektu.</p>
+<p>Argumentem do polecenia jest:</p>
+<ul class="simple">
+<li><p>ścieżka w formie importu,</p></li>
+<li><p>ścieżka do pliku z testem,</p></li>
+<li><p>polecenie discover - automatycznie znajduje testy.</p></li>
+</ul>
+<p>Przykład uruchomienia z argumentem ścieżki w formie importu:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ python -m unittest tests.utils.test_strings
+.
+-----------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+</pre></div>
+</div>
+<p>Przykład uruchomienia z argumentem ścieżki do pliku z testem:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ python -m unittest tests/utils/test_strings.py
+.
+-----------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+</pre></div>
+</div>
+<p>Przykład uruchomienia z poleceniem discover:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ python -m unittest discover
+.
+-----------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+</pre></div>
+</div>
+<p>Warto wiedzieć, że polecenia te przyjmują dodatkowy argument <code class="docutils literal notranslate"><span class="pre">-v</span></code>, który powoduje wyświetlanie większej ilości informacji.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ python -m unittest discover -v
+test_poprawna_liczba_dodatnia                   \
+      (tests.utils.test_strings.CzyLiczba) ... ok
+.
+-----------------------------------------------
+Ran 1 test in 0.000s
+OK
+
+$ python -m unittest -v tests/utils/test_strings.py
+test_poprawna_liczba_dodatnia                   \
+      (tests.utils.test_strings.CzyLiczba) ... ok
+.
+-----------------------------------------------
+Ran 1 test in 0.000s
+OK
+</pre></div>
+</div>
+<p>Przykładowy wydruk z wykonania testu, który się nie powiódł.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>$ python -m unittest discover
+===============================================
+FAIL: test_poprawna_liczba_dodatnia            \
+           (tests.utils.test_strings.CzyLiczba)
+-----------------------------------------------
+Traceback (most recent call last):
+  File &quot;tests/utils/test_strings.py&quot;, line 10, \
+              in test_poprawna_liczba_dodatnia
+    self.assertTrue(result)
+AssertionError: False is not true
+
+-----------------------------------------------
+Ran 1 test in 0.000s
+FAILED (failures=1)
+</pre></div>
+</div>
+</section>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p>unittest — Unit testing framework, <a class="reference external" href="https://docs.python.org/3/library/unittest.html">https://docs.python.org/3/library/unittest.html</a></p></li>
+<li><p>Adam Roman, Testowanie i jakość oprogramowania. Metody, narzędzia, techniki, 2015, <a class="reference external" href="https://ksiegarnia.pwn.pl/Testowanie-i-jakosc-oprogramowania.-Modele-techniki-narzedzia.,732463348,p.html">https://ksiegarnia.pwn.pl/Testowanie-i-jakosc-oprogramowania.-Modele-techniki-narzedzia.,732463348,p.html</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

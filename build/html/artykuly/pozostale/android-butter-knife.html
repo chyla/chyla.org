@@ -1,0 +1,354 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Android - Butter Knife | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="android-butter-knife">
+<h1>Android - Butter Knife<a class="headerlink" href="#android-butter-knife" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<section id="spis-tresci">
+<h2>Spis treści<a class="headerlink" href="#spis-tresci" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Wstęp</p></li>
+<li><p>Dodanie biblioteki do projektu</p></li>
+<li><p>Wiązanie w aktywności</p></li>
+<li><p>Wiązanie we fragmentach</p></li>
+<li><p>Dodatek Android ButterKnife Zelezny</p></li>
+</ol>
+</section>
+<section id="wstep">
+<h2>Wstęp<a class="headerlink" href="#wstep" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Podczas pisania aplikacji Android, programista jest zmuszony do powtarzania tych samych fragmentów kodu podczas tworzenia powiązania elementu GUI czy zasobu z odpowiednim polem klasy. Butter Knife eliminuje ten problem - odpowiednie wiązania tworzy się używając adnotacji. Na ich podstawie, w trakcie procesu kompilacji, generowany jest odpowiedni kod. Wykorzystanie biblioteki nie wpływa znacząco na wydajność aplikacji.</p>
+</section>
+<section id="dodanie-biblioteki-do-projektu">
+<h2>Dodanie biblioteki do projektu<a class="headerlink" href="#dodanie-biblioteki-do-projektu" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Bibliotekę dodamy do projektu poprzez modyfikację pliku <cite>build.gradle</cite> znajdującego się w katalogu <cite>app</cite>. W sekcji <cite>dependencies</cite> dodajemy te dwie linie (X.Y.Z należy zamienić na numer konkretnej wersji):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">compile</span> <span class="s1">&#39;com.jakewharton:butterknife:X.Y.Z&#39;</span>
+<span class="n">annotationProcessor</span> <span class="s1">&#39;com.jakewharton:butterknife-compiler:X.Y.Z&#39;</span>
+</pre></div>
+</div>
+<p>W nowej wersji <a class="reference external" href="https://stackoverflow.com/questions/44493378/whats-the-difference-between-implementation-and-compile-in-gradle">Gradle (od 3.0)</a> są to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">implementation</span> <span class="s1">&#39;com.jakewharton:butterknife:X.Y.Z&#39;</span>
+<span class="n">annotationProcessor</span> <span class="s1">&#39;com.jakewharton:butterknife-compiler:X.Y.Z&#39;</span>
+</pre></div>
+</div>
+<p>Aktualny numer wersji można sprawdzić na <a class="reference external" href="http://jakewharton.github.io/butterknife/">stronie projektu</a>, w momencie pisania tego artykułu jest to 8.8.1. Poniżej przykładowy plik konfiguracyjny:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>apply plugin: &#39;com.android.application&#39;
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId &quot;org.chyla.butterknifetestapp&quot;
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName &quot;1.0&quot;
+        testInstrumentationRunner &quot;android.support.test.runner.AndroidJUnitRunner&quot;
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile(&#39;proguard-android.txt&#39;), &#39;proguard-rules.pro&#39;
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: &#39;libs&#39;, include: [&#39;*.jar&#39;])
+    implementation &#39;com.android.support:appcompat-v7:26.1.0&#39;
+    implementation &#39;com.android.support.constraint:constraint-layout:1.0.2&#39;
+    testImplementation &#39;junit:junit:4.12&#39;
+    androidTestImplementation &#39;com.android.support.test:runner:1.0.1&#39;
+    androidTestImplementation &#39;com.android.support.test.espresso:espresso-core:3.0.1&#39;
+
+    implementation &#39;com.jakewharton:butterknife:8.8.1&#39;
+    annotationProcessor &#39;com.jakewharton:butterknife-compiler:8.8.1&#39;
+}
+</pre></div>
+</div>
+</section>
+<section id="wiazanie-w-aktywnosci">
+<h2>Wiązanie w aktywności<a class="headerlink" href="#wiazanie-w-aktywnosci" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Tradycyjnie do utworzenia wiązania między widokiem a składnikiem klasy należy użyć metody <cite>findViewById</cite>, jak w poniższym przykładzie:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginActivity</span> <span class="kd">extends</span> <span class="n">AppCompatActivity</span> <span class="p">{</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span>    <span class="kd">private</span> <span class="n">EditText</span> <span class="n">mPasswordView</span><span class="p">;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>    <span class="nd">@Override</span>
+<span class="linenos"> 6</span>    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 7</span>        <span class="kd">super</span><span class="p">.</span><span class="na">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">);</span>
+<span class="linenos"> 8</span>        <span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">activity_login</span><span class="p">);</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>        <span class="n">mPasswordView</span> <span class="o">=</span> <span class="p">(</span><span class="n">EditText</span><span class="p">)</span> <span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">password</span><span class="p">);</span>
+<span class="linenos">11</span>    <span class="p">}</span>
+<span class="linenos">12</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Każdej deklaracji (linia 3) odpowiada przypisanie widoku (linia 10). Zapis ten możemy skrócić używając <cite>BindView</cite>:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginActivity</span> <span class="kd">extends</span> <span class="n">AppCompatActivity</span> <span class="p">{</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span>    <span class="nd">@BindView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">password</span><span class="p">)</span> <span class="n">EditText</span> <span class="n">mPasswordView</span><span class="p">;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>    <span class="nd">@Override</span>
+<span class="linenos"> 6</span>    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 7</span>        <span class="kd">super</span><span class="p">.</span><span class="na">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">);</span>
+<span class="linenos"> 8</span>        <span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">activity_login</span><span class="p">);</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span>        <span class="n">ButterKnife</span><span class="p">.</span><span class="na">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="linenos">11</span>    <span class="p">}</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Zmiany nastąpiły w linii 3 i 10. W linii 3 użyta zostałą adnotacja <cite>BindView</cite>, usunięty został również modyfikator dostępu <cite>private</cite>. W linii 10 następuje jednorazowa (dla danej klasy) inicjalizacja wiązań.</p>
+<p>Oprócz widoków dowiązane mogą zostać zasoby:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginActivity</span> <span class="kd">extends</span> <span class="n">AppCompatActivity</span> <span class="p">{</span>
+
+    <span class="nd">@BindString</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">string</span><span class="p">.</span><span class="na">title</span><span class="p">)</span> <span class="n">String</span> <span class="n">title</span><span class="p">;</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">super</span><span class="p">.</span><span class="na">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">);</span>
+        <span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">activity_login</span><span class="p">);</span>
+
+        <span class="n">ButterKnife</span><span class="p">.</span><span class="na">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Biblioteka pozwala także powiązać przycisk z odpowiednią funkcją:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginActivity</span> <span class="kd">extends</span> <span class="n">AppCompatActivity</span> <span class="p">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">super</span><span class="p">.</span><span class="na">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">);</span>
+        <span class="n">setContentView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">activity_login</span><span class="p">);</span>
+
+        <span class="n">ButterKnife</span><span class="p">.</span><span class="na">bind</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">@OnClick</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">email_sign_in_button</span><span class="p">)</span>
+    <span class="kt">void</span> <span class="nf">attemptLogin</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// action</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Powyżej przedstawiłem, moim zdaniem, najczęściej wykorzystywane rodzaje wiązań. Zachęcam do przejrzenia <a class="reference external" href="http://jakewharton.github.io/butterknife/">strony domowej projektu</a>, gdzie zostały przedstawione pozostałe rodzaje (np. wiązania grupowe).</p>
+</section>
+<section id="wiazanie-we-fragmentach">
+<h2>Wiązanie we fragmentach<a class="headerlink" href="#wiazanie-we-fragmentach" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>We fragmentach również istnieje możliwość stworzenia powiązania. W tym celu należy:</p>
+<ul class="simple">
+<li><p>do metody <cite>bind</cite> przekazać dodatkowy argument wskazujący na widok (na przykładzie poniżej, linia 13),</p></li>
+<li><p>podczas niszczenia widoku usunąć powiązanie (na przykładzie poniżej, linia 20).</p></li>
+</ul>
+<p>Przykład wiązania utworzonego we fragmencie:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SearchPhotosFragment</span> <span class="kd">extends</span> <span class="n">Fragment</span> <span class="p">{</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span>    <span class="kd">private</span> <span class="n">Unbinder</span> <span class="n">unbinder</span><span class="p">;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>    <span class="nd">@BindView</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">edittext_tags</span><span class="p">)</span>
+<span class="linenos"> 6</span>    <span class="n">EditText</span> <span class="n">tagsEditText</span><span class="p">;</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>    <span class="nd">@Override</span>
+<span class="linenos"> 9</span>    <span class="kd">public</span> <span class="n">View</span> <span class="nf">onCreateView</span><span class="p">(</span><span class="n">LayoutInflater</span> <span class="n">inflater</span><span class="p">,</span> <span class="n">ViewGroup</span> <span class="n">container</span><span class="p">,</span>
+<span class="linenos">10</span>                           <span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">11</span>        <span class="n">View</span> <span class="n">view</span> <span class="o">=</span> <span class="n">inflater</span><span class="p">.</span><span class="na">inflate</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">layout</span><span class="p">.</span><span class="na">fragment_inspect_photos</span><span class="p">,</span> <span class="n">container</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>        <span class="n">unbinder</span> <span class="o">=</span> <span class="n">ButterKnife</span><span class="p">.</span><span class="na">bind</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">view</span><span class="p">);</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>        <span class="k">return</span> <span class="n">view</span><span class="p">;</span>
+<span class="linenos">16</span>    <span class="p">}</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>    <span class="nd">@Override</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDestroyView</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">19</span>      <span class="kd">super</span><span class="p">.</span><span class="na">onDestroyView</span><span class="p">();</span>
+<span class="linenos">20</span>      <span class="n">unbinder</span><span class="p">.</span><span class="na">unbind</span><span class="p">();</span>
+<span class="linenos">21</span>    <span class="p">}</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span>    <span class="nd">@OnClick</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">button_search</span><span class="p">)</span>
+<span class="linenos">24</span>    <span class="kt">void</span> <span class="nf">searchPhotos</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">25</span>    <span class="p">}</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span>    <span class="c1">// ...</span>
+<span class="linenos">28</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Powód, przez który wymagana jest operacja samodzielnego usunięcia wiązania, został wyjaśniony przez <em>egor-n</em>:</p>
+<blockquote>
+<div><p>There can be a case when fragment’s view is destroyed, but the fragment instance is still present. For example, when fragment goes into the back stack - <cite>onDestroyView()</cite> is called, but <cite>onDestroy()</cite> is not.
+[<a class="reference external" href="https://github.com/JakeWharton/butterknife/issues/291#issuecomment-117980043">egor-n</a>]</p>
+</div></blockquote>
+<p>oraz <em>artem-zinnatullin</em>:</p>
+<blockquote>
+<div><p>„System” will not clear view references in <cite>onDestroy()</cite>, they’re just regular references and they would be freed only if GC will collect them. So for example if you have long running async code with strong reference to the Fragment, GC won’t collect bonded view objects until there won’t be strong references to the Fragment and you’ll have memory leak which would keep not only Fragment itself but also bounded Views.</p>
+<p><strong>Calling `unbind()` in `onDestroyView()` is not required, but recommended.</strong></p>
+<p>But you should also keep in mind that if you don’t prevent async callbacks that work with bounded Views after <cite>onDestroyView()</cite> app could be crashed by NullPointerException because of nulled View references.
+[<a class="reference external" href="https://github.com/JakeWharton/butterknife/issues/291#issuecomment-118029002">artem-zinnatullin</a>]</p>
+</div></blockquote>
+</section>
+<section id="dodatek-android-butterknife-zelezny">
+<h2>Dodatek Android ButterKnife Zelezny<a class="headerlink" href="#dodatek-android-butterknife-zelezny" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Twórcy Avasta stworzyli dodatek do IntelliJ IDEA, który automatycznie generuje pola wraz z odpowiednimi adnotacjami dla Butter Knife. Działa to bardzo podobnie, jak generowanie metod (np. setterów i getterów dla pól klasy).</p>
+<p>W celu instalacji przechodzimy do <strong>File</strong> → <strong>Settings</strong> → <strong>Plugins</strong> → <strong>Browse Repositories</strong>, wyszukujemy <em>Android ButterKnife Zelezny</em> i instalujemy.</p>
+<figure class="align-default" id="id1">
+<img alt="../../_images/android-butter-knife-intellij-zelezny-install.png" src="../../_images/android-butter-knife-intellij-zelezny-install.png" />
+<figcaption>
+<p><span class="caption-text">Instalacja dodatku w IntelliJ.</span><a class="headerlink" href="#id1" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+<p>Poniżej animacja prezentująca działanie dodatku:</p>
+<figure class="align-default" id="id2">
+<img alt="../../_images/android-butter-knife-intellij-zelezny-animated.gif" src="../../_images/android-butter-knife-intellij-zelezny-animated.gif" />
+<figcaption>
+<p><span class="caption-text">Prezentacja obsługi dodatku. Źródło: [4]</span><a class="headerlink" href="#id2" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="http://jakewharton.github.io/butterknife/">Butter Knife</a></p></li>
+<li><p><a class="reference external" href="https://github.com/JakeWharton/butterknife">JakeWharton/butterknife: Bind Android views and callbacks to fields and methods</a></p></li>
+<li><p><a class="reference external" href="https://github.com/JakeWharton/butterknife/issues/291">It’s not clear if ButterKnife.unbind is required for fragments</a></p></li>
+<li><p><a class="reference external" href="https://plugins.jetbrains.com/plugin/7369-android-butterknife-zelezny">Android ButterKnife Zelezny :: JetBrains Plugin Repository</a></p></li>
+<li><p><a class="reference external" href="https://github.com/avast/android-butterknife-zelezny">avast/android-butterknife-zelezny: Android Studio plug-in for generating ButterKnife injections from selected layout XML.</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

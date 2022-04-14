@@ -1,0 +1,540 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Python - Generatory | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="python-generatory">
+<h1>Python - Generatory<a class="headerlink" href="#python-generatory" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<section id="spis-tresci">
+<h2>Spis treści<a class="headerlink" href="#spis-tresci" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Wstęp</p></li>
+<li><p>Generator prosty</p>
+<ul class="simple">
+<li><p>funkcja generująca</p></li>
+<li><p>funkcja generująca a generator</p></li>
+</ul>
+</li>
+<li><p>Wyrażenie generujące</p></li>
+<li><p>Generator rozszerzony</p>
+<ul class="simple">
+<li><p>wysłanie wartości do generatora</p></li>
+<li><p>metoda throw() oraz close()</p></li>
+<li><p>podgenerator</p></li>
+</ul>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Informacja</p>
+<p>Wszystkie przykłady pisane są z myślą o Pythonie w wersji 3.6.</p>
+</div>
+</section>
+<section id="wstep">
+<h2>Wstęp<a class="headerlink" href="#wstep" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Bardzo ogólnie i jeszcze niezbyt precyzyjnie możemy powiedzieć, że generator jest pewnego rodzaju funkcją. Funkcja ta może zostać wstrzymana oraz wznowiona od miejsca, w którym została wstrzymana. Na podstawie zapamiętanego, stanu możliwe jest zwracanie różnych wartości podczas kolejnych wstrzymań funkcji.</p>
+<p>Generatory cechuje <a class="reference external" href="https://pl.wikipedia.org/wiki/Warto%C5%9Bciowanie_leniwe">leniwa ewaluacja</a> (ang. <a class="reference external" href="https://en.wikipedia.org/wiki/Lazy_evaluation">lazy evaluation</a>), czyli tworzenie kolejnych elementów dopiero przy odwołaniu się do generatora. Technika ta pozwala zredukować liczbę wykonywanych obliczeń, zmniejszyć wykorzystanie pamięci oraz tworzyć nieskończoną ilość elementów.</p>
+<p>Steven McConnell w swojej książce <a class="reference external" href="https://en.wikipedia.org/wiki/Code_Complete">Code Complete: A Practical Handbook of Software Construction</a> zauważa, iż wielkość projektu (mierzona według linii kodu) wpływa na liczbę popełnionych błędów. W podrozdziale <em>How Program Size Affects Construction</em> zawarta została informacja, że w projekcie o wielkości co najmniej 512 tys. linii kodu przypada od <strong>4</strong> do <strong>100</strong> błędów na każde <strong>1 000</strong> linii kodu (<a class="reference external" href="http://softwaretestingfundamentals.com/defect-density/">defect density</a>). Im mniej kodu zawiera projekt, tym mniej błędów, prawdopodobnie, popełniono. W projektach mniejszych niż 2 000 linii kodu przypada od <strong>0</strong> do <strong>50</strong> błędów na <strong>1 000</strong> linii kodu.</p>
+<p>W jaki sposób wiąże się to z omawianymi generatorami? Bardzo prosto - w Pythonie generatory tworzymy z wykorzystaniem specjalnego słowa kluczowego, na tej podstawie interpreter zapisuje stan funkcji oraz zwraca jej wynik. W językach, które nie wspierają generatorów, programista sam musi zadbać o zachowanie i przywrócenie stanu (np. implementując generator jako klasę), co ostatecznie wpływa na możliwość popełnienia błędu.</p>
+</section>
+<section id="generator-prosty">
+<h2>Generator prosty<a class="headerlink" href="#generator-prosty" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Wiemy już jak działa generator, zobaczmy zatem na przykładzie, w jaki sposób utworzyć go w Pythonie. Poniżej zaprezentowany został generator zwracający kolejne liczby parzyste od 0 do 20:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">liczby</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="k">for</span> <span class="n">parzysta</span> <span class="ow">in</span> <span class="n">liczby</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">parzysta</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania skryptu:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>
+<span class="mi">2</span>
+<span class="mi">4</span>
+<span class="mi">6</span>
+<span class="mi">8</span>
+<span class="mi">10</span>
+<span class="mi">12</span>
+<span class="mi">14</span>
+<span class="mi">16</span>
+<span class="mi">18</span>
+<span class="mi">20</span>
+</pre></div>
+</div>
+<p>W pierwszych trzech liniach znajduje się generator. Elementem, po którym możemy odróżnić go od zwykłej funkcji jest słowo kluczowe <cite>yield</cite>. Odpowiada ono za przerwanie wykonania funkcji, zapisanie jej stanu  oraz zwrócenie wartości - w przykładzie <cite>i * 2</cite>.</p>
+<p>Wznowiona funkcja rozpoczyna swoje działanie dokładnie w miejscu, w którym została wstrzymana. Zobaczmy to na kolejnym przykładzie:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">wznowienia</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;wstrzymuje dzialanie&quot;</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;wznawiam dzialanie&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;wstrzymuje dzialanie&quot;</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="mi">2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;wznawiam dzialanie&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">wznowienia</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zwrocono wartosc: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Wynik działania skryptu:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wstrzymuje</span> <span class="n">dzialanie</span>
+<span class="n">Zwrocono</span> <span class="n">wartosc</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">wznawiam</span> <span class="n">dzialanie</span>
+<span class="n">wstrzymuje</span> <span class="n">dzialanie</span>
+<span class="n">Zwrocono</span> <span class="n">wartosc</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">wznawiam</span> <span class="n">dzialanie</span>
+</pre></div>
+</div>
+<p>W dekoratorze <cite>wznowienia</cite> (linie 1 - 8) widzimy dwie instrukcje <cite>yield</cite> zwracające odpowiednio <cite>1</cite> i <cite>2</cite>. Znajdują się w nim również instrukcje drukujące dodatkowe komunikaty z informacją o miejscu, które jest wykonywane. W pętli <cite>for</cite> (linia 10) wykorzystujemy generator.</p>
+<p>Prześledźmy proces wykonania powyższego skryptu. Pętla (linia 10) aktywuje generator, wykonywana jest linia 2 oraz 3 - na ekranie zobaczyliśmy informację o wstrzymaniu działania generatora, wykonana została instrukcja <cite>yield</cite>, co wstrzymało generator, zapisało jego stan oraz zwróciło wartość <cite>1</cite>. Kolejnym krokiem było wykonanie ciała pętli <cite>for</cite>, czyli wydrukowanie na ekranie wartości zwróconej. Tak wyglądał pierwszy przebieg pętli.</p>
+<p>W drugim przebiegu generator został wznowiony (linia 10), co spowodowało przywrócenie stanu generatora oraz kontynuację jego pracy od linii 4. Wykonane zostały dwie instrukcje drukujące dodatkowe informacje oraz kolejna instrukcja <cite>yield</cite> - ponownie generator został wstrzymany oraz zwrócona została wartość <cite>2</cite>, co potwierdza informacja wydrukowana z ciała pętli.</p>
+<p>W trzecim przebiegu pętli (linia 10) generator został wznowiony od linii 8. Wykonano instrukcję drukującą napis na ekranie, ale tym razem generator nie zwrócił żadnej wartości, dlatego pętla została przerwana i jej ciało nie zostało wykonane.</p>
+<p>Działanie generatora może również zostać przerwane poprzez wykonanie instrukcji return, co obrazuje poniższy przykład:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ret</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">i</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ret</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania skryptu:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+</pre></div>
+</div>
+<section id="funkcja-generujaca-a-generator">
+<h3>Funkcja generująca a generator<a class="headerlink" href="#funkcja-generujaca-a-generator" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>W powyższym rozumowaniu pozwoliłem sobie na dość ogólne podejście do pojęcia generator. O generatorze mówiłem, jako o funkcji zawierającej instrukcję <cite>yield</cite> - to jednak nie do końca jest prawdą. Funkcja zawierająca instrukcję <cite>yield</cite>, widoczna na powyższych przykładach, jest jedynie instrukcją, w jaki sposób interpreter ma utworzyć generator. Taką funkcję nazywamy <strong>funkcją generującą</strong> (ang. generator function).
+<strong>Jej wywołanie spowoduje utworzenie generatora</strong> - obiektu generującego (ang. generator object, generator-iterator).</p>
+<p>Zobaczmy to na przykładzie funkcji generującej nieskończoną ilość liczb parzystych:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">parzyste</span><span class="p">():</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">i</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Funkcja ta jest <strong>funkcją generującą</strong>, jej wywołanie spowoduje <strong>utworzenie generatora</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Python 3.6.3rc1 (default, Sep 20 2017, 10:53:18)
+[GCC 7.2.0] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; def parzyste():
+...     i = 0
+...     while True:
+...         yield i
+...         i = i + 2
+...
+&gt;&gt;&gt; gen = parzyste()
+&gt;&gt;&gt; type(gen)
+&lt;class &#39;generator&#39;&gt;
+&gt;&gt;&gt; print(str(gen))
+&lt;generator object parzyste at 0x7feb4ac0e0a0&gt;
+</pre></div>
+</div>
+<p>Na powyższym wydruku widać, że wywołanie funkcji generującej spowodowało zwrócenie obiektu generatora, a nie jakby się mogło wydawać liczby <cite>2</cite>. Dopiero operacje na obiekcie generatora pozwolą uzyskać kolejne liczby parzyste. <strong>Obiekt generatora, generator przechowuje stan oraz zawiera odpowiednią metodę zwracającą kolejne wartości</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gen</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gen</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gen</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gen</span><span class="o">.</span><span class="fm">__next__</span><span class="p">()</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
+<span class="go">8</span>
+</pre></div>
+</div>
+<p>Powyższy wydruk przedstawia wywołanie metody <cite>__next__()</cite> oraz funkcji wbudowanej <a class="reference external" href="https://docs.python.org/2/library/functions.html#next">next()</a> zwracającej kolejno generowane wartości.</p>
+<p>Mamy do czynienia z podwójnym znaczeniem słowa generator - jedno to określenie funkcji generującej, a drugie to określenie obiektu generującego (właściwego generatora), o czym wspomina sama dokumentacja (PEP 255):</p>
+<blockquote>
+<div><p>Note that when the intent is clear from context, the unqualified name „generator” may be used to refer either to a generator-function or a generator-iterator.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="wyrazenie-generujace">
+<h2>Wyrażenie generujące<a class="headerlink" href="#wyrazenie-generujace" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Użycie funkcji generującej nie jest jedynym sposobem na utworzenie generatora. Bardzo często wykorzystywane są także wyrażenia generujące (ang. generator expression), w użyciu bardzo podobne do <a class="reference external" href="https://pl.wikibooks.org/wiki/Zanurkuj_w_Pythonie/Odwzorowywanie_listy">wyrażeń listowych</a> (ang. <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">list comprehension</a>).</p>
+<p>Zobaczmy przykład tworzący listę złożoną z 6 elementów:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Python</span> <span class="mf">3.6.3</span><span class="n">rc1</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Sep</span> <span class="mi">20</span> <span class="mi">2017</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="mi">18</span><span class="p">)</span>
+<span class="p">[</span><span class="n">GCC</span> <span class="mf">7.2.0</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux</span>
+<span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">elements</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Każdy z elementów listy musiał zostać utworzony podczas jej tworzenia, dodatkowo zajmuje miejsce w pamięci. W przypadku wyrażeń generujących, obiekt tworzony jest tylko w momencie zapytania. Poniżej przykład wyrażenia generującego:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Python</span> <span class="mf">3.6.3</span><span class="n">rc1</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Sep</span> <span class="mi">20</span> <span class="mi">2017</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="mi">18</span><span class="p">)</span>
+<span class="p">[</span><span class="n">GCC</span> <span class="mf">7.2.0</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux</span>
+<span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">elements</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">elements</span>
+<span class="o">&lt;</span><span class="n">generator</span> <span class="nb">object</span> <span class="o">&lt;</span><span class="n">genexpr</span><span class="o">&gt;</span> <span class="n">at</span> <span class="mh">0x7fcbb0304bf8</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+<span class="mi">0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">next</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+<span class="mi">4</span>
+</pre></div>
+</div>
+<p>Nawiasy mogą zostać pominięte w przypadku wywołań z jednym argumentem, np. podczas wywołania funkcji:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Python 3.6.3rc1 (default, Sep 20 2017, 10:53:18)
+[GCC 7.2.0] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; def f(x):
+...     print(str(type(x)))
+...
+&gt;&gt;&gt; f(x for x in range(6))
+&lt;class &#39;generator&#39;&gt;
+</pre></div>
+</div>
+</section>
+<section id="generator-rozszerzony">
+<h2>Generator rozszerzony<a class="headerlink" href="#generator-rozszerzony" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>W Pythonie 2.5 interfejs generatorów rozszerzono między innymi o możliwość przekazania wartości w miejsce, w którym nastąpiło wstrzymanie (zachęcam zapoznać się z dokumentem PEP 342 w celu poznania szczegółów). Wykorzystano do tego wyrażanie <cite>yield</cite>, którego wartość może zostać przypisana do zmiennej. W celu przekazania nowej wartości do generatora należy wywołać na nim funkcję <cite>send()</cite>.</p>
+<p>Poniżej przykład generatora dodającego liczbę 1:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">x</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">y</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">gen</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>W porównaniu do poprzednich przykładów, główna zmiana widoczna jest w linii 4. Wynik wyrażenia <cite>yield</cite> zostaje przypisany do nazwy <cite>y</cite>. Wywołanie generatora funkcją <cite>next()</cite> spowoduje zwrócenie wartości <cite>None</cite>, natomiast wywołanie funkcją <cite>send()</cite> spowoduje zwrócenie wartości przekazanej.</p>
+<p>Wynik działania powyższego skryptu powinien zobrazować działanie generatora:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">12</span>
+<span class="mi">13</span>
+<span class="mi">14</span>
+</pre></div>
+</div>
+<p>Generatory zostały także wzbogacone o metody <cite>throw()</cite> oraz <cite>close()</cite>. <cite>throw()</cite> powoduje rzucenie wyjątku w miejscu, w którym generator został wstrzymany oraz ewentualne zwrócenie kolejnej wygenerowanej wartości. <cite>close()</cite> kończy pracę generatora poprzez rzucenie wyjątku <cite>GeneratorExit</cite> za pomocą funkcji <cite>throw()</cite>.</p>
+<p>Szczegóły działania metod <cite>send()</cite>, <cite>throw()</cite> oraz <cite>close()</cite> bardzo przejrzyście zostały przedstawione w dokumencie <a class="reference external" href="https://www.python.org/dev/peps/pep-0342/#specification-summary">PEP 342</a>:</p>
+<blockquote>
+<div><ol class="arabic simple" start="2">
+<li><p>Add a new send() method for generator-iterators, which resumes the generator and sends a value that becomes the result of the current yield-expression. The send() method returns the next value yielded by the generator, or raises StopIteration if the generator exits without yielding another value.</p></li>
+<li><p>Add a new throw() method for generator-iterators, which raises an exception at the point where the generator was paused, and which returns the next value yielded by the generator, raising StopIteration if the generator exits without yielding another value. (If the generator does not catch the passed-in exception, or raises a different exception, then that exception propagates to the caller.)</p></li>
+<li><p>Add a close() method for generator-iterators, which raises GeneratorExit at the point where the generator was paused. If the generator then raises StopIteration (by exiting normally, or due to already being closed) or GeneratorExit (by not catching the exception), close() returns to its caller. If the generator yields a value, a RuntimeError is raised. If the generator raises any other exception, it is propagated to the caller. close() does nothing if the generator has already exited due to an exception or normal exit.</p></li>
+</ol>
+</div></blockquote>
+<p>Poniżej przykład prezentujący działanie metody <cite>throw()</cite> oraz <cite>close()</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Python 3.6.3rc1 (default, Sep 20 2017, 10:53:18)
+[GCC 7.2.0] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; def gen():
+...     while True:
+...         try:
+...             yield 1
+...         except GeneratorExit:
+...             print(&quot;wyjatek zostal rzucony!&quot;)
+...             return
+...
+&gt;&gt;&gt; g = gen()
+&gt;&gt;&gt; next(g)
+1
+&gt;&gt;&gt; g.throw(GeneratorExit)
+wyjatek zostal rzucony!
+Traceback (most recent call last):
+File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+StopIteration
+&gt;&gt;&gt;
+&gt;&gt;&gt; g2 = gen()
+&gt;&gt;&gt; next(g2)
+1
+&gt;&gt;&gt; g2.close()
+wyjatek zostal rzucony!
+</pre></div>
+</div>
+<section id="podgenerator">
+<h3>Podgenerator<a class="headerlink" href="#podgenerator" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Z funkcji wieloliniowej można w prosty sposób wydzielić mniejsze funkcje, dokonać refaktoryzacji kodu i oddelegować zadania do mniejszych funkcji. Czy możemy w ten sam sposób postąpić z generatorami i zadania jednego generatora oddelegować do innego?</p>
+<p>Okazuje się, że nie jest to takie proste. Jednym z pomysłów jest utworzenie generatora w generatorze i odpytywanie go o kolejne wartości, jak pokazano to na poniższym przykładzie:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen012</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">i</span>
+
+<span class="k">def</span> <span class="nf">gen01234</span><span class="p">():</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">gen012</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+    <span class="k">yield</span> <span class="mi">3</span>
+    <span class="k">yield</span> <span class="mi">4</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gen01234</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania skryptu:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+</pre></div>
+</div>
+<p>Jest to pewne rozwiązanie, jednak co w sytuacji, gdy na generatorze <cite>gen01234</cite> będziemy chcieli wywołać jedną z metod przedstawionych wcześniej, np. <cite>throw()</cite>? Z którego miejsca zostanie rzucony wyjątek, a z którego powinien zostać rzucony? Zobaczmy przykład:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MojWyjatek</span><span class="p">(</span><span class="ne">BaseException</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">gen012</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="n">i</span>
+    <span class="k">except</span> <span class="n">MojWyjatek</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;wyjatek zostal rzucony w gen012!&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="c1"># przekazujemy wyjątek dalej</span>
+
+<span class="k">def</span> <span class="nf">gen01234</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gen012</span><span class="p">():</span>
+            <span class="k">yield</span> <span class="n">i</span>
+
+        <span class="k">yield</span> <span class="mi">3</span>
+        <span class="k">yield</span> <span class="mi">4</span>
+    <span class="k">except</span> <span class="n">MojWyjatek</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;wyjatek zostal rzucony w gen01234!&quot;</span><span class="p">)</span>
+
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">gen01234</span><span class="p">()</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">throw</span><span class="p">(</span><span class="n">MojWyjatek</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania skryptu:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>wyjatek zostal rzucony w gen01234!
+Traceback (most recent call last):
+File &quot;/tmp/a.py&quot;, line 24, in &lt;module&gt;
+    g.throw(MojWyjatek)
+StopIteration
+</pre></div>
+</div>
+<p>Moglibyśmy spodziewać się, że wyjątek zostanie rzucony z <cite>gen012()</cite>, a tak się nie stało. By w pełni oddelegować zadania do innego generatora - podgeneratora (ang. subgenerator), w Pythonie 3.3 (PEP 380) wprowadzono konstrukcję <cite>yield from</cite>. Zobaczmy przykład pierwszy, zmodyfikowany o nową konstrukcję:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen012</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">i</span>
+
+<span class="k">def</span> <span class="nf">gen01234</span><span class="p">():</span>
+    <span class="k">yield from</span> <span class="n">gen012</span><span class="p">()</span>
+    <span class="k">yield</span> <span class="mi">3</span>
+    <span class="k">yield</span> <span class="mi">4</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gen01234</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania skryptu:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+</pre></div>
+</div>
+<p>Widzimy, że kod generatora <cite>gen01234()</cite> jest któtszy i bardziej przejrzysty. Sprawdźmy zatem, z którego miejsca zostanie rzucony wyjątek z funkcji <cite>throw()</cite>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MojWyjatek</span><span class="p">(</span><span class="ne">BaseException</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">gen012</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="n">i</span>
+    <span class="k">except</span> <span class="n">MojWyjatek</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;wyjatek zostal rzucony w gen012!&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="c1"># przekazujemy wyjątek dalej</span>
+
+<span class="k">def</span> <span class="nf">gen01234</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">yield from</span> <span class="n">gen012</span><span class="p">()</span>
+        <span class="k">yield</span> <span class="mi">3</span>
+        <span class="k">yield</span> <span class="mi">4</span>
+    <span class="k">except</span> <span class="n">MojWyjatek</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;wyjatek zostal rzucony w gen01234!&quot;</span><span class="p">)</span>
+
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">gen01234</span><span class="p">()</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">throw</span><span class="p">(</span><span class="n">MojWyjatek</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania skryptu:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>wyjatek zostal rzucony w gen012!
+wyjatek zostal rzucony w gen01234!
+Traceback (most recent call last):
+File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+StopIteration
+</pre></div>
+</div>
+<p>Przykład ten pokazuje, że w pełni oddelegowaliśmy pracę do podgeneratora.</p>
+</section>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="http://intermediatepythonista.com/python-generators">Introduction to Python Generators</a></p></li>
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0255/">PEP 255 – Simple Generators</a></p></li>
+<li><p><a class="reference external" href="https://pl.python.org/docs/whatsnew/section-generators.html">Co nowego w Pythonie 2.3 - PEP 255: Proste generatory</a></p></li>
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0289/">PEP 289 – Generator Expressions</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3.6/reference/expressions.html#generator-expressions">The Python Language Reference » 6. Expressions</a></p></li>
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0342/">PEP 342 – Coroutines via Enhanced Generators</a></p></li>
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0380/">PEP 380 – Syntax for Delegating to a Subgenerator</a></p></li>
+<li><p><a class="reference external" href="https://www.pythonsheets.com/notes/python-generator.html">Python generator cheatsheet</a></p></li>
+<li><p><a class="reference external" href="http://pymbook.readthedocs.io/en/latest/igd.html">Iterators, generators and decorators</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

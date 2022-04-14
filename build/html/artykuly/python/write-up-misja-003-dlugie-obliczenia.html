@@ -1,0 +1,279 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>(Write-Up) Misja 003 - Długie obliczenia | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="write-up-misja-003-dlugie-obliczenia">
+<h1>(Write-Up) Misja 003 - Długie obliczenia<a class="headerlink" href="#write-up-misja-003-dlugie-obliczenia" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<p>Write-up z misji Gynvaela Coldwinda, treść misji została zaprezentowana na końcu streamu <a class="reference external" href="https://www.youtube.com/watch?v=xR0hAJPp1vs">Gynvael’s Livestream #39: RPC, czyli zdalne API</a>. Dla przypomnienia umieszczam ją, wraz z dodatkowym kodem źródłowym, poniżej:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>MISJA 003            goo.gl/ZPQvV0               DIFFICULTY: ██░░░░░░░░ [2/10]
+
+Tym razem nie trzeba nic robić. Wystarczy uruchomić poniższy skrypt, chwilkę
+poczekać, a hasło zostanie wypisane. No, taką dłuższą chwilkę...
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
+<span class="k">def</span> <span class="nf">magic1</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+  <span class="n">o</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">:</span>
+    <span class="n">o</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">:</span>
+    <span class="n">o</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="k">return</span> <span class="n">o</span>
+<span class="k">def</span> <span class="nf">magic2</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+  <span class="n">o</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">:</span>
+    <span class="n">o</span> <span class="o">=</span> <span class="n">magic1</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="k">return</span> <span class="n">o</span>
+<span class="n">n1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;2867279575674690971609643216365&quot;</span>
+         <span class="s2">&quot;4161626212087501848651843132337&quot;</span>
+         <span class="s2">&quot;3373323997065608342&quot;</span><span class="p">)</span>
+<span class="n">n2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;1240905467219837578349182398365&quot;</span>
+         <span class="s2">&quot;3459812983123659128386518235966&quot;</span>
+         <span class="s2">&quot;4109783723654812937&quot;</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">magic2</span><span class="p">(</span><span class="n">magic1</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">),</span> <span class="mi">1337</span><span class="p">)</span>
+<span class="nb">print</span> <span class="nb">hex</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;hex&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>W kodzie źródłowym widzimy dwie funkcje - <code class="docutils literal notranslate"><span class="pre">magic1</span></code> i <code class="docutils literal notranslate"><span class="pre">magic2</span></code>.</p>
+<p>Spójrzmy na pierwszą z nich. Jest to funkcja realizująca operację dodawania dwóch liczb, wykonana za pomocą dwóch pętli <code class="docutils literal notranslate"><span class="pre">while</span></code>, by spowolnić obliczenia.</p>
+<p>Druga funkcja realizuje operację mnożenia. Podobnie jak poprzednia, również została wykonana za pomocą pętli <code class="docutils literal notranslate"><span class="pre">while</span></code>, by spowolnić obliczenia.</p>
+<p>Zmieńmy, więc implementację tych dwóch funkcji i spróbujmy wykonać skrypt. Jest on napisany w Pythonie 2 - możemy to poznać po wywołaniu instrukcji <code class="docutils literal notranslate"><span class="pre">print</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/python</span>
+
+<span class="k">def</span> <span class="nf">magic1</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">magic2</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+
+<span class="n">n1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;2867279575674690971609643216365&quot;</span>
+         <span class="s2">&quot;4161626212087501848651843132337&quot;</span>
+         <span class="s2">&quot;3373323997065608342&quot;</span><span class="p">)</span>
+<span class="n">n2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;1240905467219837578349182398365&quot;</span>
+         <span class="s2">&quot;3459812983123659128386518235966&quot;</span>
+         <span class="s2">&quot;4109783723654812937&quot;</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">magic2</span><span class="p">(</span><span class="n">magic1</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">),</span> <span class="mi">1337</span><span class="p">)</span>
+<span class="nb">print</span> <span class="nb">hex</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;hex&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Wynik działania:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Haslo</span><span class="p">:</span> <span class="s2">&quot;WolneOprogramowanie!&quot;</span>
+</pre></div>
+</div>
+<p>Mamy flagę, ale co dzieje się w drugiej części programu?</p>
+<section id="big-integers">
+<h2>Big integers<a class="headerlink" href="#big-integers" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Python posiada wsparcie dla dużych liczb. W poniższym przykładzie mogą zdziwić tylko znaki cudzysłowia:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;2867279575674690971609643216365&quot;</span>
+         <span class="s2">&quot;4161626212087501848651843132337&quot;</span>
+         <span class="s2">&quot;3373323997065608342&quot;</span><span class="p">)</span>
+<span class="n">n2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;1240905467219837578349182398365&quot;</span>
+         <span class="s2">&quot;3459812983123659128386518235966&quot;</span>
+         <span class="s2">&quot;4109783723654812937&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Trzy napisy, widoczne w każdej z definicji zmiennej, zostaną złączone w jeden napis (zupełnie jak w języku C) i zamienione na typ <code class="docutils literal notranslate"><span class="pre">int</span></code>. Spójrzmy na inny przykład:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># python2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;1&quot;</span> <span class="s2">&quot;0&quot;</span> <span class="s2">&quot;2&quot;</span> <span class="s2">&quot;4&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">i</span>
+<span class="mi">1024</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">i</span>
+<span class="mi">1027</span>
+</pre></div>
+</div>
+<p>W <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#int">dokumentacji Pythona 2</a> funkcja <cite>int</cite> została opisana następująco:</p>
+<blockquote>
+<div><p>Return an integer object constructed from a number or string x, or return 0 if no arguments are given. If x is a number, it can be a plain integer, a long integer, or a floating point number. If x is floating point, the conversion truncates towards zero. If the argument is outside the integer range, the function returns a long object instead.</p>
+</div></blockquote>
+<p>Z opisu możemy wyczytać, że przyjmuje ona jako parametr obiekt typu <code class="docutils literal notranslate"><span class="pre">string</span></code>. Ponadto nie musi zwrócić obiektu typu <cite>int</cite> — w przypadku przekroczenia jego zakresu, zostanie zwrócony obiekt typu <code class="docutils literal notranslate"><span class="pre">long</span></code>.</p>
+</section>
+<section id="encode-decode">
+<h2>Encode, Decode<a class="headerlink" href="#encode-decode" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Zwróćmy uwagę na dwie ostatnie linie kodu:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">magic2</span><span class="p">(</span><span class="n">magic1</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">),</span> <span class="mi">1337</span><span class="p">)</span>
+<span class="nb">print</span> <span class="nb">hex</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;hex&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>W pierwszej wykorzystywane są funkcje <code class="docutils literal notranslate"><span class="pre">magic1</span></code> oraz <code class="docutils literal notranslate"><span class="pre">magic2</span></code>, co jak już ustaliliśmy, realizuje odpowiednio dodawanie i mnożenie. Ostatecznie nazwa <cite>n</cite> będzie wskazywała na obiekt reprezentujący liczbę.</p>
+<p>Przejdźmy do linii drugiej. Widzimy tam funkcję <code class="docutils literal notranslate"><span class="pre">hex</span></code>, według <a class="reference external" href="https://docs.python.org/2/library/functions.html#hex">dokumentacji</a> zamienia ona liczbę na ciąg znaków, reprezentujący wskazaną liczbę w postaci zapisu szesnastkowego.</p>
+<p>Wiedząc, że funkcja <code class="docutils literal notranslate"><span class="pre">hex</span></code> zwraca napis, wykonujemy na nim operację wybrania fragmentu za pomocą <a class="reference external" href="https://docs.python.org/2/tutorial/introduction.html#strings">sliceów</a>. Liczby ujemne oznaczają, że wybieramy znaki licząc od końca. Zobaczmy to na trochę prostszym przykładzie:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># python2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1234</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="nb">hex</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">s</span>
+<span class="mh">0x4d2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="mi">4</span><span class="n">d</span>
+</pre></div>
+</div>
+<p>Funkcja <a class="reference external" href="https://docs.python.org/2/library/codecs.html#codecs.decode">decode</a> służy do konwersji ciągu bajtów na napis odpowiedni dla użytkownika. Najczęstszym przypadkiem użycia funkcji <code class="docutils literal notranslate"><span class="pre">decode</span></code> (i <code class="docutils literal notranslate"><span class="pre">encode</span></code>) jest konwersja ciągu bajtów zawierających napis zakodowany w UTF-8. Zobaczmy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># python2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;ąęł&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="mi">6</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">a</span>
+<span class="n">ąęł</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="n">b</span>
+<span class="n">ąęł</span>
+</pre></div>
+</div>
+<p>Pod nazwą <code class="docutils literal notranslate"><span class="pre">a</span></code> kryje się napis zakodowany za pomocą UTF-8. Jest to tablica 6 bajtów — na jeden znak przypadają 2 bajty. Funkcja <code class="docutils literal notranslate"><span class="pre">len</span></code> zwraca długość tej właśnie tablicy, a nie ilość znaków. W takim przypadku należy zdekodować ciąg bajtów na napis w UTF-8. Od tej chwili Python 2 będzie wiedział, że ma do czynienia z napisem w UTF-8 i funkcja <code class="docutils literal notranslate"><span class="pre">len</span></code> będzie zwracała poprawną wartość. Oczywiście wykorzystanie <code class="docutils literal notranslate"><span class="pre">len</span></code> jest tylko jedną z możliwości.</p>
+<p>Funkcja <code class="docutils literal notranslate"><span class="pre">encode</span></code> dokonuje operacji odwrotnej. Zamienia ona napis, na zakodowany ciąg bajtów:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># python2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;ałóę&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="mi">4</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="mi">7</span>
+</pre></div>
+</div>
+<p>O historii UTF i jego obsłudze w Pythonie 2 można przeczytać w <a class="reference external" href="https://docs.python.org/2/howto/unicode.html">dokumentacji</a>.</p>
+<p>W kodzie Gynvaela mamy do czynienia z konwersją ciągu znaków zapisanych szesnastkowo na czytelny dla człowieka tekst. Działa to na takiej samej zasadzie, jak opisana powyżej, tylko zastosowany został <a class="reference external" href="https://docs.python.org/2/library/codecs.html#standard-encodings">inny algorytm zamiany</a>.</p>
+<p>Wiemy, jak działa kod i znamy rozwiązanie. Zapraszam do przeczytania także <a class="reference external" href="/blog/Misja_002_-_Ukrywanie_danych_Base64/">write-up z poprzedniej misji</a>.</p>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

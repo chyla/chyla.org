@@ -1,0 +1,386 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Zaawansowane techniki programowania w języku Python - studia zaoczne | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/chyla.css" />
+    <link rel="shortcut icon" href="../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../artykuly/index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="zaawansowane-techniki-programowania-w-jezyku-python-studia-zaoczne">
+<h1>Zaawansowane techniki programowania w języku Python - studia zaoczne<a class="headerlink" href="#zaawansowane-techniki-programowania-w-jezyku-python-studia-zaoczne" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<div class="contents local topic" id="tematy">
+<p class="topic-title">Tematy</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#zasady-zaliczenia" id="id1">Zasady zaliczenia</a></p></li>
+<li><p><a class="reference internal" href="#literatura" id="id2">Literatura</a></p></li>
+<li><p><a class="reference internal" href="#srodowisko-pracy" id="id3">Środowisko pracy</a></p></li>
+<li><p><a class="reference internal" href="#iteratory" id="id4">Iteratory</a></p></li>
+<li><p><a class="reference internal" href="#generatory" id="id5">Generatory</a></p></li>
+<li><p><a class="reference internal" href="#wielowatkowosc-multithreading" id="id6">Wielowątkowość (multithreading)</a></p></li>
+<li><p><a class="reference internal" href="#wieloprocesorowosc-multiprocessing" id="id7">Wieloprocesorowość (multiprocessing)</a></p></li>
+<li><p><a class="reference internal" href="#dekoratory" id="id8">Dekoratory</a></p></li>
+<li><p><a class="reference internal" href="#wyrazenia-regularne" id="id9">Wyrażenia regularne</a></p></li>
+<li><p><a class="reference internal" href="#przykladowe-listy-zadan-na-cwiczenia" id="id10">Przykładowe listy zadań na ćwiczenia</a></p></li>
+</ul>
+</div>
+<section id="zasady-zaliczenia">
+<h2>Zasady zaliczenia<a class="headerlink" href="#zasady-zaliczenia" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<section id="zasady-zaliczenia-przedmiotu">
+<h3>Zasady zaliczenia przedmiotu<a class="headerlink" href="#zasady-zaliczenia-przedmiotu" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p><strong>Do zaliczenia przedmiotu konieczne jest otrzymanie oceny co najmniej 3 z ćwiczeń.</strong> Uzyskanie oceny 2nb z ćwiczeń skutkuje uzyskaniem oceny 2nb z przedmiotu. Uzyskanie oceny 2 z ćwiczeń skutkuje uzyskaniem oceny 2 z przedmiotu.</p>
+<p>Do tego przedmiotu nie ma wykładu, <strong>ocena z ćwiczeń jest oceną z przedmiotu</strong>.</p>
+</section>
+<section id="zasady-zaliczenia-cwiczen">
+<h3>Zasady zaliczenia ćwiczeń<a class="headerlink" href="#zasady-zaliczenia-cwiczen" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Zaliczenie ćwiczeń odbywa się na podstawie jednego projektu:</p>
+<ul class="simple">
+<li><p><strong>projekt oddajemy na ostatnich zajęciach</strong>,</p></li>
+<li><p>punktacja: 0 - 30 punktów (nie ma punktów ułamkowych ;) ),</p></li>
+<li><p>temat, specyfikacja i punktacja projektu będzie podana odpowiednio wcześniej (nasz przedostatni wspólny zjazd)</p></li>
+<li><p>trzeba być autorem rozwiązania</p></li>
+</ul>
+<p>Obowiązująca skala ocen:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 39%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ocena</p></th>
+<th class="head"><p>liczba punktów</p></th>
+<th class="head"><p>procent sumarycznie uzyskanych punktów</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>od 28pkt do 30pkt</p></td>
+<td><p>od 91% do 100%</p></td>
+</tr>
+<tr class="row-odd"><td><p>4.5</p></td>
+<td><p>od 25pkt do 27pkt</p></td>
+<td><p>od 81% do 90%</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>od 22pkt do 24pkt</p></td>
+<td><p>od 71% do 80%</p></td>
+</tr>
+<tr class="row-odd"><td><p>3.5</p></td>
+<td><p>od 19pkt do 21pkt</p></td>
+<td><p>od 61% do 70%</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>od 16pkt do 18pkt</p></td>
+<td><p>od 51% do 60%</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>poniżej 16pkt</p></td>
+<td><p>poniżej 51%</p></td>
+</tr>
+<tr class="row-even"><td><p>2nb</p></td>
+<td colspan="2"><p>za brak projektu</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Polecam oficjalny tutorial:</p>
+<ul class="simple">
+<li><p>[EN] <a class="reference external" href="https://docs.python.org/3/tutorial/">https://docs.python.org/3/tutorial/</a></p></li>
+<li><p>[PL] <a class="reference external" href="https://docs.python.org/pl/3/tutorial/">https://docs.python.org/pl/3/tutorial/</a></p></li>
+</ul>
+<p>Książki:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/python-instrukcje-dla-programisty-wydanie-ii-eric-matthes,blkpy2.htm">Python. Instrukcje dla programisty, Eric Matthes, Helion</a></p></li>
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/python-wprowadzenie-wydanie-v-mark-lutz,pytho5.htm">Python. Wprowadzenie. Mark Lutz, Helion</a></p></li>
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/python-dla-testera-piotr-wroblewski,pyttes.htm#format/d">Python dla testera. Piotr Wróblewski. Helion</a></p></li>
+<li><p><a class="reference external" href="https://ksiazki.promise.pl/produkt/zaawansowany-python-jasne-zwiezle-i-efektywne-programowanie/">Zaawansowany Python, Luciano Ramalho, APN Promise</a></p></li>
+</ul>
+<p>Książki o poprawnym pisaniu kodu:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/czysty-kod-podrecznik-dobrego-programisty-robert-c-martin,czykov.htm">Czysty kod. Podręcznik dobrego programisty, Robert C. Martin, Helion</a></p></li>
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/wzorce-projektowe-elementy-oprogramowania-obiektowego-wielokrotnego-uzytku-erich-gamma-richard-helm-ralph-johnson-john-vli,wzoevv.htm">Wzorce projektowe. Elementy oprogramowania obiektowego wielokrotnego użytku, Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides, Helion</a></p></li>
+</ul>
+<p>Książki z zadaniami:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/python-zadania-z-programowania-przykladowe-funkcyjne-rozwiazania-miroslaw-j-kubiak,pyzapr.htm?5494556315243#format/d">Python. Zadania z programowania. Przykładowe funkcyjne rozwiązania. Mirosław J. Kubiak. Helion</a></p></li>
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/python-zadania-z-programowania-przykladowe-imperatywne-rozwiazania-miroslaw-j-kubiak,pyzaim.htm#format/d">Python. Zadania z programowania. Przykładowe imperatywne rozwiązania. Mirosław J. Kubiak. Helion</a></p></li>
+<li><p><a class="reference external" href="https://helion.pl/ksiazki/python-cwiczenia-praktyczne-andrzej-kierzkowski-marek-gawryszewski,cwpyth.htm#format/d">Python. Ćwiczenia praktyczne. Andrzej Kierzkowski, Marek Gawryszewski. Helion</a> (nie zawiera rozwiązań)</p></li>
+</ul>
+</section>
+<section id="srodowisko-pracy">
+<h2>Środowisko pracy<a class="headerlink" href="#srodowisko-pracy" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Wymagany <strong>oficjalny interpreter Pythona</strong> w wersji co najmniej 3.7 (najlepiej najnowszy).</p>
+<p>Link do pobrania oficjalnego interpretera: <a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p>
+<div class="admonition note">
+<p class="admonition-title">Informacja</p>
+<p>Niektóre systemy operacyjne (np. Ubuntu 18.04) nie posiadają wymaganej wersji interpretera języka Python. Część omawianych elementów języka może nie działać.</p>
+</div>
+<p>Wybór środowiska programistycznego należy do Ciebie, chociaż polecam <strong>PyCharm</strong>.</p>
+<p>Link do pobrania środowiska PyCharm (wersja PyCharm Community Edition jest darmowa): <a class="reference external" href="https://www.jetbrains.com/pycharm/download/">https://www.jetbrains.com/pycharm/download/</a></p>
+<p>Można uzyskać licencję edukacyjną (ważna przez rok) dla PyCharm/InteliJ IDEA/CLion/PhpStorm, więcej informacji tutaj: <a class="reference external" href="https://www.jetbrains.com/community/education/">https://www.jetbrains.com/community/education/</a></p>
+<p>Licencję edukacyjną na produkty (nie tylko związane z Pythonem) innych firm można także otrzymać przez GitHub Student Developer Pack, więcej informacji tutaj: <a class="reference external" href="https://education.github.com/pack">https://education.github.com/pack</a></p>
+<p>Myślę, że warto również wypróbować <strong>Microsoft Visual Studio Code</strong>. Jest darmowy, posiada wsparcie dla wielu języków (np. C, C++, C#, Java, Robot Framework), wydawany na <a class="reference external" href="https://code.visualstudio.com/License/">własnej licencji</a>.</p>
+<p>Link do pobrania środowiska Microsoft Visual Studio Code: <a class="reference external" href="https://code.visualstudio.com/">https://code.visualstudio.com/</a></p>
+<p>Dostępne są także <strong>środowiska programistyczne on-line</strong>, z tych polecam:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://replit.com/">https://replit.com/</a></p></li>
+<li><p><a class="reference external" href="https://www.online-python.com/">https://www.online-python.com/</a></p></li>
+</ul>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/using/index.html">Python Setup and Usage [EN]</a></p></li>
+<li><p><a class="reference external" href="https://www.ics.uci.edu/~pattis/common/handouts/pythoneclipsejava/python.html">Python Download and Installation Instructions [Windows] [EN]</a></p></li>
+<li><p><a class="reference external" href="https://flaviocopes.com/python-installation-macos/">Installing Python 3 on macOS [EN]</a></p></li>
+<li><p><a class="reference external" href="https://www.jetbrains.com/help/pycharm/installation-guide.html">Install PyCharm  [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/pl/3.9/using/index.html">Instalacja i używanie Pythona [PL]</a></p></li>
+<li><p><a class="reference external" href="https://tutorial.djangogirls.org/pl/python_installation/#instalowanie-pythona">Instalowanie Pythona [PL]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=owU1yyZhoH8">Instalacja Pycharm oraz Python - poradnik krok po kroku [PL]</a></p></li>
+</ol>
+</section>
+<section id="iteratory">
+<h2>Iteratory<a class="headerlink" href="#iteratory" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://refactoring.guru/pl/design-patterns/iterator">Wzorzec projektowy iterator [PL]</a></p></li>
+<li><p><a class="reference external" href="http://math.uni.wroc.pl/~jagiella/p2python/skrypt_html/wyklad4-1.html">Skrypt do wykładu Programowanie 2 (Python) - Wykład 4 (cz. 1) - iteratory i generatory (autor: G. Jagiella) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://naukapython.pl/co-kazdy-powinien-wiedziec-o-iteratorach-w-pythonie/">Co każdy powinien wiedzieć o iteratorach w Pythonie? [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.programiz.com/python-programming/iterator">Python Iterators [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/itertools.html">itertools — Functions creating iterators for efficient looping [EN]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=uNFRzNo-nyM">Czym są Iteratory? [Python] (autor: Adam Djellouli) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=jTYiNjvnHZY">Python Tutorial: Iterators and Iterables - What Are They and How Do They Work? (autor: Corey Schafer) [EN]</a></p></li>
+</ol>
+</section>
+<section id="generatory">
+<h2>Generatory<a class="headerlink" href="#generatory" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://chyla.org/artykuly/python/python-generatory.html">Python - Generatory [PL]</a></p></li>
+<li><p><a class="reference external" href="http://math.uni.wroc.pl/~jagiella/p2python/skrypt_html/wyklad4-1.html#generatory">Skrypt do wykładu Programowanie 2 (Python) - Wykład 4 (cz. 1) - iteratory i generatory (autor: G. Jagiella) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.programiz.com/python-programming/generator">Python Generators [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/itertools.html">itertools — Functions creating iterators for efficient looping [EN]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=mNxzXuwClyI">Czym są Generatory? [Python] (autor: Adam Djellouli) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=bD05uGo_sVI">Python Tutorial: Generators - How to use them and the benefits you receive (autor: Corey Schafer) [EN]</a></p></li>
+</ol>
+</section>
+<section id="wielowatkowosc-multithreading">
+<h2>Wielowątkowość (multithreading)<a class="headerlink" href="#wielowatkowosc-multithreading" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/threading.html">threading — Thread-based parallelism [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/concurrent.futures.html">concurrent.futures — Launching parallel tasks [EN]</a></p></li>
+<li><p><a class="reference external" href="https://www.laurentluce.com/posts/python-threads-synchronization-locks-rlocks-semaphores-conditions-events-and-queues/">Python threads synchronization: Locks, RLocks, Semaphores, Conditions and Queues [EN]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=D8nSgM0rxWA">Czym są wątki? [Python] (autor: Adam Djellouli) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=eygz9KPkg-0">Własny wątek, dziedziczymy po klasie threading.Thread? [Python] (autor: Adam Djellouli) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=DZx9bdzxNGY">Programowanie współbieżne w Pythonie! Kompendium efektywnego pythonisty (autor: Videopoint) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=olYdb0DdGtM">Threading Tutorial #1 - Concurrency, Threading and Parallelism Explained (autor: Tech With Tim) [EN]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=cdPZ1pJACMI">Threading Tutorial #2 - Implementing Threading in Python 3 (Examples) (autor: Tech With Tim) [EN]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=q6hxTYGbpDo">Python ThreadPoolExecutor tutorial (autor: VTGAMES) [EN]</a></p></li>
+</ol>
+</section>
+<section id="wieloprocesorowosc-multiprocessing">
+<h2>Wieloprocesorowość (multiprocessing)<a class="headerlink" href="#wieloprocesorowosc-multiprocessing" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html">multiprocessing — Process-based parallelism [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/concurrent.futures.html">concurrent.futures — Launching parallel tasks [EN]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=Lu5LrKh1Zno">Python Tutorial - 27. Multiprocessing Introduction (autor: codebasics) [EN]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=sp7EhjLkFY4">Python Tutorial - 29. Sharing Data Between Processes Using Queue (autor: codebasics) [EN]</a></p></li>
+</ol>
+</section>
+<section id="dekoratory">
+<h2>Dekoratory<a class="headerlink" href="#dekoratory" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="/artykuly/python/python-dekoratory.html">Python - Dekoratory [PL]</a></p></li>
+<li><p><a class="reference external" href="https://realpython.com/primer-on-python-decorators/">Primer on Python Decorators [EN]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=RKqqB0-tNEE">23. Kurs Python 3 - dekoratory (autor: Kanał o Wszystkim) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=7fIpdbEtqW4">Jak tworzyć dekoratory? Zaawansowany kurs Python [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=8hWIWyBfdQE">#31: Python Decorators | Python for Beginners [EN]</a></p></li>
+</ol>
+</section>
+<section id="wyrazenia-regularne">
+<h2>Wyrażenia regularne<a class="headerlink" href="#wyrazenia-regularne" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Materiały dodatkowe:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://regex101.com/">regex101: build, test, and debug regex [EN]</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/re.html">re — Regular expression operations</a></p></li>
+<li><p><a class="reference external" href="http://www.rexegg.com/">RexEgg! [EN]</a> (<a class="reference external" href="https://web.archive.org/web/20211117221942/http://www.rexegg.com/">web archive</a>)</p></li>
+<li><p><a class="reference external" href="https://developers.google.com/edu/python/regular-expressions">Python Regular Expressions [EN]</a></p></li>
+<li><p><a class="reference external" href="http://uoo.univ.szczecin.pl/~jakubs/py/py16.html">Wyrażenia regularne (autor: Jakub Swacha) [PL]</a></p></li>
+</ol>
+<p>Materiały dodatkowe na YouTube:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=528Jc3q86F8">Regular Expressions (autor: Computerphile) [EN]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=9RksQ5YT7FM">REGEX (REGULAR EXPRESSIONS) WITH EXAMPLES IN DETAIL | Regex Tutorial (autor: Crack Concepts) [EN]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=GyJtxd14DTc">Novice to Advanced RegEx in Less-than 30 Minutes + Python (autor: James Briggs) [EN]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=F_IVtPTTLa4">Jak myśli RegEx? (autor: VideoKursPL) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=yNFBBTpp1UE">PyLight #7 - Krzysztof Jura - Wyrażenia regularne w Pythonie (autor: PyLight) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=-fJXsCsUo2U">32. Kurs Python 3 - Wyrażenia regularne (cz. 1) - Regular Expression (Match, Search) (autor: Kanał o Wszystkim) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=mjG-pu8hqvA">33. Kurs Python 3 - Wyrażenia regularne (cz. 2) - Regular Expression (klasy znaków, przedziały) (autor: Kanał o Wszystkim) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=aL9VrAZ-vNo">34. Kurs Python 3 - Wyrażenia regularne (cz. 3) - Regular Expression (powtórzenia) (autor: Kanał o Wszystkim) [PL]</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=RR2pAlSTxEk">35. Kurs Python 3 - Wyrażenia regularne (cz. 4) - Regular Expression (grupy, walidacja e-mail) (autor: Kanał o Wszystkim) [PL]</a></p></li>
+</ol>
+</section>
+<section id="przykladowe-listy-zadan-na-cwiczenia">
+<h2>Przykładowe listy zadań na ćwiczenia<a class="headerlink" href="#przykladowe-listy-zadan-na-cwiczenia" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="/_static/files/edukacja/materialy/zaawansowane-techniki-programowania-w-jezyku-python/Lista-zadan-Iteratory.pdf">Ćwiczenia 1 - Iteratory</a></p></li>
+<li><p><a class="reference external" href="/_static/files/edukacja/materialy/zaawansowane-techniki-programowania-w-jezyku-python/Lista-zadan-Generatory.pdf">Ćwiczenia 2 - Generatory</a></p></li>
+<li><p><a class="reference external" href="/_static/files/edukacja/materialy/zaawansowane-techniki-programowania-w-jezyku-python/Lista-zadan-Multithreading.pdf">Ćwiczenia 3 i 4 - Multithreading</a></p></li>
+<li><p><a class="reference external" href="/_static/files/edukacja/materialy/zaawansowane-techniki-programowania-w-jezyku-python/Lista-zadan-Multiprocessing.pdf">Ćwiczenia 5 i 6 - Multiprocessing</a></p></li>
+<li><p><a class="reference external" href="/_static/files/edukacja/materialy/zaawansowane-techniki-programowania-w-jezyku-python/Lista-zadan-Dekoratory.pdf">Ćwiczenia 7 - Dekoratory</a></p></li>
+<li><p><a class="reference external" href="/_static/files/edukacja/materialy/zaawansowane-techniki-programowania-w-jezyku-python/Lista-zadan-Wyrazenia-regularne.pdf">Ćwiczenia 8 - Wyrażenia regularne</a></p></li>
+</ul>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

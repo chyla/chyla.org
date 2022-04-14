@@ -1,0 +1,443 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Podział projektu na pliki - Moduły i pakiety, moduły standardowe | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../../index.html">
+                <img src="../../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="podzial-projektu-na-pliki-moduly-i-pakiety-moduly-standardowe">
+<h1>Podział projektu na pliki - Moduły i pakiety, moduły standardowe<a class="headerlink" href="#podzial-projektu-na-pliki-moduly-i-pakiety-moduly-standardowe" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+
+<div id="pdfobject-0" class="pdfobject-container"></div>
+<script>PDFObject.embed("/_static/files/artykuly/python/python-tutorial/Podzial-projektu-na-pliki-Moduly-i-pakiety-moduly-standardowe.pdf", "#pdfobject-0");</script>
+<section id="moduly">
+<h2>Moduły<a class="headerlink" href="#moduly" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p><strong>Modułem</strong> nazywamy plik tekstowy zawierający kod źródłowy napisany w języku Python. Mogą znajdować się w nim elementy takie jak definicje funkcji, klas, zmiennych.</p>
+<p><strong>Nazwa modułu</strong> to nazwa pliku bez rozszerzenia.</p>
+<p>Nazwy (np. funkcje, klasy, zmienne) znajdujące się w modułach mogą być importowane do modułu nad którym pracujemy. Zaimportować, czyli sprawić, aby dana nazwa stała się dostępna.</p>
+<p><strong>Sposoby importowania modułów i nazw</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>zaimportowanie całego modułu</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MODUŁ</span>
+</pre></div>
+</div>
+<p>Przykład:</p>
+<blockquote>
+<div><p><em>Plik utils.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czy_liczba</span><span class="p">(</span><span class="n">napis</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p><em>Plik kalkulator.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">utils</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;czy_liczba():&quot;</span><span class="p">,</span> <span class="n">utils</span><span class="o">.</span><span class="n">czy_liczba</span><span class="p">(</span><span class="s2">&quot;13&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p><strong>zaimportowanie całego modułu pod nową nazwą</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">MODUŁ</span> <span class="k">as</span> <span class="nn">NOWA_NAZWA</span>
+</pre></div>
+</div>
+<p>Przykład:</p>
+<blockquote>
+<div><p><em>Plik utils.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czy_liczba</span><span class="p">(</span><span class="n">napis</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p><em>Plik kalkulator.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">utils</span> <span class="k">as</span> <span class="nn">narzedzia</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;czy_liczba():&quot;</span><span class="p">,</span> <span class="n">narzedzia</span><span class="o">.</span><span class="n">czy_liczba</span><span class="p">(</span><span class="s2">&quot;13&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p><strong>zaimportowanie wybranych nazw</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">MODUŁ</span> <span class="kn">import</span> <span class="n">NAZWA1</span><span class="p">,</span> <span class="n">NAZWA2</span>
+</pre></div>
+</div>
+<p>Przykład:</p>
+<blockquote>
+<div><p><em>Plik utils.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czy_liczba</span><span class="p">(</span><span class="n">napis</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p><em>Plik kalkulator.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">czy_liczba</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;czy_liczba():&quot;</span><span class="p">,</span> <span class="n">czy_liczba</span><span class="p">(</span><span class="s2">&quot;13&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p><strong>zaimportowanie wybranej nazwy pod nową nazwą</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">MODUŁ</span> <span class="kn">import</span> <span class="n">NAZWA</span> <span class="k">as</span> <span class="n">NOWA_NAZWA</span>
+</pre></div>
+</div>
+<p>Przykład:</p>
+<blockquote>
+<div><p><em>Plik utils.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czy_liczba</span><span class="p">(</span><span class="n">napis</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p><em>Plik kalkulator.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">czy_liczba</span> <span class="k">as</span> <span class="n">sprawdz</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">ceil</span> <span class="k">as</span> <span class="n">sufit</span><span class="p">,</span> <span class="n">floor</span> <span class="k">as</span> <span class="n">podloga</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;czy_liczba():&quot;</span><span class="p">,</span> <span class="n">sprawdz</span><span class="p">(</span><span class="s2">&quot;13&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;sufit():&quot;</span><span class="p">,</span> <span class="n">sufit</span><span class="p">(</span><span class="mf">3.3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;podloga():&quot;</span><span class="p">,</span> <span class="n">podloga</span><span class="p">(</span><span class="mf">3.3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p><strong>zaimportowanie wszystkich nazw z danego modułu</strong></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">MODUŁ</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>Przykład:</p>
+<blockquote>
+<div><p><em>Plik utils.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czy_liczba</span><span class="p">(</span><span class="n">napis</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p><em>Plik kalkulator.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;czy_liczba():&quot;</span><span class="p">,</span> <span class="n">czy_liczba</span><span class="p">(</span><span class="s2">&quot;13&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Podczas importowania nazw trzeba uważać. Która z poniższych funkcji <code class="docutils literal notranslate"><span class="pre">czy_liczba</span></code> zostanie wywołana?</p>
+<p><em>Plik utils.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czy_liczba</span><span class="p">(</span><span class="n">napis</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p><em>Plik kalkulator.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">czy_liczba</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;czy_liczba():&quot;</span><span class="p">,</span> <span class="n">czy_liczba</span><span class="p">(</span><span class="s2">&quot;13&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Podczas importowania modułu jego kod źródłowy jest interpretowany i wykonywany.</strong> Może to powodować niepożądane zachowanie.</p>
+<p>Specjalna zmienna <code class="docutils literal notranslate"><span class="pre">__name__</span></code> przechowuje nazwę modułu w postaci napisu. Wartość <code class="docutils literal notranslate"><span class="pre">__main__</span></code> oznacza, że moduł ten został uruchomiony bezpośrednio przez użytkownika.</p>
+<p>Sprawdzenie wartości zmiennej <code class="docutils literal notranslate"><span class="pre">__name__</span></code> w module pozwala uniknąć wykonywania kodu modułu podczas jego importowania.</p>
+<p>Przykład:</p>
+<blockquote>
+<div><p><em>Plik utils.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czy_liczba</span><span class="p">(</span><span class="n">napis</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;utils: Kod modułu.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;utils: Wartość zmiennej __name__ to:&quot;</span><span class="p">,</span>
+      <span class="vm">__name__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>Plik kalkulator.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">utils</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;kalkulator: Kod głównego programu.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;kalkulator: Wartość zmiennej __name__ to:&quot;</span><span class="p">,</span>
+      <span class="vm">__name__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Uruchomienie modułu kalkulator spowoduje wykonanie kodu znajdującego się w module <code class="docutils literal notranslate"><span class="pre">utils</span></code>. Na ekranie zostaną wyświetlone linie zaczynające się od <code class="docutils literal notranslate"><span class="pre">utils:</span></code> oraz <code class="docutils literal notranslate"><span class="pre">kalkulator:</span></code>.</p>
+<p>Rozwiązaniem jest sprawdzenie wartości zmiennej <code class="docutils literal notranslate"><span class="pre">__name__</span></code> w module <code class="docutils literal notranslate"><span class="pre">utils</span></code>. Za pomocą instrukcji warunkowej należy zdecydować, czy określony fragment kodu ma zostać wykonany.</p>
+<p>Przykład:</p>
+<blockquote>
+<div><p><em>Plik utils.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czy_liczba</span><span class="p">(</span><span class="n">napis</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;utils: Kod modułu.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;utils: Wartość zmiennej __name__ to:&quot;</span><span class="p">,</span>
+          <span class="vm">__name__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>Plik kalkulator.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">utils</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;kalkulator: Kod głównego programu.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;kalkulator: Wartość zmiennej __name__ to:&quot;</span><span class="p">,</span>
+      <span class="vm">__name__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="pakiety">
+<h2>Pakiety<a class="headerlink" href="#pakiety" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p><strong>Pakiety</strong> są sposobem na uporządkowanie modułów, jest <strong>to kolekcja modułów</strong>.</p>
+<p>Fizycznie pakiet jest katalogiem mogącym <a class="footnote-reference brackets" href="#implicitnamespacepackages" id="id1">1</a> zawierać:</p>
+<ul class="simple">
+<li><p>specjalny moduł o nazwie <code class="docutils literal notranslate"><span class="pre">__init__</span></code> - w najprostszym przypadku jest to pusty plik, może także zawierać kod inicjalizujący pakiet (np. ustawienie zmiennych),</p></li>
+<li><p>moduły,</p></li>
+<li><p>pakiety.</p></li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="implicitnamespacepackages"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>dla wtajemniczonych: od Pythona 3.3 plik __init__.py jest opcjonalny, zachowanie to opisano w PEP 420 – Implicit Namespace Packages, <a class="reference external" href="https://www.python.org/dev/peps/pep-0420/">https://www.python.org/dev/peps/pep-0420/</a></p>
+</dd>
+</dl>
+<p>Przykładowa struktura katalogów projektu:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.
+|-- kalkulator.py
+`-- utils
+    |-- __init__.py      (opcjonalny)
+    |-- strings.py
+    `-- user.py
+</pre></div>
+</div>
+<p>Moduł <code class="docutils literal notranslate"><span class="pre">kalkulator</span></code> jest głównym skryptem do uruchomienia przez użytkownika.</p>
+<p>Pakiet <code class="docutils literal notranslate"><span class="pre">utils</span></code> jest wykorzystywany przez moduł kalkulator.</p>
+<p>Sposoby importowania nazw <strong>z pakietów</strong>:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">PAKIET.MODUL</span> <span class="pre">import</span> <span class="pre">NAZWA</span></code></p></li>
+</ol>
+<p>Przykład:</p>
+<blockquote>
+<div><p><em>Plik utils/strings.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czy_liczba</span><span class="p">(</span><span class="n">napis</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p><em>Plik kalkulator.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils.strings</span> <span class="kn">import</span> <span class="n">czy_liczba</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;czy_liczba():&quot;</span><span class="p">,</span>
+      <span class="n">czy_liczba</span><span class="p">(</span><span class="s2">&quot;13&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">PAKIET.MODUL</span></code></p></li>
+</ol>
+<p>Przykład:</p>
+<blockquote>
+<div><p><em>Plik utils/strings.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czy_liczba</span><span class="p">(</span><span class="n">napis</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p><em>Plik kalkulator.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">utils.strings</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;czy_liczba():&quot;</span><span class="p">,</span>
+      <span class="n">utils</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">czy_liczba</span><span class="p">(</span><span class="s2">&quot;13&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">PAKIET</span></code> (wymaga pliku __init__.py)</p></li>
+</ol>
+<p>Przykład:</p>
+<blockquote>
+<div><p><em>Plik utils/strings.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czy_liczba</span><span class="p">(</span><span class="n">napis</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p><em>Plik utils/__init__.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">strings</span>
+</pre></div>
+</div>
+<p><em>Plik kalkulator.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">utils</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;czy_liczba():&quot;</span><span class="p">,</span>
+      <span class="n">utils</span><span class="o">.</span><span class="n">strings</span><span class="o">.</span><span class="n">czy_liczba</span><span class="p">(</span><span class="s2">&quot;13&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Sposób importowania nazw <strong>w obrębie pakietu</strong>:</p>
+<p>Przykład:</p>
+<blockquote>
+<div><p><em>Plik utils/strings.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czy_liczba</span><span class="p">(</span><span class="n">napis</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p><em>Plik utils/user.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.strings</span> <span class="kn">import</span> <span class="n">czy_liczba</span>
+
+<span class="k">def</span> <span class="nf">pobierz_liczbe</span><span class="p">():</span>
+    <span class="n">napis</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Podaj liczbe:&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">czy_liczba</span><span class="p">(</span><span class="n">napis</span><span class="p">):</span>
+       <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">napis</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+       <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Ten sposób importowania nazw może być również stosowany w pliku <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>.</p>
+</section>
+<section id="moduly-standardowe">
+<h2>Moduły standardowe<a class="headerlink" href="#moduly-standardowe" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Python jest dostarczany wraz z szeroką gamą modułów, ich pełną listę można znaleźć na stronie: <a class="reference external" href="https://docs.python.org/3/library/">https://docs.python.org/3/library/</a></p>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/modules.html">Moduły i pakiety</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/">Lista wbudowanych pakietów Pythona</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

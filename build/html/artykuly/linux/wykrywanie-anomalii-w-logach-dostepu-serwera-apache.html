@@ -1,0 +1,192 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Wykrywanie anomalii w logach dostępu serwera Apache | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="wykrywanie-anomalii-w-logach-dostepu-serwera-apache">
+<h1>Wykrywanie anomalii w logach dostępu serwera Apache<a class="headerlink" href="#wykrywanie-anomalii-w-logach-dostepu-serwera-apache" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<p>Artykuł opisuje metodę przedstawioną w „Detecting anomalous Web server usage through mining access logs” T. Gržinić, T. Kišasondi, J. Šaban. Szczególne podziękowania należą się Panu Toni Gržinić, który odpowiedział na pytania dotyczące pracy.</p>
+<p>Przykłady do każdego omawianego kroku znajdują się w prezentacji:</p>
+
+<div id="pdfobject-0" class="pdfobject-container"></div>
+<script>PDFObject.embed("/_static/files/artykuly/linux/Wykrywanie-anomalii-w-logach-dostepu-do-serwera-Apache-za-pomoca-algorytmu-KNN.pdf", "#pdfobject-0");</script>
+<p>Zakładamy, że dysponujemy tylko zawartością pliku logów dostępu do serwera (<a class="reference external" href="https://httpd.apache.org/docs/2.4/logs.html">access log</a>). Metoda opiera się na analizie wysłanych zapytań przez jednego użytkownika, sesję. Jeśli któraś sesja za bardzo odbiega od pozostałych (np. pod względem liczby wysłanych zapytań do serwera, rozmiaru zapytań) jest ona traktowana jako anomalia, może być wynikiem działania atakującego. Do wstępnego określenia, czy sesje są wynikiem normalnego ruchu, czy anomalią zastosować możemy metodę IQR. Wyniki uzyskane metodą IQR należy prawdopodobnie poprawić, nie każda sesja z dużą ilością zapytań musi być związana z atakiem.</p>
+<section id="metoda-rozstepu-miedzykwartylowego">
+<h2>Metoda rozstępu międzykwartylowego<a class="headerlink" href="#metoda-rozstepu-miedzykwartylowego" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Metoda rozstępu międzykwartylowego używana jest do określenia obserwacji odstających (anomalii) spośród podanego posortowanego niemalejąco zbioru liczb (tutaj ilości zapytań).</p>
+<p>Polega na:</p>
+<ul class="simple">
+<li><p>obliczeniu różnicy (IQR) pomiędzy kwartylem trzecim (Q3) a kwartylem pierwszym (Q1)</p></li>
+<li><p>oznaczeniu wszystkich wartości mniejszych od Q1 – 1.5 * IQR jako wartości odstających</p></li>
+<li><p>oznaczeniu wszystkich wartości większych od Q3 + 1.5 * IQR jako wartości odstających</p></li>
+</ul>
+</section>
+<section id="wyodrebnienie-sesji-uzytkownikow">
+<h2>Wyodrębnienie sesji użytkowników<a class="headerlink" href="#wyodrebnienie-sesji-uzytkownikow" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Na podstawie wpisów (reprezentujących zapytania) w logach należy wyróżnić poszczególne sesje użytkownika. Do wykonania tego zadania zostanie wykorzystany:</p>
+<ul class="simple">
+<li><p>znacznik czasu (timestamp)</p></li>
+<li><p>adres IP</p></li>
+<li><p>Identyfikator przeglądarki (user-agent)</p></li>
+<li><p>Zakładamy, że sesja użytkownika nie trwa dłużej, niż godzinę. Jeśli zapytania zawierają ten sam adres IP oraz identyfikator klienta (user-agent) należą one do tej samej sesji.</p></li>
+</ul>
+</section>
+<section id="obliczenie-statystyk">
+<h2>Obliczenie statystyk<a class="headerlink" href="#obliczenie-statystyk" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Dla każdej sesji należy obliczyć statystyki zawierające:</p>
+<ul class="simple">
+<li><p>czas trwania sesji (różnica czasu pomiędzy ostatnim a pierwszym zapytaniem w sesji w sekundach)</p></li>
+<li><p>użycie pasma sieciowego (ilości pobranych danych w bajtach) całkowita liczba zapytań w danej sesji</p></li>
+<li><p>procent błędnych zapytań (kod błędu jest pomiędzy 400 a 500)</p></li>
+</ul>
+</section>
+<section id="oznaczenie-sesji-jako-anomalii">
+<h2>Oznaczenie sesji jako anomalii<a class="headerlink" href="#oznaczenie-sesji-jako-anomalii" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Mając statystyki dotyczące każdej sesji możemy próbować wyznaczyć anomalie metodą IQR. Oczywiście oprócz ilości zapytań można brać pod uwagę dowolny inny element statystyki (np. użycie pasma, czy procent błędnych zapytań). Tak oznaczone sesje należy przejrzeć i ewentualnie poprawić ich klasyfikację. Oznaczanie sesji jako anomalii metodą IQR jest tylko pewnym przybliżeniem.</p>
+</section>
+<section id="analiza-danych-za-pomoca-algorytmu-knn">
+<h2>Analiza danych za pomocą algorytmu kNN<a class="headerlink" href="#analiza-danych-za-pomoca-algorytmu-knn" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Algorytm K-najbliższych sąsiadów (K-nearest neighbours) służy do kategoryzacji nowych obserwacji na podstawie znanych obserwacji i ich kategorii. Jako znane obserwacje traktujemy wyliczone wcześniej statystyki wraz z ich oznaczeniem (anomalia, czy nie). Obserwacje (statystyki sesji) do kategoryzacji powstaną na podstawie logów, które zostaną wygenerowane w przyszłości.</p>
+<p>Nowe obserwacje (statystyki) z łatwością będą mogły być rozpoznane jako anomalia, bądź nie. Zamiast algorytmu kNN można wykorzystać sieci neuronowe, lasy losowe i inne algorytmy pozwalające na kategoryzację.</p>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="http://www.tomaszx.pl/materialy/si_lab7.pdf">Sztuczna inteligencja; Algorytm kNN</a></p></li>
+<li><p><a class="reference external" href="http://archive.ceciis.foi.hr/app/public/conferences/1/papers2013/627.pdf">„Detecting anomalous Web server usage through mining access logs” T. Gržinić, T. Kišasondi, J. Šaban</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

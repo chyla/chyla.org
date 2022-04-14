@@ -1,0 +1,435 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Python - Dekoratory | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="python-dekoratory">
+<h1>Python - Dekoratory<a class="headerlink" href="#python-dekoratory" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Informacja</p>
+<p>Wszystkie przykłady zawarte w tym poście pisane są z myślą o Pythonie w wersji 3.6.</p>
+</div>
+<p>Dekoratory opisano w dwóch dokumentach — <a class="reference external" href="https://www.python.org/dev/peps/pep-0318/">PEP 318</a> oraz <a class="reference external" href="https://www.python.org/dev/peps/pep-3129">PEP 3129</a>. Pierwszy z nich został opublikowany w 2003 roku (Python 2.4) i dotyczy dekoratorów stosowanych do funkcji oraz metod. Po 4 latach (rok 2007, Python 3.0) opublikowano drugi dokument, w którym rozszerzono ich możliwości o dekorowanie klas.</p>
+<p>Dekorator to obiekt, który można wywołać jak funkcję (klasa lub funkcja). Obiekt ten jest wrapperem dla pierwotnego obiektu.</p>
+<p>Zobaczmy to na przykładzie. Utwórzmy najprostszy dekorator — funkcję, która będzie zwracała przekazany jej obiekt:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dekorator</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">obj</span>
+</pre></div>
+</div>
+<p>Opatrzmy teraz przykładową funkcję naszym nowo utworzonym dekoratorem:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@dekorator</span>
+<span class="k">def</span> <span class="nf">funkcja</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Zapis ze znakiem <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> przed funkcją to <a class="reference external" href="https://pl.wikipedia.org/wiki/Lukier_sk%C5%82adniowy">syntactic sugar</a> i jest on równoważny następującemu zapisowi:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">funkcja</span> <span class="o">=</span> <span class="n">dekorator</span><span class="p">(</span><span class="n">funkcja</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Operacje dokonywane są tutaj na nazwach. Nazwa <code class="docutils literal notranslate"><span class="pre">funkcja</span></code> przestaje wskazywać na obiekt reprezentujący naszą przykładową funkcję i od tego momentu wskazuje na obiekt zwrócony przez dekorator. W powyższym przypadku jest to ten sam obiekt, ale nietrudno jest sobie wyobrazić funkcję dekoratora w zmienionej postaci — zwracającej inny obiekt:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inna_funkcja</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;inna funkcja&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dekorator</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">inna_funkcja</span>
+
+<span class="nd">@dekorator</span>
+<span class="k">def</span> <span class="nf">funkcja</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+
+<span class="n">funkcja</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Wynikiem działania powyższego skryptu jest:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inna</span> <span class="n">funkcja</span>
+</pre></div>
+</div>
+<p>Zgodnie z przedstawionym wcześniej równoważnym zapisem, nazwa <code class="docutils literal notranslate"><span class="pre">funkcja</span></code> wskazuje teraz na obiekt zwrócony przez dekorator — czyli <code class="docutils literal notranslate"><span class="pre">inna_funkcja</span></code>.</p>
+<p>Powszechną praktyką jest umieszczanie <code class="docutils literal notranslate"><span class="pre">inna_funkcja</span></code> w funkcji dekoratora i wywołanie w niej pierwotnego obiektu (w omawianym przypadku jest to <code class="docutils literal notranslate"><span class="pre">funkcja</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dekorator</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">inna_funkcja</span><span class="p">():</span>
+        <span class="n">obj</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">inna_funkcja</span>
+
+<span class="nd">@dekorator</span>
+<span class="k">def</span> <span class="nf">funkcja</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+
+<span class="n">funkcja</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Jednym z klasycznych już chyba przykładów na dekoratory jest <code class="docutils literal notranslate"><span class="pre">cache</span></code>. Utworzymy dekorator o nazwie <code class="docutils literal notranslate"><span class="pre">cache</span></code> dla funkcji <code class="docutils literal notranslate"><span class="pre">get_web_page</span></code> zwracającej dane z serwisu internetowego:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">WebMock</span><span class="p">():</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="k">return</span> <span class="n">url</span> <span class="o">+</span> <span class="s2">&quot; always works!&quot;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">def</span> <span class="nf">cache</span><span class="p">(</span><span class="n">wrapped_function</span><span class="p">):</span>
+<span class="linenos"> 6</span>    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+<span class="linenos"> 7</span>        <span class="k">if</span> <span class="n">url</span> <span class="ow">in</span> <span class="s2">&quot;https://chyla.org/&quot;</span><span class="p">:</span>
+<span class="linenos"> 8</span>            <span class="k">return</span> <span class="s2">&quot;It work&#39;s!&quot;</span>
+<span class="linenos"> 9</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">10</span>            <span class="k">return</span> <span class="n">wrapped_function</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="linenos">11</span>    <span class="k">return</span> <span class="n">wrapper</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="nd">@cache</span>
+<span class="linenos">14</span><span class="k">def</span> <span class="nf">get_web_page</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+<span class="linenos">15</span>    <span class="k">return</span> <span class="n">web</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="n">web</span> <span class="o">=</span> <span class="n">WebMock</span><span class="p">()</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="n">page</span> <span class="o">=</span> <span class="n">get_web_page</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="s2">&quot;chyla.org&quot;</span><span class="p">)</span>
+<span class="linenos">21</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;chyla.org content: &quot;</span> <span class="o">+</span> <span class="n">page</span><span class="p">)</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="n">page</span> <span class="o">=</span> <span class="n">get_web_page</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="s2">&quot;google.com&quot;</span><span class="p">)</span>
+<span class="linenos">24</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;google.com content: &quot;</span> <span class="o">+</span> <span class="n">page</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Odwołanie do zawartości zdalnej może chwilę potrwać, dlatego zamiast rzeczywistego połączenia stworzyłem klasę <code class="docutils literal notranslate"><span class="pre">WebMock</span></code>. W przyszłości obiekt może zostać zmieniony, by faktycznie odwoływał się do treści umieszczonej w Internecie.</p>
+<p>Na wydruku widzimy również funkcję <code class="docutils literal notranslate"><span class="pre">cache</span></code> będącą dekoratorem. Zwraca ona funkcję wrapper, która sprawdza, czy zna już podany adres i jeśli tak to zwraca wartość z cache, w przeciwnym wypadku wywołuje funkcję <code class="docutils literal notranslate"><span class="pre">get_web_page</span></code> odpowiedzialną za pobranie danych.</p>
+<p>Pozostała część kodu powinna być dość oczywista. Jeśli nie, to zapraszam do dyskusji w komentarzach.</p>
+<section id="przekazywanie-argumentow">
+<h2>Przekazywanie argumentów<a class="headerlink" href="#przekazywanie-argumentow" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Do dekoratora możemy przekazać dowolne argumenty. W tym celu wykorzystamy nową funkcję, zobaczmy fragment kodu:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">WebMock</span><span class="p">():</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="k">return</span> <span class="n">url</span> <span class="o">+</span> <span class="s2">&quot; always works!&quot;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">def</span> <span class="nf">cache_with_value</span><span class="p">(</span><span class="n">cache_value</span><span class="p">):</span>
+<span class="linenos"> 6</span>    <span class="k">def</span> <span class="nf">cache</span><span class="p">(</span><span class="n">wrapped_function</span><span class="p">):</span>
+<span class="linenos"> 7</span>        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+<span class="linenos"> 8</span>            <span class="k">if</span> <span class="n">url</span> <span class="ow">in</span> <span class="s2">&quot;https://chyla.org/&quot;</span><span class="p">:</span>
+<span class="linenos"> 9</span>                <span class="k">return</span> <span class="n">cache_value</span>
+<span class="linenos">10</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">11</span>                <span class="k">return</span> <span class="n">wrapped_function</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="linenos">12</span>        <span class="k">return</span> <span class="n">wrapper</span>
+<span class="linenos">13</span>    <span class="k">return</span> <span class="n">cache</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="nd">@cache_with_value</span><span class="p">(</span><span class="s2">&quot;It work&#39;s!&quot;</span><span class="p">)</span>
+<span class="linenos">16</span><span class="k">def</span> <span class="nf">get_web_page</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+<span class="linenos">17</span>    <span class="k">return</span> <span class="n">web</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="n">web</span> <span class="o">=</span> <span class="n">WebMock</span><span class="p">()</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="n">page</span> <span class="o">=</span> <span class="n">get_web_page</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="s2">&quot;chyla.org&quot;</span><span class="p">)</span>
+<span class="linenos">23</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;chyla.org content: &quot;</span> <span class="o">+</span> <span class="n">page</span><span class="p">)</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="n">page</span> <span class="o">=</span> <span class="n">get_web_page</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="s2">&quot;google.com&quot;</span><span class="p">)</span>
+<span class="linenos">26</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;google.com content: &quot;</span> <span class="o">+</span> <span class="n">page</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Trzeba przyznać, że ten kod niewiele różni się od poprzedniego. Funkcja <code class="docutils literal notranslate"><span class="pre">cache</span></code>, widoczna w linii 6, jest prawie taka sama. Zmiana widoczna jest w linii 9, wykorzystywany jest parametr funkcji <code class="docutils literal notranslate"><span class="pre">cache_with_value</span></code>.</p>
+<p>Istotną zmianą jest dodanie wspomnianej funkcji <code class="docutils literal notranslate"><span class="pre">cache_with_value</span></code>. Przyjmuje ona parametr i zwraca funkcję <code class="docutils literal notranslate"><span class="pre">cache</span></code>. Spójrzmy na powiązaną z tym zmianę w linii 15, to jest wywołanie funkcji. W poprzednim przykładzie (linia 13) tego wywołania nie było. Ostatecznie w to miejsce zostanie wstawiona funkcja <code class="docutils literal notranslate"><span class="pre">cache</span></code>.</p>
+<p>Spróbujmy zapisać to podobnie jak poprzednio, bez nadmiernej ilości cukru składniowego:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">get_web_page</span> <span class="o">=</span> <span class="n">cache_with_value</span><span class="p">(</span><span class="s2">&quot;It works!&quot;</span><span class="p">)(</span><span class="n">get_web_page</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>W efekcie jest to równoważne:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">get_web_page</span> <span class="o">=</span> <span class="n">cache</span><span class="p">(</span><span class="n">get_web_page</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Technika ta jest szeroko wykorzystywana i warto ją znać.</p>
+</section>
+<section id="dekorator-w-formie-klasy">
+<h2>Dekorator w formie klasy<a class="headerlink" href="#dekorator-w-formie-klasy" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Do tej pory skupialiśmy się na dekoratorze jako funkcji, ale może on być też klasą. Zobaczmy zmodyfikowany pierwszy przykład:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">WebMock</span><span class="p">():</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="k">return</span> <span class="n">url</span> <span class="o">+</span> <span class="s2">&quot; always works!&quot;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">class</span> <span class="nc">cache</span><span class="p">():</span>
+<span class="linenos"> 6</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fun</span><span class="p">):</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">fun</span> <span class="o">=</span> <span class="n">fun</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">web</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+<span class="linenos">10</span>        <span class="k">if</span> <span class="n">url</span> <span class="ow">in</span> <span class="s2">&quot;https://chyla.org/&quot;</span><span class="p">:</span>
+<span class="linenos">11</span>            <span class="k">return</span> <span class="s2">&quot;It work&#39;s!&quot;</span>
+<span class="linenos">12</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">13</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fun</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="nd">@cache</span>
+<span class="linenos">16</span><span class="k">def</span> <span class="nf">get_web_page</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+<span class="linenos">17</span>    <span class="k">return</span> <span class="n">web</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="n">web</span> <span class="o">=</span> <span class="n">WebMock</span><span class="p">()</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="n">page</span> <span class="o">=</span> <span class="n">get_web_page</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="s2">&quot;chyla.org&quot;</span><span class="p">)</span>
+<span class="linenos">23</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;chyla.org content: &quot;</span> <span class="o">+</span> <span class="n">page</span><span class="p">)</span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="n">page</span> <span class="o">=</span> <span class="n">get_web_page</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="s2">&quot;google.com&quot;</span><span class="p">)</span>
+<span class="linenos">26</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;google.com content: &quot;</span> <span class="o">+</span> <span class="n">page</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Zapiszmy fragment odpowiedzialny za dekorator bez cukru składniowego:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">get_web_page</span> <span class="o">=</span> <span class="n">cache</span><span class="p">(</span><span class="n">get_web_page</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Widzimy, że jest to wywołanie funkcji <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, czyli nazwa <code class="docutils literal notranslate"><span class="pre">get_web_page</span></code> będzie wskazywała na instancję klasy. Podczas próby wywołania instancji klasy jak funkcji, wywołana zostanie metoda <code class="docutils literal notranslate"><span class="pre">__call__</span></code>.</p>
+<p>Czy dekorator w formie klasy może przyjmować argumenty? Oczywiście, zobaczmy zmodyfikowany drugi przykład:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">WebMock</span><span class="p">():</span>
+<span class="linenos"> 2</span>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+<span class="linenos"> 3</span>        <span class="k">return</span> <span class="n">url</span> <span class="o">+</span> <span class="s2">&quot; always works!&quot;</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="k">class</span> <span class="nc">cache_with_value</span><span class="p">():</span>
+<span class="linenos"> 6</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_value</span><span class="p">):</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">cache_value</span> <span class="o">=</span> <span class="n">cache_value</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+<span class="linenos">10</span>        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+<span class="linenos">11</span>            <span class="k">if</span> <span class="n">url</span> <span class="ow">in</span> <span class="s2">&quot;https://chyla.org/&quot;</span><span class="p">:</span>
+<span class="linenos">12</span>                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_value</span>
+<span class="linenos">13</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">14</span>                <span class="k">return</span> <span class="n">obj</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+<span class="linenos">15</span>        <span class="k">return</span> <span class="n">wrapper</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="nd">@cache_with_value</span><span class="p">(</span><span class="s2">&quot;It work&#39;s!&quot;</span><span class="p">)</span>
+<span class="linenos">18</span><span class="k">def</span> <span class="nf">get_web_page</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+<span class="linenos">19</span>    <span class="k">return</span> <span class="n">web</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="n">web</span> <span class="o">=</span> <span class="n">WebMock</span><span class="p">()</span>
+<span class="linenos">23</span>
+<span class="linenos">24</span><span class="n">page</span> <span class="o">=</span> <span class="n">get_web_page</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="s2">&quot;chyla.org&quot;</span><span class="p">)</span>
+<span class="linenos">25</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;chyla.org content: &quot;</span> <span class="o">+</span> <span class="n">page</span><span class="p">)</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="n">page</span> <span class="o">=</span> <span class="n">get_web_page</span><span class="p">(</span><span class="n">web</span><span class="p">,</span> <span class="s2">&quot;google.com&quot;</span><span class="p">)</span>
+<span class="linenos">28</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;google.com content: &quot;</span> <span class="o">+</span> <span class="n">page</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Widzimy, że został wykonany zabieg podobny do opisywanego już wcześniej. Najpierw tworzymy instancję klasy, po czym używamy jej jako dekoratora. Za pomocą funkcji <code class="docutils literal notranslate"><span class="pre">__init__</span></code> możemy przekazać argumenty, natomiast wywołanie funkcji <code class="docutils literal notranslate"><span class="pre">__call__</span></code> spowoduje udekorowanie funkcji.</p>
+<p>Zapiszmy to bez cukru składniowego:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">get_web_page</span> <span class="o">=</span> <span class="n">cache_with_value</span><span class="p">(</span><span class="s2">&quot;It works!&quot;</span><span class="p">)(</span><span class="n">get_web_page</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ciąg <code class="docutils literal notranslate"><span class="pre">cache_with_value(&quot;It</span> <span class="pre">works!&quot;)</span></code> to oczywiście wywołanie konstruktora obiektu, następnie na tym obiekcie wywoływana jest funkcja <code class="docutils literal notranslate"><span class="pre">__calll__</span></code>, do której przekazywany jest obiekt <code class="docutils literal notranslate"><span class="pre">get_web_page</span></code>. Widoczna tutaj sytuacja jest analogiczna, do omawianego wcześniej przekazywania parametrów za pomocą funkcji.</p>
+</section>
+<section id="dekorowanie-klasy">
+<h2>Dekorowanie klasy<a class="headerlink" href="#dekorowanie-klasy" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Dekorowanie klasy odbywa się w sposób analogiczny, do dotychczas omówionych. Jedyną różnicą jest fakt, iż nie dekorujemy funkcji, a klasę.</p>
+<p>Zobaczmy przykład zaproponowany przez <em>theheadofabroom</em> na <em>stackoverflow</em>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">singleton</span><span class="p">(</span><span class="n">class_</span><span class="p">):</span>
+  <span class="n">instances</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="k">def</span> <span class="nf">getinstance</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">class_</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">instances</span><span class="p">:</span>
+        <span class="n">instances</span><span class="p">[</span><span class="n">class_</span><span class="p">]</span> <span class="o">=</span> <span class="n">class_</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">instances</span><span class="p">[</span><span class="n">class_</span><span class="p">]</span>
+  <span class="k">return</span> <span class="n">getinstance</span>
+
+<span class="nd">@singleton</span>
+<span class="k">class</span> <span class="nc">MyClass</span><span class="p">(</span><span class="n">BaseClass</span><span class="p">):</span>
+  <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Dlaczego to działa? Otóż rozpisując przykład, w kod pozbawiony cukru składniowego, otrzymujemy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MyClass</span> <span class="o">=</span> <span class="n">singleton</span><span class="p">(</span><span class="n">MyClass</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">MyClass</span></code> wskazuje teraz na funkcję <code class="docutils literal notranslate"><span class="pre">getinstance</span></code>, którą składniowo wywołujemy w ten sam sposób, w jaki tworzymy nowy obiekt klasy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">my_class_instance</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Funkcja ta sprawdza, czy dany obiekt już istnieje i go zwraca, w przeciwnym wypadku jest on tworzony.</p>
+<p>Zauważmy, że pierwotna nazwa <code class="docutils literal notranslate"><span class="pre">MyClass</span></code> nie wskazuje na obiekt klasy, ale na specjalny typ reprezentujący klasę.</p>
+</section>
+<section id="dekorator-wraps">
+<h2>Dekorator wraps<a class="headerlink" href="#dekorator-wraps" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Dla przejrzystości kodu, w poprzednich przykładach pominięto, istotny podczas tworzenia własnego dekoratora, dekorator <code class="docutils literal notranslate"><span class="pre">wraps</span></code>. Jego pominięcie powoduje utratę metadanych dekorowanej funkcji (np. docstringa). Zalecane jest, by był on dodawany do tworzonych dekoratorów.</p>
+<p>Oto przykłady, bazujące na tych z dokumentacji, pokazujące utratę metadanych.</p>
+<p>Wersja z dekoratorem <code class="docutils literal notranslate"><span class="pre">wraps</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+
+<span class="k">def</span> <span class="nf">my_decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Calling decorated function&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@my_decorator</span>
+<span class="k">def</span> <span class="nf">example</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Docstring&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Called example function&#39;</span><span class="p">)</span>
+
+<span class="n">example</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Calling</span> <span class="n">decorated</span> <span class="n">function</span>
+<span class="n">Called</span> <span class="n">example</span> <span class="n">function</span>
+<span class="n">example</span>
+<span class="n">Docstring</span>
+</pre></div>
+</div>
+<p>Wersja bez dekoratora <code class="docutils literal notranslate"><span class="pre">wraps</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Calling decorated function&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@my_decorator</span>
+<span class="k">def</span> <span class="nf">example</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Docstring&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Called example function&#39;</span><span class="p">)</span>
+
+<span class="n">example</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Calling</span> <span class="n">decorated</span> <span class="n">function</span>
+<span class="n">Called</span> <span class="n">example</span> <span class="n">function</span>
+<span class="n">wrapper</span>
+<span class="kc">None</span>
+</pre></div>
+</div>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0318/">PEP 318 – Decorators for Functions and Methods</a></p></li>
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-3129/">PEP 3129 – Class Decorators</a></p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/6760685/creating-a-singleton-in-python">Creating a singleton in Python</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3.6/library/functools.html">10.2. functools — Higher-order functions and operations on callable objects</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

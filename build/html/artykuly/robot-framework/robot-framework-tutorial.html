@@ -1,0 +1,541 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Robot Framework - Tutorial | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="robot-framework-tutorial">
+<h1>Robot Framework - Tutorial<a class="headerlink" href="#robot-framework-tutorial" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Informacja</p>
+<p>Wszystkie prezentowane w artykule kody źródłowe dostępne są w repozytorium GitHub: <a class="reference external" href="https://github.com/chyla/RobotFrameworkTutorialExamples">https://github.com/chyla/RobotFrameworkTutorialExamples</a></p>
+</div>
+
+<div id="pdfobject-0" class="pdfobject-container"></div>
+<script>PDFObject.embed("/_static/files/artykuly/robot-framework/Robot-Framework-Tutorial.pdf", "#pdfobject-0");</script>
+<section id="acceptance-testing">
+<h2>Acceptance Testing<a class="headerlink" href="#acceptance-testing" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p><strong>Poziom testów</strong> czyli grupa czynności testowych, które są razem zorganizowane.</p>
+<p><em>Istotą rozróżniania poziomów testów jest to, że każdy poziom ma inne cele testowania, ma zwykle inną podstawę testów, a także inny obiekt testowania.</em></p>
+<p><em>Typowe poziomy testowania:</em></p>
+<ul class="simple">
+<li><p><strong>jednostkowe</strong> - <em>testowanie pojedynczych modułów,</em></p></li>
+<li><p><strong>integracyjne</strong> - <em>testowanie wykonywane w celu wykrycia defektów podczas interakcji między komponentami lub systemami,</em></p></li>
+<li><p><strong>systemowe</strong> - <em>testowanie zintegrowanego systemu w celu sprawdzenia jego zgodności z wyspecyfikowanymi wymaganiami,</em></p></li>
+<li><p><strong>akceptacyjne</strong> - <em>testowanie formalnie przeprowadzane w celu umożliwienia użytkownikowi, klientowi lub innemu ustalonemu podmiotowi ustalenia, czy zaakceptować system lub moduł.</em> <a class="footnote-reference brackets" href="#tijo" id="id1">1</a></p></li>
+</ul>
+<dl class="footnote brackets">
+<dt class="label" id="tijo"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>żródło/na podstawie: <a class="reference external" href="https://ksiegarnia.pwn.pl/Testowanie-i-jakosc-oprogramowania.-Modele-techniki-narzedzia.,732463348,p.html">Testowanie i jakość oprogramowania. Metody, narzędzia, techniki, Adam Roman, 2015</a> s. 72-80</p>
+</dd>
+</dl>
+<p><strong>Acceptance testing według ISTQB:</strong></p>
+<blockquote>
+<div><p>Formal testing with respect to user needs, requirements, and business processes conducted to determine whether or not a system satisfies the acceptance criteria and to enable the user, customers or other authorized entity to determine whether or not to accept the system. <a class="footnote-reference brackets" href="#istqb-glossary" id="id2">2</a></p>
+</div></blockquote>
+<dl class="footnote brackets">
+<dt class="label" id="istqb-glossary"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>źródło: ISTQB Glossary: <a class="reference external" href="https://glossary.istqb.org/en/search/acceptance%20testing">http://glossary.istqb.org/search/acceptance%20testing</a></p>
+</dd>
+</dl>
+</section>
+<section id="robot-framework">
+<h2>Robot Framework<a class="headerlink" href="#robot-framework" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<blockquote>
+<div><p><strong>Robot Framework is a generic open source automation framework for acceptance testing, acceptance test driven development (ATDD), and robotic process automation (RPA).</strong></p>
+<p><strong>It has easy-to-use tabular test data syntax and it utilizes the keyword-driven testing approach.</strong></p>
+<p>Its testing capabilities can be extended by test libraries implemented either with Python or Java, and users can create new higher-level keywords from existing ones using the same syntax that is used for creating test cases. <a class="footnote-reference brackets" href="#robotframework-introduction" id="id3">3</a></p>
+</div></blockquote>
+<dl class="footnote brackets">
+<dt class="label" id="robotframework-introduction"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dd><p>źródło:  <a class="reference external" href="https://robotframework.org/#introduction">https://robotframework.org/#introduction</a></p>
+</dd>
+</dl>
+<section id="instalacja">
+<h3>Instalacja<a class="headerlink" href="#instalacja" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Do napisania testu z użyciem Robot Framework wymagana jest instalacja pakietu <code class="docutils literal notranslate"><span class="pre">robotframework</span></code>. Dostępny jest także graficzny edytor RIDE ułatwiający pisanie testów, wymaga to instalacji pakietu <code class="docutils literal notranslate"><span class="pre">robotframework-ride</span></code>.</p>
+<p>Polecenia instalacji:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">robotframework</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">robotframework-ride</span></code></p></li>
+</ul>
+</section>
+<section id="format-pliku-z-testami">
+<h3>Format pliku z testami<a class="headerlink" href="#format-pliku-z-testami" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Robot framework obsługuje następujące formaty plików:</p>
+<ul class="simple">
+<li><p>czysty tekst (pliki .robot),</p></li>
+<li><p>TSV (tab-separated values) - pliki typu TSV można tworzyć i edytować w arkuszu kalkulacyjnym (np. MS Excel), wsparcie dla tego formatu zostanie w przyszłości wycofane,</p></li>
+<li><p>reStructuredText format,</p></li>
+<li><p>HTML (do wersji 3.1 Robot Framework).</p></li>
+</ul>
+<p><strong>W dalszej części uwaga zostanie poświęcona testom w formacie czystego tekstu.</strong></p>
+</section>
+<section id="struktura-pliku-z-testami">
+<h3>Struktura pliku z testami<a class="headerlink" href="#struktura-pliku-z-testami" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Plik z testami składa się z czterech sekcji, z których tylko <code class="docutils literal notranslate"><span class="pre">Test</span> <span class="pre">Cases</span></code> jest obowiązkowa.</p>
+<div class="highlight-robotframework notranslate"><div class="highlight"><pre><span></span><span class="gh">*** Settings ***</span><span class="p"></span>
+
+
+<span class="gh">*** Variables ***</span><span class="p"></span>
+
+
+<span class="gh">*** Test Cases ***</span><span class="p"></span>
+
+
+<span class="gh">*** Keywords ***</span><span class="p"></span>
+</pre></div>
+</div>
+<p>W sekcji <strong>Settings</strong> umieszczana jest dokumentacja dotycząca zestawu testów, informacje o dodatkowych plikach zasobów i wykorzystywanych bibliotekach.</p>
+<p>W sekcji <strong>Variables</strong> umieszczane są zmienne.</p>
+<p>W sekcji <strong>Test Cases</strong> umieszczane są poszczególne przypadki testowe.</p>
+<p>W sekcji <strong>Keywords</strong> umieszczane są definicje funkcji (w języku Robot Framework funkcję nazywamy keyword’em).</p>
+</section>
+<section id="pierwszy-test">
+<h3>Pierwszy test<a class="headerlink" href="#pierwszy-test" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Przykładowy plik z testami rozpoczyna się od sekcji <strong>Settings</strong> z dokumentacją opisującą cel wszystkich testów zawartych w danym pliku.</p>
+<p>Test o nazwie <em>My First Test Case</em> składa się z jednego wywołania keyword’u (funkcji) <em>Log</em>. Funkcja ta zapisuje przekazany napis do pliku z logami.</p>
+<p>Plik <code class="docutils literal notranslate"><span class="pre">first.robot</span></code>:</p>
+<div class="highlight-robotframework notranslate"><div class="highlight"><pre><span></span><span class="gh">*** Settings ***</span><span class="p"></span>
+<span class="kn">Documentation</span><span class="p">    </span><span class="s">My first test</span><span class="p"></span>
+<span class="p">...    </span><span class="s">with Robot Framework.</span><span class="p"></span>
+
+<span class="gh">*** Test Cases ***</span><span class="p"></span>
+<span class="gu">My First Test Case</span><span class="p"></span>
+<span class="p">    </span><span class="nf">Log</span><span class="p">    </span><span class="s">This text will be logged</span><span class="p"></span>
+</pre></div>
+</div>
+<p>Najważniejsze informacje:</p>
+<ul class="simple">
+<li><p>odstęp pomiędzy poszczególnymi elementami to minimum 2 spacje (<strong>zaleca się 4 spacje</strong>),</p></li>
+<li><p>kontynuacja poprzedniej linii rozpoczyna się od trzech kropek (napis wieloliniowy),</p></li>
+<li><p>brak cudzysłowu podczas tworzenia napisu,</p></li>
+<li><p>nazwa testu <em>My First Test Case</em> zawiera spacje, jest to pełna nazwa.</p></li>
+</ul>
+</section>
+<section id="logowanie-informacji">
+<h3>Logowanie informacji<a class="headerlink" href="#logowanie-informacji" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Komunikaty zapisywane do logów mogą mieć różne poziomy ważności, dostępne poziomy:</p>
+<ul class="simple">
+<li><p><strong>FAIL</strong> - Używane, gdy wykonanie keyword’a się nie powiedzie. Ten poziom jest zarezerwowany dla komunikatów pochodzących od Robot Framework.</p></li>
+<li><p><strong>WARN</strong> - Używany do ostrzeżeń, komunikaty na tym poziomie są także wyświetlane w konsoli podczas wykonywania testu, a także umieszczane w sekcji <em>Test Execution Errors</em> pliku z logami.</p></li>
+<li><p><strong>INFO</strong> - Domyślny poziom, poniżej tego poziomu (<em>DEBUG</em>, <em>TRACE</em>) komunikaty nie są zapisywane w pliku z logami.</p></li>
+<li><p><strong>DEBUG</strong> - Używany w celu debugowania, używany do zapisywania informacji przydatnych programistom i testerom.</p></li>
+<li><p><strong>TRACE</strong> - Bardziej szczegółowy poziom niż <em>DEBUG</em>. Domyślnie z tym poziomem zapisywane są informacje o argumentach keyword’a i wartości zwracanej.</p></li>
+</ul>
+<p>Plik <code class="docutils literal notranslate"><span class="pre">logging.robot</span></code>:</p>
+<div class="highlight-robotframework notranslate"><div class="highlight"><pre><span></span><span class="gh">*** Settings ***</span><span class="p"></span>
+<span class="kn">Documentation</span><span class="p"></span>
+<span class="p">...    </span><span class="s">Demonstrate log levels.</span><span class="p"></span>
+
+<span class="gh">*** Test Cases ***</span><span class="p"></span>
+<span class="gu">Multi Log Level Test Case</span><span class="p"></span>
+<span class="p">    [</span><span class="kn">Documentation</span><span class="p">]    </span><span class="s">Log message on each log level.</span><span class="p"></span>
+<span class="p">    </span><span class="nf">Log</span><span class="p">    </span><span class="s">Warning message</span><span class="p">    </span><span class="s">WARN</span><span class="p"></span>
+<span class="p">    </span><span class="nf">Log</span><span class="p">    </span><span class="s">Info message</span><span class="p"></span>
+<span class="p">    </span><span class="nf">Log</span><span class="p">    </span><span class="s">Second info message</span><span class="p">    </span><span class="s">INFO</span><span class="p"></span>
+<span class="p">    </span><span class="nf">Log</span><span class="p">    </span><span class="s">Debug message</span><span class="p">    </span><span class="s">DEBUG</span><span class="p"></span>
+<span class="p">    </span><span class="nf">Log</span><span class="p">    </span><span class="s">Trace message</span><span class="p">    </span><span class="s">TRACE</span><span class="p"></span>
+</pre></div>
+</div>
+<p>Test <em>Multi Log Level Test Case</em> składa się z pięciu wywołań keyword’u <strong>Log</strong> z przeważnie dwoma argumentami oddzielonymi 4 spacjami.</p>
+</section>
+<section id="uruchomienie-testow">
+<h3>Uruchomienie testów<a class="headerlink" href="#uruchomienie-testow" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>W celu wykonania testów należy wykonać polecenie robot i jako argument podać ścieżkę do pliku lub katalogu z testami. Dodatkowymi opcjami do polecenia są:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-d</span> <span class="pre">KATALOG</span></code> - ścieżka do katalogu, w którym mają zostać zapisane logi wraz z dodatkowymi informacjami z wykonania testu,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-L</span> <span class="pre">POZIOM</span></code> - określa poziom, od którego będą zapisywane komunikaty do logów, domyślnie <em>INFO</em>.</p></li>
+</ul>
+<p>Wzór polecenia:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>robot -d KATALOG -L POZIOM ŚCIEŻKA_DO_PLIKU_Z_TESTEM
+</pre></div>
+</div>
+<p>Przykład uruchomienia testów z pliku <code class="docutils literal notranslate"><span class="pre">logging.robot</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&gt; robot -d output -L DEBUG logging.robot
+=====================================================================
+Logging :: Demonstrate log levels.
+=====================================================================
+[ WARN ] Warning message
+Multi Log Level Test Case :: Log message on each log level.  | PASS |
+---------------------------------------------------------------------
+Logging :: Demonstrate log levels.                           | PASS |
+1 test, 1 passed, 0 failed
+=====================================================================
+Output:  /home/[...]/output/output.xml
+Log:     /home/[...]/output/log.html
+Report:  /home/[...]/output/report.html
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Logi wraz z dodatkowymi informacjami zostaną zapisane w katalogu output.</p></li>
+<li><p>Do logów zostaną zapisane komunikaty na poziomie <em>DEBUG</em> i wyżej (<em>INFO</em>, <em>WARNING</em>, <em>FAIL</em>).</p></li>
+</ul>
+</section>
+<section id="wyniki-wykonania-testow">
+<h3>Wyniki wykonania testów<a class="headerlink" href="#wyniki-wykonania-testow" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Na pliki stanowiące wynik uruchomienia testów składają się:</p>
+<ul class="simple">
+<li><p><strong>output.xml</strong> - plik z surowymi danymi, na jego podstawie tworzone są pliki log.html i_report.html,</p></li>
+<li><p><strong>log.html</strong> - plik zawierający informacje na temat wykonania testu (wykonane testy, zapisane komunikaty), umożliwia filtrowanie logów według poziomu ważności,</p></li>
+<li><p><strong>report.html</strong> - zawiera statystyki na temat uruchomionych testów.</p></li>
+</ul>
+<figure class="align-default" id="id5">
+<img alt="../../_images/robot-framework-log-file-example.png" src="../../_images/robot-framework-log-file-example.png" />
+<figcaption>
+<p><span class="caption-text">Przykład pliku <code class="docutils literal notranslate"><span class="pre">log.html</span></code>.</span><a class="headerlink" href="#id5" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id6">
+<img alt="../../_images/robot-framework-report-file-example.png" src="../../_images/robot-framework-report-file-example.png" />
+<figcaption>
+<p><span class="caption-text">Przykład pliku <code class="docutils literal notranslate"><span class="pre">report.html</span></code>.</span><a class="headerlink" href="#id6" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="zmienne">
+<h3>Zmienne<a class="headerlink" href="#zmienne" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>W zależności od rodzaju zmiennej musi ona zostać odpowiednio oznaczona.</p>
+<p>Zmienne skalarne oznaczane są za pomocą <code class="docutils literal notranslate"><span class="pre">${}</span></code>, listy za pomocą <code class="docutils literal notranslate"><span class="pre">&#64;{}</span></code> i słowniki za pomocą <code class="docutils literal notranslate"><span class="pre">&amp;{}</span></code>.</p>
+<p>Plik <code class="docutils literal notranslate"><span class="pre">variables-section.robot</span></code>:</p>
+<div class="highlight-robotframework notranslate"><div class="highlight"><pre><span></span><span class="gh">*** Settings ***</span><span class="p"></span>
+<span class="kn">Documentation</span><span class="p">    </span><span class="s">Variables section example.</span><span class="p"></span>
+
+<span class="gh">*** Variables ***</span><span class="p"></span>
+<span class="p">${</span><span class="nv">NAME</span><span class="p">} =   </span><span class="s">Jan</span><span class="p"></span>
+<span class="p">@{</span><span class="nv">EXAMPLE_LIST</span><span class="p">}    </span><span class="s">1</span><span class="p">    </span><span class="s">2</span><span class="p">    </span><span class="s">3</span><span class="p">    </span><span class="s">a</span><span class="p">   </span><span class="s">b</span><span class="p">   </span><span class="s">c</span><span class="p">    </span><span class="s">4</span><span class="p"></span>
+<span class="p">&amp;{</span><span class="nv">EXAMPLE_DICT</span><span class="p">}    </span><span class="s">name=Jan</span><span class="p">    </span><span class="s">lastname=Kowalski</span><span class="p"></span>
+
+<span class="gh">*** Test Case ***</span><span class="p"></span>
+<span class="gu">Variable List Dict</span><span class="p"></span>
+<span class="p">    </span><span class="nf">Log</span><span class="p">    ${</span><span class="nv">NAME</span><span class="p">}</span>
+<span class="p">    </span><span class="nf">Log</span><span class="p">    ${</span><span class="nv">EXAMPLE_LIST</span><span class="p">}</span><span class="s">[1]</span><span class="p"></span>
+<span class="p">    </span><span class="nf">Log</span><span class="p">    ${</span><span class="nv">EXAMPLE_DICT</span><span class="p">}</span><span class="s">[name]</span><span class="p"></span>
+</pre></div>
+</div>
+<p>Znak = jest opcjonalny, każdy element kolekcji musi być oddzielony co najmniej 2 spacjami.</p>
+<p>Odwołania do poszczególnych elementów kolekcji realizowane są za pomocą <code class="docutils literal notranslate"><span class="pre">${}</span></code> oraz operatora indeksowania.</p>
+<p>W wyniku działania przedstawionego testu zostaną zalogowane komunikaty złożone z poszczególnych elementów kolekcji:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>INFO: Jan
+INFO: 2
+INFO: Jan
+</pre></div>
+</div>
+<p>Zmienne mogą również zostać ustawione podczas uruchamiania testów, służy do tego przełącznik variable. Taka zmienna może być później używana w testach.</p>
+<p>Wzór polecenia:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>robot --variable NAZWA_ZMIENNEJ:WARTOŚĆ ŚCIEŻKA_DO_PLIKU_Z_TESTEM
+</pre></div>
+</div>
+</section>
+<section id="zmienne-specjalne">
+<h3>Zmienne specjalne<a class="headerlink" href="#zmienne-specjalne" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Robot Framework posiada zmienne o specjalnym przeznaczeniu:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">${CURDIR}</span></code> - bezwzględna ścieżka do katalogu, w którym zlokalizowany jest test.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">${TEMPDIR}</span></code> - bezwzględna ścieżka do systemowego katalogu tymczasowego.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">${EXECDIR}</span></code> - bezwzględna ścieżka do katalogu, z którego rozpoczęto wykonywanie testów.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">${/}</span></code> - separator ścieżki. W Linuksie wartością jest <code class="docutils literal notranslate"><span class="pre">/</span></code>, w Windowsie <code class="docutils literal notranslate"><span class="pre">\</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">${:}</span></code> - separator ścieżek. W Linuksie <code class="docutils literal notranslate"><span class="pre">:</span></code>, w Windowsie <code class="docutils literal notranslate"><span class="pre">;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">${\n}</span></code> - znak nowej linii. W Linuksie <code class="docutils literal notranslate"><span class="pre">\n</span></code>, w Windowsie <code class="docutils literal notranslate"><span class="pre">\r\n</span></code>.</p></li>
+</ul>
+</section>
+<section id="operacje-na-kolekcjach">
+<h3>Operacje na kolekcjach<a class="headerlink" href="#operacje-na-kolekcjach" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Wybrane operacje na kolekcjach:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Get</span> <span class="pre">Length</span></code> - zwraca liczbę elementów w kolekcji</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Append</span> <span class="pre">To</span> <span class="pre">List</span></code> - dodanie elementów do listy</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Remove</span> <span class="pre">From</span> <span class="pre">List</span></code> - usunięcie elementu o podanym indeksie z listy</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Remove</span> <span class="pre">From</span> <span class="pre">Dictionary</span></code> - usunięcie elementu o podanym kluczu ze słownika</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Sort</span> <span class="pre">List</span></code> - sortuje listę w miejscu</p></li>
+</ul>
+<p>Keyword’y, które mogą przerwać wykonywanie testu:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Length</span> <span class="pre">Should</span> <span class="pre">Be</span></code> - założenie co do liczby elementów</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Should</span> <span class="pre">Be</span> <span class="pre">Empty</span></code> - założenie co do pustej kolekcji</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Should</span> <span class="pre">Not</span> <span class="pre">Be</span> <span class="pre">Empty</span></code> - założenie co do niepustej kolekcji</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Should</span> <span class="pre">Contain</span></code> - założenie co do elementu znajdującego się w kolekcji</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Should</span> <span class="pre">Not</span> <span class="pre">Contain</span></code> - założenie co do braku elementu w kolekcji</p></li>
+</ul>
+<p>Większość omówionych operacji jest dostępna globalnie za pomocą biblioteki Builtin: <a class="reference external" href="http://robotframework.org/robotframework/3.1/libraries/BuiltIn.html">http://robotframework.org/robotframework/3.1/libraries/BuiltIn.html</a></p>
+<p>Część z wymienionych keyword’ów znajduje się w bibliotece Collecetions: <a class="reference external" href="http://robotframework.org/robotframework/3.1/libraries/Collections.html">http://robotframework.org/robotframework/3.1/libraries/Collections.html</a></p>
+</section>
+<section id="tworzenie-zmiennych-w-tescie">
+<h3>Tworzenie zmiennych w teście<a class="headerlink" href="#tworzenie-zmiennych-w-tescie" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Wybrane operacje:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">Variable</span></code> - tworzy zmienną w ciele testu lub keyword’u</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">List</span></code> - tworzy listę w ciele testu lub keyword’u</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">Dictionary</span></code> - tworzy słownik w ciele testu lub keyword’u</p></li>
+</ul>
+<p>Większość omówionych operacji jest dostępna globalnie za pomocą biblioteki Builtin: <a class="reference external" href="http://robotframework.org/robotframework/3.1/libraries/BuiltIn.html">http://robotframework.org/robotframework/3.1/libraries/BuiltIn.html</a></p>
+<p>Część z wymienionych keyword’ów znajduje się w bibliotece Collecetions: <a class="reference external" href="http://robotframework.org/robotframework/3.1/libraries/Collections.html">http://robotframework.org/robotframework/3.1/libraries/Collections.html</a></p>
+</section>
+<section id="id4">
+<h3>Zmienne<a class="headerlink" href="#id4" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Zmienne można tworzyć i modyfikować w teście lub keywordzie za pomocą odpowiednich keyword’ów.</p>
+<p>Plik <code class="docutils literal notranslate"><span class="pre">variables-inside-test-case.robot</span></code>:</p>
+<div class="highlight-robotframework notranslate"><div class="highlight"><pre><span></span><span class="gh">*** Test Case ***</span><span class="p"></span>
+<span class="gu">Variable In Keyword</span><span class="p"></span>
+<span class="p">    ${</span><span class="nv">new_name</span><span class="p">} =   </span><span class="nf">Set Variable</span><span class="p">    </span><span class="s">Janusz</span><span class="p"></span>
+<span class="p">    ${</span><span class="nv">new_list</span><span class="p">} =   </span><span class="nf">Create List</span><span class="p">    </span><span class="s">Janusz</span><span class="p"></span>
+<span class="p">    ...    </span><span class="s">Alicja</span><span class="p">    </span><span class="s">Natalia</span><span class="p"></span>
+<span class="p">    ${</span><span class="nv">new_dict</span><span class="p">} =   </span><span class="nf">Create Dictionary</span><span class="p"></span>
+<span class="p">    ...    </span><span class="s">name=Anna</span><span class="p">    </span><span class="s">lastname=Nowak</span><span class="p"></span>
+
+<span class="p">    </span><span class="nf">Length Should Be</span><span class="p">    ${</span><span class="nv">new_list</span><span class="p">}    </span><span class="s">3</span><span class="p"></span>
+
+<span class="p">    </span><span class="nf">Log</span><span class="p">    </span><span class="s">Variable new_name: </span><span class="p">${</span><span class="nv">new_name</span><span class="p">}</span>
+<span class="p">    </span><span class="nf">Log</span><span class="p">    </span><span class="s">Variable new_list: </span><span class="p">${</span><span class="nv">new_list</span><span class="p">}</span>
+<span class="p">    </span><span class="nf">Log</span><span class="p">    </span><span class="s">variable new_dict: </span><span class="p">${</span><span class="nv">new_dict</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="biblioteki">
+<h3>Biblioteki<a class="headerlink" href="#biblioteki" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Funkcje z bibliotek dostępne są po umieszczeniu w sekcji <strong>Settings</strong> odpowiedniego odniesienia do biblioteki.</p>
+<p>Plik <code class="docutils literal notranslate"><span class="pre">libraries.robot</span></code>:</p>
+<div class="highlight-robotframework notranslate"><div class="highlight"><pre><span></span><span class="gh">*** Settings ***</span><span class="p"></span>
+<span class="kn">Documentation</span><span class="p">    </span><span class="s">Variables example.</span><span class="p"></span>
+<span class="kn">Library</span><span class="p">    </span><span class="nn">Collections</span><span class="p"></span>
+
+<span class="gh">*** Test Case ***</span><span class="p"></span>
+<span class="gu">Variable With Library</span><span class="p"></span>
+<span class="p">    ${</span><span class="nv">names</span><span class="p">} =   </span><span class="nf">Create List</span><span class="p">    </span><span class="s">Janusz</span><span class="p"></span>
+<span class="p">    ...    </span><span class="s">Alicja</span><span class="p">    </span><span class="s">Natalia</span><span class="p"></span>
+<span class="p">    </span><span class="nf">Sort List</span><span class="p">    ${</span><span class="nv">names</span><span class="p">}</span>
+<span class="p">    </span><span class="nf">Log</span><span class="p">    </span><span class="s">Imiona: </span><span class="p">${</span><span class="nv">names</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Do Robot Frameworka dołączone są biblioteki dodające do języka nowe możliwości. Listę dostępnych bibliotek można znaleźć na stronie: <a class="reference external" href="http://robotframework.org/robotframework/">http://robotframework.org/robotframework/</a></p>
+</section>
+<section id="najczesciej-uzywane-keywordy">
+<h3>Najczęściej używane keyword’y<a class="headerlink" href="#najczesciej-uzywane-keywordy" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Wybrane Keyword’y:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Should</span> <span class="pre">Be</span> <span class="pre">True</span></code> - sprawdza, czy podany warunek jest prawdą,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Should</span> <span class="pre">Be</span> <span class="pre">Equal</span></code> - sprawdza, czy podane dwie wartości są równe,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Should</span> <span class="pre">Be</span> <span class="pre">Equal</span> <span class="pre">As</span> <span class="pre">Strings</span></code> - porównywanie zmiennych jako napisy,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Should</span> <span class="pre">Be</span> <span class="pre">Equal</span> <span class="pre">As</span> <span class="pre">Integers</span></code> - porównywanie zmiennych jako liczby całkowite,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Catenate</span></code> - łączy napisy,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Evaluate</span></code> - uruchamia podane wyrażenie w Pythonie,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">Keyword</span> <span class="pre">If</span></code> - wykonuje tylko jeśli warunek jest spełniony.</p></li>
+</ul>
+<p>Omówione operacje są dostępne globalnie za pomocą biblioteki Builtin: <a class="reference external" href="http://robotframework.org/robotframework/3.1/libraries/BuiltIn.html">http://robotframework.org/robotframework/3.1/libraries/BuiltIn.html</a></p>
+</section>
+<section id="tworzenie-keywordow">
+<h3>Tworzenie keywordów<a class="headerlink" href="#tworzenie-keywordow" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Podobnie jak nazwy testów keyword’y (funkcje) mogą zawierać w nazwie po jednej spacji. Nazwa taka jest wtedy traktowana jako całość.</p>
+<p>Plik <code class="docutils literal notranslate"><span class="pre">libraries.robot</span></code>:</p>
+<div class="highlight-robotframework notranslate"><div class="highlight"><pre><span></span><span class="gh">*** Settings ***</span><span class="p"></span>
+<span class="kn">Documentation</span><span class="p">    </span><span class="s">Variables example.</span><span class="p"></span>
+<span class="kn">Library</span><span class="p">    </span><span class="nn">Collections</span><span class="p"></span>
+
+<span class="gh">*** Test Case ***</span><span class="p"></span>
+<span class="gu">Variable With Library</span><span class="p"></span>
+<span class="p">    ${</span><span class="nv">names</span><span class="p">} =   </span><span class="nf">Create List</span><span class="p">    </span><span class="s">Janusz</span><span class="p"></span>
+<span class="p">    ...    </span><span class="s">Alicja</span><span class="p">    </span><span class="s">Natalia</span><span class="p"></span>
+<span class="p">    </span><span class="nf">Sort List</span><span class="p">    ${</span><span class="nv">names</span><span class="p">}</span>
+<span class="p">    </span><span class="nf">Log</span><span class="p">    </span><span class="s">Imiona: </span><span class="p">${</span><span class="nv">names</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Tworzenie keywordów odbywa się w sekcji <strong>Keywords</strong>. Argumenty wejściowe określa się za pomocą składni <strong>Arguments</strong>, wartość zwracaną z funkcji oznacza się składnią <strong>Return</strong>.</p>
+<p>Plik <code class="docutils literal notranslate"><span class="pre">own-keyword.robot</span></code>:</p>
+<div class="highlight-robotframework notranslate"><div class="highlight"><pre><span></span><span class="gh">*** Test Cases ***</span><span class="p"></span>
+<span class="gu">Sum two numbers</span><span class="p"></span>
+<span class="p">    ${</span><span class="nv">result</span><span class="p">} =    </span><span class="nf">My Own Sum Keyword</span><span class="p">    </span><span class="s">4</span><span class="p">    </span><span class="s">5</span><span class="p"></span>
+<span class="p">    </span><span class="nf">Should Be Equal As Integers</span><span class="p">    ${</span><span class="nv">result</span><span class="p">}    </span><span class="s">9</span><span class="p"></span>
+
+<span class="gh">*** Keywords ***</span><span class="p"></span>
+<span class="gu">My Own Sum Keyword</span><span class="p"></span>
+<span class="p">    [</span><span class="kn">Documentation</span><span class="p">]    </span><span class="s">Add two numbers.</span><span class="p"></span>
+<span class="p">    [</span><span class="kn">Arguments</span><span class="p">]    ${</span><span class="nv">a</span><span class="p">}    ${</span><span class="nv">b</span><span class="p">}</span>
+<span class="p">    ${</span><span class="nv">w</span><span class="p">} =    </span><span class="nf">Evaluate</span><span class="p">     ${</span><span class="nv">a</span><span class="p">}</span><span class="s"> + </span><span class="p">${</span><span class="nv">b</span><span class="p">}</span>
+<span class="p">    [</span><span class="kn">Return</span><span class="p">]    ${</span><span class="nv">w</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Keyword’y (funkcje) mogą być napisane w języku Python.</p>
+<p>W tym celu tworzymy funkcję w pliku <code class="docutils literal notranslate"><span class="pre">.py</span></code>, a sam plik importujemy w plikach z testem za pomocą słowa kluczowego <code class="docutils literal notranslate"><span class="pre">Library</span></code>.</p>
+<p>Plik <code class="docutils literal notranslate"><span class="pre">my_math.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Plik <code class="docutils literal notranslate"><span class="pre">own-library.robot</span></code>:</p>
+<div class="highlight-robotframework notranslate"><div class="highlight"><pre><span></span><span class="gh">*** Settings ***</span><span class="p"></span>
+<span class="kn">Library</span><span class="p">    </span><span class="nn">my_math.py</span><span class="p"></span>
+
+<span class="gh">*** Test Case ***</span><span class="p"></span>
+<span class="gu">Custom Library Test</span><span class="p"></span>
+<span class="p">    ${</span><span class="nv">sum</span><span class="p">} =   </span><span class="nf">My Sum</span><span class="p">    </span><span class="s">4</span><span class="p">    </span><span class="s">2</span><span class="p"></span>
+<span class="p">    </span><span class="nf">Log</span><span class="p">    </span><span class="s">Sum: </span><span class="p">${</span><span class="nv">sum</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Spacje w nazwie keywordu są tłumaczone na znaki podłogi (<code class="docutils literal notranslate"><span class="pre">_</span></code>) w nazwie funkcji.</p>
+<p>Argumenty przekazywane są jako napisy, dlatego należy jawnie zamienić je na liczby (lub inny typ danych, zależnie od potrzeb).</p>
+</section>
+<section id="podzial-na-pliki">
+<h3>Podział na pliki<a class="headerlink" href="#podzial-na-pliki" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Istnieje możliwość podzielenia plików z testami na mniejsze pliki, w których będą umieszczone sekcje <strong>Settings</strong>, <strong>Keywords</strong>, <strong>Variables</strong>. Pliki złożone z tych sekcji, używane przez pliki z testami, nazywamy zasobami (Resources).</p>
+<p>Plik <code class="docutils literal notranslate"><span class="pre">keyword-in-resource-file.robot</span></code>:</p>
+<div class="highlight-robotframework notranslate"><div class="highlight"><pre><span></span><span class="gh">*** Settings ***</span><span class="p"></span>
+<span class="kn">Resource</span><span class="p">    </span><span class="nn">own_keywords.resource</span><span class="p"></span>
+
+<span class="gh">*** Test Cases ***</span><span class="p"></span>
+<span class="gu">Sum two numbers</span><span class="p"></span>
+<span class="p">    ${</span><span class="nv">result</span><span class="p">} =    </span><span class="nf">My Own Sum Keyword</span><span class="p">    </span><span class="s">4</span><span class="p">    </span><span class="s">5</span><span class="p"></span>
+<span class="p">    </span><span class="nf">Should Be Equal As Integers</span><span class="p">    ${</span><span class="nv">result</span><span class="p">}    </span><span class="s">9</span><span class="p"></span>
+</pre></div>
+</div>
+<p>Plik <code class="docutils literal notranslate"><span class="pre">own_keywords.resource</span></code>:</p>
+<div class="highlight-robotframework notranslate"><div class="highlight"><pre><span></span><span class="gh">*** Keywords ***</span><span class="p"></span>
+<span class="gu">Suma</span><span class="p"></span>
+<span class="p">    [</span><span class="kn">Documentation</span><span class="p">]    </span><span class="s">Add two numbers</span><span class="p"></span>
+<span class="p">    [</span><span class="kn">Arguments</span><span class="p">]    ${</span><span class="nv">a</span><span class="p">}    ${</span><span class="nv">b</span><span class="p">}</span>
+<span class="p">    ${</span><span class="nv">w</span><span class="p">} =    </span><span class="nf">Evaluate</span><span class="p">     ${</span><span class="nv">a</span><span class="p">}</span><span class="s"> + </span><span class="p">${</span><span class="nv">b</span><span class="p">}</span>
+<span class="p">    [</span><span class="kn">Return</span><span class="p">]    ${</span><span class="nv">w</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Robot Framework, <a class="reference external" href="https://robotframework.org">https://robotframework.org</a></p></li>
+<li><p>Robot Framework User Guide, <a class="reference external" href="http://robotframework.org/robotframework/3.1.1/RobotFrameworkUserGuide.html">http://robotframework.org/robotframework/3.1.1/RobotFrameworkUserGuide.html</a></p></li>
+<li><p>Adam Roman, Testowanie i jakość oprogramowania. Metody, narzędzia, techniki, 2015, <a class="reference external" href="https://ksiegarnia.pwn.pl/Testowanie-i-jakosc-oprogramowania.-Modele-techniki-narzedzia.,732463348,p.html">https://ksiegarnia.pwn.pl/Testowanie-i-jakosc-oprogramowania.-Modele-techniki-narzedzia.,732463348,p.html</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

@@ -1,0 +1,384 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Formatowanie napisów - %-formatting, str.format(), f-strings | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../../index.html">
+                <img src="../../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="formatowanie-napisow-formatting-str-format-f-strings">
+<h1>Formatowanie napisów - %-formatting, str.format(), f-strings<a class="headerlink" href="#formatowanie-napisow-formatting-str-format-f-strings" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+
+<div id="pdfobject-0" class="pdfobject-container"></div>
+<script>PDFObject.embed("/_static/files/artykuly/python/python-tutorial/Formatowanie-napisow.pdf", "#pdfobject-0");</script>
+<section id="formatowanie-napisow">
+<h2>Formatowanie napisów<a class="headerlink" href="#formatowanie-napisow" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Formatowanie napisu to operacja przekształcenia napisu wzorcowego, opisującego umiejscowienie i sposób prezentacji danych, w nowy napis złożony z podstawionych w odpowiednie miejsca konkretnych danych o określonym wyglądzie.</p>
+<p>W Pythonie najpopularniejszymi metodami formatowania napisów są:</p>
+<ul class="simple">
+<li><p>%-formatting (printf-style String Formatting, stary styl),</p></li>
+<li><p>str.format() (nowy styl),</p></li>
+<li><p>f-strings (formatted strings, od Pythona 3.6).</p></li>
+</ul>
+</section>
+<section id="formatting">
+<h2>%-formatting<a class="headerlink" href="#formatting" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Do formatownia napisów można wykorzystać operator <code class="docutils literal notranslate"><span class="pre">%</span></code> (modulo). Po jego lewej stronie znajduje się wzorzec, a po prawej dane. W wyniku operacji modulo otrzymamy nowy napis.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">liczba_kotow</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">nowy_napis</span> <span class="o">=</span> <span class="s1">&#39;Ala ma </span><span class="si">%d</span><span class="s1"> kotow&#39;</span> <span class="o">%</span> <span class="n">liczba_kotow</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">nowy_napis</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Każdy fragment pod który zostaną podstawione dane (specyfikator konwersji) musi składać się z co najmniej dwóch znaków, z których pierwszy to <code class="docutils literal notranslate"><span class="pre">%</span></code>, a drugi to identyfikator typu informujący o typie danych do podstawienia (typ konwersji).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">liczba_kotow</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">liczba_psow</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">nowy_napis</span> <span class="o">=</span> <span class="s1">&#39;Ala ma </span><span class="si">%d</span><span class="s1"> kotow i </span><span class="si">%d</span><span class="s1"> psow&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">liczba_kotow</span><span class="p">,</span> <span class="n">liczba_psow</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">nowy_napis</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Pełny opis składowych specyfikatora konwersji:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Znak „%”, który określa początek definicji.</p></li>
+<li><p>Nazwa klucza odwzorowania (opcjonalnie), zawarta w nawiasach okrągłych (n.p.. (nazwa)).</p></li>
+<li><p>Flaga konwersji (opcjonalnie), które mają wpływ na niektóre typy danych biorące udział w konwersji.</p></li>
+<li><p>Minimalna szerokość pola (opcjonalnie). Jeśli zdefiniowana jako „*” (gwiazdka) wartość pola jest odczytywana z następnego pola w tabeli wartości a obiekt do konwersji następuje po minimalnej szerokości i ew. precyzji.</p></li>
+<li><p>Precyzja (opcjonalnie), podana jako „.” (kropka) po której następuje wartość precyzji. Jeśli zdefiniowana jako „*” (gwiazdka) wartość pola jest odczytywana z następnego pola w tabeli wartości a obiekt do konwersji następuje po precyzji.</p></li>
+<li><p>Modyfikator długości (opcjonalnie).</p></li>
+<li><p>Typ do konwersji. <a class="footnote-reference brackets" href="#typesseq-strings" id="id1">1</a></p></li>
+</ol>
+</div></blockquote>
+<dl class="footnote brackets">
+<dt class="label" id="typesseq-strings"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>źródło: <a class="reference external" href="https://pl.python.org/docs/lib/typesseq-strings.html">https://pl.python.org/docs/lib/typesseq-strings.html</a></p>
+</dd>
+</dl>
+<p>Wybrane flagi konwersji:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 81%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>wypełnienie zerami</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>wyrównanie do lewej</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">+</span></code></p></td>
+<td><p>poprzedzający znak + lub -</p></td>
+</tr>
+</tbody>
+</table>
+<p>Wybrane identyfikatory typu do konwersji (ostatni znak w specyfikatorze konwersji):</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 88%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">d</span></code></p></td>
+<td><p>liczba całkowita</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">f</span></code></p></td>
+<td><p>liczba zmiennoprzecinkowa</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+<td><p>pojedynczy znak</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td><p>napis (zamienia dowolny obiekt Pythona na napis)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Bazując na opisie składowych specyfikatora konwersji (punkty 1, 5 i 7), prezentowany przykład wypisuje na ekranie liczbę zmiennoprzecinkową z dokładnością do trzech miejsc po przecinku.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pi</span> <span class="o">=</span> <span class="mf">3.141592653589793</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">pi</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Więcej informacji na temat tego sposobu formatowania napisów znajduje się_w_dokumentacji: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting">https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(lang)s</span><span class="s1"> has </span><span class="si">%(number)03d</span><span class="s1"> quote types.&#39;</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;lang&#39;</span><span class="p">:</span> <span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="s2">&quot;number&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+</pre></div>
+</div>
+</section>
+<section id="str-format">
+<h2>str.format()<a class="headerlink" href="#str-format" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Użycie nowego stylu formatowania napisów wymaga wywołania funkcji <code class="docutils literal notranslate"><span class="pre">format()</span></code> na wzorcu. Wzorzec powinien składać się z pól do zastąpienia (replacement fields) otoczonych klamrami.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">liczba_kotow</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">nowy_napis</span> <span class="o">=</span> <span class="s1">&#39;Ala ma </span><span class="si">{}</span><span class="s1"> kotow&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">liczba_kotow</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">nowy_napis</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Pola do zastąpienia mogą odnosić się do nazwanych parametrów funkcji <code class="docutils literal notranslate"><span class="pre">format()</span></code>, jednak jest to opcjonalne.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">liczba_kotow</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">nowy_napis</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{kto}</span><span class="s1"> ma </span><span class="si">{ile}</span><span class="s1"> kotow&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                 <span class="n">ile</span><span class="o">=</span><span class="n">liczba_kotow</span><span class="p">,</span>
+                                 <span class="n">kto</span><span class="o">=</span><span class="s2">&quot;Ala&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">nowy_napis</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Podobnie jak w przypadku formatowania napisów z użyciem operatora modulo (<code class="docutils literal notranslate"><span class="pre">%</span></code>), można podać specyfikator konwersji (<em>standard format specifier</em>), należy to jednak zrobić po dwukropku.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">liczba_kotow</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">nowy_napis</span> <span class="o">=</span> <span class="s1">&#39;Ala ma </span><span class="si">{:02d}</span><span class="s1"> kotow&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                    <span class="n">liczba_kotow</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">nowy_napis</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Pełny opis składowych specyfikatora konwersji (<em>standard format specifier</em>) <a class="footnote-reference brackets" href="#format-specification-mini-language" id="id2">2</a>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>format_spec     ::=  [[fill]align][sign][#][0][width][grouping_option][.precision][type]
+fill            ::=  &lt;any character&gt;
+align           ::=  &quot;&lt;&quot; | &quot;&gt;&quot; | &quot;=&quot; | &quot;^&quot;
+sign            ::=  &quot;+&quot; | &quot;-&quot; | &quot; &quot;
+width           ::=  digit+
+grouping_option ::=  &quot;_&quot; | &quot;,&quot;
+precision       ::=  digit+
+type            ::=  &quot;b&quot; | &quot;c&quot; | &quot;d&quot; | &quot;e&quot; | &quot;E&quot; | &quot;f&quot; | &quot;F&quot; | &quot;g&quot; | &quot;G&quot; | &quot;n&quot; | &quot;o&quot; | &quot;s&quot; | &quot;x&quot; | &quot;X&quot; | &quot;%&quot;
+</pre></div>
+</div>
+<dl class="footnote brackets">
+<dt class="label" id="format-specification-mini-language"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>źródło: <a class="reference external" href="https://docs.python.org/3/library/string.html#format-specification-mini-language">https://docs.python.org/3/library/string.html#format-specification-mini-language</a></p>
+</dd>
+</dl>
+<p>Znaczenie opcji align:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code> - wyrównanie do lewej,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code> - wyrównanie do prawej,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">=</span></code> - ważne tylko dla liczb, wymusza wypełnienie po znaku, aż do początku liczby (wyświetlanie liczb w postaci <code class="docutils literal notranslate"><span class="pre">+000000120</span></code>),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">^</span></code> - wyśrodkowanie.</p></li>
+</ul>
+<p>Znaczenie opcji sign:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">+</span></code> (plus) - liczby dodatnie otrzymują znak plus, ujemne znak minus przed cyframi</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-</span></code> (minus) - liczby dodatnie nie otrzymują znaku plus, ujemne otrzymują znak minus przed cyframi,</p></li>
+<li><p>spacja - liczby dodatnie poprzedza spacja, ujemne otrzymują znak minus przed cyframi</p></li>
+</ul>
+<p>Znaczenie opcji <code class="docutils literal notranslate"><span class="pre">#</span></code>: alternatywny sposób prezentowania liczb (np. liczby szesnastkowe otrzymają przedrostek <code class="docutils literal notranslate"><span class="pre">0x</span></code>).</p>
+<p>Znaczenie opcji <code class="docutils literal notranslate"><span class="pre">0</span></code>: wypełnienie pola zerami.</p>
+<p>Znaczenie opcji <code class="docutils literal notranslate"><span class="pre">width</span></code>: szerokość pola.</p>
+<p>Znaczenie opcji <code class="docutils literal notranslate"><span class="pre">grouping_option</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">,</span></code> (przecinek) - użycie przecinka jako separatora dla tysięcy.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_</span></code> (podkreślnik/podłoga) - użycie podłogi jako separatora dla tysięcy.</p></li>
+</ul>
+<p>Znaczenie opcji <code class="docutils literal notranslate"><span class="pre">.precission</span></code>:</p>
+<ul class="simple">
+<li><p>dla liczb zmiennoprzecinkowych określa ile liczb po przecinku powinno zostać umieszczonych.</p></li>
+<li><p>dla wartości nieliczbowych określa maksymalną długość pola.</p></li>
+</ul>
+<p>Wybrane identyfikatory typu prezentacji (pole <code class="docutils literal notranslate"><span class="pre">type</span></code>):</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 88%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">d</span></code></p></td>
+<td><p>liczba całkowita</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">f</span></code></p></td>
+<td><p>liczba zmiennoprzecinkowa</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c</span></code></p></td>
+<td><p>pojedynczy znak</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">s</span></code></p></td>
+<td><p>napis (zamienia dowolny obiekt Pythona na napis)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="f-strings">
+<h2>f-strings<a class="headerlink" href="#f-strings" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>W Pythonie 3.6 wprowadzono nowy mechanizm nazwany f-strings. Jest to bardzo podobny sposób zapisu do <em>str.format()</em>, lecz dużo bardziej zwięzły.</p>
+<p>F-string wygląda następująco:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>f &#39;&lt;text&gt; { &lt;expression&gt; &lt;optional !s, !r, or !a&gt; &lt;optional : format specifier&gt; } &lt;text&gt;&#39;
+</pre></div>
+</div>
+<p>Opcja <code class="docutils literal notranslate"><span class="pre">expression</span></code> to wyrażenie, które ma zostać umieszczone.</p>
+<p>Opcja <code class="docutils literal notranslate"><span class="pre">!s</span></code>, <code class="docutils literal notranslate"><span class="pre">!r</span></code>, <code class="docutils literal notranslate"><span class="pre">!a</span></code> wymusza sposób konwersji przekazanego parametru (<code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">repr</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii</span></code>).</p>
+<p>Opcja <code class="docutils literal notranslate"><span class="pre">format</span> <span class="pre">specifier</span></code> definiuje sposób prezentacji danych, jej składnia jest dokładnie taka sama, jak składnia znanego już specyfikatora konwersji z <em>str.format()</em>.</p>
+<p>Wprowadzenie f-stringów zmniejszyło ilość potrzebnego kodu do sformatowania napisu.</p>
+<p>Przed wzorcem pojawiła się litera <code class="docutils literal notranslate"><span class="pre">f</span></code>, to informacja, że dany napis jest f-napisem i ma zostać sformatowany.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">liczba_kotow</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">nowy_napis</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Ala ma </span><span class="si">{</span><span class="n">liczba_kotow</span><span class="si">}</span><span class="s1"> kotow&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">nowy_napis</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Część związana ze specyfikatorem konwersji jest dokładnie taka sama, jak w przypadku <em>str.format()</em>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lang</span> <span class="o">=</span> <span class="s1">&#39;Python&#39;</span>
+<span class="n">number</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">nowy</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">lang</span><span class="si">}</span><span class="s1">s has </span><span class="si">{</span><span class="n">number</span><span class="si">:</span><span class="s1">03d</span><span class="si">}</span><span class="s1"> quote types.&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">nowy</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Ważną zmianą w porównaniu do <em>str.format()</em> jest możliwość umieszczenia wyrażenia w formatowanym napisie.</p>
+<p>Oznacza to możliwość wywołania dowolnej funkcji wewnątrz wzorca.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Ala ma kota&#39;</span>
+
+<span class="n">nowy</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Napis </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s1"> ma </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="si">}</span><span class="s1"> znakow.&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">nowy</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Warto również zauważyć, że f-strings pozwala na wielokrotne użycie tej samej zmiennej we wzorcu.</p>
+<p>Tej funkcjonalności nie oferują pozostałe metody formatowania napisów.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s1">&#39;Ala ma kota&#39;</span>
+
+<span class="n">nowy</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Napis </span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s1"> ma </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="si">}</span><span class="s1"> znakow.&#39;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">nowy</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#printf-style-string-formatting">printf-style String Formatting</a></p></li>
+<li><p><a class="reference external" href="https://pl.python.org/docs/lib/typesseq-strings.html">Operacje formatujące napisy</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/string.html#format-string-syntax">Format String Syntax</a></p></li>
+<li><p><a class="reference external" href="https://www.python.org/dev/peps/pep-0498/">PEP 498 – Literal String Interpolation</a></p></li>
+<li><p><a class="reference external" href="https://realpython.com/python-f-strings/">Python 3’s f-Strings: An Improved String Formatting Syntax (Guide)</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

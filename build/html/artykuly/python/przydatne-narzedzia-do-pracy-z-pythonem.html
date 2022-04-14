@@ -1,0 +1,261 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Przydatne narzędzia do pracy z Pythonem | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="przydatne-narzedzia-do-pracy-z-pythonem">
+<h1>Przydatne narzędzia do pracy z Pythonem<a class="headerlink" href="#przydatne-narzedzia-do-pracy-z-pythonem" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<div class="contents local topic" id="spis-tresci">
+<p class="topic-title">Spis treści</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#pyenv" id="id1">pyenv</a></p></li>
+<li><p><a class="reference internal" href="#virtualenv" id="id2">virtualenv</a></p></li>
+<li><p><a class="reference internal" href="#venv" id="id3">venv</a></p></li>
+<li><p><a class="reference internal" href="#pycodestyle-dawniej-pep8" id="id4">pycodestyle (dawniej pep8)</a></p></li>
+<li><p><a class="reference internal" href="#flake8" id="id5">flake8</a></p></li>
+<li><p><a class="reference internal" href="#pylint" id="id6">pylint</a></p></li>
+<li><p><a class="reference internal" href="#black" id="id7">black</a></p></li>
+</ul>
+</div>
+<section id="pyenv">
+<h2>pyenv<a class="headerlink" href="#pyenv" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Zarządzanie różnymi wersjami Pythona.</p>
+<blockquote>
+<div><p>pyenv lets you easily switch between multiple versions of Python. It’s simple, unobtrusive, and follows the UNIX tradition of single-purpose tools that do one thing well.</p>
+</div></blockquote>
+<p>Strona domowa: <a class="reference external" href="https://github.com/pyenv/pyenv">https://github.com/pyenv/pyenv</a></p>
+<section id="pyenv-installer">
+<h3>pyenv installer<a class="headerlink" href="#pyenv-installer" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Narzędzie do instalacji pyenv.</p>
+<blockquote>
+<div><p>This tool installs pyenv and friends. It is inspired by rbenv-installer.</p>
+</div></blockquote>
+<p>Strona domowa: <a class="reference external" href="https://github.com/pyenv/pyenv-installer">https://github.com/pyenv/pyenv-installer</a></p>
+</section>
+<section id="krotka-instrukcja-instalacji">
+<h3>Krótka instrukcja instalacji<a class="headerlink" href="#krotka-instrukcja-instalacji" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Pobieranie pyenv (z użyciem pyenv installer):</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Linie w <cite>~/.bashrc</cite> potrzebne do działania pyenv:</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>export PATH=&quot;$HOME/.pyenv/bin:$PATH&quot;
+eval &quot;$(pyenv virtualenv-init -)&quot;
+eval &quot;$(pyenv init -)&quot;
+eval &quot;$(pyenv init --path)&quot;
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Instalacja zależności potrzebnych do zbudowania CPythona: <a class="reference external" href="https://github.com/pyenv/pyenv/wiki#suggested-build-environment">https://github.com/pyenv/pyenv/wiki#suggested-build-environment</a></p></li>
+</ol>
+</section>
+</section>
+<section id="virtualenv">
+<h2>virtualenv<a class="headerlink" href="#virtualenv" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Narzędzie dla Pythona 2 i Pythona 3 do tworzenia wirtualnego środowiska.</p>
+<blockquote>
+<div><p>A tool for creating isolated virtual python environments.</p>
+</div></blockquote>
+<p>PyPi: <a class="reference external" href="https://pypi.org/project/virtualenv/">https://pypi.org/project/virtualenv/</a></p>
+<p>GitHub: <a class="reference external" href="https://github.com/pypa/virtualenv">https://github.com/pypa/virtualenv</a></p>
+<p>Dokumentacja: <a class="reference external" href="https://virtualenv.pypa.io/en/latest/">https://virtualenv.pypa.io/en/latest/</a></p>
+<p>Wskazówki użycia: <a class="reference external" href="/artykuly/python/python-virtualenv.html">Python - virtualenv</a></p>
+</section>
+<section id="venv">
+<h2>venv<a class="headerlink" href="#venv" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Narzędzie dostarczane z Pythonem od wersji 3.3 do tworzenia wirtualnego środowiska.</p>
+<blockquote>
+<div><p>The venv module provides support for creating lightweight “virtual environments” with their own site directories, optionally isolated from system site directories. Each virtual environment has its own Python binary (which matches the version of the binary that was used to create this environment) and can have its own independent set of installed Python packages in its site directories.</p>
+</div></blockquote>
+<p>Dokumentacja: <a class="reference external" href="https://docs.python.org/3/library/venv.html">https://docs.python.org/3/library/venv.html</a></p>
+<p>Wskazówki użycia: <a class="reference external" href="/artykuly/python/python3-venv.html">Python 3 - venv</a>, <a class="reference external" href="/artykuly/python/python-tutorial/wirtualne-srodowisko-pypi-venv.html">Wirtualne środowisko - PyPI, venv</a></p>
+</section>
+<section id="pycodestyle-dawniej-pep8">
+<h2>pycodestyle (dawniej pep8)<a class="headerlink" href="#pycodestyle-dawniej-pep8" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Sprawdzanie stylu kodu.</p>
+<blockquote>
+<div><p>pycodestyle is a tool to check your Python code against some of the style conventions in PEP 8.</p>
+</div></blockquote>
+<p>PyPi: <a class="reference external" href="https://pypi.org/project/pycodestyle/">https://pypi.org/project/pycodestyle/</a></p>
+<p>GitHub: <a class="reference external" href="https://github.com/PyCQA/pycodestyle">https://github.com/PyCQA/pycodestyle</a></p>
+<p>Dokumentacja: <a class="reference external" href="https://pycodestyle.pycqa.org/en/stable/">https://pycodestyle.pycqa.org/en/stable/</a></p>
+</section>
+<section id="flake8">
+<h2>flake8<a class="headerlink" href="#flake8" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Do sprawdzania stylu kodu i wyłapywania niektórych błędów.</p>
+<blockquote>
+<div><p>Flake8 is a wrapper around these tools:</p>
+<ul class="simple">
+<li><p>PyFlakes</p></li>
+<li><p>pycodestyle</p></li>
+<li><p>Ned Batchelder’s McCabe script</p></li>
+</ul>
+</div></blockquote>
+<p>PyPi: <a class="reference external" href="https://pypi.org/project/flake8/">https://pypi.org/project/flake8/</a></p>
+<p>GitHub: <a class="reference external" href="https://github.com/pycqa/flake8">https://github.com/pycqa/flake8</a></p>
+<p>Dokumentacja: <a class="reference external" href="https://flake8.pycqa.org/en/stable/">https://flake8.pycqa.org/en/stable/</a></p>
+</section>
+<section id="pylint">
+<h2>pylint<a class="headerlink" href="#pylint" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Do sprawdzania stylu kodu i wyłapywania niektórych błędów.</p>
+<blockquote>
+<div><p>Pylint is a Python static code analysis tool which looks for programming errors, helps enforcing a coding standard, sniffs for code smells and offers simple refactoring suggestions.</p>
+</div></blockquote>
+<p>PyPi: <a class="reference external" href="https://pypi.org/project/pylint/">https://pypi.org/project/pylint/</a></p>
+<p>GitHub: <a class="reference external" href="https://github.com/PyCQA/pylint">https://github.com/PyCQA/pylint</a></p>
+<p>Dokumentacja: <a class="reference external" href="https://pylint.pycqa.org/en/stable/">https://pylint.pycqa.org/en/stable/</a></p>
+</section>
+<section id="black">
+<h2>black<a class="headerlink" href="#black" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Formatowanie kodu.</p>
+<p>PyPi: <a class="reference external" href="https://pypi.org/project/black/">https://pypi.org/project/black/</a></p>
+<p>GitHub: <a class="reference external" href="https://github.com/psf/black">https://github.com/psf/black</a></p>
+<p>Dokumentacja: <a class="reference external" href="https://black.readthedocs.io/en/stable/">https://black.readthedocs.io/en/stable/</a></p>
+<p>Przydatne opcje:</p>
+<ul>
+<li><p><cite>-l &lt;num&gt;</cite> - How many characters per line to allow.</p></li>
+<li><p><cite>–experimental-string-processing</cite> (<a class="reference external" href="https://github.com/psf/black/issues/2188">will be enabled by default in the future</a>) - Black splits long strings (using parentheses where appropriate) and merges short ones. When split, parts of f-strings that don’t need formatting are converted to plain strings. User-made splits are respected when they do not exceed the line length limit. Line continuation backslashes are converted into parenthesized strings. Unnecessary parentheses are stripped. Because the functionality is experimental, feedback and issue reports are highly encouraged! (<a class="reference external" href="https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#strings">opis funkcjonalności</a>)</p>
+<blockquote>
+<div><p>Black is the uncompromising Python code formatter.</p>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

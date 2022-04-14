@@ -1,0 +1,771 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>GDB - Tutorial | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="gdb-tutorial">
+<h1>GDB - Tutorial<a class="headerlink" href="#gdb-tutorial" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Informacja</p>
+<p>Wszystkie prezentowane w artykule kody źródłowe dostępne są w repozytorium GitHub: <a class="reference external" href="https://github.com/chyla/GdbTutorial">https://github.com/chyla/GdbTutorial</a></p>
+</div>
+<section id="spis-tresci">
+<h2>Spis treści<a class="headerlink" href="#spis-tresci" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Wstęp</p></li>
+<li><p>Przygotowanie oprogramowania do pracy z GDB</p>
+<ul class="simple">
+<li><p>kompilacja programu z dodatkowymi symbolami</p></li>
+<li><p>osobny plik z symbolami</p></li>
+</ul>
+</li>
+<li><p>Uruchomienie aplikacji pod nadzorem GDB</p>
+<ul class="simple">
+<li><p>uruchomienie z dodatkowymi symbolami</p></li>
+<li><p>uruchomienie ze zrzutem pamięci</p></li>
+<li><p>podłączenie do procesu</p></li>
+</ul>
+</li>
+<li><p>Debugowanie aplikacji</p>
+<ul class="simple">
+<li><p>ustawienie pułapek</p></li>
+<li><p>punkt obserwacji (obserwacja zmiennych)</p></li>
+<li><p>usuwanie pułapek i punktów obserwacji</p></li>
+<li><p>polecenia nawigacji</p></li>
+<li><p>ustawienie oraz wyświetlenie zmiennych</p></li>
+<li><p>obsługa wielowątkowości</p></li>
+</ul>
+</li>
+<li><p>Tekstowy interfejs użytkownika</p></li>
+</ol>
+</section>
+<section id="wstep">
+<h2>Wstęp<a class="headerlink" href="#wstep" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>GDB (GNU Project Debugger) to najpopularniejsze narzędzie odpluskwiania (ang. debugging) w środowisku uniksowym. Pozwala monitorować wykonywany program oraz analizować przyczyny jego awarii. [1]</p>
+<p>Omawiany debugger nie posiada graficznego interfejsu użytkownika, a jego obsługa sprowadza się do wykonywania odpowiednich poleceń w konsoli. Wiele środowisk programistycznych (np. <a class="reference external" href="http://www.codeblocks.org/">Code::Blocks</a>, <a class="reference external" href="https://codelite.org/">CodeLite</a>) integruje możliwości GDB, istnieją także niezależne projekty dostarczające graficzny interfejs użytkownika (np. <a class="reference external" href="https://www.gnu.org/software/ddd/">GNU DDD</a>).</p>
+<p>Wspierane są następujące języki programowania: C, C++, D, Go, Objective-C, Fortran, OpenCL C, Pascal, Rust, assembly, Modula-2 i Ada [2]. W wersji 8 i nowszych zrezygnowano z obsługi aplikacji Java kompilowanych z użyciem GNU Compiler for the Java Programming Language (GCJ) [3] – wiąże się to z faktem usunięcia GCJ z GNU Compiler Collection (GCC) 7 [4].</p>
+</section>
+<section id="przygotowanie-oprogramowania-do-pracy-z-gdb">
+<h2>Przygotowanie oprogramowania do pracy z GDB<a class="headerlink" href="#przygotowanie-oprogramowania-do-pracy-z-gdb" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Podczas kompilacji aplikacji mogą zostać wygenerowane symbole, czyli dodatkowe informacje przeznaczone dla debuggera. Mogą to być między innymi dane na temat zmiennych, funkcji, odpowiednich numerów linii w pliku źródłowym, czy użytym języku programowania [5,6]. Na ich podstawie debugger pozwala odwoływać się do poszczególnych elementów programu w przystępny sposób. Symbole mogą zostać umieszczone razem z programem w jednym pliku wykonywalnym lub w osobnym pliku symboli [5].</p>
+<p>GDB obsługuje symbole w formacie STABS/STAB oraz DWARF, potrafi również odczytać tablicę symboli w plikach ELF oraz COFF, XCOFF, ECOFF [7]. W przeciwieństwie do formatu ELF, tablica symboli COFF jest dużo bardziej szczegółowa [8,9] i może zawierać więcej elementów przydatnych podczas odpluskwiania.</p>
+<p>Bardzo często, by dołączyć odpowiednie symbole debugowania, wystarczy użyć przełącznika <cite>-g</cite> podawanego kompilatorowi. Tak jest między innymi w GCC [10], clang [11] oraz we Free Pascal [12]. Niektóre kompilatory pozwalają umieścić symbole debugowania w osobnym pliku (np. Free Pascal [12]), w innym przypadku należy samodzielnie wygenerować taki plik poprzez wyodrębnienie symboli odpluskwiania z pliku całościowego. Poniżej zaprezentowano przykład takiej operacji z użyciem narzędzia <cite>objcopy</cite> [13]:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ g++ -g example.cpp -o example.out
+$ objcopy --only-keep-debug example.out example.debug
+$ strip -g example.out
+$ objcopy --add-gnu-debuglink=example.debug example.out
+</pre></div>
+</div>
+<p>W pierwszej linii powyższego wydruku wykonujemy kompilację z użyciem przełącznika <cite>-g</cite>, co spowoduje utworzenie pliku wykonywalnego wraz z dodatkowymi symbolami. W drugiej linii dodatkowe symbole są kopiowane do osobnego pliku, a w trzeciej usuwane z pliku całościowego. Ostatnim krokiem jest umieszczenie informacji o dodatkowym pliku z symbolami w pliku wykonywalnym – ta informacja zostanie wykorzystana przez GDB do znalezienia dodatkowych symboli.</p>
+</section>
+<section id="uruchomienie-aplikacji-pod-nadzorem-gdb">
+<h2>Uruchomienie aplikacji pod nadzorem GDB<a class="headerlink" href="#uruchomienie-aplikacji-pod-nadzorem-gdb" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Uruchomienie aplikacji z odpluskwiaczem sprowadza się do wykonania odpowiedniego polecenia w konsoli:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb ./example.out
+Reading symbols from ./example.out...done.
+(gdb) run
+</pre></div>
+</div>
+<p>W pierwszej linii widzimy polecenie uruchamiające <cite>gdb</cite> ze ścieżką do interesującego nas pliku wykonywalnego. Po jego wykonaniu symbole zostaną załadowane automatycznie. Druga linia — polecenie <cite>run</cite> w interaktywnym trybie debuggera — odpowiada za uruchomienie wskazanej aplikacji.</p>
+<p>Polecenie run może także przyjmować argumenty, które zostaną przekazane do programu. W poniższym przykładzie zaprezentowano przekazanie trzech parametrów – «arg1», 3 oraz 2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb ./example.out
+Reading symbols from ./example.out...done.
+(gdb) run &#39;arg1&#39; 3 2
+</pre></div>
+</div>
+<p>GDB możemy również uruchomić bez argumentów, a plik wykonywalny zdefiniować w trybie interaktywnym za pomocą polecenia <cite>file</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb
+(gdb) file ./example.out
+Reading symbols from ./example.out...done.
+(gdb) run
+</pre></div>
+</div>
+<p>Gdyby automatyczne załadowanie symboli nie powiodło się, możemy ręcznie podać ścieżkę do pliku, z którego mają zostać załadowane. Służy do tego polecenie <cite>symbol-file</cite> w trybie interaktywnym:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb
+(gdb) file example.out
+Reading symbols from example.out...(no debugging symbols found)...done.
+(gdb) symbol-file example.debug
+Reading symbols from example.debug...done.
+(gdb) run
+</pre></div>
+</div>
+<p>Do analizy programu możemy wykorzystać plik zrzutu pamięci (zachęcam do zapoznania się z <a class="reference external" href="/blog/Linux_-_Core_dump/">artykułem na temat core dump</a>). Informację na jego temat przekazujemy podczas uruchamiania GDB:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb ./example.out example.core-dump
+</pre></div>
+</div>
+<p>W trybie interaktywnym służy do tego polecenie <cite>core-file</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb ./example.out
+(gdb) core-file example.core-dump
+</pre></div>
+</div>
+<p>GDB może zostać użyty do analizy działającego procesu. Identyfikator interesującego nas procesu (PID) podajemy w linii poleceń. Przykład dla procesu o numerze <em>1593</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb ./example.out 1593
+</pre></div>
+</div>
+<p>Podłączenie do procesu może się także odbyć w trybie interaktywnym za pomocą polecenia <cite>attach</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb ./example.out
+(gdb) attach 1593
+</pre></div>
+</div>
+<p>Zamknięcie GDB następuje po wykonaniu polecenia <cite>quit</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb ./example.out
+(gdb) quit
+</pre></div>
+</div>
+<p>Wszystkie omówione opcje zostały przedstawione w oficjalnej dokumentacji [14,15,16].</p>
+</section>
+<section id="debugowanie-aplikacji">
+<h2>Debugowanie aplikacji<a class="headerlink" href="#debugowanie-aplikacji" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Poniżej przedstawiam kilka, moim zdaniem, najważniejszych poleceń przydatnych podczas analizy. Przykładową aplikację treningową możesz znaleźć <a class="reference external" href="https://github.com/chyla/GdbTutorial">w repozytorium GitHub</a>.</p>
+<section id="pulapki">
+<h3>Pułapki<a class="headerlink" href="#pulapki" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Pułapki (ang. breakpoint) wskazują miejsce, w którym działanie programu zostanie wstrzymane. Do ich ustawienia służy polecenie <cite>break</cite>, które jako argument przyjmuje lokalizację – nazwę funkcji, względny/bezwzględny numer linii lub adres instrukcji [17].</p>
+<p>Poniżej przykład ustawienia pułapki z użyciem nazwy funkcji:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb break.out
+(gdb) break test_break
+Breakpoint 1 at 0x40077a: file break.cpp, line 7.
+(gdb) run
+Starting program: /vagrant/break.out
+
+Breakpoint 1, test_break () at break.cpp:7
+7               cout &lt;&lt; &quot;Test break\n&quot;;
+(gdb)
+</pre></div>
+</div>
+<p>Przykład ustawienia pułapki z użyciem nazwy pliku i numeru linii:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb break.out
+(gdb) break break.cpp:6
+Breakpoint 1 at 0x40077a: file break.cpp, line 6.
+(gdb) run
+Starting program: /vagrant/break.out
+
+Breakpoint 1, test_break () at break.cpp:7
+7               cout &lt;&lt; &quot;Test break\n&quot;;
+</pre></div>
+</div>
+<p>Listę aktualnie ustawionych pułapek możemy sprawdzić poleceniem <cite>info breakpoints</cite> lub krócej <cite>info break</cite> [17]:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">info</span> <span class="k">break</span>
+<span class="n">Num</span>     <span class="n">Type</span>           <span class="n">Disp</span> <span class="n">Enb</span> <span class="n">Address</span>            <span class="n">What</span>
+<span class="mi">1</span>       <span class="nb">breakpoint</span>     <span class="n">keep</span> <span class="n">y</span>   <span class="mh">0x000000000040077a</span> <span class="ow">in</span> <span class="n">test_break</span><span class="p">()</span> <span class="n">at</span> <span class="k">break</span><span class="o">.</span><span class="n">cpp</span><span class="p">:</span><span class="mi">7</span>
+</pre></div>
+</div>
+</section>
+<section id="punkty-obserwacji">
+<h3>Punkty obserwacji<a class="headerlink" href="#punkty-obserwacji" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Punkt obserwacji (ang. watchpoint) pozwala zatrzymać wykonywanie programu, gdy wartość wyrażenia przekazanego jako argument polecenia <cite>watch</cite> ulegnie zmianie. Wyrażeniem może proste (np. złożone z nazwy zmiennej) lub złożone (np. rzutowanie wartości pod określonym adresem na dany typ danych, wrażenie matematyczne) [18].</p>
+<p>Przykład obserwacji zmiennej w strukturze:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb watch.out
+(gdb) break main
+Breakpoint 1 at 0x4006df: file watch.cpp, line 21.
+(gdb) run
+Starting program: /vagrant/watch.out
+
+Breakpoint 1, main (argc=1, argv=0x7fffffffe5d8) at watch.cpp:21
+21              tsw.y = 0;
+(gdb) watch tsw.y
+Hardware watchpoint 2: tsw.y
+(gdb) continue
+Continuing.
+
+Hardware watchpoint 2: tsw.y
+
+Old value = -6704
+New value = 0
+main (argc=1, argv=0x7fffffffe5d8) at watch.cpp:22
+22              tsw.y++;
+</pre></div>
+</div>
+<p>Przykład obserwacji wyrażenia:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb watch.out
+(gdb) break test_watch
+Breakpoint 1 at 0x4006ba: file watch.cpp, line 11.
+(gdb) run
+Starting program: /vagrant/watch.out
+
+Breakpoint 1, test_watch () at watch.cpp:11
+11              int x = 0;
+(gdb) watch x &lt; 2
+Hardware watchpoint 2: x &lt; 2
+(gdb) continue
+Continuing.
+
+Hardware watchpoint 2: x &lt; 2
+
+Old value = true
+New value = false
+test_watch () at watch.cpp:12
+12              while (x &lt; 10) {
+</pre></div>
+</div>
+<p>Listę ustawionych pułapek i punktów obserwacji można sprawdzić poleceniem <cite>info break</cite> oraz <cite>info watchpoints</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> $ gdb watch.out
+(gdb) break main
+Breakpoint 1 at 0x4006df: file watch.cpp, line 21.
+(gdb) run
+Starting program: /vagrant/watch.out
+
+Breakpoint 1, main (argc=1, argv=0x7fffffffe5d8) at watch.cpp:21
+21              tsw.y = 0;
+(gdb) watch tsw.y
+Hardware watchpoint 2: tsw.y
+(gdb) info break
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x00000000004006df in main(int, char**) at watch.cpp:21
+       breakpoint already hit 1 time
+2       hw watchpoint  keep y                      tsw.y
+(gdb) info watchpoints
+Num     Type           Disp Enb Address            What
+2       hw watchpoint  keep y                      tsw.y
+</pre></div>
+</div>
+</section>
+<section id="usuwanie-pulapek-i-punktow-obserwacji">
+<h3>Usuwanie pułapek i punktów obserwacji<a class="headerlink" href="#usuwanie-pulapek-i-punktow-obserwacji" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Do usuwania ustawionych pułapek i punktów obserwacji służą polecenia: <cite>clear</cite> oraz <cite>delete</cite>. <cite>clear</cite> bazuje na ich położeniu (np. nazwie funkcji, numerze linii), natomiast <cite>delete</cite> bazuje na przydzielonym im numerze identyfikacyjnym [19]. Numer ten jest wyświetlany podczas tworzenia pułapki oraz punktu obserwacji, można go także ustalić poleceniem <cite>info break</cite>.</p>
+<p>Przykład usunięcia pułapki bazując na jej numerze:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb break.out
+(gdb) break main
+Breakpoint 1 at 0x40079b: file break.cpp, line 12.
+(gdb) break test_break
+Breakpoint 2 at 0x40077a: file break.cpp, line 7.
+(gdb) info break
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x000000000040079b in main(int, char**) at break.cpp:12
+2       breakpoint     keep y   0x000000000040077a in test_break() at break.cpp:7
+(gdb) delete 1
+(gdb) info break
+Num     Type           Disp Enb Address            What
+2       breakpoint     keep y   0x000000000040077a in test_break() at break.cpp:7
+</pre></div>
+</div>
+<p>Przykład usunięcia pułapki bazując na jej położeniu:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb watch.out
+(gdb) break main
+Breakpoint 1 at 0x4006df: file watch.cpp, line 21.
+(gdb) break test_watch
+Breakpoint 2 at 0x4006ba: file watch.cpp, line 11.
+(gdb) info break
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x00000000004006df in main(int, char**) at watch.cpp:21
+2       breakpoint     keep y   0x00000000004006ba in test_watch() at watch.cpp:11
+(gdb) clear watch.cpp:21
+Deleted breakpoint 1
+(gdb) clear test_watch
+Deleted breakpoint 2
+</pre></div>
+</div>
+</section>
+<section id="polecenia-nawigacji">
+<h3>Polecenia nawigacji<a class="headerlink" href="#polecenia-nawigacji" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Polecenia nawigacji po analizowanej aplikacji można podzielić na dwie kategorie: pierwszą związaną z poruszaniem się po kodzie/instrukcjach programu oraz drugą związaną z poruszaniem się po poszczególnych ramkach stosu programu (<a class="reference external" href="/blog/assembler/Asembler_cz2_Stos_i_wywolanie_funkcji/">zachęcam do zapoznania się z moim artykułem na temat stosu</a>).</p>
+<p>Do <strong>nawigacji po kodzie/instrukcjach</strong> służą polecenia:</p>
+<ul class="simple">
+<li><p><cite>list</cite></p></li>
+<li><p><cite>next</cite></p></li>
+<li><p><cite>step</cite></p></li>
+<li><p><cite>finish</cite></p></li>
+<li><p><cite>continue</cite></p></li>
+</ul>
+<p>Polecenie <cite>list</cite> [24] pozwala przeglądać kod źródłowy programu. Argumentem może być numer linii w pliku, zakres linii, czy nazwa funkcji. Domyślnie wyświetlane jest tylko 10 linii, by to zmienić należy wykorzystać polecenie <cite>set listsize</cite>.</p>
+<p>Poniższy przykład prezentuje wyświetlenie aktualnej wartości oraz zmianę domyślnie wyświetlanej liczby linii kodu źródłowego, a także wyświetlenie kodu źródłowego przykładowej funkcji <cite>main</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb navigation.out
+(gdb) show listsize
+Number of source lines gdb will list by default is 10.
+(gdb) set listsize 5
+(gdb) show listsize
+Number of source lines gdb will list by default is 5.
+(gdb) list main
+11    }
+12
+13    int main(int argc, char **argv) {
+14            int val = 0;
+15
+</pre></div>
+</div>
+<p>Zauważmy, że funkcja <cite>main</cite> została umieszczona pośrodku. Do wyświetlenia funkcji od jej początku można posłużyć się zakresem (początek wskazuje na funkcję <cite>main</cite>, a koniec jest nieokreślony – przecinek pełni istotną rolę):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb navigation.out
+(gdb) set listsize 5
+(gdb) list main,
+13    int main(int argc, char **argv) {
+14            int val = 0;
+15
+16            increment(val);
+17
+</pre></div>
+</div>
+<p><cite>next</cite>, <cite>step</cite>, <cite>finish</cite> oraz <cite>continue</cite> pozwalają sterować przebiegiem wykonania programu [25]. <cite>next</cite> wykonuje instrukcje odpowiadające kolejnej linii kodu źródłowego, jeśli jest to funkcja to zostanie ona wykonana. <cite>step</cite> również wykonuje kolejną linię kodu, jednak jeśli jest to funkcja to przechodzi do niej. <cite>finish</cite> wykonuje kolejne instrukcje, aż do zakończenia obecnej funkcji.  <cite>continue</cite> wznawia pracę programu.</p>
+<p>Przykład wykorzystania powyższych poleceń:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb navigation.out
+(gdb) break main
+Breakpoint 1 at 0x400769: file navigation.cpp, line 13.
+(gdb) run
+Starting program: /vagrant/navigation.out
+
+Breakpoint 1, main (argc=1, argv=0x7fffffffe5d8) at navigation.cpp:13
+13    int main(int argc, char **argv) {
+(gdb) next
+14            int val = 0;
+(gdb) next
+16            increment(val);
+(gdb) next
+18            decrement(val);
+(gdb) step
+decrement (x=@0x7fffffffe4e4: 1) at navigation.cpp:10
+10            x--;
+(gdb) finish
+Run till exit from #0  decrement (x=@0x7fffffffe4e4: 1) at navigation.cpp:10
+main (argc=1, argv=0x7fffffffe5d8) at navigation.cpp:20
+20            val += 10;
+Value returned is $1 = -6940
+(gdb) continue
+Continuing.
+[Inferior 1 (process 6775) exited normally]
+</pre></div>
+</div>
+<p>Do <strong>nawigacji po ramkach stosu</strong> służą polecenia:</p>
+<ul class="simple">
+<li><p><cite>backtrace</cite> (inaczej <cite>bt</cite>, <cite>where</cite> lub <cite>info stack</cite>)</p></li>
+<li><p><cite>frame</cite></p></li>
+<li><p><cite>up</cite></p></li>
+<li><p><cite>down</cite></p></li>
+</ul>
+<p><cite>backtrace</cite> [26] wyświetla podsumowanie o wywołanych funkcjach. Na jedną linię podsumowania przypada jedna ramka stosu, w każdej linii zawarta jest informacja o numerze wykonanej linii w pliku źródłowym.</p>
+<p>Na poniższym wydruku widzimy, że program wykonał funkcję <cite>main</cite> aż do linii 18, w której to zaczął wykonywać funkcję <cite>decrement</cite> aż do linii 10:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb navigation.out
+(gdb) break decrement
+Breakpoint 1 at 0x400748: file navigation.cpp, line 10.
+(gdb) run
+Starting program: /vagrant/navigation.out
+
+Breakpoint 1, decrement (x=@0x7fffffffe4e4: 1) at navigation.cpp:10
+10            x--;
+(gdb) where
+#0  decrement (x=@0x7fffffffe4e4: 1) at navigation.cpp:10
+#1  0x0000000000400797 in main (argc=1, argv=0x7fffffffe5d8) at navigation.cpp:18
+</pre></div>
+</div>
+<p><cite>frame</cite> wyświetla informacje o aktualnie wybranej ramce stosu, natomiast polecenia <cite>up</cite> oraz <cite>down</cite> pozwalają ją zmienić [27]. Po wybraniu ramki stosu możemy wykonywać na niej inne operacje – np. wyświetlanie wartości zmiennych dostępnych w wybranej ramce.</p>
+<p>Poniżej przykład prezentujący wybrane polecenia:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb navigation.out
+(gdb) break decrement
+Breakpoint 1 at 0x400748: file navigation.cpp, line 10.
+(gdb) run
+Starting program: /vagrant/navigation.out
+
+Breakpoint 1, decrement (x=@0x7fffffffe4e4: 1) at navigation.cpp:10
+10            x--;
+(gdb) where
+#0  decrement (x=@0x7fffffffe4e4: 1) at navigation.cpp:10
+#1  0x0000000000400797 in main (argc=1, argv=0x7fffffffe5d8) at navigation.cpp:18
+(gdb) frame
+#0  decrement (x=@0x7fffffffe4e4: 1) at navigation.cpp:10
+10            x--;
+(gdb) up
+#1  0x0000000000400797 in main (argc=1, argv=0x7fffffffe5d8) at navigation.cpp:18
+18            decrement(val);
+(gdb) frame
+#1  0x0000000000400797 in main (argc=1, argv=0x7fffffffe5d8) at navigation.cpp:18
+18            decrement(val);
+(gdb) down
+#0  decrement (x=@0x7fffffffe4e4: 1) at navigation.cpp:10
+10            x--;
+(gdb) frame
+#0  decrement (x=@0x7fffffffe4e4: 1) at navigation.cpp:10
+10            x--;
+</pre></div>
+</div>
+</section>
+<section id="ustawienie-oraz-wyswietlenie-zmiennych">
+<h3>Ustawienie oraz wyświetlenie zmiennych<a class="headerlink" href="#ustawienie-oraz-wyswietlenie-zmiennych" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Do ustawiania oraz wyświetlania zmiennych (de facto wyrażeń) możemy użyć poleceń <cite>set</cite>, <cite>print</cite>, <cite>display</cite> oraz <cite>undisplay</cite>.</p>
+<p><cite>set</cite> pozwala ustawić wartość zmiennej [28]. Jeśli nazwa zmiennej koliduje z nazwą jednego z podpolecenia <cite>set</cite>, to możemy użyć <cite>set variable</cite>.</p>
+<p>Poniżej przykład wykorzystania polecenia <cite>set</cite> oraz <cite>set variable</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb loop.out
+(gdb) break test_loop
+Breakpoint 1 at 0x40072a: file loop.cpp, line 7.
+(gdb) run
+Starting program: /vagrant/loop.out
+
+Breakpoint 1, test_loop () at loop.cpp:7
+7             int b = 2;
+(gdb) next
+8             int i = 0;
+(gdb) next
+10            while (i == 0) {
+(gdb) set i=1
+Ambiguous set command &quot;i=1&quot;: .
+(gdb) set variable i=1
+(gdb) set variable i=b+1
+</pre></div>
+</div>
+<p>Kolejną instrukcją jest <cite>print</cite>. Jest ona o tyle ciekawa, że oprócz wypisywania wartości zmiennej pozwala ją także ustawić [28].</p>
+<p>Poniżej przykład wykorzystania polecenia <cite>print</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb loop.out
+(gdb) break test_loop
+Breakpoint 1 at 0x40072a: file loop.cpp, line 7.
+(gdb) run
+Starting program: /vagrant/loop.out
+
+Breakpoint 1, test_loop () at loop.cpp:7
+7             int b = 2;
+(gdb) next
+8             int i = 0;
+(gdb) next
+10            while (i == 0) {
+(gdb) print b
+$1 = 2
+(gdb) print i
+$2 = 0
+(gdb) print i=1+2*b
+$3 = 5
+(gdb) print i
+$4 = 5
+</pre></div>
+</div>
+<p>Warto wiedzieć, że polecenie <cite>print</cite> może wyświetlać dane w różnym formacie. Jego specyfikację podaje się jako pierwszy argument - <cite>print /FORMAT expression</cite>.</p>
+<p>Możliwe formaty wyświetlania danych [30, 31]:</p>
+<ul class="simple">
+<li><p>o - octal</p></li>
+<li><p>x - hexadecimal</p></li>
+<li><p>u - unsigned decimal</p></li>
+<li><p>t - binary</p></li>
+<li><p>f - floating point</p></li>
+<li><p>a - address</p></li>
+<li><p>c - char</p></li>
+<li><p>s - string</p></li>
+</ul>
+<p>Przykład formatowania danych:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(gdb) print /c 65
+$9 = 65 &#39;A&#39;
+(gdb) print /x 65
+$10 = 0x41
+</pre></div>
+</div>
+<p>Polecenie <cite>display</cite> jest w swoim działaniu bardzo podobne do <cite>print</cite>, jednakże <cite>display</cite> wyświetla podane wyrażenie przy każdym zatrzymaniu programu. <cite>list display</cite> informuje o aktualnych wyrażeniach, a <cite>undisplay</cite> (lub <cite>delete display</cite>) pozwala je usunąć. <cite>display</cite> umożliwia także wyspecyfikowanie formatu wyświetlanych danych — w dokładnie ten sam sposób jak przy poleceniu <cite>print</cite>.</p>
+<p>Przykład wykorzystania omówionych poleceń:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> $ gdb watch.out
+ (gdb) break test_watch
+ Breakpoint 1 at 0x4006ba: file watch.cpp, line 11.
+ (gdb) run
+Starting program: /vagrant/watch.out
+
+ Breakpoint 1, test_watch () at watch.cpp:11
+ 11            int x = 0;
+ (gdb) next
+ 12            while (x &lt; 10) {
+ (gdb) display x
+ 1: x = 0
+ (gdb) display x &lt; 10
+ 2: x &lt; 10 = true
+ (gdb) next
+ 13                    x++;
+ 1: x = 0
+ 2: x &lt; 10 = true
+ (gdb) next
+ 12            while (x &lt; 10) {
+ 1: x = 1
+ 2: x &lt; 10 = true
+ (gdb) next
+ 13                    x++;
+ 1: x = 1
+ 2: x &lt; 10 = true
+ (gdb) next
+ 12            while (x &lt; 10) {
+ 1: x = 2
+ 2: x &lt; 10 = true
+ (gdb) info display
+ Auto-display expressions now in effect:
+ Num Enb Expression
+ 1:   y  x
+ 2:   y  x &lt; 10
+ (gdb) undisplay 1
+ (gdb) next
+ 13                    x++;
+ 2: x &lt; 10 = true
+ (gdb) display /x x
+ 3: /x x = 0x2
+ (gdb) next
+ 12            while (x &lt; 10) {
+ 2: x &lt; 10 = true
+ 3: /x x = 0x3
+</pre></div>
+</div>
+<p>Warto również wiedzieć o poleceniach <cite>info args</cite> oraz <cite>info locals</cite> [32]. Polecenia te wyświetlają odpowiednio wartości argumentów oraz zmiennych lokalnych.</p>
+</section>
+<section id="obsluga-wielowatkowosci">
+<h3>Obsługa wielowątkowości<a class="headerlink" href="#obsluga-wielowatkowosci" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>GDB pozwala również analizować programy wielowątkowe [33]. Utworzone wątki są wykrywane automatycznie, co obrazuje poniższy przykład:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb threads.out
+(gdb) break my_thread
+Breakpoint 1 at 0x400e90: file threads.cpp, line 8.
+(gdb) run
+Starting program: /vagrant/threads.out
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library &quot;/lib/x86_64-linux-gnu/libthread_db.so.1&quot;.
+[New Thread 0x7ffff6f4e700 (LWP 7856)]
+[New Thread 0x7ffff674d700 (LWP 7857)]
+[Switching to Thread 0x7ffff6f4e700 (LWP 7856)]
+
+Thread 2 &quot;threads.out&quot; hit Breakpoint 1, my_thread () at threads.cpp:8
+8             for (int i = 0; i &lt; 10; i++) {
+</pre></div>
+</div>
+<p>Moim zdaniem najbardziej przydatnymi poleceniami do pracy na wątkach są <cite>info threads</cite> oraz <cite>thread</cite>. <cite>info threads</cite> wyświetla informacje dotyczące wątków (np. identyfikator, aktualna ramka stosu), <cite>thread</cite> wybiera wątek, na którym będziemy pracować.</p>
+<p>Poniżej przykład pracy na dwóch wątkach – po wybraniu wątku praca odbywa się jak dotychczas:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gdb threads.out
+(gdb) break my_thread
+Breakpoint 1 at 0x400fb0: file threads.cpp, line 8.
+(gdb) run
+Starting program: /vagrant/threads.out
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library &quot;/lib/x86_64-linux-gnu/libthread_db.so.1&quot;.
+[New Thread 0x7ffff6f4e700 (LWP 7996)]
+[New Thread 0x7ffff674d700 (LWP 7997)]
+[Switching to Thread 0x7ffff6f4e700 (LWP 7996)]
+
+Thread 2 &quot;threads.out&quot; hit Breakpoint 1, my_thread () at threads.cpp:8
+8             for (int i = 0; i &lt; 10; i++) {
+(gdb) step
+[Switching to Thread 0x7ffff674d700 (LWP 7997)]
+
+Thread 3 &quot;threads.out&quot; hit Breakpoint 1, my_thread () at threads.cpp:8
+8             for (int i = 0; i &lt; 10; i++) {
+(gdb) thread 2
+[Switching to thread 2 (Thread 0x7ffff6f4e700 (LWP 7996))]
+#0  0x0000000000400fb7 in my_thread () at threads.cpp:8
+8             for (int i = 0; i &lt; 10; i++) {
+(gdb) step
+Value: 0
+Value: 1
+Value: 2
+Value: 3
+Value: 4
+Value: 5
+Value: 6
+Value: 7
+Value: 8
+Value: 9
+[Thread 0x7ffff674d700 (LWP 7997) exited]
+9                     cout &lt;&lt; &quot;Value: &quot; &lt;&lt; i &lt;&lt; endl;
+(gdb) step
+Value: 0
+8             for (int i = 0; i &lt; 10; i++) {
+(gdb) step
+9                     cout &lt;&lt; &quot;Value: &quot; &lt;&lt; i &lt;&lt; endl;
+</pre></div>
+</div>
+<p>Warto zauważyć, że <strong>GDB podczas pracy skupia się tylko na jednym wątku</strong>. W przykładzie powyżej zaprezentowano, jak po wykonaniu polecenia <cite>step</cite>, wątek 3 (nieustawiony) kontynuuje pracę – tylko wątek 2 jest pod kontrolą odpluskwiacza.</p>
+<p>Podczas napotkania jakiejkolwiek pułapki wstrzymywane są wszystkie wątki, natomiast po wznowieniu pracy każdy wątek rozpocznie działanie, jednak tylko jeden będzie pod obserwacją GDB.</p>
+</section>
+</section>
+<section id="tekstowy-interfejs-uzytkownika">
+<h2>Tekstowy interfejs użytkownika<a class="headerlink" href="#tekstowy-interfejs-uzytkownika" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Oprócz znanego wszystkim interaktywnego interfejsu GDB posiada także specjalny tekstowy interfejs użytkownika (Text User Inteface – TUI) [34]. Za jego aktywację odpowiada polecenie <cite>tui enable</cite>, natomiast za dezaktywację <cite>tui disable</cite> - można także użyć skrótu klawiszowego <em>CTRL-x a</em>.</p>
+<figure class="align-default" id="id1">
+<img alt="../../_images/gdb-tutorial-tui.png" src="../../_images/gdb-tutorial-tui.png" />
+<figcaption>
+<p><span class="caption-text">Przykładowa sesja TUI z widokiem src.</span><a class="headerlink" href="#id1" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+<p>Dostępnych jest kilka układów okien (standardowym jest <cite>src</cite>) możliwych do przełączenia za pomocą polecenia <cite>layout &lt;nazwa&gt;</cite>.</p>
+<ul class="simple">
+<li><p><cite>src</cite> – okno kodu źródłowego oraz wiersz poleceń</p></li>
+<li><p><cite>asm</cite> – okno assemblera oraz wiersz poleceń</p></li>
+<li><p><cite>split</cite> – okno kodu źródłowego, assemblera i wiersza poleceń</p></li>
+<li><p><cite>regs</cite> – jeśli w momencie przełączenia aktualnym układem był <cite>src</cite> to ustawione zostanie okno rejestrów, kodu źródłowego i wiersza poleceń; jeśli układem był <cite>asm</cite> lub <cite>split</cite> to ustawione zostanie okno rejestrów, assemblera i wiersza poleceń.</p></li>
+</ul>
+<figure class="align-default" id="id2">
+<img alt="../../_images/gdb-tutorial-tui-split.png" src="../../_images/gdb-tutorial-tui-split.png" />
+<figcaption>
+<p><span class="caption-text">Przykładowa sesja TUI z widokiem split.</span><a class="headerlink" href="#id2" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+<p>Aktualnie aktywne okno można przełączyć za pomocą skrótu klawiszowego <em>CTRL-x o</em>.</p>
+<p>Ten rodzaj interfejsu użytkownika posiada specjalny tryb (TUI Single Key Mode), w którym najczęściej używane polecenia otrzymały swój jedno-znakowy skrót klawiszowy, aby przełączyć się do tego trybu należy użyć skrótu <em>CTRL-x s</em>.</p>
+<p>Niektóre skróty klawiszowe:</p>
+<ul class="simple">
+<li><p>c - continue</p></li>
+<li><p>d - down</p></li>
+<li><p>f - finish</p></li>
+<li><p>n - next</p></li>
+<li><p>q – wyjdź z trybu</p></li>
+<li><p>r - run</p></li>
+<li><p>s - step</p></li>
+<li><p>u - up</p></li>
+<li><p>w - where</p></li>
+</ul>
+<p>GDB to potężne narzędzie. Warto poznać podstawy jego obsługi, by w przyszłości móc z łatwością wykorzystać jego potencjał w praktyce.</p>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.gnu.org/software/gdb/">GDB: The GNU Project Debugger</a></p></li>
+<li><p><a class="reference external" href="http://sourceware.org/gdb/current/onlinedocs/gdb/Supported-Languages.html#Supported-Languages">Debugging with GDB: Supported Languages</a></p></li>
+<li><p><a class="reference external" href="https://www.phoronix.com/scan.php?page=news_item&amp;px=GNU-GDB-8.0-Released">GDB 8.0 Released, Adds Many New Features, Drops Java GCJ Support - Phoronix</a></p></li>
+<li><p><a class="reference external" href="https://gcc.gnu.org/gcc-7/changes.html">GCC 7 Release Series; Changes, New Features, and Fixes - GNU Project - Free Software Foundation (FSF)</a></p></li>
+<li><p><a class="reference external" href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/symbols-and-symbol-files">Symbols and Symbol Files</a></p></li>
+<li><p><a class="reference external" href="https://www.ibm.com/developerworks/library/os-debugging/">Debugging formats DWARF and STAB</a></p></li>
+<li><p><a class="reference external" href="http://students.mimuw.edu.pl/SO/Projekt05-06/temat3-g3/pliki_obiektowe.html">Opcje odpluskwiania w gcc. Formaty plików obiektowych i przygotowanych do odpluskwiania.</a></p></li>
+<li><p><a class="reference external" href="https://blogs.oracle.com/ali/inside-elf-symbol-tables">Inside ELF Symbol Tables | Oracle Ali Bahrami Blog</a></p></li>
+<li><p><a class="reference external" href="http://www.delorie.com/djgpp/doc/coff/symtab.html">COFF: Symbol Table</a></p></li>
+<li><p><a class="reference external" href="https://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html">Using the GNU Compiler Collection (GCC): Debugging Options</a></p></li>
+<li><p><a class="reference external" href="https://clang.llvm.org/docs/CommandGuide/clang.html">clang - the Clang C, C++, and Objective-C compiler - Clang 6 documentation</a></p></li>
+<li><p><a class="reference external" href="http://wiki.freepascal.org/Logging_exceptions">Logging exceptions - Free Pascal wiki</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/Separate-Debug-Files.html">Debugging with GDB: Separate Debug Files</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/current/onlinedocs/gdb/Invoking-GDB.html#Invoking-GDB">Debugging with GDB: Invoking GDB</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/current/onlinedocs/gdb/Files.html#Files">Debugging with GDB: Files</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/Attach.html">Debugging with GDB: Attach</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/Set-Breaks.html">Debugging with GDB: Set Breaks</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/Set-Watchpoints.html">Debugging with GDB: Set Watchpoints</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/Delete-Breaks.html#Delete-Breaks">Debugging with GDB: Delete Breaks</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/List.html">Debugging with GDB: List</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/Continuing-and-Stepping.html">Debugging with GDB: Continuing and Stepping</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/Backtrace.html">Debugging with GDB: Backtrace</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/Selection.html">Debugging with GDB: Selection</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/List.html">Debugging with GDB: List</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/Continuing-and-Stepping.html">Debugging with GDB: Continuing and Stepping</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/Backtrace.html">Debugging with GDB: Backtrace</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/Selection.html">Debugging with GDB: Selection</a></p></li>
+<li><p><a class="reference external" href="https://www.sourceware.org/gdb/onlinedocs/gdb.html#Assignment">Debugging with GDB: Assignment to Variables</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/Auto-Display.html">Debugging with GDB: Automatic Display</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/Output-Formats.html#Output-Formats">Debugging with GDB: Output Formats</a></p></li>
+<li><p><a class="reference external" href="http://visualgdb.com/gdbreference/commands/print">GDB Command Reference - print command</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/Frame-Info.html">Debugging with GDB: Frame Info</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/onlinedocs/gdb/Threads.html">Debugging with GDB: Threads</a></p></li>
+<li><p><a class="reference external" href="https://sourceware.org/gdb/current/onlinedocs/gdb/TUI.html#TUI">GDB Text User Interface</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

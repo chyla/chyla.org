@@ -1,0 +1,412 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Wstęp do obiektowości - Klasy i dziedziczenie | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../../index.html">
+                <img src="../../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="wstep-do-obiektowosci-klasy-i-dziedziczenie">
+<h1>Wstęp do obiektowości - Klasy i dziedziczenie<a class="headerlink" href="#wstep-do-obiektowosci-klasy-i-dziedziczenie" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+
+<div id="pdfobject-0" class="pdfobject-container"></div>
+<script>PDFObject.embed("/_static/files/artykuly/python/python-tutorial/Wstep-do-obiektowosci-Klasy-i-dziedziczenie.pdf", "#pdfobject-0");</script>
+<section id="klasy">
+<h2>Klasy<a class="headerlink" href="#klasy" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<section id="wprowadzenie">
+<h3>Wprowadzenie<a class="headerlink" href="#wprowadzenie" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Dotychczas koncentrowaliśmy się na zmienych oraz funkcjach. Stwórzmy funkcję, która wypisze podstawowe informacje o startującym samochodzie.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s1_kolor</span> <span class="o">=</span> <span class="s1">&#39;czerwony&#39;</span>
+<span class="n">s1_marka</span> <span class="o">=</span> <span class="s1">&#39;fiat&#39;</span>
+
+<span class="n">s2_kolor</span> <span class="o">=</span> <span class="s1">&#39;czarny&#39;</span>
+<span class="n">s2_marka</span> <span class="o">=</span> <span class="s1">&#39;bmw&#39;</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">kolor</span><span class="p">,</span> <span class="n">marka</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Startuje&quot;</span><span class="p">,</span> <span class="n">kolor</span><span class="p">,</span> <span class="n">marka</span><span class="p">)</span>
+
+<span class="n">run</span><span class="p">(</span><span class="n">s1_kolor</span><span class="p">,</span> <span class="n">s1_marka</span><span class="p">)</span>
+<span class="n">run</span><span class="p">(</span><span class="n">s2_kolor</span><span class="p">,</span> <span class="n">s2_marka</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Jakie problemy możemy dostrzec w przytoczonym kodzie źródłowym?</p>
+<ol class="arabic simple">
+<li><p>Możliwa błędna kolejność podanych argumentów w funkcji run.</p></li>
+<li><p>“Zmieszanie” dwóch różnych samochodów (np. kolor z s1, marka z s2).</p></li>
+<li><p>Podanie dwa razy tych samych argumentów (np. marka zamiast koloru).</p></li>
+</ol>
+<p><strong>Główny problem:</strong>
+<strong>Poszczególne zmienne określające dany samochód nie są ze sobą w żaden sposób powiązane.</strong></p>
+</section>
+<section id="definicja-klasy">
+<h3>Definicja Klasy<a class="headerlink" href="#definicja-klasy" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Korzystając z klas możemy powiązać poszczególne zmienne ze sobą.</p>
+<p><strong>Definicja klasy (klasa) określa zachowanie i stan obiektu.</strong></p>
+<p>Na podstawie definicji klasy tworzone są konkretne obiekty - instancje klasy.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Samochod</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">sam</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Startuje&quot;</span><span class="p">,</span> <span class="n">sam</span><span class="o">.</span><span class="n">kolor</span><span class="p">,</span> <span class="n">sam</span><span class="o">.</span><span class="n">marka</span><span class="p">)</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">Samochod</span><span class="p">()</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">kolor</span> <span class="o">=</span> <span class="s1">&#39;czerwony&#39;</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">marka</span> <span class="o">=</span> <span class="s1">&#39;fiat&#39;</span>
+
+<span class="n">run</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="metody-klasy">
+<h3>Metody klasy<a class="headerlink" href="#metody-klasy" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Co możemy poprawić w omawianym przykładzie?</p>
+<p>Warto napisać dodatkową funkcję, która jako parametr będzie przyjmowała obiekt samochodu oraz atrybuty, które należy ustawić w przekazanym obiekcie. Stosując takie rozwiązanie nie pominiemy żadnego z atrybutów.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Samochod</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">sam</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Startuje&quot;</span><span class="p">,</span> <span class="n">sam</span><span class="o">.</span><span class="n">kolor</span><span class="p">,</span> <span class="n">sam</span><span class="o">.</span><span class="n">marka</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="n">sam</span><span class="p">,</span> <span class="n">kolor</span><span class="p">,</span> <span class="n">marka</span><span class="p">):</span>
+    <span class="n">sam</span><span class="o">.</span><span class="n">kolor</span> <span class="o">=</span> <span class="n">kolor</span>
+    <span class="n">sam</span><span class="o">.</span><span class="n">marka</span> <span class="o">=</span> <span class="n">marka</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">Samochod</span><span class="p">()</span>
+<span class="n">init</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="s1">&#39;czerwony&#39;</span><span class="p">,</span> <span class="s1">&#39;fiat&#39;</span><span class="p">)</span>
+
+<span class="n">run</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Nowa funkcja <code class="docutils literal notranslate"><span class="pre">init()</span></code> ustawia odpowiednie zmienne w <strong>konkretnym</strong> obiekcie samochodu.</p>
+<p>Powiązaliśmy ze sobą zmienne, czy to samo możemy zrobić z funkcjami? Co się stanie jeśli wywołamy którąś z funkcji na obiekcie innej klasy niż samochód?</p>
+<p>Funkcje związane z daną klasą możemy umieścić w jej definicji.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Samochod</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Startuje&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kolor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">marka</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="n">sam</span><span class="p">,</span> <span class="n">kolor</span><span class="p">,</span> <span class="n">marka</span><span class="p">):</span>
+    <span class="n">sam</span><span class="o">.</span><span class="n">kolor</span> <span class="o">=</span> <span class="n">kolor</span>
+    <span class="n">sam</span><span class="o">.</span><span class="n">marka</span> <span class="o">=</span> <span class="n">marka</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">Samochod</span><span class="p">()</span>
+<span class="n">init</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="s1">&#39;czerwony&#39;</span><span class="p">,</span> <span class="s1">&#39;fiat&#39;</span><span class="p">)</span>
+
+<span class="n">s1</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  <span class="c1"># --- wcześniej ---&gt;   run(s1)</span>
+</pre></div>
+</div>
+<p><strong>Zwróćmy uwagę, że jedyny parametr funkcji zmienił swoją nazwę z ‘sam’ na ‘self’, wskazuje on instancję klasy.</strong></p>
+<p>Nazwa tego parametru jest dowolna, jednak PEP 8 zaleca stosowanie nazwy ‘self’.</p>
+<p>Zmienił się także sposób wywołania funkcji <code class="docutils literal notranslate"><span class="pre">run()</span></code>. Pierwszy parametr funkcji znajduje się teraz z lewej strony.</p>
+<p>Również funkcję <code class="docutils literal notranslate"><span class="pre">__init__()</span></code> możemy umieścić w definicji klasy. Funkcję taką nazywamy konstruktorem lub po prostu funkcją init. Ustawia ona początkowy stan obiektu.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Samochod</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kolor</span><span class="p">,</span> <span class="n">marka</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kolor</span> <span class="o">=</span> <span class="n">kolor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marka</span> <span class="o">=</span> <span class="n">marka</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Startuje&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kolor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">marka</span><span class="p">)</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">Samochod</span><span class="p">(</span><span class="s2">&quot;czerwony&quot;</span><span class="p">,</span> <span class="s2">&quot;fiat&quot;</span><span class="p">)</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Również w przypadku tej funkcji zmieniła się nazwa pierwszego parametru i sposób jej wywołania.</p>
+</section>
+</section>
+<section id="dziedziczenie">
+<h2>Dziedziczenie<a class="headerlink" href="#dziedziczenie" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<section id="id1">
+<h3>Wprowadzenie<a class="headerlink" href="#id1" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Zmodyfikujmy lekko nasz przykład. Uwzględnijmy poziom paliwa, jakim dysponuje samochód i uzależnijmy od tego jego start.</p>
+<p>Dla samochodu benzynowego stwórzmy klasę SamochodBenzyna.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SamochodBenzyna</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kolor</span><span class="p">,</span> <span class="n">marka</span><span class="p">,</span> <span class="n">benzyna</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kolor</span> <span class="o">=</span> <span class="n">kolor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marka</span> <span class="o">=</span> <span class="n">marka</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">benzyna</span> <span class="o">=</span> <span class="n">benzyna</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">czy_mozna_wystartowac</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Startuje&quot;</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">kolor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">marka</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">czy_mozna_wystartowac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">benzyna</span> <span class="o">&gt;</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>Podobnie sytuacja będzie wyglądała dla samochodu na gaz. Stwórzmy klasę SamochodLPG z odpowiednimi polami, czyli zmiennymi klasy.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SamochodLPG</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kolor</span><span class="p">,</span> <span class="n">marka</span><span class="p">,</span> <span class="n">lpg</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kolor</span> <span class="o">=</span> <span class="n">kolor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marka</span> <span class="o">=</span> <span class="n">marka</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lpg</span> <span class="o">=</span> <span class="n">lpg</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">czy_mozna_wystartowac</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Startuje&quot;</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">kolor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">marka</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">czy_mozna_wystartowac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lpg</span> <span class="o">&gt;</span> <span class="mi">20</span>
+</pre></div>
+</div>
+<p>Czy możemy zrobić to lepiej?</p>
+</section>
+<section id="hierarchia-klas">
+<h3>Hierarchia klas<a class="headerlink" href="#hierarchia-klas" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Pomysł:</p>
+<p>Stwórzmy jedną ogólną definicję klasy samochód - uniwersalną dla każdego samochodu. Ogólna wersja nie zawiera pól i metod odpowiedzialnych za poziom paliwa.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Samochod</span><span class="p">:</span>  <span class="c1"># klasa nadrzędna/bazowa</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kolor</span><span class="p">,</span> <span class="n">marka</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kolor</span> <span class="o">=</span> <span class="n">kolor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marka</span> <span class="o">=</span> <span class="n">marka</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">czy_mozna_wystartowac</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Startuje&quot;</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">kolor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">marka</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Na podstawie klasy Samochod stwórzmy klasę SamochodBenzyna przeznaczoną dla samochodów benzynowych.</p>
+<p><strong>Klasa ta będzie zawierała wszystkie pola i metody klasy Samochód. Mechanizm ten nazywamy dziedziczeniem.</strong></p>
+<p>Klasę po której dziedziczymy nazywamy klasą bazową, nowo tworzoną klasę nazywamy klasą pochodną.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SamochodBenzyna</span><span class="p">(</span><span class="n">Samochod</span><span class="p">):</span>  <span class="c1"># klasa pochodna; Samochod - klasa po której dziedziczymy (bazowa)</span>
+    <span class="k">pass</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">SamochodBenzyna</span><span class="p">(</span><span class="s1">&#39;czerwony&#39;</span><span class="p">,</span> <span class="s1">&#39;fiat&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Obiekt utworzony na podstawie klasy SamochodBenzyna nie jest w pełni funkcjonalny. Zawiera on co prawda metodę <code class="docutils literal notranslate"><span class="pre">run()</span></code>, jednak nigdzie nie została zdefiniowana metoda <code class="docutils literal notranslate"><span class="pre">czy_mozna_wystartowac()</span></code>. Próba wywołania metody <code class="docutils literal notranslate"><span class="pre">run()</span></code> spowoduje błąd wykonania.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SamochodBenzyna</span><span class="p">(</span><span class="n">Samochod</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">SamochodBenzyna</span><span class="p">(</span><span class="s1">&#39;czerwony&#39;</span><span class="p">,</span> <span class="s1">&#39;fiat&#39;</span><span class="p">)</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  <span class="c1"># BŁĄD! brak metody czy_mozna_wystartowac</span>
+</pre></div>
+</div>
+<p>Uzupełnijmy definicję klasy SamochodBenzyna o potrzebne pola i metody. Tworzymy nowy konstruktor (funkcję <code class="docutils literal notranslate"><span class="pre">__init__()</span></code>) uwzględniający pole benzyna, a także nową funkcję <code class="docutils literal notranslate"><span class="pre">czy_można_wystartować()</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SamochodBenzyna</span><span class="p">(</span><span class="n">Samochod</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kolor</span><span class="p">,</span> <span class="n">marka</span><span class="p">,</span> <span class="n">benzyna</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kolor</span> <span class="o">=</span> <span class="n">kolor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marka</span> <span class="o">=</span> <span class="n">marka</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">benzyna</span> <span class="o">=</span> <span class="n">benzyna</span>
+
+    <span class="k">def</span> <span class="nf">czy_mozna_wystartowac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">benzyna</span> <span class="o">&gt;</span> <span class="mi">10</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">SamochodBenzyna</span><span class="p">(</span><span class="s1">&#39;czerwony&#39;</span><span class="p">,</span> <span class="s1">&#39;fiat&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Co można zrobić lepiej?</p>
+<p><strong>Zasada DRY - Don’t Repeat Yourself!</strong></p>
+<p>Istniał już konstruktor, który potrafił ustawić pola kolor oraz marka.</p>
+<p>Zamiast na nowo pisać kolejne instrukcje przypisania skorzystajmy z konstruktora dostępnego w klasie Samochod, zrobimy to przy pomocy funkcji <code class="docutils literal notranslate"><span class="pre">super()</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SamochodBenzyna</span><span class="p">(</span><span class="n">Samochod</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kolor</span><span class="p">,</span> <span class="n">marka</span><span class="p">,</span> <span class="n">benzyna</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">kolor</span><span class="p">,</span> <span class="n">marka</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">benzyna</span> <span class="o">=</span> <span class="n">benzyna</span>
+
+    <span class="k">def</span> <span class="nf">czy_mozna_wystartowac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">benzyna</span> <span class="o">&gt;</span> <span class="mi">10</span>
+
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">SamochodBenzyna</span><span class="p">(</span><span class="s1">&#39;czerwony&#39;</span><span class="p">,</span> <span class="s1">&#39;fiat&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="widocznosc-atrybutow">
+<h3>Widoczność atrybutów<a class="headerlink" href="#widocznosc-atrybutow" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Tworząc klasy musimy zadbać o widoczność pól i metod. Nie zawsze chcemy, by każde pole było dostępne do użytku poza metodami danej klasy. Zachowanie to nazywamy <strong>hermetyzacją</strong> lub inaczej <strong>enkapsulacją</strong>.</p>
+<p><strong>Pole prywatne</strong> - dostępne tylko dla metod danej klasy, tworzymy poprzez <strong>dodanie znaku podkreślenia na początku nazwy</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Samochod</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kolor</span><span class="p">,</span> <span class="n">marka</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kolor</span> <span class="o">=</span> <span class="n">kolor</span>  <span class="c1"># pole publiczne</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">marka</span> <span class="o">=</span> <span class="n">marka</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_czy_mozna_wystartowac</span><span class="p">():</span>  <span class="c1"># wywołanie metody prywatnej</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Startuje&quot;</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">kolor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">marka</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Pola prywatne utworzone za pomocą jednego znaku podkreślenia są prywatne w rozumieniu umowy między programistami, określa to dokument PEP 8.</p>
+<p><strong>Interpreter nie weryfikuje dostępu do pola/metody.</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SamochodBenzyna</span><span class="p">(</span><span class="n">Samochod</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kolor</span><span class="p">,</span> <span class="n">marka</span><span class="p">,</span> <span class="n">benzyna</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">kolor</span><span class="p">,</span> <span class="n">marka</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_benzyna</span> <span class="o">=</span> <span class="n">benzyna</span>  <span class="c1"># pole prywatne</span>
+
+    <span class="k">def</span> <span class="nf">_czy_mozna_wystartowac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_benzyna</span> <span class="o">&gt;</span> <span class="mi">10</span>
+
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">SamochodBenzyna</span><span class="p">(</span><span class="s1">&#39;czerwony&#39;</span><span class="p">,</span> <span class="s1">&#39;fiat&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Pola/metody prywatne można również utworzyć za pomocą <strong>podwójnego znaku podkreślenia</strong>. W takim przypadku <strong>interpreter weryfikuje dostęp i powiadamia o błędzie</strong>. Do takich pól/metod nie można odwołać się w klasie nadrzędnej (bazowej) i pochodnej.</p>
+<p>Nazwy zaczynające się i kończące się dwoma znakami podkreślenia są funkcjami o specjalnym przeznaczeniu (przykład: funkcja <code class="docutils literal notranslate"><span class="pre">__init__()</span></code>).</p>
+</section>
+<section id="atrybuty-statyczne">
+<h3>Atrybuty statyczne<a class="headerlink" href="#atrybuty-statyczne" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>W definicji klasy możemy również umieścić pola i metody statyczne. Pole statyczne przyjmuje jedną wartość dla wszystkich instancji danej klasy. Pola/metody statyczne nie muszą byćwywoływane na konkretnym obiekcie danej klasy.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Samochod</span><span class="p">:</span>
+    <span class="n">stala_mph_kph</span> <span class="o">=</span> <span class="mf">1.6093</span>  <span class="c1"># pole statyczne</span>
+
+    <span class="c1"># ...</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">zamienMphNaKph</span><span class="p">(</span><span class="n">mile</span><span class="p">):</span>  <span class="c1"># funkcja statyczna</span>
+        <span class="k">return</span> <span class="n">mile</span> <span class="o">*</span> <span class="n">Samochod</span><span class="o">.</span><span class="n">stala_mph_kph</span>
+
+
+<span class="n">kph</span> <span class="o">=</span> <span class="n">Samochod</span><span class="o">.</span><span class="n">zamienMphNaKph</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;kph =&#39;</span><span class="p">,</span> <span class="n">kph</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/classes.html#a-first-look-at-classes">A First Look at Classes</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/classes.html#private-variables">Private Variables</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/classes.html#inheritance">Inheritance</a></p></li>
+<li><p><a class="reference external" href="https://www.programiz.com/python-programming/methods/built-in/staticmethod">Staticmethod</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

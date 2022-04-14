@@ -1,0 +1,206 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Zmienne środowiskowe w systemie Linux | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="zmienne-srodowiskowe-w-systemie-linux">
+<h1>Zmienne środowiskowe w systemie Linux<a class="headerlink" href="#zmienne-srodowiskowe-w-systemie-linux" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<p>Zmienne środowiskowe to dodatkowe dane przekazywane do uruchamianego programu. Ustawiane  są  podczas  uruchamiania  systemu,  procesu  logowania  użytkownika oraz w trakcie pracy powłoki systemowej.</p>
+<p>Zmienne te zawierają informacje takie jak:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>aktualny katalog roboczy (CWD, zmienna PWD),</p></li>
+<li><p>wykorzystywany interpreter języka poleceń (zmienna SHELL),</p></li>
+<li><p>położenie katalogu domowego użytkownika (zmienna HOME),</p></li>
+<li><p>katalogi, w których poszukiwane są programy (zmienna PATH).</p></li>
+</ul>
+</div></blockquote>
+
+<div id="pdfobject-0" class="pdfobject-container"></div>
+<script>PDFObject.embed("/_static/files/artykuly/linux/Zmienne-srodowiskowe-w-systemie-Linux-Przekazywanie-danych-do-programu.pdf", "#pdfobject-0");</script>
+<section id="zmienne-srodowiskowe-w-jezyku-c">
+<h2>Zmienne środowiskowe w języku C<a class="headerlink" href="#zmienne-srodowiskowe-w-jezyku-c" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Zmienne środowiskowe przechowywane są jako napisy postaci <cite>NAZWA=WARTOŚĆ</cite> w globalnej tablicy <cite>environ</cite>.</p>
+<p>Do operacji na zmiennych środowiskowych służą funkcje:  <cite>getenv()</cite>, <cite>putenv()</cite>, <cite>setenv()</cite>, <cite>unsetenv()</cite>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="k">extern</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">environ</span><span class="p">;</span><span class="w"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">**</span><span class="n">env</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">environ</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">env</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">env</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="zmienne-srodowiskowe-w-powloce-bash">
+<h2>Zmienne środowiskowe w powłoce BASH<a class="headerlink" href="#zmienne-srodowiskowe-w-powloce-bash" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Domyślnie zmienne powłoki nie są przekazywane do podprocesów i są widoczne jedynie w bieżącej powłoce. Zmienną taką należy wyeksportować, aby stała się widoczna dla procesu potomnego jako zmienna środowiskowa.</p>
+<p>Przyjęło się, że nazwy zmiennych środowiskowych (eksportowane zmienne powłoki) pisane są wielkimi literami, chociaż są od tego wyjątki (np. <cite>http_proxy</cite>).</p>
+<p>Do wyświetlenia wszystkich zmiennych powłoki można wykorzystać polecenie <cite>set</cite>, natomiast do wyświetlenia zmiennych środowiskowych polecenia <cite>env</cite> oraz <cite>printenv</cite>.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">LC_ALL</span><span class="o">=</span>C
+$ printenv <span class="p">|</span> grep LC_ALL
+$ <span class="nb">set</span> <span class="p">|</span> grep LC_ALL
+<span class="nv">LC_ALL</span><span class="o">=</span>C
+$ <span class="nb">export</span> LC_ALL
+$ printenv <span class="p">|</span> grep LC_ALL
+<span class="nv">LC_ALL</span><span class="o">=</span>C
+$ <span class="nb">set</span> <span class="p">|</span> grep LC_ALL
+<span class="nv">LC_ALL</span><span class="o">=</span>C
+</pre></div>
+</div>
+<p>Więcej informacji i przykładów znajdziesz w prezentacji umieszczonej na górze strony.</p>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://help.ubuntu.com/community/EnvironmentVariables">EnvironmentVariables</a></p></li>
+<li><p><a class="reference external" href="https://web.archive.org/web/20170501173703/http://www.turox.org.pl/podrecznik/Zmienne_srodowiskowe.html">Zmienne środowiskowe</a></p></li>
+<li><p><a class="reference external" href="https://linux.die.net/man/1/bash">man 1 bash</a></p></li>
+<li><p><a class="reference external" href="https://linux.die.net/man/7/environ">man 7 environ</a></p></li>
+<li><p><a class="reference external" href="https://linux.die.net/man/3/getenv">man 3 getenv</a></p></li>
+<li><p><a class="reference external" href="https://linux.die.net/man/3/putenv">man 3 putenv</a></p></li>
+<li><p><a class="reference external" href="https://linux.die.net/man/3/setenv">man 3 setenv</a></p></li>
+<li><p><a class="reference external" href="https://linux.die.net/man/3/unsetenv">man 3 unsetenv</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

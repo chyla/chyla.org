@@ -1,0 +1,301 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Funkcje - Definicja i wywołanie funkcji, przekazywanie argumentów, zwracanie wartości | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../../index.html">
+                <img src="../../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="funkcje-definicja-i-wywolanie-funkcji-przekazywanie-argumentow-zwracanie-wartosci">
+<h1>Funkcje - Definicja i wywołanie funkcji, przekazywanie argumentów, zwracanie wartości<a class="headerlink" href="#funkcje-definicja-i-wywolanie-funkcji-przekazywanie-argumentow-zwracanie-wartosci" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+
+<div id="pdfobject-0" class="pdfobject-container"></div>
+<script>PDFObject.embed("/_static/files/artykuly/python/python-tutorial/Funkcje-Definicja-i-wywolanie-funkcji-przekazywanie-argumentow-zwracanie-wartosci.pdf", "#pdfobject-0");</script>
+<section id="funkcje-w-matematyce">
+<h2>Funkcje w matematyce<a class="headerlink" href="#funkcje-w-matematyce" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p><strong>Funkcja</strong> <em>(łac. functio, -onis „odbywanie, wykonywanie, czynność”)</em> – dla danych dwóch zbiorów <strong>X</strong> i <strong>Y</strong>  przyporządkowanie każdemu elementowi zbioru <strong>X</strong> dokładnie jednego elementu zbioru <strong>Y</strong>. <a class="footnote-reference brackets" href="#funkcja-wikipedia" id="id1">1</a></p>
+<p>Przykład:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<dl class="footnote brackets">
+<dt class="label" id="funkcja-wikipedia"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://pl.wikipedia.org/wiki/Funkcja">https://pl.wikipedia.org/wiki/Funkcja</a></p>
+</dd>
+</dl>
+</section>
+<section id="definicja-i-wywolanie-funkcji">
+<h2>Definicja i wywołanie funkcji<a class="headerlink" href="#definicja-i-wywolanie-funkcji" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Funkcja to wydzielona część programu wykonująca pewne operacje. Nazwa funkcji ma istotne znaczenie, określa ona czynność, którą dana funkcja wykonuje. Poprzez użycie odpowiedniej nazwy można wywołać konkretną funkcję, czyli wykonać kod w niej zapisany.</p>
+<p>Dobrze napisana funkcja wykonuje tylko jedną czynność.</p>
+<p>Tworzenie funkcji w języku Python rozpoczynamy od słowa kluczowego def. Zaraz po nim następuje nazwa funkcji, nawiasy okrągłe oraz dwukropek.
+Przypomnijmy: dwukropek na końcu linii oznacza, że w kolejnej linii następuje odpowiednio wcięty blok kodu złożony z co najmniej jednej linii.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czesc</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Czesc!&quot;</span><span class="p">)</span>
+
+<span class="n">czesc</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Każdy blok kodu powinien zawierać dokładnie cztery spacje. Jest to wymaganie określone w dokumencie PEP 8, do którego zaleceń stosują się programiści Pythona.</p>
+</section>
+<section id="przekazywanie-argumentow">
+<h2>Przekazywanie argumentów<a class="headerlink" href="#przekazywanie-argumentow" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Parametry funkcji umieszczane są w nawiasach okrągłych umieszczonych za nazwą funkcji. Argumenty przekazujemy w nawiasach okrągłych podczas wywoływania funkcji.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czesc</span><span class="p">(</span><span class="n">imie</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Czesc &quot;</span> <span class="o">+</span> <span class="n">imie</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span><span class="p">)</span>
+
+<span class="n">czesc</span><span class="p">(</span><span class="s2">&quot;Janusz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Podczas przekazywania argumentu możemy również podać nazwę parametru.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czesc</span><span class="p">(</span><span class="n">imie</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Czesc &quot;</span> <span class="o">+</span> <span class="n">imie</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span><span class="p">)</span>
+
+<span class="n">czesc</span><span class="p">(</span><span class="n">imie</span><span class="o">=</span><span class="s2">&quot;Janusz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Pytanie</strong></p>
+<p>Załóżmy, że mamy funkcję przyjmującą dwa parametry: <code class="docutils literal notranslate"><span class="pre">imie</span></code> oraz <code class="docutils literal notranslate"><span class="pre">miasto</span></code>.</p>
+<p>Czy korzystając z nazw parametrów możemy zmienić kolejność ich występowania?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czesc</span><span class="p">(</span><span class="n">imie</span><span class="p">,</span> <span class="n">miasto</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Czesc &quot;</span> <span class="o">+</span> <span class="n">imie</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Widze, ze jestes z miasta&quot;</span><span class="p">,</span> <span class="n">miasto</span><span class="p">)</span>
+
+<span class="n">czesc</span><span class="p">(</span><span class="n">miasto</span><span class="o">=</span><span class="s2">&quot;Wroclaw&quot;</span><span class="p">,</span> <span class="n">imie</span><span class="o">=</span><span class="s2">&quot;Janusz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Odpowiedź: Tak.</p>
+<p><strong>Pytanie</strong></p>
+<p>Załóżmy, że mamy funkcję przyjmującą dwa parametry:: <code class="docutils literal notranslate"><span class="pre">imie</span></code> oraz <code class="docutils literal notranslate"><span class="pre">miasto</span></code>.</p>
+<p>Czy program zadziała dobrze, gdy przekażemy argumenty ze zmienioną kolejnością nie podając nazw parametrów?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czesc</span><span class="p">(</span><span class="n">imie</span><span class="p">,</span> <span class="n">miasto</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Czesc &quot;</span> <span class="o">+</span> <span class="n">imie</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Widze, ze jestes z miasta&quot;</span><span class="p">,</span> <span class="n">miasto</span><span class="p">)</span>
+
+<span class="n">czesc</span><span class="p">(</span><span class="s2">&quot;Wroclaw&quot;</span><span class="p">,</span> <span class="s2">&quot;Janusz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Odpowiedź: Nie.</p>
+</section>
+<section id="przekazywanie-argumentow-argumenty-domyslne">
+<h2>Przekazywanie argumentów - Argumenty domyślne<a class="headerlink" href="#przekazywanie-argumentow-argumenty-domyslne" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Dla parametry funkcji można ustanowić pewne konkretne wartości, nazywamy je <strong>argumentami domyślnymi</strong>.</p>
+<p>Argumenty domyślne pozwalają wywołać funkcję bez podawania jednego lub większej liczby argumentów.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czesc</span><span class="p">(</span><span class="n">imie</span><span class="p">,</span> <span class="n">miasto</span><span class="p">,</span> <span class="n">komunikat</span><span class="o">=</span><span class="s2">&quot;Czesc&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">komunikat</span><span class="p">,</span> <span class="n">imie</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Widze, ze jestes z miasta&quot;</span><span class="p">,</span> <span class="n">miasto</span><span class="p">)</span>
+
+<span class="n">czesc</span><span class="p">(</span><span class="s2">&quot;Janusz&quot;</span><span class="p">,</span> <span class="s2">&quot;Wroclaw&quot;</span><span class="p">)</span>
+<span class="n">czesc</span><span class="p">(</span><span class="s2">&quot;Alicja&quot;</span><span class="p">,</span> <span class="s2">&quot;Wroclaw&quot;</span><span class="p">,</span> <span class="s2">&quot;Milego dnia&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Pytanie</strong></p>
+<p>Czy argument domyślny możemy przypisać do parametru miasto?</p>
+<p>Innymi słowy, czy dowolny parametr bez podanego argumentu domyślnego może znajdować się za parametrami z argumentami domyślnymi?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czesc</span><span class="p">(</span><span class="n">imie</span><span class="p">,</span> <span class="n">miasto</span><span class="o">=</span><span class="s2">&quot;Wroclaw&quot;</span><span class="p">,</span> <span class="n">komunikat</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">komunikat</span><span class="p">,</span> <span class="n">imie</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Widze, ze jestes z miasta&quot;</span><span class="p">,</span> <span class="n">miasto</span><span class="p">)</span>
+
+<span class="n">czesc</span><span class="p">(</span><span class="s2">&quot;Alicja&quot;</span><span class="p">,</span> <span class="s2">&quot;Milego dnia&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Odpowiedź: Nie.</p>
+</section>
+<section id="zwracanie-wartosci">
+<h2>Zwracanie wartości<a class="headerlink" href="#zwracanie-wartosci" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Z czasem stopień skomplikowania naszych funkcji rośnie, ich zadaniem będzie wykonanie pewnych obliczeń i zwrócenie wyniku.</p>
+<p>Wartości z funkcji zwracane są przy pomocy słowa kluczowego return.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dodawanie</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">z</span>
+
+<span class="n">wynik</span> <span class="o">=</span> <span class="n">dodawanie</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Wynik:&quot;</span><span class="p">,</span> <span class="n">wynik</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Pytanie</strong></p>
+<p>Co to znaczy zwrócić wartość z funkcji?</p>
+<p>Odpowiedź: Bardzo ogólnie możemy powiedzieć, że zwrócenie wartości oznacza podstawienie obliczonego wyniku (wartości wskazanej słowem return) w miejsce wywołania funkcji.</p>
+<p>Wartości zwracane z funkcji nie muszą być tylko liczbami. Funkcje mogą zwracać dowolne obiekty (np. listy, krotki, słowniki).</p>
+<p><strong>Pytanie</strong></p>
+<p>Co robi poniższy kod?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">produce_numbers</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">numbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">numbers</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">produce_numbers</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Element:&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="przekazywanie-argumentow-ciag-dalszy">
+<h2>Przekazywanie argumentów - ciąg dalszy<a class="headerlink" href="#przekazywanie-argumentow-ciag-dalszy" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Funkcje w języku Python mogą przyjmować dowolnie wiele argumentów. W tym celu został opracowany specjalny parametr <code class="docutils literal notranslate"><span class="pre">*args</span></code> przechowujący dodatkowe nienazwane argumenty przekazane do funkcji.</p>
+<p>Nazwa  <code class="docutils literal notranslate"><span class="pre">args</span></code> jest umowna.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czesc</span><span class="p">(</span><span class="n">imie</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Czesc &quot;</span> <span class="o">+</span> <span class="n">imie</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Czesc &quot;</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="s2">&quot;! (args)&quot;</span><span class="p">)</span>
+
+<span class="n">czesc</span><span class="p">(</span><span class="s2">&quot;Janusz&quot;</span><span class="p">,</span> <span class="s2">&quot;Maciej&quot;</span><span class="p">,</span> <span class="s2">&quot;Mateusz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Dostępny jest także parametr <code class="docutils literal notranslate"><span class="pre">**kwargs</span></code> przechowujący dodatkowe nazwane argumenty przekazane do funkcji.  <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> jest słownikiem, gdzie kluczem jest nazwa parametru, a wartością przekazany argument.</p>
+<p>Nazwa <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> jest umowna.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">czesc</span><span class="p">(</span><span class="n">imie</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">nazwa</span> <span class="o">=</span> <span class="n">imie</span>
+    <span class="k">if</span> <span class="s2">&quot;nazwisko&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">nazwa</span> <span class="o">=</span> <span class="n">nazwa</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;nazwisko&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Czesc &quot;</span> <span class="o">+</span> <span class="n">nazwa</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span><span class="p">)</span>
+
+<span class="n">czesc</span><span class="p">(</span><span class="s2">&quot;Janusz&quot;</span><span class="p">)</span>
+<span class="n">czesc</span><span class="p">(</span><span class="s2">&quot;Anna&quot;</span><span class="p">,</span> <span class="n">nazwisko</span><span class="o">=</span><span class="s1">&#39;Nowak&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions">Funkcje</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions">Więcej o funkcjach</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

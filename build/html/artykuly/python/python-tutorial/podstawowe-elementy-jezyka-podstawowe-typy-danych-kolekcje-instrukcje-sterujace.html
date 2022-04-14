@@ -1,0 +1,683 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Podstawowe elementy języka - podstawowe typy danych, kolekcje, instrukcje sterujące | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../../index.html">
+                <img src="../../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="podstawowe-elementy-jezyka-podstawowe-typy-danych-kolekcje-instrukcje-sterujace">
+<h1>Podstawowe elementy języka - podstawowe typy danych, kolekcje, instrukcje sterujące<a class="headerlink" href="#podstawowe-elementy-jezyka-podstawowe-typy-danych-kolekcje-instrukcje-sterujace" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+
+<div id="pdfobject-0" class="pdfobject-container"></div>
+<script>PDFObject.embed("/_static/files/artykuly/python/python-tutorial/Podstawowe-elementy-jezyka-podstawowe-typy-danych-kolekcje-instrukcje-sterujące.pdf", "#pdfobject-0");</script>
+<section id="podstawowe-typy-danych">
+<h2>Podstawowe typy danych<a class="headerlink" href="#podstawowe-typy-danych" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Typy informują interpreter o wewnętrznym sposobie reprezentacji danych oraz operacjach, które można na nich wykonywać. Spośród wszystkich dostępnych typów wbudowanych warto wyróżnić cztery podstawowe:</p>
+<ul class="simple">
+<li><p>str,</p></li>
+<li><p>bool,</p></li>
+<li><p>int,</p></li>
+<li><p>float.</p></li>
+</ul>
+<p><strong>Napisy (str - string)</strong> są szeroko wykorzystywane w programowaniu, większość skryptów wykorzystuje je do zapisu danych czy komunikacji z innymi systemami. Napisy typu str (string) tworzone są najczęściej poprzez ujęcie ciągu znaków w apostrof (<code class="docutils literal notranslate"><span class="pre">'</span></code>) lub podwójny apostrof (<code class="docutils literal notranslate"><span class="pre">&quot;</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">napis</span> <span class="o">=</span> <span class="s1">&#39;Ala ma kota&#39;</span>
+<span class="n">napis2</span> <span class="o">=</span> <span class="s2">&quot;Ala ma kota&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">napis</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">napis2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Umieszczenie tekstu pomiędzy trzykrotnie powtórzonym znakiem apostrofu lub podwójnego apostrofu pozwala na_stworzenie napisu złożonego z wielu linii.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">napis_wiloliniowy</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;Ala</span>
+<span class="s1">ma</span>
+<span class="s1">kota&#39;&#39;&#39;</span>
+<span class="n">napis_wiloliniowy2</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Ala</span>
+<span class="s2">ma</span>
+<span class="s2">kota&quot;&quot;&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">napis_wiloliniowy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">napis_wiloliniowy2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Typ logiczny (bool – boolean)</strong> określany jest przez wartości True oraz False, wykorzystuje się go do weryfikacji warunków i przeprowadzania operacji logicznych.</p>
+<p>Poszczególne wyrażenia mogą być ze sobą łączone za pomocą <strong>alternatywy</strong> (or), <strong>koniunkcji</strong> (and) oraz <strong>negacji</strong> (not).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wynik</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">wynik</span><span class="p">)</span>
+
+<span class="n">wynik</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">wynik</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Typ liczb całkowitych (int_–_integer)</strong> określa liczby o dowolnej wielkości. W wyniku przeprowadzanych operacji matematycznych możliwe jest otrzymanie liczby <strong>typu rzeczywistego (float)</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># w wyniku mnożenia otrzymujemy liczbę typu int</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a * b =&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># w wyniku dzielenia otrzymujemy liczbę typu float</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a / b =&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Do <strong>konwersji danych danego typu na inny</strong> wykorzystywana jest nazwa typu docelowego taka jak <code class="docutils literal notranslate"><span class="pre">str</span></code>, <code class="docutils literal notranslate"><span class="pre">bool</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># str(x) --&gt; zamiana x na napis</span>
+<span class="n">napis</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># napis = &quot;1&quot;</span>
+
+<span class="c1"># int(x) --&gt; zamiana x na liczbę</span>
+<span class="n">liczba</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>  <span class="c1"># liczba = 2</span>
+
+<span class="c1"># float(x) --&gt; zamiana x na liczbę typu float</span>
+<span class="n">rzeczywista</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;2.3&quot;</span><span class="p">)</span>  <span class="c1"># rzeczywista = 2.3</span>
+
+<span class="c1"># bool(x) --&gt; zamiana x na wartość logiczną</span>
+<span class="n">logiczna</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>      <span class="c1"># logiczna = False</span>
+<span class="n">logiczna</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>      <span class="c1"># logiczna = True</span>
+<span class="n">logiczna</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>     <span class="c1"># logiczna = False</span>
+<span class="n">logiczna</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="s2">&quot;abc&quot;</span><span class="p">)</span>  <span class="c1"># logiczna = True</span>
+</pre></div>
+</div>
+<p>Wbudowana <strong>funkcja type()</strong> może posłużyć jako narzędzie do określania typu podanego wyrażenia.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Typ a&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Typ b:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Typ c:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Wynik działania powyższego skryptu:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Typ a: &lt;class &#39;int&#39;&gt;
+Typ b: &lt;class &#39;float&#39;&gt;
+Typ c: &lt;class &#39;float&#39;&gt;
+</pre></div>
+</div>
+</section>
+<section id="kolekcje">
+<h2>Kolekcje<a class="headerlink" href="#kolekcje" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<section id="lista-list">
+<h3>Lista (list)<a class="headerlink" href="#lista-list" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p><strong>Lista (list)</strong> służy do przechowywania zestawu danych. Kolejność elementów listy jest zależna od kolejności dodawania elementów.</p>
+<p>Elementy przechowywane w liście nie muszą być tego samego typu (np. ta sama lista może przechowywać napisy jak i liczby).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># utworzenie pustej listy</span>
+<span class="n">moja_lista</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">moja_lista</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+<span class="c1"># utworzenie listy zawierającej 7 elementów</span>
+<span class="c1">#    element   0  1   2    3    4   5  6</span>
+<span class="c1">#    element  -7 -6  -5   -4   -3  -2 -1</span>
+<span class="n">moja_lista</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">]</span>
+
+<span class="c1"># wyświetlenie na ekranie drugiego elementu</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moja_lista</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># wyświetlenie na ekranie przedostatniego elementu</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moja_lista</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moja_lista</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Częste operacje na listach:</p>
+<ol class="arabic simple">
+<li><p>sprawdzenie długości:</p></li>
+</ol>
+<p>wolna funkcja <code class="docutils literal notranslate"><span class="pre">len()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># utworzenie listy zawierającej 7 elementów</span>
+<span class="c1">#    element   0  1   2    3    4   5  6</span>
+<span class="n">moja_lista</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">]</span>
+
+<span class="c1"># otrzymanie liczby elementów listy</span>
+<span class="n">rozmiar_listy</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">moja_lista</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rozmiar_listy =&quot;</span><span class="p">,</span> <span class="n">rozmiar_listy</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>dodanie elementu:</p></li>
+</ol>
+<p>funkcja <code class="docutils literal notranslate"><span class="pre">append()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># utworzenie listy zawierającej 7 elementów</span>
+<span class="c1">#    element   0  1   2    3    4   5  6</span>
+<span class="n">moja_lista</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">]</span>
+
+<span class="c1"># dodanie elementu do listy</span>
+<span class="n">moja_lista</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;moja_lista = &quot;</span><span class="p">,</span> <span class="n">moja_lista</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania powyższego skryptu:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>moja_lista = [1, 2, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, 3, 4, 5]
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>wstawienie elementu:</p></li>
+</ol>
+<p>funkcja <code class="docutils literal notranslate"><span class="pre">insert()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># utworzenie listy zawierającej 7 elementów</span>
+<span class="c1">#    element   0  1   2    3    4   5  6</span>
+<span class="n">moja_lista</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">]</span>
+
+<span class="c1"># wstawienie elementu w określone miejsce listy</span>
+<span class="n">moja_lista</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;nowa&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;moja_lista = &quot;</span><span class="p">,</span> <span class="n">moja_lista</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania powyższego skryptu:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>moja_lista =  [1, 2, &#39;nowa&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, 3, 4]
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>usunięcie elementu:</p></li>
+</ol>
+<p>funkcja <code class="docutils literal notranslate"><span class="pre">remove()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># utworzenie listy zawierającej 7 elementów</span>
+<span class="c1">#    element   0  1   2    3    4   5  6</span>
+<span class="n">moja_lista</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">]</span>
+
+<span class="c1"># usunięcie pierwszego elementu listy,</span>
+<span class="c1"># którego wartość jest równa wartości elementu</span>
+<span class="c1"># przekazanego do funkcji remove</span>
+<span class="n">moja_lista</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;moja_lista = &quot;</span><span class="p">,</span> <span class="n">moja_lista</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania powyższego skryptu:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>moja_lista =  [1, 2, &#39;a&#39;, &#39;c&#39;, 3, 4]
+</pre></div>
+</div>
+<p>wolna funkcja <code class="docutils literal notranslate"><span class="pre">del()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># utworzenie listy zawierającej 7 elementów</span>
+<span class="c1">#    element   0  1   2    3    4   5  6</span>
+<span class="n">moja_lista</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">]</span>
+
+<span class="c1"># usunięcie określonego elementu listy</span>
+<span class="k">del</span><span class="p">(</span><span class="n">moja_lista</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;moja_lista = &quot;</span><span class="p">,</span> <span class="n">moja_lista</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania powyższego skryptu:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>moja_lista =  [1, 2, &#39;b&#39;, &#39;c&#39;, 3, 4]
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>wydzielenie kolekcji (slicing):</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># utworzenie listy zawierającej 7 elementów</span>
+<span class="c1">#    element   0  1   2    3    4   5  6</span>
+<span class="n">moja_lista</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">]</span>
+
+<span class="c1"># wydzielenie nowej listy na podstawie istniejącej</span>
+<span class="n">nowa_lista</span> <span class="o">=</span> <span class="n">moja_lista</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;moja_lista = &quot;</span><span class="p">,</span> <span class="n">moja_lista</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;nowa_lista = &quot;</span><span class="p">,</span> <span class="n">nowa_lista</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania powyższego skryptu:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>moja_lista =  [1, 2, ‘a’, &#39;b&#39;, &#39;c&#39;, 3, 4]
+nowa_lista =  [2, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+</pre></div>
+</div>
+</section>
+<section id="krotka-tuple">
+<h3>Krotka (tuple)<a class="headerlink" href="#krotka-tuple" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p><strong>Krotka (tuple)</strong>, podobnie jak lista, służy do przechowywania zestawu danych. Kolejność elementów jest zależna od kolejności zdefiniowanej w chwili utworzenia krotki.</p>
+<p>Elementy przechowywane w_krotce nie muszą być tego samego typu (np. ta sama krotka może przechowywać napisy jak i liczby).</p>
+<p><strong>Raz utworzona krotka nie_może być później zmieniona.</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># utworzenie pustej krotki</span>
+<span class="n">moja_krotka</span> <span class="o">=</span> <span class="p">()</span>
+<span class="n">moja_krotka</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">()</span>
+
+<span class="c1"># utworzenie krotki zawierającej 7 elementów</span>
+<span class="c1">#    element   0  1   2    3    4   5  6</span>
+<span class="c1">#    element  -7 -6  -5   -4   -3  -2 -1</span>
+<span class="n">moja_krotka</span> <span class="o">=</span> <span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span> <span class="p">)</span>
+
+<span class="c1"># wyświetlenie na ekranie drugiego elementu</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moja_krotka</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># wyświetlenie na ekranie przedostatniego elementu</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moja_krotka</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moja_krotka</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="napisy-str">
+<h3>Napisy (str)<a class="headerlink" href="#napisy-str" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p><strong>Napisy (str)</strong> zachowują się podobnie do krotek:</p>
+<ul class="simple">
+<li><p>są niemodyfikowalne,</p></li>
+<li><p>do poszczególnych liter można odwołać się za pomocą indeksu,</p></li>
+<li><p>funkcja <code class="docutils literal notranslate"><span class="pre">len()</span></code> zwraca liczbę liter,</p></li>
+<li><p>wspierają tworzenie napisów częściowych (slicing).</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">moj_napis</span> <span class="o">=</span> <span class="s2">&quot;Ala ma kota&quot;</span>
+
+<span class="c1"># wyświetlenie na ekranie trzeciego elementu</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moj_napis</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># wyświetlenie na ekranie przedostatniego elementu</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">moj_napis</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># utworzenie nowego elementu, slicing</span>
+<span class="n">kot</span> <span class="o">=</span> <span class="n">moj_napis</span><span class="p">[</span><span class="mi">7</span><span class="p">:]</span>    <span class="c1"># brak liczby po dwukropku!</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;kot =&quot;</span><span class="p">,</span> <span class="n">kot</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="wspolne-zachowanie">
+<h3>Wspólne zachowanie<a class="headerlink" href="#wspolne-zachowanie" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Informacja</p>
+<p>Listy, krotki i napisy pozwalają na wykonanie operacji dających podobne rezultaty na każdym z tych typów. Do operacji tych możemy zaliczyć między innymi omówione wcześniej:</p>
+<ul class="simple">
+<li><p>odwoływanie się do poszczególnych elementów za pomocą indeksów (operator indeksowania, []),</p></li>
+<li><p>pobieranie liczby elementów przechowywanych w danym typie (funkcja len()),</p></li>
+<li><p>wydzielenie nowej kolekcji na podstawie kolekcji istniejącej (slicing, [x:y]).</p></li>
+</ul>
+<p>Ważny wniosek:</p>
+<p><strong>Listy, krotki i napisy posiadają pewien wspólny interfejs (zbiór pewnych funkcji), który pozwala tym typom zachowywać się w podobny sposób.</strong></p>
+</div>
+</section>
+<section id="zbior-set">
+<h3>Zbiór (set)<a class="headerlink" href="#zbior-set" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p><strong>Zbior (set)</strong> służy do_przechowywania unikalnego zestawu danych bez_zachowania kolejności elementów.
+W związku z_niezachowywaniem kolejności elementów w_zbiorze nie jest możliwe odwoływanie się_do_poszczególnych elementów za pomocą operatora indeksowania.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># utworzenie pustego zbioru</span>
+<span class="n">zbior_A</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<span class="c1"># utworzenie zbioru z 4 elementami</span>
+<span class="n">zbior_B</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zbior_B =&quot;</span><span class="p">,</span> <span class="n">zbior_B</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zbior_B[1] = &quot;</span><span class="p">,</span> <span class="n">zbior_B</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># BŁĄD!</span>
+</pre></div>
+</div>
+<p>Najczęściej wykorzystywane funkcje do operacji na zbiorach:</p>
+<ol class="arabic simple">
+<li><p>dodanie nowego elementu - funkcja <code class="docutils literal notranslate"><span class="pre">add()</span></code></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">zbior_A</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">zbior_B</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">}</span>
+
+<span class="c1"># dodanie elementów</span>
+<span class="n">zbior_A</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">zbior_A</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">zbior_A</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zbior_A =&quot;</span><span class="p">,</span> <span class="n">zbior_A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zbior_B =&quot;</span><span class="p">,</span> <span class="n">zbior_B</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>usunięcie elementu - funkcja <code class="docutils literal notranslate"><span class="pre">remove()</span></code></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">zbior_A</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">zbior_B</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">}</span>
+
+<span class="c1"># usunięcie elementu</span>
+<span class="n">zbior_B</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">99</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zbior_A =&quot;</span><span class="p">,</span> <span class="n">zbior_A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zbior_B =&quot;</span><span class="p">,</span> <span class="n">zbior_B</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>suma zbiorów - operator <code class="docutils literal notranslate"><span class="pre">|</span></code></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">zbior_A</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span> <span class="p">}</span>
+<span class="n">zbior_B</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">}</span>
+
+<span class="c1"># suma zbiorów</span>
+<span class="n">zbior_C</span> <span class="o">=</span> <span class="n">zbior_A</span> <span class="o">|</span> <span class="n">zbior_B</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zbior_A =&quot;</span><span class="p">,</span> <span class="n">zbior_A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zbior_B =&quot;</span><span class="p">,</span> <span class="n">zbior_B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zbior_C =&quot;</span><span class="p">,</span> <span class="n">zbior_C</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>część wspólna zbiorów: - operator <code class="docutils literal notranslate"><span class="pre">&amp;</span></code></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">zbior_A</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span> <span class="p">}</span>
+<span class="n">zbior_B</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">}</span>
+
+<span class="c1"># część wspólna</span>
+<span class="n">zbior_C</span> <span class="o">=</span> <span class="n">zbior_A</span> <span class="o">&amp;</span> <span class="n">zbior_B</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zbior_A =&quot;</span><span class="p">,</span> <span class="n">zbior_A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zbior_B =&quot;</span><span class="p">,</span> <span class="n">zbior_B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zbior_C =&quot;</span><span class="p">,</span> <span class="n">zbior_C</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>różnica zbiorów: - operator <code class="docutils literal notranslate"><span class="pre">-</span></code></p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">zbior_A</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span> <span class="p">}</span>
+<span class="n">zbior_B</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">}</span>
+
+<span class="c1"># różnica zbiorów - wszystkie elementy</span>
+<span class="c1"># ze zbioru A bez elementów ze zbioru B</span>
+<span class="n">zbior_C</span> <span class="o">=</span> <span class="n">zbior_A</span> <span class="o">-</span> <span class="n">zbior_B</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zbior_A =&quot;</span><span class="p">,</span> <span class="n">zbior_A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zbior_B =&quot;</span><span class="p">,</span> <span class="n">zbior_B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zbior_C =&quot;</span><span class="p">,</span> <span class="n">zbior_C</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="slownik-dict">
+<h3>Słownik (dict)<a class="headerlink" href="#slownik-dict" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p><strong>Słownik (dict)</strong> służy do_przechowywania zestawów par klucz - wartość. Kluczem mogą być wartości, których_nie_można zmieniać (np. napisy, liczby, krotki).</p>
+<p>Utworzenie nowego elementu oraz odwołanie się do istniejącego elementu słownika odbywa się za pomocą operatora indeksowania.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># utworzenie pustego słownika</span>
+<span class="n">kolory</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># utworzenie słownika z 3 elementami</span>
+<span class="n">kolory</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;#000000&quot;</span> <span class="p">:</span> <span class="s2">&quot;czarny&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#FFFFFF&quot;</span> <span class="p">:</span> <span class="s2">&quot;bialy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#808080&quot;</span> <span class="p">:</span> <span class="s2">&quot;szary&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1"># dodanie elementu</span>
+<span class="n">kolory</span><span class="p">[</span><span class="s2">&quot;#FF3333&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;czerwony&quot;</span>
+
+<span class="c1"># odwołanie do elementu</span>
+<span class="n">nazwa_koloru</span> <span class="o">=</span> <span class="n">kolory</span><span class="p">[</span><span class="s2">&quot;#FFFFFF&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Podobnie jak było to w przypadku typów podstawowych, <strong>do konwersji danych jednego typu na inny</strong> wykorzystywana jest nazwa typu docelowego taka jak <code class="docutils literal notranslate"><span class="pre">list</span></code>, <code class="docutils literal notranslate"><span class="pre">tuple</span></code>, <code class="docutils literal notranslate"><span class="pre">set</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># tuple(x) --&gt; zamiana x na krotkę</span>
+<span class="n">krotka</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="s2">&quot;aabbcc&quot;</span><span class="p">)</span>
+
+<span class="c1"># list(x) --&gt; zamiana x na listę</span>
+<span class="n">lista</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">krotka</span><span class="p">)</span>
+
+<span class="c1"># set(x) --&gt; zamiana x na zbiór</span>
+<span class="n">zbior</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">lista</span><span class="p">)</span>
+
+<span class="c1"># zamiana kolekcji na napis następuje</span>
+<span class="c1"># przy użyciu funkcji join()</span>
+<span class="n">unikalne</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">zbior</span><span class="p">)</span>
+<span class="n">napis</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">unikalne</span><span class="p">)</span> <span class="c1"># kolejność liter dowolna</span>
+</pre></div>
+</div>
+</section>
+<section id="operator-in">
+<h3>Operator in<a class="headerlink" href="#operator-in" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Uniwersalny <strong>operator in</strong> pozwala sprawdzić czy dany element znajduje się w kolekcji.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">krotka</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="n">czy_dwa</span> <span class="o">=</span> <span class="mi">2</span> <span class="ow">in</span> <span class="n">krotka</span>
+<span class="n">czy_trzy</span> <span class="o">=</span> <span class="mi">3</span> <span class="ow">in</span> <span class="n">krotka</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;czy_dwa =&quot;</span><span class="p">,</span> <span class="n">czy_dwa</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;czy_trzy =&quot;</span><span class="p">,</span> <span class="n">czy_trzy</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania powyższego skryptu:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>czy_dwa = True
+czy_trzy = False
+</pre></div>
+</div>
+</section>
+</section>
+<section id="instrukcje-sterujace">
+<h2>Instrukcje sterujące<a class="headerlink" href="#instrukcje-sterujace" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Programy nie zawsze wykonują te same czynności, czasami ich dalsze zachowanie jest uzależnione od pewnych warunków. Przykładowo, aplikacja kontrolująca działanie robota sprzątającego musi zmienić kierunek ruchu odkurzacza, gdy wykryje, że urządzenie uderzyło w przeszkodę. Do sterowania przebiegiem wykonania programu wykorzystywana jest instrukcja warunkowa (if), pętla for oraz while.</p>
+<section id="instrukcja-warunkowa-if">
+<h3>Instrukcja warunkowa (if)<a class="headerlink" href="#instrukcja-warunkowa-if" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Instrukcja warunkowa pozwala wykonać fragment kodu, gdy zostanie spełniony określony warunek.</p>
+<p>Istotne elementy:</p>
+<ul class="simple">
+<li><p>słowo kluczowe if,</p></li>
+<li><p>dwukropek na końcu linii,</p></li>
+<li><p>widoczne wcięcie (4 spacje) oznaczające blok kodu do wykonania.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">imie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Podaj swoje imie: &quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">imie</span> <span class="o">==</span> <span class="s2">&quot;Jan&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Twoje imie to Jan&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">imie</span> <span class="o">==</span> <span class="s2">&quot;Mateusz&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;O Mateusz!&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nie znamy sie jeszcze&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dzien dobry!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="wartosc-none">
+<h3>Wartość None<a class="headerlink" href="#wartosc-none" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>W języku Python dostępna jest specjalna <strong>wartość None</strong>, gdy zmienna przyjmuje taką wartość oznacza to, że nie przechowuje ona żadnych danych.</p>
+<p>Sprawdzenia tej wartości dokonujemy za pomocą operatora <strong>is</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zmienna a nie ma ustawionej wartosci&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a:&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="petla-while">
+<h3>Pętla while<a class="headerlink" href="#petla-while" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Konstrukcja while pozwala na ponowne wykonywanie danego fragmentu kodu, dopóki podany warunek jest spełniony. Wykonywanie pętli zostanie zatrzymane, gdy warunek przestanie być prawdziwy.</p>
+<p>Istotne elementy:</p>
+<ul class="simple">
+<li><p>słowo kluczowe while,</p></li>
+<li><p>dwukropek na końcu linii,</p></li>
+<li><p>widoczne wcięcie (4 spacje) oznaczające blok kodu do wykonania.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zaczynam liczyc&quot;</span><span class="p">)</span>
+
+<span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Liczba:&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Koncze liczyc&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="petla-for">
+<h3>Pętla for<a class="headerlink" href="#petla-for" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Powtarzanie tych samych fragmentów kodu możliwe jest także za pomocą <strong>pętli for</strong>. Pętla ta pozwala na wybranie kolejnych elementów z podanej kolekcji.</p>
+<p>Istotne elementy:</p>
+<ul class="simple">
+<li><p>słowo kluczowe if oraz in,</p></li>
+<li><p>dwukropek na końcu linii,</p></li>
+<li><p>widoczne wcięcie (4 spacje) oznaczające blok kodu do wykonania.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zaczynam&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">nazwa</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Ala&quot;</span><span class="p">,</span> <span class="s2">&quot;ma&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;koty&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Element:&quot;</span><span class="p">,</span> <span class="n">nazwa</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Koncze&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania powyższego skryptu:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Zaczynam
+Element: Ala
+Element: ma
+Element: 2
+Element: koty
+Koncze
+</pre></div>
+</div>
+<p>Pętla for służy do iterowania (przechodzenia) po kolejnych elementach pewnego zestawu danych. W skład tego zestawu (np. listy lub krotki) mogą wchodzić kolejne liczby naturalne.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zaczynam&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">nazwa</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Element:&quot;</span><span class="p">,</span> <span class="n">nazwa</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Koncze&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania powyższego skryptu:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Zaczynam
+Element: 1
+Element: 2
+Element: 3
+Element: 4
+Koncze
+</pre></div>
+</div>
+<p>Korzystanie z kolejnych liczb w pętli for jest dość częste. W przypadku próby iteracji po liczbach od 0 do 100 wykorzystanie listy byłoby uciążliwe, z tego powodu powstała <strong>funkcja range</strong>, która tworzy obiekt zwracający kolejne liczby całkowite.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zaczynam&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">nazwa</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>      <span class="c1"># przedział &lt;1, 5)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Element:&quot;</span><span class="p">,</span> <span class="n">nazwa</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Koncze&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Wynik działania powyższego skryptu:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Zaczynam
+Element: 1
+Element: 2
+Element: 3
+Element: 4
+Koncze
+</pre></div>
+</div>
+</section>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/introduction.html">Podstawowe typy danych</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html">Struktury danych (Kolekcje)</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html">Instrukcje sterujące</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

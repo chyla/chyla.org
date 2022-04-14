@@ -1,0 +1,502 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Vim - Zaawansowany edytor tekstu | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="vim-zaawansowany-edytor-tekstu">
+<h1>Vim - Zaawansowany edytor tekstu<a class="headerlink" href="#vim-zaawansowany-edytor-tekstu" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<section id="spis-tresci">
+<h2>Spis treści<a class="headerlink" href="#spis-tresci" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple" start="0">
+<li><p>Wstęp - instalacja Vim</p></li>
+<li><p>Podstawowe polecenia - omówienie działania edytora z listą przydatnych skrótów klawiszowych</p></li>
+<li><p>Dystrybucje - gotowe konfiguracje Vim</p>
+<ul class="simple">
+<li><p>Instalacja space-vim</p></li>
+<li><p>Konfiguracja - dostosowanie space-vim do naszych potrzeb</p>
+<ul>
+<li><p>Warstwy</p></li>
+<li><p>Klasyczne skróty klawiszowe (CTRL-C itp.)</p></li>
+<li><p>Aliasy na literówki w poleceniach (np. <cite>:Wq</cite> zapisze bufor i opuści edytor)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="wstep">
+<h2>Wstęp<a class="headerlink" href="#wstep" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Przed przystąpieniem do pracy z edytorem Vim musimy upewnić się, że jest on zainstalowany w naszym systemie. Edytor można pobrać ze <a class="reference external" href="http://www.vim.org/download.php">strony domowej projektu</a> - dostępne są m.in. wersje dla Windows, Unix oraz Mac.</p>
+<figure class="align-default" id="id1">
+<img alt="../../_images/vim-download.png" src="../../_images/vim-download.png" />
+<figcaption>
+<p><span class="caption-text">Pobieranie edytora na stronie domowej projektu.</span><a class="headerlink" href="#id1" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+<p>W systemie Linux najwygodniejszym sposobem jest instalacja pakietu przygotowanego przez opiekunów dystrybucji. W tych bazujących na Debianie należy zainstalować pakiet <cite>vim</cite> oraz <cite>vim-gtk</cite> (dla trybu graficznego), natomiast w dystrybucjach bazujących na RHEL/Fedora pakiety to <cite>vim-enhanced</cite> oraz <cite>vim-X11</cite> odpowiednio.</p>
+</section>
+<section id="podstawowe-polecenia">
+<h2>Podstawowe polecenia<a class="headerlink" href="#podstawowe-polecenia" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Po instalacji Vim nie zachwyca. Na pewno nie zachwyca nowych użytkowników - ani pod względem obsługi, ani pod względem wyglądu. Co prawda dostępny jest tutorial (polecenie konsoli: <cite>vimtutor</cite>) prezentujący podstawowe polecenia edytora, jednak próg wejścia, w możliwość swobodnego poruszania się, jest nadal wysoki.</p>
+<figure class="align-default" id="id2">
+<img alt="../../_images/vim-konsola.png" src="../../_images/vim-konsola.png" />
+<figcaption>
+<p><span class="caption-text">Vim uruchomiony w oknie konsoli.</span><a class="headerlink" href="#id2" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id3">
+<img alt="../../_images/vim-gtk.png" src="../../_images/vim-gtk.png" />
+<figcaption>
+<p><span class="caption-text">Vim uruchomiony z wykorzystaniem graficznego interfejsu.</span><a class="headerlink" href="#id3" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+<p>Po uruchomieniu Vim działa w trybie <cite>NORMAL</cite>, jest to tryb wpisywania poleceń. Polecenia te pozwalają poruszać się po edytorze - np. wykonać operację kopiuj/wklej, przejść na koniec pliku itp.</p>
+<p>Po wydaniu jednoliterowego polecenia <cite>i</cite> Vim przejdzie do trybu <cite>INSERT</cite> (<cite>WPROWADZANIE</cite>) - ogólnie mówiąc, jest to tryb, w którym możemy zmieniać otwarty plik. Status informujący o aktywacji tego trybu znajdziemy w lewym dolnym rogu. By powrócić do trybu <cite>NORMAL</cite> naciskamy klawisz <cite>ESC</cite>.</p>
+<figure class="align-default" id="id4">
+<img alt="../../_images/vim-insert.png" src="../../_images/vim-insert.png" />
+<figcaption>
+<p><span class="caption-text">Vim w trybie <cite>INSERT</cite>.</span><a class="headerlink" href="#id4" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+<p>Vim może pracować również w trybie <cite>VISUAL</cite> (<cite>WIZUALNY</cite>). W trybie tym możemy zaznaczyć tekst i wykonać na nim żądane polecenie (np. wytnij). Po wykonaniu polecenia Vim automatycznie zmieni tryb na <cite>NORMAL</cite>. Klawisza <cite>ESC</cite> używamy, by opuścić tryb bez wprowadzania zmian.</p>
+<figure class="align-default" id="id5">
+<img alt="../../_images/vim-visual.png" src="../../_images/vim-visual.png" />
+<figcaption>
+<p><span class="caption-text">Vim w trybie <cite>VISUAL</cite>.</span><a class="headerlink" href="#id5" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+<p>Oto lista trybów, z których często korzystam:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 31%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Polecenie</p></th>
+<th class="head"><p>Tryb</p></th>
+<th class="head"><p>Opis</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>i</cite></p></td>
+<td><p>wprowadzanie</p></td>
+<td><p>modyfikowanie tekstu</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>v</cite></p></td>
+<td><p>wizualny</p></td>
+<td><p>zaznaczanie tekstu</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>CTRL + v</cite></p></td>
+<td><p>wizualny blokowy</p></td>
+<td><p>zaznaczanie tekstu blokami</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>V</cite></p></td>
+<td><p>wizualny liniowy</p></td>
+<td><p>zaznaczanie tekstu liniami</p></td>
+</tr>
+</tbody>
+</table>
+<p>Oprócz trybów warto znać kilka innych poleceń. Podobnie jak wyżej, przedstawione subiektywnie (dwukropek oznacza przejście do linii poleceń):</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 72%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Polecenie</p></th>
+<th class="head"><p>Opis</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><cite>dd</cite></p></td>
+<td><p>wytnij linię (delete)</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>dw</cite></p></td>
+<td><p>wytnij słowo (delete)</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>yy</cite></p></td>
+<td><p>kopiuj linię (yank)</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>yw</cite></p></td>
+<td><p>kopiuj słowo (yank)</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>P</cite></p></td>
+<td><p>wklej powyżej/przed kursorem</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>p</cite></p></td>
+<td><p>wklej poniżej/za kursorem</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>/</cite></p></td>
+<td><p>przeszukaj zawartość bufora</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>u</cite></p></td>
+<td><p>cofnij</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>CTRL + r</cite></p></td>
+<td><p>ponów</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>:e &lt;nazwa&gt;</cite></p></td>
+<td><p>otwarcie pliku</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>:w</cite></p></td>
+<td><p>zapis bufora</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>:w &lt;nazwa&gt;</cite></p></td>
+<td><p>zapis bufora do pliku o wybranej nazwie</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>:ls</cite></p></td>
+<td><p>lista otwartych buforów</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>:b &lt;numer&gt;</cite></p></td>
+<td><p>przejdź do bufora</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>:bd</cite></p></td>
+<td><p>zamknięcie bufora</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>:split</cite></p></td>
+<td><p>podziel okno poziomo</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>:split &lt;nazwa&gt;</cite></p></td>
+<td><p>podziel okno poziomo i otwórz plik</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>:vsplit</cite></p></td>
+<td><p>podziel okno pionowo</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>:vsplit &lt;nazwa&gt;</cite></p></td>
+<td><p>podziel okno pionowo i otwórz plik</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>:q</cite></p></td>
+<td><p>zamknięcie okna</p></td>
+</tr>
+<tr class="row-even"><td><p><cite>CTRL + w &lt;strzałka&gt;</cite></p></td>
+<td><p>przejście do okna po lewej/prawej stronie, na górze/dole</p></td>
+</tr>
+<tr class="row-odd"><td><p><cite>:! &lt;polecenie&gt;</cite></p></td>
+<td><p>wykonanie polecenia powłoki</p></td>
+</tr>
+</tbody>
+</table>
+<p>Zapewne niektórzy zwrócili uwagę na słowo <em>delete</em> przy słowie <em>wytnij</em> oraz <em>yank</em> przy <em>kopiuj</em>. Wynika to z faktu, że w Vimie właśnie tak te operacje się nazywają. Pewne rozważania na ten temat można znaleźć na <a class="reference external" href="https://ell.stackexchange.com/questions/14632/why-does-yank-in-vim-mean-copy">StackExchange</a>.</p>
+<p>Polecenia można ze sobą łączyć. Poniższe zapisze bufor do pliku, a następnie zamknie otwarte okno:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="n">wq</span>
+</pre></div>
+</div>
+<p>Oczywiście powyższa lista nie jest kompletna, Vim oferuje dużo więcej poleceń. Oto kilka stron, na których możesz o nich przeczytać:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.radford.edu/~mhtay/CPSC120/VIM_Editor_Commands.htm">VIM Editor Commands</a></p></li>
+<li><p><a class="reference external" href="https://www.cs.oberlin.edu/~kuperman/help/vim/home.html">vim tips and tricks</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=sHGiC6Fp800">(youtube) VIM - Split Screen and Navigation - Linux - Shell - BASH</a></p></li>
+</ul>
+</section>
+<section id="dystrybucje">
+<h2>Dystrybucje<a class="headerlink" href="#dystrybucje" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Vim może być czymś więcej, niż tylko zwykłym edytorem tekstu - może być środowiskiem programistycznym. W tym celu należy skonfigurować Vima (plik <cite>~/.vimrc</cite>) do naszych potrzeb, zainstalować odpowiednie dodatki i je skonfigurować albo… wykorzystać konfigurację utworzoną przez innych - tak zwaną dystrybucję. Oczywiście dystrybucja taka jest odpowiednio przygotowana, by jej użytkownicy mogli ją dostosowywać.</p>
+<p>Chyba najpopularniejszą dystrybucją jest <a class="reference external" href="http://vim.spf13.com/">spf13-vim</a>. Na jej stronie internetowej znajdziemy opis instalacji i dokumentację. Inną dystrybucją jest <a class="reference external" href="http://vim.liuchengxu.org/">space-vim</a> i to właśnie jej poświęcę uwagę.</p>
+<section id="instalacja-space-vim">
+<h3>Instalacja space-vim<a class="headerlink" href="#instalacja-space-vim" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<div class="admonition attention">
+<p class="admonition-title">Uwaga</p>
+<p>Polecenia konsoli, pokazane w dalszej części artykułu, przygotowane zostały z myślą o użytkownikach systemu Linux. W przypadku innych systemów operacyjnych polecenia te mogą się różnić.</p>
+</div>
+<p>Instalacja została opisana na stronie internetowej dystrybucji - <a class="reference external" href="http://vim.liuchengxu.org/">http://vim.liuchengxu.org/</a>.</p>
+<p>Przed przystąpieniem do instalacji musimy upewnić się, że mamy zainstalowany program <cite>git</cite> oraz edytor <cite>vim</cite> z obsługą języka Python.</p>
+<p>Poniższe polecenia Vim pomogą sprawdzić, czy Python jest obsługiwany:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="n">echo</span> <span class="n">has</span><span class="p">(</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+<span class="p">:</span><span class="n">echo</span> <span class="n">has</span><span class="p">(</span><span class="s1">&#39;python3&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Jeśli którekolwiek z nich wyświetli <cite>1</cite> to znaczy, że nasz Vim posiada wsparcie dla języka Python.</p>
+<p>Instalację przeprowadzamy z konta użytkownika, który ma tej dystrybucji używać, poprzez wydanie polecenia:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;$(curl -fsSL https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.sh)&quot;</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id6">
+<img alt="../../_images/vim-space-vim-instalacja.png" src="../../_images/vim-space-vim-instalacja.png" />
+<figcaption>
+<p><span class="caption-text">Proces instalacji dystrybucji space-vim.</span><a class="headerlink" href="#id6" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+<p>Po krótkiej chwili możemy uruchomić edytor. Z pewnością zauważymy, że teraz wygląda on zupełnie inaczej.</p>
+<figure class="align-default" id="id7">
+<img alt="../../_images/vim-space-vim-konsola.png" src="../../_images/vim-space-vim-konsola.png" />
+<figcaption>
+<p><span class="caption-text">space-vim uruchomiony w oknie konsoli.</span><a class="headerlink" href="#id7" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id8">
+<img alt="../../_images/vim-space-vim-gtk.png" src="../../_images/vim-space-vim-gtk.png" />
+<figcaption>
+<p><span class="caption-text">space-vim uruchomiony z wykorzystaniem graficznego interfejsu.</span><a class="headerlink" href="#id8" title="Stały odnośnik do tego obrazu">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="konfiguracja">
+<h3>Konfiguracja<a class="headerlink" href="#konfiguracja" title="Stały odnośnik do tego nagłówka">¶</a></h3>
+<p>Instalacja dystrybucji tylko z uwagi na jej wygląd nie jest niczym szczególnym, ważne są dodatki. Otwórzmy zatem plik konfiguracyjny i dostosujmy dystrybucję do naszych potrzeb. Oczywiście całą operację wykonamy za pomocą Vima.</p>
+<ol class="arabic">
+<li><p>Otwieramy plik konfiguracyjny <cite>~/.spacevim</cite> (domyślny plik konfiguracyjny to <cite>~/.vimrc</cite>, jednak na potrzeby dystrybucji został on zmieniony). Będąc w trybie <cite>NORMAL</cite> wykonujemy polecenie:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="n">e</span> <span class="o">~/.</span><span class="n">spacevim</span>
+</pre></div>
+</div>
+<p>Naszym oczom ukaże się taki plik konfiguracyjny:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&quot; You can enable the existing layers in space-vim and
+&quot; exclude the partial plugins in a certain layer.
+&quot; The command Layer is vaild in the function Layers().
+&quot; Use exclude option if you don&#39;t want the full Layer,
+&quot; e.g., Layer &#39;better-defaults&#39;, { &#39;exclude&#39;: &#39;itchyny/vim-cursorword&#39; }
+function! Layers()
+
+  &quot; Default layers, recommended!
+  Layer &#39;fzf&#39;
+  Layer &#39;unite&#39;
+  Layer &#39;better-defaults&#39;
+
+endfunction
+
+&quot; Put your private plugins here.
+function! UserInit()
+
+  &quot; Space has been set as the default leader key,
+  &quot; if you want to change it, uncomment and set it here.
+  &quot; let g:spacevim_leader = &quot;&lt;\Space&gt;&quot;
+  &quot; let g:spacevim_localleader = &#39;,&#39;
+
+  &quot; Install private plugins
+  &quot; Plug &#39;extr0py/oni&#39;
+
+endfunction
+
+&quot; Put your costom configurations here, e.g., change the colorscheme.
+function! UserConfig()
+
+  &quot; If you enable airline layer and have installed the powerline fonts, set it here.
+  &quot; let g:airline_powerline_fonts=1
+  &quot; color desert
+
+endfunction
+</pre></div>
+</div>
+<p>Plik ten możemy podzielić na trzy części według widocznych funkcji - warstwy, dodatki użytkownika oraz konfigurację użytkownika.</p>
+<p><strong>Warstwa</strong> (Layer) to zbiór dodatków - np. warstwa <cite>python</cite> zawiera dodatki pozwalające na pracę ze skryptami języka Python.</p>
+<p><strong>Dodatki użytkownika</strong> to poszczególne dodatki dla Vima, które chcemy włączyć.</p>
+<p><strong>Konfiguracja użytkownika</strong> umożliwia zmianę poszczególnych opcji Vima - np. używanego schematu kolorów.</p>
+</li>
+<li><p>Zobaczmy jakie warstwy oferuje nam <cite>space-vim</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">ls</span> <span class="o">~/.</span><span class="n">space</span><span class="o">-</span><span class="n">vim</span><span class="o">/</span><span class="n">layers</span><span class="o">/</span>
+<span class="o">+</span><span class="n">checkers</span>    <span class="o">+</span><span class="n">distributions</span>  <span class="n">generate_layers</span><span class="o">.</span><span class="n">py</span>  <span class="n">LAYERS</span><span class="o">.</span><span class="n">md</span>  <span class="o">+</span><span class="n">programming</span>  <span class="o">+</span><span class="n">tools</span>            <span class="o">+</span><span class="n">vim</span>
+<span class="o">+</span><span class="n">completion</span>  <span class="o">+</span><span class="n">fun</span>            <span class="o">+</span><span class="n">lang</span>               <span class="o">+</span><span class="n">misc</span>      <span class="o">+</span><span class="n">themes</span>       <span class="o">+</span><span class="n">version</span><span class="o">-</span><span class="n">control</span>
+</pre></div>
+</div>
+<p>Po sprawdzeniu katalogu dystrybucji widać, że zostały one podzielone ze względu na ich role. Jako programista jestem zainteresowany językami C, C++ oraz Python:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">ls</span>  <span class="o">~/.</span><span class="n">space</span><span class="o">-</span><span class="n">vim</span><span class="o">/</span><span class="n">layers</span><span class="o">/+</span><span class="n">lang</span><span class="o">/</span>
+<span class="n">c</span><span class="o">-</span><span class="n">c</span><span class="o">++</span>   <span class="n">elm</span>     <span class="n">go</span>        <span class="n">html</span>  <span class="n">javascript</span>  <span class="n">markdown</span>  <span class="n">scala</span>       <span class="n">vue</span>
+<span class="n">elixir</span>  <span class="n">erlang</span>  <span class="n">graphviz</span>  <span class="n">java</span>  <span class="n">latex</span>       <span class="n">python</span>    <span class="n">typescript</span>
+</pre></div>
+</div>
+<p>Sprawdźmy jakie dodatki zostaną zainstalowane z warstwą <cite>python</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">cat</span>  <span class="o">~/.</span><span class="n">space</span><span class="o">-</span><span class="n">vim</span><span class="o">/</span><span class="n">layers</span><span class="o">/+</span><span class="n">lang</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">packages</span><span class="o">.</span><span class="n">vim</span>
+<span class="n">MP</span> <span class="s1">&#39;tmhedberg/SimpylFold&#39;</span><span class="p">,</span>    <span class="p">{</span> <span class="s1">&#39;for&#39;</span><span class="p">:</span> <span class="s1">&#39;python&#39;</span> <span class="p">}</span>
+<span class="n">MP</span> <span class="s1">&#39;python-mode/python-mode&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="s1">&#39;for&#39;</span><span class="p">:</span> <span class="s1">&#39;python&#39;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Proponuję rozejrzeć się chwilę po dostępnych warstwach.</p>
+</li>
+<li><p>W celu włączenia nowych warstw musimy wyedytować funkcję <cite>Layers</cite>. W moim przypadku włączone zostały warstwy: <cite>c-c++</cite>, <cite>python</cite> oraz <cite>git</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function! Layers()
+
+  &quot; Default layers, recommended!
+  Layer &#39;fzf&#39;
+  Layer &#39;unite&#39;
+  Layer &#39;better-defaults&#39;
+
+  Layer &#39;c-c++&#39;
+  Layer &#39;python&#39;
+
+  Layer &#39;git&#39;
+
+endfunction
+</pre></div>
+</div>
+<p>Po zmianie funkcji <cite>Layers</cite> należy ponownie uruchomić edytor, aby nowe dodatki zostały zainstalowane.</p>
+</li>
+<li><p>Wiele osób narzeka na konieczność używania dziwnych poleceń w Vimie. Zainstalujmy dodatek <cite>novim-mode</cite>, który doda obsługę <em>klasycznych</em> skrótów klawiszowych (ich dokumentacja znajduje się <a class="reference external" href="https://github.com/tombh/novim-mode">tutaj</a>).</p>
+<p>W tym celu należy wyedytować funkcję <cite>UserInit</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function! UserInit()
+
+  &quot; Space has been set as the default leader key,
+  &quot; if you want to change it, uncomment and set it here.
+  &quot; let g:spacevim_leader = &quot;&lt;\Space&gt;&quot;
+  &quot; let g:spacevim_localleader = &#39;,&#39;
+
+  &quot; Install private plugins
+  &quot; Plug &#39;extr0py/oni&#39;
+
+  Plug &#39;tombh/novim-mode&#39;
+
+endfunction
+</pre></div>
+</div>
+<p>Oczywiście po tej zmianie ponownie uruchamiamy edytor i cieszymy się standardowymi skrótami klawiszowymi. Jestem dość sceptycznie nastawiony do tego dodatku, ale może komuś przypadnie do gustu. Przedstawiam go bardziej jako ciekawostkę.</p>
+<p>Jedna ważna uwaga: <cite>ALT + ;</cite> oraz <cite>ALT + c</cite> sprawi, że otworzy się wiersz poleceń Vim. Ten skrót może się przydać, gdy wpadniemy w tarapaty.</p>
+</li>
+<li><p>Na koniec możemy zmienić konfigurację Vima. Ustawmy inny schemat kolorów oraz <em>pożyczmy</em> od <cite>spf13-vim</cite> konfigurację odpowiedzialną za utworzenie aliasów do typowych błędów w poleceniach:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&quot; Put your costom configurations here, e.g., change the colorscheme.
+function! UserConfig()
+
+  &quot; If you enable airline layer and have installed the powerline fonts, set it here.
+  &quot; let g:airline_powerline_fonts=1
+  color desert
+
+  &quot; Fix common typos like :W, :Q, etc
+  command! -bang -nargs=* -complete=file E e&lt;bang&gt; &lt;args&gt;
+  command! -bang -nargs=* -complete=file W w&lt;bang&gt; &lt;args&gt;
+  command! -bang -nargs=* -complete=file Wq wq&lt;bang&gt; &lt;args&gt;
+  command! -bang -nargs=* -complete=file WQ wq&lt;bang&gt; &lt;args&gt;
+  command! -bang Wa wa&lt;bang&gt;
+  command! -bang WA wa&lt;bang&gt;
+  command! -bang Q q&lt;bang&gt;
+  command! -bang QA qa&lt;bang&gt;
+  command! -bang Qa qa&lt;bang&gt;
+
+endfunction
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

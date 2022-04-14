@@ -1,0 +1,233 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>Operacje wejścia/wyjścia - Pickle | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/chyla.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../../index.html">
+                <img src="../../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="operacje-wejscia-wyjscia-pickle">
+<h1>Operacje wejścia/wyjścia - Pickle<a class="headerlink" href="#operacje-wejscia-wyjscia-pickle" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+
+<div id="pdfobject-0" class="pdfobject-container"></div>
+<script>PDFObject.embed("/_static/files/artykuly/python/python-tutorial/Operacje-wejscia-wyjscia-Pickle.pdf", "#pdfobject-0");</script>
+<section id="pickle">
+<h2>Pickle<a class="headerlink" href="#pickle" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Moduł <strong>pickle</strong> pozwala na serializację i deserializację obiektów Pythona.</p>
+<p>Serializacją (inaczej <em>marshalling</em>, <em>pickling</em> lub <em>flattening</em>) to proces przekształcania obiektu w ciąg bajtów. Deserializacja (inaczej <em>demarshalling</em> lub <em>unpicking</em>) to proces przeciwny -  zamiana kolejnych bajtów na obiekt.  <a class="footnote-reference brackets" href="#id2" id="id1">1</a></p>
+<p>Uzyskany w ten sposób ciąg bajtów można zapisać do pliku lub przesłać przez sieć. Dane zapisane w pliku mogą później posłużyć do odtworzenia stanu programu przy jego kolejnym uruchomieniu.</p>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>źródło: <a class="reference external" href="https://docs.python.org/3/library/pickle.html">https://docs.python.org/3/library/pickle.html</a></p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Ostrzeżenie</p>
+<p>Za pomocą modułu pickle należy deserializować dane pochodzące wyłącznie z zaufanego źródła.</p>
+<p>Deserializacja niezaufanych danych może wiązać się z poważnym zagrożeniem bezpieczeństwa dla systemu, na którym działa nasz program.</p>
+<p>Proces deserializacji danych umożliwia wykonanie dowolnego kodu. Kontrola danych przeznaczonych do deserializacji za pomocą modułu pickle to silny atut w rękach atakującego.</p>
+</div>
+</section>
+<section id="serializacja-danych">
+<h2>Serializacja danych<a class="headerlink" href="#serializacja-danych" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Funkcja <code class="docutils literal notranslate"><span class="pre">dumps()</span></code> pozwala na serializację obiektu do ciągu bajtów.</p>
+<p>Ciąg bajtów można zapisać do pliku lub przesłać przez sieć.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="n">phone_book</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Jonna&quot;</span><span class="p">:</span> <span class="s2">&quot;542124&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Maciej&quot;</span><span class="p">:</span> <span class="s2">&quot;542323&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+
+<span class="nb">bytes</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">phone_book</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="zapisywanie-danych-do-pliku">
+<h2>Zapisywanie danych do pliku<a class="headerlink" href="#zapisywanie-danych-do-pliku" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Zapisanie danych do pliku możemy zrealizować za pomocą funkcji <code class="docutils literal notranslate"><span class="pre">dump()</span></code>.</p>
+<p>Plik, w którym chcemy zapisać dane, musi zostać otworzony w trybie binarnym. Należy również pamiętać o jego zamknięciu.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="n">phone_book</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Jonna&quot;</span><span class="p">:</span> <span class="s2">&quot;542124&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Maciej&quot;</span><span class="p">:</span> <span class="s2">&quot;542323&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;app_data.pickle&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">phone_book</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="deserializacja-danych">
+<h2>Deserializacja danych<a class="headerlink" href="#deserializacja-danych" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Funkcja <code class="docutils literal notranslate"><span class="pre">loads()</span></code> pozwala zamienić ciąg bajtów na obiekt.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="nb">bytes</span> <span class="o">=</span> <span class="p">(</span> <span class="sa">b</span><span class="s1">&#39;(dp0</span><span class="se">\n</span><span class="s1">VJonna</span><span class="se">\n</span><span class="s1">p1</span><span class="se">\n</span><span class="s1">V542124</span><span class="se">\n</span><span class="s1">p2</span><span class="se">\n</span><span class="s1">sVMaciej</span><span class="se">\n</span><span class="s1">p3</span><span class="se">\n</span><span class="s1">V542323</span><span class="se">\n</span><span class="s1">p4</span><span class="se">\n</span><span class="s1">s.&#39;</span>
+<span class="p">)</span>
+
+<span class="n">phone_book</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="nb">bytes</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="wczytywanie-danych-z-pliku">
+<h2>Wczytywanie danych z pliku<a class="headerlink" href="#wczytywanie-danych-z-pliku" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Odczyt danych z pliku możemy zrealizować za pomocą funkcji <code class="docutils literal notranslate"><span class="pre">load()</span></code>.</p>
+<p>Plik, z którego chcemy odczytać dane, musi zostać otworzony w trybie binarnym. Należy również pamiętać o jego zamknięciu.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;app_data.pickle&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">phone_book</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="wykonanie-dowolnego-kodu">
+<h2>Wykonanie dowolnego kodu<a class="headerlink" href="#wykonanie-dowolnego-kodu" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p><strong>Za pomocą modułu pickle należy deserializować dane pochodzące wyłącznie z zaufanego źródła.</strong></p>
+<p>Powyższe stwierdzenie jest bardzo ważne. Dobrze obrazuje to przykład, który deserializuje ciąg bajtów podany przez złośliwego użytkownika (albo atakującego).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="nb">bytes</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;cos</span><span class="se">\n</span><span class="s2">system</span><span class="se">\n</span><span class="s2">(S&#39;echo Usuwanie plikow.&#39;</span><span class="se">\n</span><span class="s2">tR.&quot;</span>
+
+<span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="nb">bytes</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>W strumieniu danych znajduje się wywołanie funkcji <code class="docutils literal notranslate"><span class="pre">system()</span></code>, która uruchamia podane polecenie w konsoli.</p>
+</section>
+<section id="literatura">
+<h2>Literatura<a class="headerlink" href="#literatura" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/pickle.html">pickle — Python object serialization</a></p></li>
+<li><p><a class="reference external" href="https://www.benfrederickson.com/dont-pickle-your-data/">Don’t Pickle Your Data</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Specjalista ds. Rozwoju Oprogramowania</p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-90323199-1', 'auto');
+    ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>
