@@ -1,0 +1,404 @@
+body {
+    background-color: #fafafa;
+}
+
+/* navbar */
+.navbar,
+#navbar-placeholder {
+    height: 4rem;
+}
+
+.navbar .nav-link {
+    padding: 0.5em;
+    text-transform: uppercase;
+    border: 1px solid #f0f0f0;
+}
+
+@media screen and (max-width: 766px) {
+    .navbar .nav-link {
+        padding: 1em;
+    }
+}
+
+.navbar .nav-item {
+    padding: 0 1px;
+}
+
+.chyla-navbar-light {
+    background: #fafafa;
+    box-shadow: 0 0 2px rgb(0 0 0 / 15%);
+}
+
+.chyla-navbar-light .nav-link {
+    background-color: #fff;
+    color: #3d3d3d;
+}
+
+.chyla-navbar-light .chyla-navbar-toggler {
+    font-size: 0.9375rem;
+    height: calc(1.5em + 0.75rem + 2px);
+    color: #495057;
+    text-align: center;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    padding: 0.375rem 0.75rem;
+}
+
+#blog-title {
+    color: #777;
+    font-weight: 700;
+    font-size: 18pt;
+    padding: 0.3rem;
+}
+
+/* footer */
+footer {
+    padding: 2rem 3rem;
+}
+
+@media screen and (max-width: 766px) {
+    footer {
+        text-align: center;
+    }
+
+    footer h5 {
+        margin: 10px auto;
+    }
+}
+
+
+footer h5 {
+    display: table;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+    font-size: 12pt;
+    font-weight: 400;
+}
+
+footer p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 10pt;
+}
+
+.chyla-footer-light {
+    background: #fafafa;
+    box-shadow: 0 -1px 1px rgb(0 0 0 / 15%);
+}
+
+.footer-law p {
+    font-size: 8pt;
+    text-align: center;
+}
+
+.footer-box {
+    padding-top: 10pt;
+}
+
+.chyla-footer-light h5,
+.chyla-footer-light p,
+.chyla-footer-light a {
+    color: #373a3c;
+}
+
+.chyla-footer-light h5 {
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.chyla-footer-social-list ul {
+    padding: 0;
+}
+
+.chyla-footer-social-list li {
+    display: inline-block;
+    border: 1px solid #ebebeb;
+    margin: 0 10px 0 0;
+}
+
+.chyla-footer-social-list li a {
+    padding: 5px;
+    width: 35px;
+}
+
+
+/* search banner */
+@media screen and (max-width: 576px) {
+	.banner .search {
+		padding: 5rem 2rem !important;
+	}
+
+	.banner .search-form {
+		padding: 2rem 0.5rem;
+	}
+}
+
+.banner .search {
+    padding: 5rem 7rem;
+    background-color: #e9ecef;
+}
+
+.banner .searchbox {
+    padding: 2rem 2rem;
+}
+
+.banner .searchbox .search-form {
+    padding: 0.3rem;
+}
+
+.banner .btn-outline-extended-search {
+	background-color: #fff;
+	border-color: #3fb618;
+    flex: 1 1 auto;
+    min-width: 35%;
+    width: 35%;
+}
+
+.banner .btn-outline-extended-search:hover {
+	color: #fff;
+	background-color: #3fb618;
+	border-color: #3fb618;
+}
+
+.banner .btn-extended-search {
+    color: #fff;
+    background-color: #3fb618;
+    border-color: #3fb618;
+}
+
+
+/* standard page */
+.document {
+    background-color: #fff;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
+.document h1, h2, h3, h4, h5, h6, h7 {
+    padding-top: 1.2rem;
+}
+
+.document dt {
+    font-weight: normal;
+    float: left;
+    padding-right: 0.2rem;
+}
+
+.document dd {
+    margin-bottom: 0.2rem;
+}
+
+.document dd p {
+    margin-bottom: 0;
+}
+
+.document p {
+    text-align: justify;
+    margin-bottom: 0.6rem;
+    line-height: 1.7;
+    word-wrap: break-word;
+}
+
+.topic {
+    padding-top: 1rem;
+}
+
+.topic p {
+    margin-bottom: 0.2rem;
+}
+
+.topic .topic-title {
+    margin-bottom: 0.1rem;
+    font-size: 1.875rem;
+    font-weight: 300;
+}
+
+/* workaround https://stackoverflow.com/a/11842865/5007100 */
+.section {
+    padding-top: 4rem;
+    margin-top: -4rem;
+}
+
+blockquote {
+    margin-left: 0.6rem;
+    margin-bottom: 0.6rem;
+    margin-right: 0.6rem;
+    border-left: 5px solid #eee;
+    padding: .5rem;
+}
+
+.admonition {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 0 solid transparent;
+}
+
+.admonition .admonition-title {
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+}
+
+.note {
+    background-color: #e5e6e6;
+    border-color: #e5e6e6;
+}
+
+.tip {
+    background-color: #d9f0d1;
+    border-color: #c9ebbe;
+}
+
+.important,
+.attention,
+.warning {
+    background-color: #ffccd7;
+    border-color: #ffb8c8;
+}
+
+
+.highlight-link {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    line-height: 1;
+}
+
+.highlight-link a {
+    font-size: 0.6rem;
+}
+
+.highlighted,
+.highlight-link a {
+    background-color: #f3f88e;
+}
+
+a.headerlink {
+    font-size: 0.8rem;
+    margin-left: 6px;
+    padding: 0 4px 0 4px;
+    float: right;
+}
+
+a.headerlink {
+    visibility: hidden;
+}
+
+h1:hover > a.headerlink,
+h2:hover > a.headerlink,
+h3:hover > a.headerlink,
+h4:hover > a.headerlink,
+h5:hover > a.headerlink,
+h6:hover > a.headerlink,
+dt:hover > a.headerlink,
+caption:hover > a.headerlink,
+p.caption:hover > a.headerlink,
+div.code-block-caption:hover > a.headerlink {
+    visibility: visible;
+}
+
+.footnote {
+    font-size: 0.7rem;
+    padding-top: 0.5rem;
+}
+
+.footnote-reference {
+    vertical-align: super;
+    font-size: 0.75em;
+}
+
+/* tables */
+table.docutils {
+    width: 100%;
+    margin: 1rem;
+}
+
+table.docutils thead {
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    border-color: #97999a;
+}
+
+table.docutils p {
+    margin: 0;
+    padding: 0.2rem;
+}
+
+table.docutils tr:hover th,
+table.docutils tr:hover td {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+
+/* images */
+.figure {
+    text-align: center;
+    width: 100%;
+    padding: 1rem;
+}
+
+.figure img {
+    max-width: 100%;
+}
+
+.figure .caption {
+    text-align: center;
+    font-style: italic;
+}
+
+
+/* source code */
+div.notranslate {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0.4rem;
+    margin-left: 0.5rem;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+}
+
+div.notranslate,
+div.notranslate .highlight,
+div.notranslate .highlighttable {
+    background: #ffffff;
+}
+
+div.notranslate .highlight pre,
+div.notranslate .highlighttable pre{
+    margin: 0;
+    overflow: revert;
+}
+
+/* pdfobject */
+.pdfobject-container {
+    height: 20rem;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 576px) {
+    .pdfobject-container {
+        height: 20rem;
+    }
+}
+
+@media (min-width: 766px) {
+    .pdfobject-container {
+        height: 25rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .pdfobject-container {
+        height: 35rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .pdfobject-container {
+        height: 35rem;
+    }
+}

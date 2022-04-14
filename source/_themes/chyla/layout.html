@@ -1,0 +1,158 @@
+{%- set url_root = pathto('', 1) %}
+{# URL root should never be #, then all links are fragments #}
+{%- if url_root == '#' %}{% set url_root = '' %}{% endif %}
+
+
+{%- macro css() %}
+    <link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css" />
+    <link rel="stylesheet" href="{{ pathto('_static/' + style, 1)|e }}" type="text/css" />
+    {%- for css in css_files %}
+      {%- if css|attr("filename") %}
+    {{ css_tag(css) }}
+      {%- else %}
+    <link rel="stylesheet" href="{{ pathto(css, 1)|e }}" type="text/css" />
+      {%- endif %}
+    {%- endfor %}
+{%- endmacro %}
+
+
+{%- macro script() %}
+    <script id="documentation_options" data-url_root="{{ url_root }}" src="{{ pathto('_static/documentation_options.js', 1) }}"></script>
+    {%- for js in script_files %}
+    {{ js_tag(js) }}
+    {%- endfor %}
+{%- endmacro %}
+
+
+<!DOCTYPE html>
+<html lang="{{ language }}">
+  <head>
+    <meta charset="utf-8">
+    {%- block htmltitle %}
+    <title>{{ title|striptags|e }} | {{ project|striptags|e }}</title>
+    {%- endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="{{ pathto('_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css', 1) }}" type="text/css" />
+    <link rel="stylesheet" href="{{ pathto('_static/bootstrap-icons-1.4.0/bootstrap-icons.css', 1) }}" type="text/css" />
+    <link rel="stylesheet" href="{{ pathto('_static/bootswatch-cosmo-4-mod.css', 1) }}" type="text/css" />
+
+	{{ extra_header }}
+
+    {%- block css %}
+    {{- css() }}
+    {%- endblock %}
+
+    {%- if favicon %}
+    <link rel="shortcut icon" href="{{ pathto('_static/' + favicon, 1)|e }}"/>
+    {%- endif %}
+
+    {%- block scripts %}
+    {{- script() }}
+    {%- endblock %}
+
+    {%- block extrahead %} {% endblock %}
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+
+        {%- if logo %}
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="{{ pathto('index') }}">
+                <img src="{{ pathto('_static/' + logo, 1)|e }}" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+        {%- endif %}
+
+        {%- if theme_navbar_project_name|tobool %}
+        <div class="navbar-brand-title">
+            <a class="navbar-brand" href="{{ pathto('index') }}">
+                <span id="blog-title">{{ project }}</span>
+            </a>
+        </div>
+        {%- endif %}
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ pathto('index') }}">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ pathto('artykuly/index') }}">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ pathto('edukacja/index') }}">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ pathto('repozytorium-pakietow/index') }}">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ pathto('oprogramowanie/omtt') }}">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="{{ pathto('search') }}" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="{{ _('Szukamy?') }}" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+
+{%- block content %}
+<main>
+    <div class="document">
+        <div class="container">
+            {%- block document %}
+            <div class="body" role="main">
+                {% block body %} {% endblock %}
+                <div class="clearer"></div>
+            </div>
+            {%- endblock %}
+        </div>
+    </div>
+</main>
+{%- endblock %}
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				{{ footer_infos }}
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					{{ footer_social_list }}
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				{{ footer_law }}
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ pathto('_static/bootstrap-4.6/bootstrap.bundle.min.js', 1) }}"></script>
+	{{ extra_scripts }}
+
+  </body>
+</html>

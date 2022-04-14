@@ -1,0 +1,31 @@
+{%- extends "layout.html" %}
+
+{% set title = "Cześć!" %}
+
+{% block content %}
+
+{%- set groupid = idgen() %}
+
+<header class="banner" role="banner" aria-label="Szukaj treści">
+
+    <div class="search">
+        <h1 class="display-3">Cześć!</h1>
+        <p class="lead">{{ _('Jakich informacji dziś potrzebujesz?') }}</p>
+
+        <div id="searchbox" role="search">
+            <div class="searchformwrapper">
+                <form class="search-form" action="{{ pathto('search') }}" method="get">
+                    <div class="input-group">
+                        <input class="form-control form-control-lg" type="text" name="q" placeholder="" aria-label="Search input field">
+                        <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+{% endblock %}

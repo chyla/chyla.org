@@ -1,0 +1,15 @@
+﻿{%- extends "layout.html" %}
+
+{% set title = "Blog" %}
+
+{%- block extrahead %}
+<meta http-equiv="refresh" content="0; url={{ pathto('artykuly/python/python3-virtualenv') }}" />
+<link rel="canonical" href="{{ pathto('artykuly/python/python3-virtualenv') }}"/>
+{% endblock %}
+
+{% block body %}
+<h1>301</h1>
+<p>
+    <a class="nav-link" href="{{ pathto('artykuly/python/python3-virtualenv') }}">Kliknij tutaj, by przejść do artykułu..</a>
+</p>
+{% endblock %}

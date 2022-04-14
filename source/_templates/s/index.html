@@ -1,0 +1,15 @@
+﻿{%- extends "layout.html" %}
+
+{% set title = "Blog" %}
+
+{%- block extrahead %}
+<meta http-equiv="refresh" content="0; url={{ pathto('index') }}" />
+<link rel="canonical" href="{{ pathto('index') }}"/>
+{% endblock %}
+
+{% block body %}
+<h1>301</h1>
+<p>
+    <a class="nav-link" href="{{ pathto('index') }}">Przejdź do witryny.</a>
+</p>
+{% endblock %}

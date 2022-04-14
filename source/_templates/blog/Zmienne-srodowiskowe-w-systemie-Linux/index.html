@@ -1,0 +1,15 @@
+﻿{%- extends "layout.html" %}
+
+{% set title = "Blog" %}
+
+{%- block extrahead %}
+<meta http-equiv="refresh" content="0; url={{ pathto('artykuly/linux/zmienne-srodowiskowe-w-systemie-linux') }}" />
+<link rel="canonical" href="{{ pathto('artykuly/linux/zmienne-srodowiskowe-w-systemie-linux') }}"/>
+{% endblock %}
+
+{% block body %}
+<h1>301</h1>
+<p>
+    <a class="nav-link" href="{{ pathto('artykuly/linux/zmienne-srodowiskowe-w-systemie-linux') }}">Kliknij tutaj, by przejść do artykułu..</a>
+</p>
+{% endblock %}

@@ -1,0 +1,94 @@
+{%- extends "layout.html" %}
+
+{% set title = _('Search') %}
+
+{%- block scripts %}
+    {{ super() }}
+    <script src="{{ pathto('_static/searchtools.js', 1) }}"></script>
+    <script src="{{ pathto('_static/language_data.js', 1) }}"></script>
+
+    <script>
+    $(document).ready(function(){
+        input_text = $("#navbar-search-input").val();
+        $("#search-input").val(input_text);
+        $("#extended-search-input").val(input_text + ' site:edu.pl OR site:chyla.org OR site:docs.python.org OR site:umk.pl OR site:oeiizk.waw.pl');
+        $("#extended-books-search-input").val(input_text);
+    });
+    </script>
+{%- endblock %}
+
+{% block extrahead %}
+  <script src="{{ pathto('searchindex.js', 1) }}" defer></script>
+  {{ super() }}
+{% endblock %}
+
+{%- block content %}
+<header class="banner" role="banner" aria-label="Szukaj treści">
+    <div class="search">
+		<h1><i class="bi bi-search"></i> Wyszukiwanie</h1>
+
+        <div class="searchbox" role="search">
+			<form class="search-form" action="" method="get">
+				<div class="input-group">
+					<input id="search-input" class="form-control form-control-lg" type="text" name="q" placeholder="" aria-label="Search input field">
+					<div class="input-group-append">
+						<button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+					</div>
+				</div>
+			</form>
+        </div>
+    </div>
+</header>
+
+
+<main>
+    <div class="document">
+        <div class="container">
+            {%- block document %}
+            <div class="body" role="main">
+
+                <div id="fallback" class="admonition warning">
+                    <script>$('#fallback').hide();</script>
+                    <p>
+                        {% trans %}Please activate JavaScript to enable the search functionality.{% endtrans %}
+                    </p>
+                </div>
+
+                <div id="search-results">
+                </div>
+
+                <div class="clearer"></div>
+            </div>
+            {%- endblock %}
+        </div>
+    </div>
+</main>
+
+
+<div class="banner" role="banner" aria-label="Szukaj treści">
+    <div class="search">
+		<h1><i class="bi bi-journal-text"></i> Zbyt mało wyników?</h1>
+
+        <div class="searchbox" role="search">
+			<form class="search-form" action="https://www.google.com/search" method="get" target="_blank">
+				<div class="input-group">
+					<input id="extended-search-input" class="form-control form-control-lg" type="hidden" name="q" placeholder="" aria-label="Search input field">
+					<button type="submit" class="btn btn-outline-extended-search">Przeszukaj zawartość stron edukacyjnych</button>
+					<button type="submit" class="btn btn-extended-search"><i class="bi bi-zoom-in"></i></button>
+				</div>
+			</form>
+			
+			<form class="search-form" action="https://www.google.com/search" method="get" target="_blank">
+				<div class="input-group">
+					<input id="extended-books-search-input" type="hidden" name="q">
+					<input type="hidden" name="tbs" value="bkv:f">
+					<input type="hidden" name="tbm" value="bks">
+					<button type="submit" class="btn btn-outline-extended-search">Przeszukaj publicznie dostępne książki i czasopisma</button>
+					<button type="submit" class="btn btn-extended-search"><i class="bi bi-zoom-in"></i></button>
+				</div>
+			</form>
+			
+        </div>
+    </div>
+</div>
+{%- endblock %}
