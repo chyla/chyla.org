@@ -215,7 +215,7 @@ footer p {
 }
 
 /* workaround https://stackoverflow.com/a/11842865/5007100 */
-.section {
+section {
     padding-top: 4rem;
     margin-top: -4rem;
 }
@@ -331,17 +331,18 @@ table.docutils tr:hover td {
 
 
 /* images */
-.figure {
+.document figure {
     text-align: center;
     width: 100%;
-    padding: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
-.figure img {
+.document figure img {
     max-width: 100%;
 }
 
-.figure .caption {
+.document figure figcaption p {
     text-align: center;
     font-style: italic;
 }
