@@ -69,8 +69,8 @@ Obowiązująca skala ocen:
 Przykładowe listy zadań na ćwiczenia
 ------------------------------------
 
-* `Ćwiczenia 1 - Iteratory </_static/files/edukacja/materialy/zaawansowane-techniki-programowania-w-jezyku-python/Lista-zadan-Iteratory.pdf>`__
-* `Ćwiczenia 2 - Generatory </_static/files/edukacja/materialy/zaawansowane-techniki-programowania-w-jezyku-python/Lista-zadan-Generatory.pdf>`__
+* `Ćwiczenia 1 - Iteratory </_static/files/edukacja/materialy/zaawansowane-techniki-programowania-w-jezyku-python/Lista-zadan-Iteratory.pdf>`__ (`Przykładowe rozwiązania </_static/files/edukacja/materialy/zaawansowane-techniki-programowania-w-jezyku-python/Lista-zadan-Iteratory-Przykladowe-rozwiazania.zip>`__)
+* `Ćwiczenia 2 - Generatory </_static/files/edukacja/materialy/zaawansowane-techniki-programowania-w-jezyku-python/Lista-zadan-Generatory.pdf>`__ (`Przykładowe rozwiązania </_static/files/edukacja/materialy/zaawansowane-techniki-programowania-w-jezyku-python/Lista-zadan-Generatory-Przykladowe-rozwiazania.zip>`__)
 * `Ćwiczenia 3 i 4 - Multithreading </_static/files/edukacja/materialy/zaawansowane-techniki-programowania-w-jezyku-python/Lista-zadan-Multithreading.pdf>`__
 * `Ćwiczenia 5 i 6 - Multiprocessing </_static/files/edukacja/materialy/zaawansowane-techniki-programowania-w-jezyku-python/Lista-zadan-Multiprocessing.pdf>`__
 * `Ćwiczenia 7 - Dekoratory </_static/files/edukacja/materialy/zaawansowane-techniki-programowania-w-jezyku-python/Lista-zadan-Dekoratory.pdf>`__
