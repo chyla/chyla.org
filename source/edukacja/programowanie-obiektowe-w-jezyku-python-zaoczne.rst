@@ -64,9 +64,9 @@ Obowiązująca skala ocen:
 
 .. include:: materialy/python/wzorce-projektowe-template-method.rst
 
-.. include:: materialy/python/wzorce-projektowe-strategy.rst
-
 .. include:: materialy/python/wzorce-projektowe-command.rst
+
+.. include:: materialy/python/wzorce-projektowe-strategy.rst
 
 
 Przykładowe programy do wykładów
@@ -85,9 +85,9 @@ Przykładowe programy do wykładów
 **Wykład 3** - Wzorce projektowe - Template method, Strategy
 
 1. `REPL (Template method) </_static/files/edukacja/materialy/programowanie-obiektowe-w-jezyku-python/zaoczne/Programowanie-Obiektowe-Python-Wyklad-3-Template-method-REPL.zip>`__
-2. `uniq (Strategy) </_static/files/edukacja/materialy/programowanie-obiektowe-w-jezyku-python/zaoczne/Programowanie-Obiektowe-Python-Wyklad-3-Strategy-uniq.zip>`__
+2. `menu (Command) </_static/files/edukacja/materialy/programowanie-obiektowe-w-jezyku-python/zaoczne/Programowanie-Obiektowe-Python-Wyklad-4-Command-menu.zip>`__
 
 
 **Wykład 4** - Wzorce projektowe - Command
 
-1. `menu (Command) </_static/files/edukacja/materialy/programowanie-obiektowe-w-jezyku-python/zaoczne/Programowanie-Obiektowe-Python-Wyklad-4-Command-menu.zip>`__
+1. `uniq (Strategy) </_static/files/edukacja/materialy/programowanie-obiektowe-w-jezyku-python/zaoczne/Programowanie-Obiektowe-Python-Wyklad-3-Strategy-uniq.zip>`__
