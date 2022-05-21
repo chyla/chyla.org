@@ -82,12 +82,12 @@ Przykładowe programy do wykładów
 1. `Samochód (Dziedziczenie) </_static/files/edukacja/materialy/programowanie-obiektowe-w-jezyku-python/zaoczne/Programowanie-Obiektowe-Python-Wyklad-2-Dziedziczenie.zip>`__
 
 
-**Wykład 3** - Wzorce projektowe - Template method, Strategy
+**Wykład 3** - Wzorce projektowe - Template method, Command
 
 1. `REPL (Template method) </_static/files/edukacja/materialy/programowanie-obiektowe-w-jezyku-python/zaoczne/Programowanie-Obiektowe-Python-Wyklad-3-Template-method-REPL.zip>`__
 2. `menu (Command) </_static/files/edukacja/materialy/programowanie-obiektowe-w-jezyku-python/zaoczne/Programowanie-Obiektowe-Python-Wyklad-4-Command-menu.zip>`__
 
 
-**Wykład 4** - Wzorce projektowe - Command
+**Wykład 4** - Wzorce projektowe - Strategy
 
 1. `uniq (Strategy) </_static/files/edukacja/materialy/programowanie-obiektowe-w-jezyku-python/zaoczne/Programowanie-Obiektowe-Python-Wyklad-3-Strategy-uniq.zip>`__
