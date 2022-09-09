@@ -1,7 +1,7 @@
 Repozytorium pakietów
 =====================
 
-Utworzyłem repozytorium pakietów dla Ubuntu 20.04 LTS, by dostarczyć kilka programów w nowszych wersjach. Do repozytorium trafiają programy i bilioteki, których używam. W ten sposób wiem czy dany pakiet działa poprawnie i czy jest aktualny. Oznacza to także, że możesz nie znaleźć tu pakietu, który Ciebie interesuje.
+Utworzyłem repozytorium pakietów dla Ubuntu LTS, by dostarczyć kilka programów w nowszych wersjach. Do repozytorium trafiają programy i bilioteki, których używam. W ten sposób wiem czy dany pakiet działa poprawnie i czy jest aktualny. Oznacza to także, że możesz nie znaleźć tu pakietu, który Ciebie interesuje.
 
 Większość pakietów to "backporty" z nowszych wersji Ubuntu albo Debiana, chociaż są też pakiety własne.
 
@@ -32,8 +32,19 @@ Dodanie repozytorium
 Polecam wykorzystać `mechanizm Apt-Pinning <https://wiki.debian.org/AptConfiguration#apt_preferences_.28APT_pinning.29>`__ do wyboru pakietów, które Ciebie interesują.
 
 
-Ubuntu 20.04
+Ubuntu 22.04
 ^^^^^^^^^^^^
+
+Jeszcze niedostępne.
+
+
+Przestarzałe
+^^^^^^^^^^^^
+
+**Poniższe repozytoria nie otrzymują już nowszych wersji pakietów.**
+
+Ubuntu 20.04
+************
 
 Dodanie repozytorium do systemu sprowadza się do wykonania tych poleceń:
 
@@ -43,12 +54,6 @@ Dodanie repozytorium do systemu sprowadza się do wykonania tych poleceń:
     sudo apt-get update
 
 Pełna lista pakietów i dokładny opis instalacji znajduje się na `stronie launchpad.net <https://launchpad.net/~extk/+archive/ubuntu/chyla.org-repository-for-ubuntu-20.04>`__.
-
-Przestarzałe
-^^^^^^^^^^^^
-
-**Poniższe repozytoria nie otrzymują już nowszych wersji pakietów.**
-
 
 Ubuntu 18.04
 ************
