@@ -93,8 +93,9 @@ Przykładowe programy do wykładów
 
 **Wykład 5, 6** - Formatowanie napisów; Wirtualne środowisko; Operacje wejścia/wyjścia - Pliki; Operacje wejścia/wyjścia - Pickle
 
-1. `Fibonacci (czytanie i zapisywanie pliku) </_static/files/edukacja/materialy/programowanie-w-jezyku-python/zaoczne/Programowanie-Python-Wyklad-5i6-Fibonacci-Czytanie-i-zapisywanie-pliku.zip>`__
-2. `Fibonacci (pickle) </_static/files/edukacja/materialy/programowanie-w-jezyku-python/zaoczne/Programowanie-Python-Wyklad-5i6-Fibonacci-Pickle.zip>`__
+1. `Fibonacci (czytanie i zapisywanie pliku - historia) </_static/files/edukacja/materialy/programowanie-w-jezyku-python/zaoczne/Programowanie-Python-Wyklad-5i6-Fibonacci-Czytanie-i-zapisywanie-pliku-Historia.zip>`__
+2. `Fibonacci (czytanie i zapisywanie pliku - cache) </_static/files/edukacja/materialy/programowanie-w-jezyku-python/zaoczne/Programowanie-Python-Wyklad-5i6-Fibonacci-Czytanie-i-zapisywanie-pliku-Cache.zip>`__
+3. `Fibonacci (pickle) </_static/files/edukacja/materialy/programowanie-w-jezyku-python/zaoczne/Programowanie-Python-Wyklad-5i6-Fibonacci-Pickle.zip>`__
 
 
 **Wykład 7** - Wprowadzenie do obsługi wyjątków
