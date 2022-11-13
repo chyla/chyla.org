@@ -101,6 +101,7 @@ Przykładowe programy do wykładów
 **Wykład 7** - Wprowadzenie do obsługi wyjątków
 
 1. `NBP (wyjątki) </_static/files/edukacja/materialy/programowanie-w-jezyku-python/zaoczne/Programowanie-Python-Wyklad-7-NBP-Wyjatki.zip>`__
+2. `Łączenie PDF (wyjątki) </_static/files/edukacja/materialy/programowanie-w-jezyku-python/zaoczne/Programowanie-Python-Wyklad-7-PDF-Merger.zip>`__
 
 
 **Wykład 8** - Egzamin
