@@ -45,7 +45,7 @@ Linux
 
 3. OMTT zostało zainstalowane.
 
-   Możliwe, że musisz zmodyfikować zmienną systemową ```PATH``. Zero Install
+   Możliwe, że musisz zmodyfikować zmienną systemową ``PATH``. Zero Install
    wyświetli odpowiedni komunikat. W takim przypadku do pliku ``~/.bashrc``
    dopisz na końcu:
 
