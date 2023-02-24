@@ -83,7 +83,7 @@
   <section id="output-match-testing-tool">
 <h1>Output Match Testing Tool<a class="headerlink" href="#output-match-testing-tool" title="Stały odnośnik do tego nagłówka">¶</a></h1>
 <p>OMTT pozwala sprawdzić poprawność działania programu/skryptu. Narzędzie uruchamia
-testowany system z określonym wejściem i sprawdza czy wypisywane informacje
+testowany system z określonym wejściem i sprawdza czy wypisywane dane
 oraz kod wyjścia zgadzają się z założeniami określonymi w teście.</p>
 <section id="instalacja">
 <h2>Instalacja<a class="headerlink" href="#instalacja" title="Stały odnośnik do tego nagłówka">¶</a></h2>
@@ -109,7 +109,11 @@ GitHub</a>.</p>
 </pre></div>
 </div>
 </li>
-<li><p>OMTT zostało zainstalowane, uruchom ponownie konsolę.</p></li>
+<li><p>OMTT został dodany, może zostać uruchomiony poleceniem:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>0install run omtt
+</pre></div>
+</div>
+</li>
 </ol>
 </section>
 <section id="linux">
@@ -121,11 +125,12 @@ GitHub</a>.</p>
 </pre></div>
 </div>
 </li>
-<li><p>OMTT zostało zainstalowane.</p>
-<p>Możliwe, że musisz zmodyfikować zmienną systemową <code class="docutils literal notranslate"><span class="pre">`PATH</span></code>. Zero Install
-wyświetli odpowiedni komunikat. W takim przypadku do pliku <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>
-dopisz na końcu:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/home/<span class="si">${</span><span class="nv">USER</span><span class="si">}</span>/bin:<span class="nv">$PATH</span>
+<li><p>OMTT został dodany, może zostać uruchomiony poleceniem:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>0install run omtt
+</pre></div>
+</div>
+<p>Możesz utworzyć <a class="reference external" href="https://bash.0x1fff.com/polecenia_wbudowane/polecenie_alias.html">alias polecenia</a>, do pliku <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> dopisz na końcu:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">alias</span> <span class="nv">omtt</span><span class="o">=</span><span class="s1">&#39;0install run omtt&#39;</span>
 </pre></div>
 </div>
 </li>
@@ -141,12 +146,12 @@ WITH INPUT
 Hello world!
 </pre></div>
 </div>
-<p><strong>Pełne sprawdzenie</strong> standardowego wyjścia określa się w bloku <code class="docutils literal notranslate"><span class="pre">EXPECT</span> <span class="pre">OUTPUT</span></code>, przykład:</p>
+<p><strong>Pełne sprawdzenie</strong> standardowego wyjścia określa się w bloku <code class="docutils literal notranslate"><span class="pre">EXPECT</span> <span class="pre">OUTPUT</span></code> (sprawdzane są również białe znaki - np. spacje) , przykład:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>EXPECT OUTPUT
 Hello world!
 </pre></div>
 </div>
-<p><strong>Częściowe sprawdzenie</strong> standardowego wyjścia określa się w bloku <code class="docutils literal notranslate"><span class="pre">EXPECT</span> <span class="pre">IN</span> <span class="pre">OUTPUT</span></code>, przykład:</p>
+<p><strong>Częściowe sprawdzenie</strong> standardowego wyjścia określa się w bloku <code class="docutils literal notranslate"><span class="pre">EXPECT</span> <span class="pre">IN</span> <span class="pre">OUTPUT</span></code> (sprawdzane są również białe znaki - np. spacje) , przykład:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>EXPECT IN OUTPUT
 Hello
 EXPECT IN OUTPUT
@@ -174,14 +179,14 @@ wraz z przykładami znajduje się w pliku <a class="reference external" href="ht
 <section id="przyklad-uruchomienia-testu-dla-programu">
 <h3>Przykład uruchomienia testu dla programu<a class="headerlink" href="#przyklad-uruchomienia-testu-dla-programu" title="Stały odnośnik do tego nagłówka">¶</a></h3>
 <p>Przykład polecenia uruchamiającego test znajdujący się w pliku <code class="docutils literal notranslate"><span class="pre">cat-will_print_input_and_exit_with_zero.omtt</span></code> dla programu <code class="docutils literal notranslate"><span class="pre">cat</span></code>:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>omtt --sut /bin/cat cat-will_print_input_and_exit_with_zero.omtt
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>0install run omtt --sut /bin/cat cat-will_print_input_and_exit_with_zero.omtt
 </pre></div>
 </div>
 </section>
 <section id="przyklad-uruchomienia-testu-dla-skryptu-wymagajacego-interpretera">
 <h3>Przykład uruchomienia testu dla skryptu wymagającego interpretera<a class="headerlink" href="#przyklad-uruchomienia-testu-dla-skryptu-wymagajacego-interpretera" title="Stały odnośnik do tego nagłówka">¶</a></h3>
 <p>Przykład polecenia uruchamiającego test znajdujący się w pliku <code class="docutils literal notranslate"><span class="pre">python-hello.omtt</span></code> dla skryptu napisanego w języku Python:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>omtt --interpreter /usr/bin/python3 --sut hello.py python-hello.omtt
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>0install run omtt --interpreter /usr/bin/python3 --sut hello.py python-hello.omtt
 </pre></div>
 </div>
 </section>
