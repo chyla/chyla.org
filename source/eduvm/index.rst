@@ -29,7 +29,7 @@ Pobieranie
 ----------
 
 Do pobrania maszyny wirtualnej potrzebujesz klienta BitTorrent ze wsparciem
-dla *webseeding**, polecam `qBittorrent <https://www.qbittorrent.org/download>`__.
+dla *webseeding*, polecam `qBittorrent <https://www.qbittorrent.org/download>`__.
 Klient BitTorrent zadba o poprawne pobranie pliku - w przypadku błędów
 podczas transmisji danych, tylko niepoprawny fragment pliku zostanie
 pobrany ponownie.
