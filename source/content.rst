@@ -12,6 +12,11 @@ Zawartość
     edukacja/index
 
 .. toctree::
+    :maxdepth: 2
+
+    eduvm/index
+
+.. toctree::
     :maxdepth: 1
 
     repozytorium-pakietow/index
