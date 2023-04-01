@@ -1,4 +1,4 @@
-﻿
+
 
 
 
@@ -6,7 +6,7 @@
 <html lang="pl">
   <head>
     <meta charset="utf-8">
-    <title>Blog | chyla.org</title>
+    <title>EduVM 23.04 Beta - Przygotowanie VM | chyla.org</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
@@ -23,10 +23,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/pdfobject/pdfobject.min.js"></script>
-    <script src="../../_static/translations.js"></script>
-<meta http-equiv="refresh" content="0; url=../../artykuly/linux/core-dump.html" />
-<link rel="canonical" href="../../artykuly/linux/core-dump.html"/>
-
+    <script src="../../_static/translations.js"></script> 
   </head>
 
   <body>
@@ -52,7 +49,7 @@
               <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../../eduvm/index.html">EduVM</a>
+              <a class="nav-link" href="../index.html">EduVM</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
@@ -86,10 +83,76 @@
         <div class="container">
             <div class="body" role="main">
                 
-<h1>301</h1>
-<p>
-    <a class="nav-link" href="../../artykuly/linux/core-dump.html">Kliknij tutaj, by przejść do artykułu..</a>
-</p>
+  <section id="eduvm-23-04-beta-przygotowanie-vm">
+<h1>EduVM 23.04 Beta - Przygotowanie VM<a class="headerlink" href="#eduvm-23-04-beta-przygotowanie-vm" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<ol class="arabic">
+<li><p>Konfiguacja maszyny wirtualnej:</p>
+<ul class="simple">
+<li><p>Nazwa: EduVM 23.04 Beta</p></li>
+<li><p>Wersja: Ubuntu (64bit)</p></li>
+<li><p>Skip Unattended Installation</p></li>
+<li><p>RAM: 2048 MB</p></li>
+<li><p>Processors: 2</p></li>
+<li><p>Hard disk size: 30 GB</p></li>
+<li><p>Hard disk format: VDI</p></li>
+<li><p>Współdzielony schowek: Dwukierunkowy</p></li>
+<li><p>Pamięć wideo: 32 MB</p></li>
+<li><p>Kontroler: SATA: Użyj buforowania wejścia/wyjścia gospodarza: Tak</p></li>
+<li><p>Sieć:</p>
+<ul>
+<li><p>Karta 1: NAT</p></li>
+<li><p>Karta 2: Karta sieci izolowanej (host-only) - wyłącznie do automatycznej konfiguracji z Ansible</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Instalacja systemu:</p>
+<ul class="simple">
+<li><p>Xubuntu ISO: <a class="reference external" href="https://cdimage.ubuntu.com/xubuntu/daily-minimal/">lunar-minimal-amd64.iso</a></p></li>
+<li><p>Keyboard: English (US)</p></li>
+<li><p>No updates while installing</p></li>
+<li><p>TZ: Warsaw</p></li>
+<li><p>Name: EduVM</p></li>
+<li><p>Computer’s name: EduVM</p></li>
+<li><p>Username: eduvm</p></li>
+<li><p>Password: eduvm</p></li>
+<li><p>Log in automatically</p></li>
+</ul>
+</li>
+<li><p>Konfiguracja systemu</p>
+<p>Na konfigurowanej maszynie:</p>
+<ul class="simple">
+<li><p>Ustawienie NOPASSWD dla grupy sudo</p></li>
+<li><p>Zainstalowany openssh-server</p></li>
+</ul>
+<p>Na sąsiedniej maszynie:</p>
+<ul class="simple">
+<li><p>Wymiana kluczy z konfigurowanym systemem: <code class="docutils literal notranslate"><span class="pre">ssh-copy-id</span> <span class="pre">eduvm&#64;192.168.X.X</span></code></p></li>
+<li><p>Uruchomienie konfiguracji, repo tag: <a class="reference external" href="https://github.com/chyla/eduvm-preparation/tree/eduvm-2304-beta">https://github.com/chyla/eduvm-preparation/tree/eduvm-2304-beta</a></p></li>
+</ul>
+<p>Po zakończonej konfiguracji z Ansible, na konfigurowanej maszynie:</p>
+<ul class="simple">
+<li><p>Ponowne uruchomienie konfigurowanej maszyny</p></li>
+<li><p>Usunięcie starych pakietów: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">purge</span> <span class="pre">-y</span> <span class="pre">$(dpkg</span> <span class="pre">-l</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">-e</span> <span class="pre">linux-image</span> <span class="pre">-e</span> <span class="pre">linux-modules</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">-v</span> <span class="pre">$(uname</span> <span class="pre">-r)</span> <span class="pre">|</span> <span class="pre">awk</span> <span class="pre">&quot;{print</span> <span class="pre">$2}&quot;)</span></code></p></li>
+<li><p>Ustawienie ikony menu głównego</p></li>
+<li><p>Przesunięcie panelu z góry na dół</p></li>
+<li><p>Usunięcie zapisanych kluczy: <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">~/.ssh/authorized_keys</span></code></p></li>
+<li><p>Wyzerowanie pustego miejsca: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dd</span> <span class="pre">if=/dev/zero</span> <span class="pre">of=/root/zero</span> <span class="pre">||</span> <span class="pre">sudo</span> <span class="pre">rm</span> <span class="pre">/root/zero</span></code></p></li>
+</ul>
+</li>
+<li><p>Eksport przygotowanej maszyny</p>
+<ul class="simple">
+<li><p>Wyłączenie karty sieciowej - host-only</p></li>
+<li><p>Eksport do OCI</p>
+<ul>
+<li><p>Polityka adresów MAC: Usuń wszystkie adresy MAC kart sieciowych</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+
 
                 <div class="clearer"></div>
             </div>

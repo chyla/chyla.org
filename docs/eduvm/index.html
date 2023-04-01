@@ -6,7 +6,7 @@
 <html lang="pl">
   <head>
     <meta charset="utf-8">
-    <title>Nota prawna | chyla.org</title>
+    <title>EduVM | chyla.org</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
@@ -49,7 +49,7 @@
               <a class="nav-link" href="../repozytorium-pakietow/index.html">Repozytorium</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../eduvm/index.html">EduVM</a>
+              <a class="nav-link" href="#">EduVM</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="../oprogramowanie/omtt.html">OMTT</a>
@@ -83,17 +83,50 @@
         <div class="container">
             <div class="body" role="main">
                 
-  <section id="nota-prawna">
-<h1>Nota prawna<a class="headerlink" href="#nota-prawna" title="Stały odnośnik do tego nagłówka">¶</a></h1>
-<p>Administratorem strony jest Adam Chyła. Kontakt z administratorem jest możliwy za pośrednictwem adresu e-mail <a class="reference external" href="mailto:adam&#37;&#52;&#48;chyla&#46;org">adam<span>&#64;</span>chyla<span>&#46;</span>org</a>.</p>
-<ol class="arabic simple">
-<li><p><strong>Ochrona treści.</strong> Niniejszy Portal korzysta z ochrony na podstawie ustawy z dnia 4 lutego 1994 roku o prawie autorskim i prawach pokrewnych (tekst jednolity Dz.U. z 2000 r. Nr 80, poz. 904 z późn. zm.). Jakiekolwiek kopiowanie, odtwarzanie, przegrywanie, zwielokrotnianie zawartości serwisu internetowego jest zabronione.</p></li>
-<li><p><strong>Wykorzystanie treści.</strong> Kopiowanie treści możliwe jest tylko po udzieleniu zgody przez właściciela Portalu – chyba że przy danym tekście zaznaczono inaczej.</p></li>
-<li><p><strong>Przeznaczanie treści.</strong> Treści dostępne w Portalu służą wyłącznie celom informacyjnym oraz edukacyjnym. Właściciele Portalu nie ponoszą odpowiedzialności za ewentualne niezgodne z prawem wykorzystanie materiałów dostępnych w Portalu. Stanowczo odradza się działań niezgodnych z prawem. Zakazane jest korzystanie z Portalu w sposób sprzeczny z prawem, z zasadami współżycia społecznego i dobrymi obyczajami. Zakazane jest dostarczanie przez użytkowników treści o charakterze bezprawnym. Użytkownicy ponoszą całkowitą odpowiedzialność za wprowadzane przez siebie treści jak i szkody powstałe w wyniku ich zachowania niezgodnego z powyższymi zastrzeżeniami.</p></li>
-<li><p><strong>Ograniczenie odpowiedzialności.</strong> Dokładamy staranności, aby zapewnić możliwie wysoką jakość i rzetelność treści publikowanych w Portalu. Nie odpowiadamy jednak za błędy, aktualność oraz kompletność publikowanych informacji. Nie odpowiadamy za ewentualne szkody poniesione w wyniku wykorzystania zawartych w Portalu danych. Nie ponosimy również odpowiedzialności za treści znajdujące się w hiperlinkach umieszczonych w niniejszym Portalu. Korzystanie z Portalu odbywa się wyłącznie na koszt i ryzyko użytkownika</p></li>
-<li><p><strong>Monitorowanie działania Portalu.</strong> Informujemy, iż działania użytkownika w niniejszym Portalu są monitorowane oraz składowane zgodnie z obowiązującą polityką prywatności.</p></li>
-<li><p><strong>Bezpieczeństwo portalu.</strong> Próby naruszenia bezpieczeństwa portalu są monitorowane. Zabrania się wykonywania jakichkolwiek czynności zagrażających bezpieczeństwu Portalu. W przypadku wykrycia tego typu działań,  zostaną podjęte odpowiednie czynności – włączając w to wykorzystanie środków prawnych.</p></li>
-</ol>
+  <section id="eduvm">
+<h1>EduVM<a class="headerlink" href="#eduvm" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<p>Maszyna wirtualna <a class="reference external" href="https://www.virtualbox.org/">VirtualBox</a> z zainstalowanym
+<a class="reference external" href="https://xubuntu.org/">Xubuntu</a> wraz z narzędziami programistycznymi
+dla Pythona i C++. Zawiera tylko wolne oprogramowanie, zgodne z założeniami
+<a class="reference external" href="https://www.debian.org/social_contract#guidelines">DFSG</a> (sprawdzane
+za pomocą <a class="reference external" href="https://debian.pages.debian.net/check-dfsg-status/">check-dfsg-status - vrms</a>).</p>
+<p>W maszynie wirtualnej znajdziesz:</p>
+<ul class="simple">
+<li><p>interpreter języka Python 3 (CPython);</p></li>
+<li><p>kompilator języka C++ (GCC, Clang);</p></li>
+<li><p>środowiska programistyczne:</p>
+<ul>
+<li><p>PyCharm Community,</p></li>
+<li><p>Microsoft Visual Studio Code (ze względów licencyjnych nie jest bezpośrednio
+zainstalowany, lecz jest pobierany przy pierwszej próbie uruchomienia);</p></li>
+<li><p>Qt Creator,</p></li>
+<li><p>KDevelop,</p></li>
+</ul>
+</li>
+<li><p>narzędzia Python (np. venv, virtualenv, pyenv, black, flake8, pylint, pycodestyle);</p></li>
+<li><p>narzędzia C++ (np. GDB, cmake, ninja, KCachegrind, Cppcheck, gcovr, GoogleTest);</p></li>
+</ul>
+<p>Pełną listę oraz wersje poszczególnych pakietów znajdziesz na stronie wydania.</p>
+<section id="pobieranie">
+<h2>Pobieranie<a class="headerlink" href="#pobieranie" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<p>Do pobrania maszyny wirtualnej potrzebujesz klienta BitTorrent ze wsparciem
+dla <em>webseeding*</em>, polecam <a class="reference external" href="https://www.qbittorrent.org/download">qBittorrent</a>.
+Klient BitTorrent zadba o poprawne pobranie pliku - w przypadku błędów
+podczas transmisji danych, tylko niepoprawny fragment pliku zostanie
+pobrany ponownie.</p>
+<p>Po zainstalowaniu klienta otwórz plik <code class="docutils literal notranslate"><span class="pre">.torrent</span></code> (dostępny w sekcji
+<em>Wydania</em>), aby rozpocząć pobieranie.</p>
+<p>Wskazówka: <em>Nie ograniczaj prędkości wysyłania danych, od niej również
+zależy prędkość pobierania danych.</em></p>
+</section>
+<section id="wydania">
+<h2>Wydania<a class="headerlink" href="#wydania" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="2304-beta/index.html">EduVM 23.04 Beta</a></li>
+</ul>
+</div>
+</section>
 </section>
 
 
