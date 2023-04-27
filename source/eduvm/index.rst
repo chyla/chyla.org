@@ -48,4 +48,4 @@ Wydania
 .. toctree::
     :maxdepth: 1
 
-    2304-beta/index
+    2304/index
