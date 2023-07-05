@@ -8,7 +8,7 @@ W maszynie wirtualnej znajdziesz:
 * GCC **12.2.0**;
 * clang **15.0.7**;
 * PyCharm Community **2023.1**;
-* Microsoft Visual Studio Code (wersja do wyboru, domyslnie pobierana jest najnowsza);
+* Microsoft Visual Studio Code (wersja do wyboru, domyślnie pobierana jest najnowsza);
 * Qt Creator **9.0**;
 * KDevelop **5.10.221203 (22.12.3)**;
 
