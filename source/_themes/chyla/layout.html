@@ -41,8 +41,8 @@
     {{- css() }}
     {%- endblock %}
 
-    {%- if favicon %}
-    <link rel="shortcut icon" href="{{ pathto('_static/' + favicon, 1)|e }}"/>
+    {%- if favicon_url %}
+    <link rel="shortcut icon" href="{{ favicon_url | e }}"/>
     {%- endif %}
 
     {%- block scripts %}
@@ -55,10 +55,10 @@
   <body>
     <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
 
-        {%- if logo %}
+        {%- if logo_url %}
         <div class="navbar-brand-logo">
             <a class="navbar-brand" href="{{ pathto('index') }}">
-                <img src="{{ pathto('_static/' + logo, 1)|e }}" alt="Logo" id="logo" width="45px" height="45px">
+                <img src="{{ logo_url | e }}" alt="Logo" id="logo" width="45px" height="45px">
             </a>
         </div>
         {%- endif %}
