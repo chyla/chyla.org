@@ -179,18 +179,8 @@ footer p {
     padding-top: 1.2rem;
 }
 
-.document dt {
-    font-weight: normal;
-    float: left;
-    padding-right: 0.2rem;
-}
-
 .document dd {
     margin-bottom: 0.2rem;
-}
-
-.document dd p {
-    margin-bottom: 0;
 }
 
 .document p {
@@ -200,15 +190,15 @@ footer p {
     word-wrap: break-word;
 }
 
-.topic {
+.contents {
     padding-top: 1rem;
 }
 
-.topic p {
+.contents p {
     margin-bottom: 0.2rem;
 }
 
-.topic .topic-title {
+.contents .topic-title {
     margin-bottom: 0.1rem;
     font-size: 1.875rem;
     font-weight: 300;
@@ -299,7 +289,18 @@ div.code-block-caption:hover > a.headerlink {
 
 .footnote {
     font-size: 0.7rem;
-    padding-top: 0.5rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+}
+
+.footnote .label {
+    font-weight: normal;
+    float: left;
+    padding-right: 0.2rem;
+}
+
+.footnote p {
+    margin-bottom: 0;
 }
 
 .footnote-reference {
