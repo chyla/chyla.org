@@ -53,7 +53,7 @@ html_context = {
 
 	'footer_infos': '''
 <h5>Adam Chyła</h5>
-<p>Specjalista ds. Rozwoju Oprogramowania</p>
+<p>Klucz GPG: <a href="https://keyserver.ubuntu.com/pks/lookup?search=09C6348C6917D7CDCD74041B53984B48D35B4B7B&fingerprint=on&op=index" target="_blank">09C6348C6917D7CDCD74041B53984B48D35B4B7B</a></p>
 ''',
 
 	'footer_social_list': '''
@@ -78,6 +78,6 @@ html_additional_pages = {
     'blog/Python_-_Generatory/index': 'blog/Python_-_Generatory/index.html',
     'blog/Zapomniane_haslo_zaszyfrowanego_dysku/index': 'blog/Zapomniane_haslo_zaszyfrowanego_dysku/index.html',
     'blog/Zmienne-srodowiskowe-w-systemie-Linux/index': 'blog/Zmienne-srodowiskowe-w-systemie-Linux/index.html',
-	's/index': 's/index.html',
-	's/twitch/index': 's/twitch/index.html',
+    's/index': 's/index.html',
+    's/twitch/index': 's/twitch/index.html',
 }
