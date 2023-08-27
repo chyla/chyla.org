@@ -53,7 +53,6 @@ html_context = {
 
 	'footer_infos': '''
 <h5>Adam Chyła</h5>
-<p>Specjalista ds. Rozwoju Oprogramowania</p>
 ''',
 
 	'footer_social_list': '''
