@@ -94,7 +94,7 @@ Wynik działania skryptu::
     Zwrocono wartosc: 2
     wznawiam dzialanie
 
-W dekoratorze `wznowienia` (linie 1 - 8) widzimy dwie instrukcje `yield` zwracające odpowiednio `1` i `2`. Znajdują się w nim również instrukcje drukujące dodatkowe komunikaty z informacją o miejscu, które jest wykonywane. W pętli `for` (linia 10) wykorzystujemy generator.
+W generatorze `wznowienia` (linie 1 - 8) widzimy dwie instrukcje `yield` zwracające odpowiednio `1` i `2`. Znajdują się w nim również instrukcje drukujące dodatkowe komunikaty z informacją o miejscu, które jest wykonywane. W pętli `for` (linia 10) wykorzystujemy generator.
 
 Prześledźmy proces wykonania powyższego skryptu. Pętla (linia 10) aktywuje generator, wykonywana jest linia 2 oraz 3 - na ekranie zobaczyliśmy informację o wstrzymaniu działania generatora, wykonana została instrukcja `yield`, co wstrzymało generator, zapisało jego stan oraz zwróciło wartość `1`. Kolejnym krokiem było wykonanie ciała pętli `for`, czyli wydrukowanie na ekranie wartości zwróconej. Tak wyglądał pierwszy przebieg pętli.
 
