@@ -138,7 +138,7 @@ Dystrybucje
 
 Vim może być czymś więcej, niż tylko zwykłym edytorem tekstu - może być środowiskiem programistycznym. W tym celu należy skonfigurować Vima (plik `~/.vimrc`) do naszych potrzeb, zainstalować odpowiednie dodatki i je skonfigurować albo... wykorzystać konfigurację utworzoną przez innych - tak zwaną dystrybucję. Oczywiście dystrybucja taka jest odpowiednio przygotowana, by jej użytkownicy mogli ją dostosowywać.
 
-Chyba najpopularniejszą dystrybucją jest `spf13-vim <http://vim.spf13.com/>`__. Na jej stronie internetowej znajdziemy opis instalacji i dokumentację. Inną dystrybucją jest `space-vim <http://vim.liuchengxu.org/>`__ i to właśnie jej poświęcę uwagę.
+Chyba najpopularniejszą dystrybucją jest `spf13-vim <http://vim.spf13.com/>`__. Na jej stronie internetowej znajdziemy opis instalacji i dokumentację. Inną dystrybucją jest `space-vim <https://liuchengxu.github.io/space-vim/>`__ i to właśnie jej poświęcę uwagę.
 
 Instalacja space-vim
 ^^^^^^^^^^^^^^^^^^^^
@@ -146,7 +146,7 @@ Instalacja space-vim
 .. attention::
    Polecenia konsoli, pokazane w dalszej części artykułu, przygotowane zostały z myślą o użytkownikach systemu Linux. W przypadku innych systemów operacyjnych polecenia te mogą się różnić.
 
-Instalacja została opisana na stronie internetowej dystrybucji - http://vim.liuchengxu.org/.
+Instalacja została opisana na stronie: https://liuchengxu.github.io/space-vim/#docs
 
 Przed przystąpieniem do instalacji musimy upewnić się, że mamy zainstalowany program `git` oraz edytor `vim` z obsługą języka Python.
 
