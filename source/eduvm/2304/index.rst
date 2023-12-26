@@ -1,7 +1,6 @@
 EduVM 23.04
 ===========
 
-
 W maszynie wirtualnej znajdziesz:
 
 * Python **3.11.2**;
