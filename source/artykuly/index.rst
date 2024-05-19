@@ -84,3 +84,4 @@ Pozostałe
     pozostale/android-butter-knife
     pozostale/sqlite-wlaczenie-weryfikacji-foreign-key-constraints
     pozostale/write-up-misja-002-ukryte-dane-w-base64
+    pozostale/openwrt-low-throughput
