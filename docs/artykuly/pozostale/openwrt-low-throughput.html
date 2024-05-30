@@ -1,0 +1,174 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>OpenWRT Low Throughput | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../eduvm/index.html">EduVM</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="openwrt-low-throughput">
+<h1>OpenWRT Low Throughput<a class="headerlink" href="#openwrt-low-throughput" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<p>Zmiana parametrów <strong>offloading</strong> pomaga zwiększyć przepustowość,
+przynajmniej na <strong>TP-Link Archer A7 AC1750 (hw ver 5)</strong>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># for software offload
+uci set firewall.@defaults[0].flow_offloading=&#39;1&#39;
+
+# for hardware offload
+uci set firewall.@defaults[0].flow_offloading_hw=&#39;1&#39;
+
+# save settings
+uci commit
+
+# restart firewall to apply these settings
+/etc/init.d/firewall restart
+</pre></div>
+</div>
+<p>Można również spróbować poniższych:</p>
+<ul class="simple">
+<li><p>zmienić <strong>MTU</strong> (maximum transmission unit) interfejsów na większe,</p></li>
+<li><p>zmienić <strong>nice</strong> procesu <strong>hostapd</strong> (np. na <em>-20</em>),</p></li>
+<li><p>wyłączyć IPv6 lub IPv4 i używać tylko jednego z nich,</p></li>
+<li><p>zaktualizować OpenWRT (problem jest mniej widoczny na 23.05, niż na 22.*),</p></li>
+<li><p>po ustawieniu offload, co jakiś czas pomaga restart usługi firewall: <cite>/etc/init.d/firewall restart</cite>.</p></li>
+</ul>
+<p>Na OpenWRT 23.05, z wflow_offloading=1, MTU=4000, nice=-20, wyłączonym IPv6,
+testując jednym klientem, blisko routera udaje się osiągnąć lekko ponad 280Mbps.</p>
+<section id="zrodla">
+<h2>Źródła<a class="headerlink" href="#zrodla" title="Stały odnośnik do tego nagłówka">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://forum.openwrt.org/t/new-openwrt-installation-on-a-tp-link-archer-c7-v2-is-slow-speed-cut-in-half/157300">New OpenWrt installation on a TP-Link Archer C7 v2 is slow - speed cut in half</a></p></li>
+<li><p><a class="reference external" href="https://forum.openwrt.org/t/openwrt-software-offloading-configuration/151081">OpenWrt software offloading configuration</a></p></li>
+</ol>
+</section>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Klucz GPG: <a href="https://keyserver.ubuntu.com/pks/lookup?search=09C6348C6917D7CDCD74041B53984B48D35B4B7B&fingerprint=on&op=index" target="_blank">09C6348C6917D7CDCD74041B53984B48D35B4B7B</a></p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DKEWN50PZG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DKEWN50PZG');
+</script>
+
+
+  </body>
+</html>
