@@ -1,0 +1,210 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>EduVM 24.10 - Przygotowanie VM | chyla.org</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../_static/IBM-Plex-Web-5.2.1/css/ibm-plex-mod.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootstrap-icons-1.4.0/bootstrap-icons.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/bootswatch-cosmo-4-mod.css" type="text/css" />
+
+	
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/chyla.css" />
+    <link rel="shortcut icon" href="../../_static/logo-45x45.png"/>
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/pdfobject/pdfobject.min.js"></script>
+    <script src="../../_static/translations.js"></script> 
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md fixed-top chyla-navbar-light">
+        <div class="navbar-brand-logo">
+            <a class="navbar-brand" href="../../index.html">
+                <img src="../../_static/logo-45x45.png" alt="Logo" id="logo" width="45px" height="45px">
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../../index.html">Cześć!</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../artykuly/index.html">Artykuły</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../edukacja/index.html">Edukacja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../repozytorium-pakietow/index.html">Repozytorium</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">EduVM</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../../oprogramowanie/omtt.html">OMTT</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav navbar-right">
+            <div id="searchbox" role="search">
+                <div class="searchformwrapper">
+                    <form class="search-form" action="../../search.html" method="get">
+                        <div class="input-group">
+                            <input id="navbar-search-input" class="form-control" type="text" name="q" placeholder="Szukamy?" aria-label="Search input field">
+                            <div class="input-group-append">
+                            <button type="submit" class="input-group-text"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <button class="navbar-toggler chyla-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="bi bi-list"></i>
+        </button>
+</nav>
+
+<div id="navbar-placeholder"></div>
+<main>
+    <div class="document">
+        <div class="container">
+            <div class="body" role="main">
+                
+  <section id="eduvm-24-10-przygotowanie-vm">
+<h1>EduVM 24.10 - Przygotowanie VM<a class="headerlink" href="#eduvm-24-10-przygotowanie-vm" title="Stały odnośnik do tego nagłówka">¶</a></h1>
+<ol class="arabic">
+<li><p>Konfiguacja maszyny wirtualnej:</p>
+<ul class="simple">
+<li><p>Nazwa: EduVM 24.10</p></li>
+<li><p>Wersja: Ubuntu (64bit)</p></li>
+<li><p>Skip Unattended Installation</p></li>
+<li><p>RAM: 2048 MB</p></li>
+<li><p>Processors: 4</p></li>
+<li><p>Hard disk size: 30 GB</p></li>
+<li><p>Hard disk format: VDI</p></li>
+<li><p>Współdzielony schowek: Dwukierunkowy</p></li>
+<li><p>Pamięć wideo: 32 MB</p></li>
+<li><p>Kontroler: SATA: Użyj buforowania wejścia/wyjścia gospodarza: Tak</p></li>
+<li><p>Sieć:</p>
+<ul>
+<li><p>Karta 1: NAT</p></li>
+<li><p>Karta 2: Karta sieci izolowanej (host-only) - wyłącznie do automatycznej konfiguracji z Ansible</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Instalacja systemu:</p>
+<ul class="simple">
+<li><p>Xubuntu ISO: <a class="reference external" href="https://torrent.ubuntu.com/xubuntu/releases/oracular/release/minimal/xubuntu-24.10-minimal-amd64.iso.torrent">xubuntu-24.10-minimal-amd64.iso</a></p></li>
+<li><p>Keyboard: English (US)</p></li>
+<li><p>No updates while installing</p></li>
+<li><p>TZ: Warsaw</p></li>
+<li><p>Name: EduVM</p></li>
+<li><p>Computer’s name: EduVM</p></li>
+<li><p>Username: eduvm</p></li>
+<li><p>Password: eduvm</p></li>
+</ul>
+</li>
+<li><p>Konfiguracja systemu</p>
+<p>Na konfigurowanej maszynie:</p>
+<ul class="simple">
+<li><p>Ustawienie NOPASSWD dla grupy sudo</p></li>
+<li><p>Zainstalowany openssh-server</p></li>
+</ul>
+<p>Na sąsiedniej maszynie:</p>
+<ul class="simple">
+<li><p>Wymiana kluczy z konfigurowanym systemem: <code class="docutils literal notranslate"><span class="pre">ssh-copy-id</span> <span class="pre">eduvm&#64;192.168.X.X</span></code></p></li>
+<li><p>Uruchomienie konfiguracji, repo tag: <a class="reference external" href="https://github.com/chyla/eduvm-preparation/tree/eduvm-2410">https://github.com/chyla/eduvm-preparation/tree/eduvm-2410</a></p></li>
+</ul>
+<p>Po zakończonej konfiguracji z Ansible, na konfigurowanej maszynie:</p>
+<ul class="simple">
+<li><p>Ponowne uruchomienie konfigurowanej maszyny</p></li>
+<li><p>Usunięcie starych pakietów: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">purge</span> <span class="pre">-y</span> <span class="pre">$(dpkg</span> <span class="pre">-l</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">-e</span> <span class="pre">linux-image</span> <span class="pre">-e</span> <span class="pre">linux-modules</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">-v</span> <span class="pre">$(uname</span> <span class="pre">-r)</span> <span class="pre">|</span> <span class="pre">awk</span> <span class="pre">'{print</span> <span class="pre">$2}')</span></code></p></li>
+<li><p>Usunięcie SSH: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">purge</span> <span class="pre">-y</span> <span class="pre">openssh-server</span> <span class="pre">openssh-sftp-server</span></code></p></li>
+<li><p>Przesunięcie panelu z góry na dół</p></li>
+<li><p>Usunięcie historii bash użytkownika: <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">/home/eduvm/.bash_history</span></code></p></li>
+<li><p>Usunięcie historii bash roota: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">rm</span> <span class="pre">/root/.bash_history</span></code></p></li>
+<li><p>Usunięcie zapisanych kluczy: <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">~/.ssh</span></code></p></li>
+<li><p>Usunięcie bazy kluczy: <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">~/.local/share/keyrings/login.keyring</span></code></p></li>
+<li><p>Wyzerowanie pustego miejsca: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">dd</span> <span class="pre">if=/dev/zero</span> <span class="pre">of=/root/zero</span> <span class="pre">||</span> <span class="pre">sudo</span> <span class="pre">rm</span> <span class="pre">/root/zero</span></code></p></li>
+</ul>
+</li>
+<li><p>Eksport przygotowanej maszyny</p>
+<ul class="simple">
+<li><p>Wyłączenie karty sieciowej - host-only</p></li>
+<li><p>Eksport</p>
+<ul>
+<li><p>Polityka adresów MAC: Usuń wszystkie adresy MAC kart sieciowych</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</section>
+
+
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer id="footer" class="chyla-footer-light">
+        <div class="row">
+            <div class="footer-box footer-infos col-md-10">
+				
+<h5>Adam Chyła</h5>
+<p>Klucz GPG: <a href="https://keyserver.ubuntu.com/pks/lookup?search=09C6348C6917D7CDCD74041B53984B48D35B4B7B&fingerprint=on&op=index" target="_blank">09C6348C6917D7CDCD74041B53984B48D35B4B7B</a></p>
+
+            </div>
+            <div class="footer-box chyla-footer-social-list col-md-2">
+                <h5>Social media</h5>
+                <ul>
+					
+<li><a href="https://github.com/chyla" target="_blank"><i class="bi bi-github"></i></a></li>
+
+				</ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="footer-box footer-law col-md-12">
+				
+<p>Witryna prywatna. Każda opinia wyrażona w tej wirtynie jest wyłącznie moją opinią (nie jest to opinia mojego pracodawcy).<br/>
+   Private website. All opinions expressed here are only mine (not of my employer).</p>
+
+<p><a href="/law/nota_prawna.html">Zapoznaj się z notą prawną dotyczącą treści i funkcjonowania portalu</a> oraz <a href="/law/polityka_prywatnosci_i_plikow_cookies.html">polityką prywatności i plików cookie</a>.</p>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../_static/bootstrap-4.6/bootstrap.bundle.min.js"></script>
+	
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DKEWN50PZG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DKEWN50PZG');
+</script>
+
+
+  </body>
+</html>
