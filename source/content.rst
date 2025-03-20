@@ -17,11 +17,6 @@ Zawartość
     eduvm/index
 
 .. toctree::
-    :maxdepth: 1
-
-    repozytorium-pakietow/index
-
-.. toctree::
     :maxdepth: 2
 
     law/index
