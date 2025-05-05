@@ -4,8 +4,8 @@ Edukacja
 Dodatkowe materiały edukacyjne.
 
 
-Wyższa Szkoła Bankowa
----------------------
+Uniwersytet WSB Merito Wrocław
+------------------------------
 
 .. toctree::
     :maxdepth: 1
