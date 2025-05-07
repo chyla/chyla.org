@@ -1,28 +1,20 @@
 Środowisko pracy
 ----------------
 
-Wymagany **oficjalny interpreter Pythona** w wersji co najmniej 3.7 (najlepiej najnowszy).
+Wymagany **oficjalny interpreter Pythona** w wersji co najmniej 3.11 (najlepiej najnowszy).
 
-Link do pobrania oficjalnego interpretera: https://www.python.org/downloads/
-
-.. note::
-
-    Niektóre systemy operacyjne (np. Ubuntu 18.04) nie posiadają wymaganej wersji interpretera języka Python. Część omawianych elementów języka może nie działać.
-
+* Link do pobrania: https://www.python.org/downloads/
 
 Wybór środowiska programistycznego należy do Ciebie, chociaż polecam **PyCharm**.
 
-Link do pobrania środowiska PyCharm (wersja PyCharm Community Edition jest darmowa): https://www.jetbrains.com/pycharm/download/
+* Link do pobrania (wersja PyCharm Community Edition jest darmowa): https://www.jetbrains.com/pycharm/download/
+* **Można uzyskać licencję edukacyjną** (ważna przez rok) dla PyCharm/InteliJ IDEA/CLion/PhpStorm, więcej informacji tutaj: https://www.jetbrains.com/community/education/
 
-Można uzyskać licencję edukacyjną (ważna przez rok) dla PyCharm/InteliJ IDEA/CLion/PhpStorm, więcej informacji tutaj: https://www.jetbrains.com/community/education/
+Warto również wypróbować **Microsoft Visual Studio Code**. Jest darmowy, posiada wsparcie dla wielu języków (np. C, C++, C#, Java, Robot Framework), wydawany na `własnej licencji <https://code.visualstudio.com/License/>`__.
 
-Licencję edukacyjną na produkty (nie tylko związane z Pythonem) innych firm można także otrzymać przez GitHub Student Developer Pack, więcej informacji tutaj: https://education.github.com/pack
+* Link do pobrania: https://code.visualstudio.com/
 
-
-Myślę, że warto również wypróbować **Microsoft Visual Studio Code**. Jest darmowy, posiada wsparcie dla wielu języków (np. C, C++, C#, Java, Robot Framework), wydawany na `własnej licencji <https://code.visualstudio.com/License/>`__.
-
-Link do pobrania środowiska Microsoft Visual Studio Code: https://code.visualstudio.com/
-
+Licencję edukacyjną na produkty (nie tylko związane z Pythonem) innych firm można także otrzymać przez **GitHub Student Developer Pack**, więcej informacji tutaj: https://education.github.com/pack
 
 Dostępne są także **środowiska programistyczne on-line**, z tych polecam:
 
