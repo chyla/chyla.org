@@ -1,6 +1,8 @@
 Programista Python Developer - studia zaoczne
 =============================================
 
+Materiały na 10.05.2025.
+
 .. contents:: Tematy
     :backlinks: none
     :local:
