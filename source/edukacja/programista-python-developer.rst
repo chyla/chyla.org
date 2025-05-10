@@ -15,4 +15,8 @@ Materiały na 10.05.2025.
 
 .. include:: materialy/python/wirtualne-srodowisko.rst
 
+Materiały dodatkowe - virtualenv:
+
+1. `Python & virtualenv </artykuly/python/python-virtualenv.html>`__
+
 .. include:: materialy/python/zarzadzenie-projektem.rst
