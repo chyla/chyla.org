@@ -80,4 +80,5 @@ html_additional_pages = {
     'blog/Zmienne-srodowiskowe-w-systemie-Linux/index': 'blog/Zmienne-srodowiskowe-w-systemie-Linux/index.html',
     's/index': 's/index.html',
     's/twitch/index': 's/twitch/index.html',
+    's/pwr-2025/index': 's/pwr-2025/index.html',
 }
