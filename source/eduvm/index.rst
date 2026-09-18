@@ -48,6 +48,7 @@ Wydania
 .. toctree::
     :maxdepth: 1
 
+    2604/index
     2510/index
     2504/index
     2410/index
